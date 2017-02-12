@@ -4,6 +4,9 @@
 #include "ItemWeapon.h"
 #include "ItemLightSword.cpp"
 #include "EntityDrop.h"
+#include "EntityMinion.h"
+#include "EntityBoss.h"
+
 #include <vector>
 #include <map>
 #include <string>
@@ -22,6 +25,8 @@ private:
 	unsigned item_starting_ = 2;
 	map<unsigned, ItemBase *> item_base_;
 	vector<EntityDrop *> drop_base_;
+	vector<EntityMinion *> minion_base_;
+	vector<EntityBoss *> boss_base_;
 
 
 public:

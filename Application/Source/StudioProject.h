@@ -12,7 +12,6 @@
 #include "MatrixStack.h"
 #include "Light.h"
 #include "DataBase.h"
-#include "ItemWeapon.h"
 
 #include <string>
 #include <vector>

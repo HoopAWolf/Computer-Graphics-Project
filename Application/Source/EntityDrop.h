@@ -8,6 +8,7 @@ class EntityDrop : public EntityBase
 public:
 	EntityDrop()
 	{
+		size_ = Vector3(2, 2, 2);
 		elemental_type_ = NONE;
 		texture_string_ = "";
 		health_ = 0;
@@ -60,6 +61,22 @@ public:
 	}
 
 	void onDeath(){}
+
+	Vector3 getPosition()
+	{
+		return position_;
+	}
+
+	Vector3 getSize()
+	{
+		return size_;
+	}
+
+
+	void setPosition(Vector3 position)
+	{
+		position_ = position;
+	}
 
 };
 
