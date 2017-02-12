@@ -61,6 +61,7 @@ public:
 	}
 
 	void onDeath(){}
+	void runAISequence(){};
 
 	Vector3 getPosition()
 	{
