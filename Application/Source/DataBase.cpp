@@ -2,21 +2,42 @@
 
 void DataBase::registerWeapons()
 {
-	if (weapon_base_.size() == 0)
+	if (item_base_.size() == 0)
 	{
-		weapon_base_.push_back(new ItemLightSword);
+		ItemBase *temp_obj;
+		
+		temp_obj = new ItemLightSword;
+		item_base_[temp_obj->getItemID()] = new ItemLightSword;
+		delete temp_obj;
 	}
 }
 
-ItemWeapon* DataBase::getWeapon(int itemID)
+ItemBase* DataBase::getItem(unsigned itemID)
 {
-	for (int it = 0; it < weapon_base_.size(); it++)
+	if (itemID < item_base_.size())
 	{
-		if (weapon_base_[it]->getItemID() == itemID)
-		{
-			return weapon_base_[it];
-		}
+		return item_base_[itemID];
 	}
 
 	return nullptr;
+}
+
+ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned rarity)
+{
+	srand(time(nullptr));
+
+	if (normal_item)
+	{
+		if (rand() % (rarity + 1) == 1)
+		{
+			return getItem((rand() % item_starting_) + item_starting_);
+		}
+	}
+	else if (weapon_item)
+	{
+		if (rand() % (rarity + 1) == 1)
+		{
+			return getItem((rand() % item_starting_));
+		}
+	}
 }

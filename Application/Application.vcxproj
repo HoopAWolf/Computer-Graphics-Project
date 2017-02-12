@@ -108,6 +108,9 @@
     <ClInclude Include="Source\DataBase.h" />
     <ClInclude Include="Source\DetectMemoryLeak.h" />
     <ClInclude Include="Source\EntityBase.h" />
+    <ClInclude Include="Source\EntityBoss.h" />
+    <ClInclude Include="Source\EntityDrop.h" />
+    <ClInclude Include="Source\EntityMinion.h" />
     <ClInclude Include="Source\ItemBase.h" />
     <ClInclude Include="Source\ItemWeapon.h" />
     <ClInclude Include="Source\Light.h" />

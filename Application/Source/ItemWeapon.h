@@ -20,8 +20,8 @@ protected:
 	};
 
 	int durability_;
-	int damage_;
-	int attack_speed_;
+	unsigned damage_;
+	unsigned attack_speed_;
 
 	WEAPON_TYPE weapon_type_;
 
@@ -31,8 +31,8 @@ public:
 	//------------------GETTERS------------------
 	virtual WEAPON_TYPE getWeaponType() = 0;
 	virtual int getWeaponDurability() = 0;
-	virtual int getWeaponDamage() = 0;
-	virtual int getWeaponAttackSpeed() = 0;
+	virtual unsigned getWeaponDamage() = 0;
+	virtual unsigned getWeaponAttackSpeed() = 0;
 };
 
 #endif

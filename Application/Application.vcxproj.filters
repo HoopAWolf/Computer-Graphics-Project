@@ -121,6 +121,15 @@
     <ClInclude Include="Source\DetectMemoryLeak.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\EntityBoss.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityMinion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityDrop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\..\Downloads\Practical2_files(1)\Practical2_files\Application\Shader\SimpleFragmentShader.fragmentshader">

@@ -29,7 +29,7 @@ public:
 		return item_name_;
 	}
 
-	int getItemID()
+	unsigned getItemID()
 	{
 		return itemID_;
 	}
@@ -50,12 +50,12 @@ public:
 		return durability_;
 	}
 
-	int getWeaponDamage()
+	unsigned getWeaponDamage()
 	{
 		return damage_;
 	}
 
-	int getWeaponAttackSpeed()
+	unsigned getWeaponAttackSpeed()
 	{
 		return attack_speed_;
 	}

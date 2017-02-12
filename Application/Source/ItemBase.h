@@ -10,7 +10,7 @@ class ItemBase abstract
 {
 
 protected:
-	int itemID_;
+	unsigned itemID_;
 
 	string texture_string_;
 	string item_name_;
@@ -22,7 +22,7 @@ public:
 	//------------------GETTERS------------------
 	virtual string getTextureString() = 0;
 	virtual string getItemName() = 0;
-	virtual int getItemID() = 0;
+	virtual unsigned getItemID() = 0;
 
 	//------------------USES------------------
 	virtual void onItemUse() = 0;

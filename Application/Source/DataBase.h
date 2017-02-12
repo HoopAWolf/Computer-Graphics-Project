@@ -3,11 +3,15 @@
 
 #include "ItemWeapon.h"
 #include "ItemLightSword.cpp"
+#include "EntityDrop.h"
 #include <vector>
+#include <map>
 #include <string>
+#include <time.h>
 
 using std::vector;
 using std::string;
+using std::map;
 
 class DataBase
 {
@@ -15,7 +19,9 @@ private:
 	static DataBase *s_instance;
 	DataBase(){};
 
-	vector<ItemWeapon *> weapon_base_;
+	unsigned item_starting_ = 2;
+	map<unsigned, ItemBase *> item_base_;
+	vector<EntityDrop *> drop_base_;
 
 
 public:
@@ -28,7 +34,8 @@ public:
 	}
 
 	void registerWeapons();
-	ItemWeapon* getWeapon(int itemID);
+	ItemBase* getItem(unsigned itemID);
+	ItemBase* getRandomItem(bool normal_item, bool weapon_item, unsigned rarity);
 
 
 };
