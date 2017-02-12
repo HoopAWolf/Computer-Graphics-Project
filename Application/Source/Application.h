@@ -20,11 +20,9 @@ public:
 	static bool IsKeyPressed(unsigned short key);
 
 	static GLFWwindow* m_window;
+	static StopWatch m_timer;
+	static unsigned int frameTime;
 
-private:
-
-	//Declare a window object
-	StopWatch m_timer;
 };
 
 #endif
