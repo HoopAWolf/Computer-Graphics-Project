@@ -12,13 +12,11 @@
 short mousePosYAnchor, mousePosXAnchor;
 int windowX, windowY;
 
-extern GLFWwindow* m_window;
-
 Camera3::Camera3()
 {
 	limitRotation = 0, mousePosXAnchor = 0, mousePosYAnchor = 0;
 	ShowCursor(false);
-	glfwGetWindowSize(m_window, &windowX, &windowY);
+	glfwGetWindowSize(Application::m_window, &windowX, &windowY);
 }
 
 Camera3::~Camera3()
@@ -39,7 +37,7 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 void Camera3::Update(double dt)
 {
 		static const float CAMERA_SPEED = 5.f, MOVING_SPEED = 500.f;
-		glfwGetWindowSize(m_window, &windowX, &windowY);
+		glfwGetWindowSize(Application::m_window, &windowX, &windowY);
 
 		Vector3 oldTarget = target;
 		Vector3 view = (target - position).Normalized();

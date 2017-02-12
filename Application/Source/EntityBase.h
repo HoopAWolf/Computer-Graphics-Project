@@ -23,7 +23,7 @@ protected:
 	unsigned damage_;
 	unsigned attack_speed_;
 	unsigned walking_speed_;
-	Vector3 position_, size_;
+	Vector3 position_, size_, up_, forward_, right_, target_;
 	ItemBase* drop_;
 
 public:
@@ -42,6 +42,7 @@ public:
 	virtual void onDeath() = 0;
 
 	virtual void setPosition(Vector3 position) = 0;
+	virtual void runAISequence() = 0;
 };
 
 #endif

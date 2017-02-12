@@ -13,7 +13,7 @@
 #include <iostream>
 
 
-DataBase *DataBase::s_instance = 0;
+DataBase *DataBase::s_instance = nullptr;
 
 
 StudioProject::StudioProject()

@@ -1,19 +1,13 @@
 
 #include "Application.h"
 
-//Include GLEW
-#include <GL/glew.h>
-
-//Include GLFW
-#include <GLFW/glfw3.h>
-
 //Include the standard C++ headers
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "StudioProject.h"
 
-GLFWwindow* m_window;
+GLFWwindow* Application::m_window = nullptr;
 const unsigned char FPS = 60; // FPS of this game
 const unsigned int frameTime = 1000 / FPS; // time for each frame
 
