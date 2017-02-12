@@ -11,16 +11,12 @@
 #include "Mesh.h"
 #include "MatrixStack.h"
 #include "Light.h"
+#include "DataBase.h"
+#include "ItemWeapon.h"
 
 #include <string>
 #include <vector>
 using std::vector;
-
-struct TAABB
-{
-	Vector3 pt_Max;
-	Vector3 pt_Min;
-};
 
 class StudioProject : public Scene
 {
@@ -123,12 +119,7 @@ private:
 
 	void RenderSkybox();
 
-	bool pointInAABB(const TAABB&, const Vector3&);
-	bool AABBtoAABB(const TAABB&, const TAABB&);
-
 	char mapArray[2000][2000];
-
-	//Camera2 camera;
 	Camera3 camera;
 };
 

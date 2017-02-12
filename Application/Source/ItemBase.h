@@ -2,12 +2,14 @@
 #define _ITEM_BASE_H_
 
 #include <string>
+#include "DetectMemoryLeak.h"
 
 using std::string;
 
 class ItemBase abstract
 {
-private:
+
+protected:
 	int itemID_;
 
 	string texture_string_;
@@ -15,6 +17,8 @@ private:
 
 
 public:
+	virtual ~ItemBase(){};
+
 	//------------------GETTERS------------------
 	virtual string getTextureString() = 0;
 	virtual string getItemName() = 0;

@@ -1,3 +1,4 @@
+#include "DetectMemoryLeak.h"
 #include "StudioProject.h"
 #include "GL\glew.h"
 
@@ -11,6 +12,10 @@
 
 #include <iostream>
 
+
+DataBase *DataBase::s_instance = 0;
+
+
 StudioProject::StudioProject()
 {
 }
@@ -21,6 +26,8 @@ StudioProject::~StudioProject()
 
 void StudioProject::Init()
 {
+	DataBase::instance()->registerWeapons();
+
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
@@ -191,6 +198,8 @@ static float SCALE_LIMIT = 5.f;
 
 void StudioProject::Update(double dt)
 {
+	camera.Update(dt);
+
 	float LSPEED = 10.f;
 
 	if (Application::IsKeyPressed('1')) //enable back face culling
@@ -236,8 +245,6 @@ void StudioProject::Update(double dt)
 		glUniform1i(m_parameters[U_LIGHT0_TYPE], light[0].type);
 	}
 	//--------------------------------------------------------------------------------
-
-	camera.Update(dt);
 
 }
 
@@ -586,28 +593,6 @@ void StudioProject::RenderSkybox()
 	modelStack.PopMatrix();//end ground
 }
 
-bool StudioProject::pointInAABB(const TAABB& box, const Vector3& point)//test
-{
-	if ((point.x > box.pt_Min.x && point.x < box.pt_Max.x)
-		&& (point.z < box.pt_Min.z && point.z > box.pt_Max.z))
-	{
-		return true;
-	}
-
-	return false;
-}
-
-bool StudioProject::AABBtoAABB(const TAABB& box01, const TAABB& box02)
-{
-	if (box01.pt_Max.x > box02.pt_Min.x && box01.pt_Min.x < box02.pt_Max.x &&
-		box01.pt_Max.y > box02.pt_Min.y && box01.pt_Min.y < box02.pt_Max.y &&
-		box01.pt_Max.z < box02.pt_Min.z && box01.pt_Min.z > box02.pt_Max.z)
-	{
-		return true;
-	}
-
-	return false;
-}
 
 void StudioProject::Exit()
 {

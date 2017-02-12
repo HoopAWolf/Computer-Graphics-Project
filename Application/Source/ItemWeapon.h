@@ -5,7 +5,8 @@
 
 class ItemWeapon abstract  : public ItemBase
 {
-private:
+
+protected:
 	enum WEAPON_TYPE
 	{
 		LIGHT,
@@ -20,14 +21,18 @@ private:
 
 	int durability_;
 	int damage_;
+	int attack_speed_;
 
 	WEAPON_TYPE weapon_type_;
 
 public:
+	virtual ~ItemWeapon(){};
+
 	//------------------GETTERS------------------
 	virtual WEAPON_TYPE getWeaponType() = 0;
 	virtual int getWeaponDurability() = 0;
 	virtual int getWeaponDamage() = 0;
+	virtual int getWeaponAttackSpeed() = 0;
 };
 
 #endif
