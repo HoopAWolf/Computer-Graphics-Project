@@ -16,6 +16,7 @@
 DataBase *DataBase::s_instance = nullptr;
 
 
+
 StudioProject::StudioProject()
 {
 }
@@ -27,6 +28,7 @@ StudioProject::~StudioProject()
 void StudioProject::Init()
 {
 	DataBase::instance()->registerWeapons();
+	PlayerBase::instance()->startPlayer();
 
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);

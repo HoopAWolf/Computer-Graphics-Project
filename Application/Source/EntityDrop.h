@@ -61,7 +61,12 @@ public:
 	}
 
 	void onDeath(){}
-	void runAISequence(){};
+	bool isDead()
+	{
+		return false;
+	}
+
+	void runAISequence(){}
 
 	Vector3 getPosition()
 	{

@@ -12,6 +12,30 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{5d33c47d-0d42-404a-8965-ba5bdacb604c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\AABB">
+      <UniqueIdentifier>{cf61905e-7664-49ff-87e9-483aa0ee5ccc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DataBase">
+      <UniqueIdentifier>{36039916-9c67-4d99-bf5b-3c3f015b7173}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities">
+      <UniqueIdentifier>{2b49cad4-43fa-489e-a864-d50cb2e18fb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Items">
+      <UniqueIdentifier>{4ae4481c-3003-47ae-b20b-068a84b677e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scenes">
+      <UniqueIdentifier>{69daf6fa-59b4-4dde-9e41-fb85c01ff420}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DataBase">
+      <UniqueIdentifier>{b4257eed-2e44-4a50-9266-47f2a5704ea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes">
+      <UniqueIdentifier>{0fc0dd86-2d48-4fc3-ba5a-b148bdbdce1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Items">
+      <UniqueIdentifier>{908f74a8-9737-4e7b-af0a-5b33f750897a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -47,17 +71,20 @@
     <ClCompile Include="Source\LoadOBJ.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\StudioProject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ItemLightSword.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\DataBase.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\DataBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StudioProject.cpp">
+      <Filter>Source Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Source\SceneManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ItemLightSword.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlayerBase.cpp">
+      <Filter>Source Files\DataBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -100,41 +127,44 @@
     <ClInclude Include="Source\LoadOBJ.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\StudioProject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ItemBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\AABB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ItemWeapon.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\EntityBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\DataBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\DetectMemoryLeak.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EntityBoss.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\AABB.h">
+      <Filter>Header Files\AABB</Filter>
     </ClInclude>
-    <ClInclude Include="Source\EntityMinion.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\PlayerBase.h">
+      <Filter>Header Files\DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DataBase.h">
+      <Filter>Header Files\DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityBase.h">
+      <Filter>Header Files\DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ItemBase.h">
+      <Filter>Header Files\DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityBoss.h">
+      <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Source\EntityDrop.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityMinion.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ItemWeapon.h">
+      <Filter>Header Files\Items</Filter>
     </ClInclude>
     <ClInclude Include="Source\SceneManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StudioProject.h">
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -30,12 +30,14 @@ protected:
 	};
 	string boss_name_;
 	BOSS_STATE boss_state_;
+	unsigned armor_;
 
 public:
 	virtual ~EntityBoss();
 
 	virtual string getBossName() = 0;
 	virtual BOSS_STATE getBossState() = 0;
+	virtual unsigned getBossArmor() = 0;
 
 };
 

@@ -40,6 +40,7 @@ public:
 	virtual Vector3 getSize() = 0;
 
 	virtual void onDeath() = 0;
+	virtual bool isEntityDead() = 0;
 
 	virtual void setPosition(Vector3 position) = 0;
 	virtual void runAISequence() = 0;
