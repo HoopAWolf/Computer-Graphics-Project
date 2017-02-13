@@ -15,7 +15,7 @@ void PlayerBase::startPlayer()
 
 	for (int i = 0; i < 20; i++)
 	{
-		inventory_data_[i] = nullptr;
+		inventory_data_.push_back(nullptr);
 	}
 
 	for (int i = 0; i < 4; i++)

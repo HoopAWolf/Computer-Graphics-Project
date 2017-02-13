@@ -21,7 +21,8 @@ public:
 
 	static GLFWwindow* m_window;
 	static StopWatch m_timer;
-	static unsigned int frameTime;
+	static const unsigned int frameTime;
+	static float elapsed_timer_;
 
 };
 

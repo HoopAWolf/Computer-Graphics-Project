@@ -1,25 +1,27 @@
 #include "DataBase.h"
 
-void DataBase::registerWeapons()
+void DataBase::registerItems()
 {
-	if (item_base_.size() == 0)
+	if (item_base_.size() == 0)  //CHECKING IF THE ITEM BASE SIZE IS 0, TO MAKE SURE IT ONLY REGISTER ONCE
 	{
-		ItemBase *temp_obj;
+		int item_starting = 0;  //STARTING ITEM PLACEMENT
+		ItemBase *temp_obj;  //TEMP OBJ TO STORE ITEM ID
 		
 		temp_obj = new ItemLightSword;
-		item_base_[temp_obj->getItemID()] = new ItemLightSword;
-		delete temp_obj;
+		item_base_[temp_obj->getItemID()] = new ItemLightSword;  //REGISTER WEAPON
+		delete temp_obj;  //DELETE OBJ WHEN REGISTERED
+		item_starting++;  //INCREASE BY ONE WHEN ITEM REGISTERED IS WEAPON
 	}
 }
 
 ItemBase* DataBase::getItem(unsigned itemID)
 {
-	if (itemID < item_base_.size())
+	if (itemID < item_base_.size())  //CHECK IF ITEMID IS IN THE ITEM BASE
 	{
-		return item_base_[itemID];
+		return item_base_[itemID];  //RETURN ITEM FROM ITEM BASE VIA ITEMID
 	}
 
-	return nullptr;
+	return nullptr;  //RETURN NULL IF THERE IS NO ITME
 }
 
 ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned rarity)

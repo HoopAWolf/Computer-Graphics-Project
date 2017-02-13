@@ -15,8 +15,6 @@
 
 DataBase *DataBase::s_instance = nullptr;
 
-
-
 StudioProject::StudioProject()
 {
 }
@@ -27,7 +25,7 @@ StudioProject::~StudioProject()
 
 void StudioProject::Init()
 {
-	DataBase::instance()->registerWeapons();
+	DataBase::instance()->registerItems();
 	PlayerBase::instance()->startPlayer();
 
 	// Set background color to dark blue
@@ -201,6 +199,11 @@ static float SCALE_LIMIT = 5.f;
 void StudioProject::Update(double dt)
 {
 	camera.Update(dt);
+	Application::elapsed_timer_ += dt;
+
+	std::cout << Application::elapsed_timer_ << std::endl;
+
+	PlayerBase::instance()->playerUpdate(dt);
 
 	float LSPEED = 10.f;
 
