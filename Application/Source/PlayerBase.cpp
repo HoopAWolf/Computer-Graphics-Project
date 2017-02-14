@@ -12,6 +12,7 @@ void PlayerBase::startPlayer()
 	attribute_points_ = 0;
 	resistance_ = 1;
 	player_state_ = IDLE;
+	size_ = Vector3(2, 3, 2);
 
 	for (int i = 0; i < 20; i++)
 	{
@@ -110,6 +111,15 @@ int PlayerBase::getPlayerHealth()
 	return player_health_;
 }
 
+AABB PlayerBase::getBoundingBox()
+{
+	AABB bounding;
+	bounding.setBoundry(-size_, size_);
+	bounding.getBoundryAtCoord(Camera::position);
+
+	return bounding;
+}
+
 bool PlayerBase::isPlayerDead()
 {
 	if (getPlayerHealth() <= 0)
@@ -171,4 +181,9 @@ void PlayerBase::useSkills(unsigned skill_slot, float timer)
 void PlayerBase::setPlayerState(PLAYER_STATE player_state)
 {
 	player_state_ = player_state;
+}
+
+unsigned PlayerBase::getDimension()
+{
+	return dimension_;
 }

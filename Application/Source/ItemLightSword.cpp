@@ -19,47 +19,11 @@ public:
 
 	}
 
-	string getTextureString()
-	{
-		return texture_string_;
-	}
-
-	string getItemName()
-	{
-		return item_name_;
-	}
-
-	unsigned getItemID()
-	{
-		return itemID_;
-	}
-
 	//------------------USES------------------
 	void onItemUse()
 	{
 		;
 	}
-
-	WEAPON_TYPE getWeaponType()
-	{
-		return weapon_type_;
-	}
-
-	int getWeaponDurability()
-	{
-		return durability_;
-	}
-
-	unsigned getWeaponDamage()
-	{
-		return damage_;
-	}
-
-	unsigned getWeaponAttackSpeed()
-	{
-		return attack_speed_;
-	}
-
 };
 
 #endif

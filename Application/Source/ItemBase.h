@@ -20,9 +20,20 @@ public:
 	virtual ~ItemBase(){};
 
 	//------------------GETTERS------------------
-	virtual string getTextureString() = 0;
-	virtual string getItemName() = 0;
-	virtual unsigned getItemID() = 0;
+	virtual string getTextureString()
+	{
+		return texture_string_;
+	}
+
+	virtual string getItemName()
+	{
+		return item_name_;
+	}
+
+	virtual unsigned getItemID()
+	{
+		return itemID_;
+	}
 
 	//------------------USES------------------
 	virtual void onItemUse() = 0;

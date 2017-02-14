@@ -20,39 +20,9 @@ public:
 
 	~EntityDrop();
 
-	ELEMENTAL_TYPE getElementalType()
-	{
-		return elemental_type_;
-	}
-
 	ItemBase* getItemDrop()
 	{
 		return nullptr;
-	}
-
-	int getHealth()
-	{
-		return health_;
-	}
-
-	unsigned getDamage()
-	{
-		return damage_;
-	}
-
-	unsigned getAttackSpeed()
-	{
-		return attack_speed_;
-	}
-
-	unsigned getWalkingSpeed()
-	{
-		return walking_speed_;
-	}
-
-	string getTextureString()
-	{
-		return texture_string_;
 	}
 
 	void setTextureString(string texture_string)
@@ -61,23 +31,13 @@ public:
 	}
 
 	void onDeath(){}
+
 	bool isDead()
 	{
 		return false;
 	}
 
-	void runAISequence(){}
-
-	Vector3 getPosition()
-	{
-		return position_;
-	}
-
-	Vector3 getSize()
-	{
-		return size_;
-	}
-
+	void updateAI(float timer){}
 
 	void setPosition(Vector3 position)
 	{

@@ -14,6 +14,9 @@
 
 
 DataBase *DataBase::s_instance = nullptr;
+Vector3 Camera::position = 0;
+Vector3 Camera::target = 0;
+Vector3 Camera::up = 0;
 
 
 StudioProject::StudioProject()
@@ -203,9 +206,8 @@ void StudioProject::Update(double dt)
 {
 	camera.Update(dt);
 	ShowCursor(false);
-	Application::elapsed_timer_ += dt;
 
-	std::cout << Application::elapsed_timer_ << std::endl;
+	Application::elapsed_timer_ += dt;
 
 	PlayerBase::instance()->playerUpdate(dt);
 

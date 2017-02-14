@@ -29,10 +29,25 @@ public:
 	virtual ~ItemWeapon(){};
 
 	//------------------GETTERS------------------
-	virtual WEAPON_TYPE getWeaponType() = 0;
-	virtual int getWeaponDurability() = 0;
-	virtual unsigned getWeaponDamage() = 0;
-	virtual unsigned getWeaponAttackSpeed() = 0;
+	virtual WEAPON_TYPE getWeaponType()
+	{
+		return weapon_type_;
+	}
+
+	virtual int getWeaponDurability()
+	{
+		return durability_;
+	}
+
+	virtual unsigned getWeaponDamage()
+	{
+		return damage_;
+	}
+
+	virtual unsigned getWeaponAttackSpeed()
+	{
+		return attack_speed_;
+	}
 };
 
 #endif

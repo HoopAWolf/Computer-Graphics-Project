@@ -90,18 +90,25 @@
     <ClCompile Include="Source\Camera3.cpp" />
     <ClCompile Include="Source\DataBase.cpp" />
     <ClCompile Include="Source\ItemLightSword.cpp" />
+    <ClCompile Include="Source\LoadATOM.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTGA.cpp" />
     <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\Mainmenu.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\PlayerBase.cpp" />
+    <ClCompile Include="Source\SceneBossH.cpp" />
+    <ClCompile Include="Source\SceneBossL.cpp" />
+    <ClCompile Include="Source\SceneBossM.cpp" />
+    <ClCompile Include="Source\SceneBossR.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\StudioProject.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MapBase.h" />
     <ClInclude Include="Source\AABB.h" />
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\Camera.h" />
@@ -116,13 +123,19 @@
     <ClInclude Include="Source\ItemBase.h" />
     <ClInclude Include="Source\ItemWeapon.h" />
     <ClInclude Include="Source\Light.h" />
+    <ClInclude Include="Source\LoadATOM.h" />
     <ClInclude Include="Source\LoadOBJ.h" />
     <ClInclude Include="Source\LoadTGA.h" />
+    <ClInclude Include="Source\Mainmenu.h" />
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
     <ClInclude Include="Source\PlayerBase.h" />
     <ClInclude Include="Source\Scene.h" />
+    <ClInclude Include="Source\SceneBossH.h" />
+    <ClInclude Include="Source\SceneBossL.h" />
+    <ClInclude Include="Source\SceneBossM.h" />
+    <ClInclude Include="Source\SceneBossR.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\StudioProject.h" />

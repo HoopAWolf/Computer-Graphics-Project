@@ -5,6 +5,8 @@
 #include <vector>
 #include <map>
 #include "Vector3.h"
+#include "Camera.h"
+#include "AABB.h"
 
 using std::vector;
 using std::map;
@@ -26,7 +28,8 @@ private:
 	PlayerBase(){};
 	static PlayerBase *s_instance;
 	int player_health_;
-	unsigned damage_, attack_speed_, moving_speed_, ammo_, attribute_points_, resistance_;
+	unsigned damage_, attack_speed_, moving_speed_, ammo_, attribute_points_, resistance_, dimension_;
+	Vector3 size_;
 
 	vector<ItemBase *> inventory_data_;
 	map<unsigned, Vector3> skills_; //VECTOR 3 (X - POINTS IN SKILL, Y - SKILL COOLDOWN, Z - SKILL DAMAGE/DURATION)
@@ -56,10 +59,13 @@ public:
 	unsigned getCurrentSkillDamage(unsigned skill_slot);
 	unsigned getCurrentSkillCoolDown(unsigned skill_slot);
 	int getPlayerHealth();
+	unsigned getDimension();
+
 	PLAYER_STATE getPlayerState()
 	{
 		return player_state_;
 	}
+	AABB getBoundingBox();
 
 	bool isPlayerDead();
 
