@@ -1,8 +1,6 @@
 #ifndef STUDIO_PROJECT_H
 #define STUDIO_PROJECT_H
 
-#include "Scene.h"
-
 //Azimuth_Camera_System
 #include "Camera2.h"
 //FPS_Camera_System

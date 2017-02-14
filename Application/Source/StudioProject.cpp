@@ -9,6 +9,7 @@
 #include "MeshBuilder.h"
 #include "Utility.h"
 #include "LoadTGA.h"
+#include "LoadATOM.h"
 
 #include <iostream>
 
@@ -18,6 +19,7 @@ Vector3 Camera::position = 0;
 Vector3 Camera::target = 0;
 Vector3 Camera::up = 0;
 
+int frame = 1;
 
 StudioProject::StudioProject()
 {
@@ -105,20 +107,13 @@ void StudioProject::Init()
 
 	//variable to rotate geometry
 
-
-	//Initialize camera settings
-	camera.Init(Vector3(1000, 950, 1010), Vector3(1000, 950, 1000), Vector3(0, 1, 0));
-
 	//meshes------------------------------------------------------------------------------------------
 	meshList[GEO_AXES] = MeshBuilder::GenerateAxes("reference", 1000, 1000, 1000);
 
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1, 1, 1), 24, 13, 1);
 
-	meshList[GEO_SPHERE] = MeshBuilder::GenerateSphere("sphere", Color(1, 0, 0), 24, 13, 1);
-	meshList[GEO_SPHERE]->material.kAmbient.Set(0.2f, 0.2f, 0.2f);
-	meshList[GEO_SPHERE]->material.kDiffuse.Set(0.6f, 0.6f, 0.6f);
-	meshList[GEO_SPHERE]->material.kSpecular.Set(0.3f, 0.3f, 0.3f);
-	meshList[GEO_SPHERE]->material.kShininess = 1.f;
+	meshList[GEO_CUBE] = MeshBuilder::GenerateOBJ("chicken", "OBJ//chicken.obj");
+	meshList[GEO_CUBE]->textureID = LoadTGA("Image//chicken.tga");
 
 	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_FRONT]->textureID = LoadTGA("Image//front.tga");
@@ -345,7 +340,15 @@ void StudioProject::Render()
 	modelStack.PopMatrix();
 	//===================================================================================================
 
-	
+	modelStack.PushMatrix();
+	modelStack.Scale(10, 10, 10);
+	LoadAtom("Atom//Chicken.atom", &modelStack, frame, "pCylinder2");
+	RenderMesh(meshList[GEO_CUBE], false);
+	modelStack.PopMatrix();
+	frame += (1 % 120);
+
+	if (frame >= 120)
+		frame = 1;
 
 }
 
