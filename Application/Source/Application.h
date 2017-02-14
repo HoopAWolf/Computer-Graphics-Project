@@ -23,7 +23,6 @@ public:
 	static StopWatch m_timer;
 	static const unsigned int frameTime;
 	static float elapsed_timer_;
-
 };
 
 #endif

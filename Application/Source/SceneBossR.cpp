@@ -1,5 +1,5 @@
 #include "DetectMemoryLeak.h"
-#include "StudioProject.h"
+#include "SceneBossR.h"
 #include "GL\glew.h"
 
 #include "shader.hpp"
@@ -13,22 +13,18 @@
 #include <iostream>
 
 
-DataBase *DataBase::s_instance = nullptr;
-
-
-StudioProject::StudioProject()
+SceneBossR::SceneBossR()
 {
 }
 
-StudioProject::~StudioProject()
+SceneBossR::~SceneBossR()
 {
 }
 
-void StudioProject::Init()
+void SceneBossR::Init()
 {
-	
-	DataBase::instance()->registerItems();
-	PlayerBase::instance()->startPlayer();
+
+
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
@@ -137,6 +133,7 @@ void StudioProject::Init()
 
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
+
 	//------------------------------------------------------------------------------------------
 	//light
 	light[0].type = Light::LIGHT_DIRECTIONAL;
@@ -199,15 +196,9 @@ void StudioProject::Init()
 static float ROT_LIMIT = 45.f;
 static float SCALE_LIMIT = 5.f;
 
-void StudioProject::Update(double dt)
+void SceneBossR::Update(double dt)
 {
 	camera.Update(dt);
-	ShowCursor(false);
-	Application::elapsed_timer_ += dt;
-
-	std::cout << Application::elapsed_timer_ << std::endl;
-
-	PlayerBase::instance()->playerUpdate(dt);
 
 	float LSPEED = 10.f;
 
@@ -219,9 +210,9 @@ void StudioProject::Update(double dt)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); //default fill mode
 	if (Application::IsKeyPressed('4'))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //wireframe mode
-	if (Application::IsKeyPressed(VK_F1))
+	if (Application::IsKeyPressed(VK_F2))
 	{
-		SceneManager::getSceneManger()->setNextScene(1);
+		SceneManager::getSceneManger()->setNextScene(0);
 	}
 	//light_controls---------------------------------------------------------------
 	if (Application::IsKeyPressed('I'))
@@ -261,7 +252,7 @@ void StudioProject::Update(double dt)
 }
 
 
-void StudioProject::Render()
+void SceneBossR::Render()
 {
 	// Render VBO here
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -343,12 +334,12 @@ void StudioProject::Render()
 	modelStack.PopMatrix();
 	//===================================================================================================
 
-	
+	RenderTextOnScreen(meshList[GEO_TEXT], "kawaii", Color(0, 1, 0), 3, 1, 1);
 
 }
 
 
-void StudioProject::RenderMesh(Mesh *mesh, bool enableLight)
+void SceneBossR::RenderMesh(Mesh *mesh, bool enableLight)
 {
 	Mtx44 MVP, modelView, modelView_inverse_transpose;
 
@@ -400,7 +391,7 @@ void StudioProject::RenderMesh(Mesh *mesh, bool enableLight)
 
 }
 
-void StudioProject::RenderText(Mesh* mesh, std::string text, Color color)
+void SceneBossR::RenderText(Mesh* mesh, std::string text, Color color)
 {
 	if (!mesh || mesh->textureID <= 0) //Proper error check
 		return;
@@ -427,7 +418,7 @@ void StudioProject::RenderText(Mesh* mesh, std::string text, Color color)
 	glEnable(GL_DEPTH_TEST);
 }
 
-void StudioProject::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y)
+void SceneBossR::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y)
 {
 	if (!mesh || mesh->textureID <= 0) //Proper error check
 		return;
@@ -473,7 +464,7 @@ void StudioProject::RenderTextOnScreen(Mesh* mesh, std::string text, Color color
 }
 
 //============================================TESTING===============================================
-void StudioProject::RenderUI(Mesh* mesh, Color color, float size, float x, float y, bool enableLight)
+void SceneBossR::RenderUI(Mesh* mesh, Color color, float size, float x, float y, bool enableLight)
 {
 	if (!mesh || mesh->textureID <= 0) //Proper error check
 		return;
@@ -548,7 +539,7 @@ void StudioProject::RenderUI(Mesh* mesh, Color color, float size, float x, float
 }
 //=================================================================================================
 
-void StudioProject::RenderSkybox()
+void SceneBossR::RenderSkybox()
 {
 	modelStack.PushMatrix();//push ground
 	modelStack.Translate(950, 0, 950);
@@ -606,8 +597,7 @@ void StudioProject::RenderSkybox()
 }
 
 
-
-void StudioProject::Exit()
+void SceneBossR::Exit()
 {
 	glDeleteVertexArrays(1, &m_vertexArrayID);
 	glDeleteProgram(m_programID);

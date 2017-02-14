@@ -7,6 +7,11 @@
 
 #include "StudioProject.h"
 #include "SceneManager.h"
+#include "SceneBossL.h"
+#include "SceneBossM.h"
+#include "SceneBossH.h"
+#include "SceneBossR.h"
+#include "Mainmenu.h"
 
 GLFWwindow* Application::m_window = nullptr;
 SceneManager* SceneManager::s_instance = nullptr;
@@ -102,6 +107,15 @@ void Application::Run()
 	//Main Loop
 	Scene *scene = new StudioProject();
 	SceneManager::getSceneManger()->addScene(scene);
+	scene = new Mainmenu();
+	SceneManager::getSceneManger()->addScene(scene);
+	scene = new SceneBossL();
+	SceneManager::getSceneManger()->addScene(scene);
+	scene = new SceneBossM();
+	SceneManager::getSceneManger()->addScene(scene);
+	scene = new SceneBossH();
+	SceneManager::getSceneManger()->addScene(scene);
+	
 
 	SceneManager::getSceneManger()->initAllScene();
 

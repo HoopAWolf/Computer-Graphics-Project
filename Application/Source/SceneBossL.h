@@ -1,5 +1,5 @@
-#ifndef STUDIO_PROJECT_H
-#define STUDIO_PROJECT_H
+#ifndef SCENEBOSSL_H
+#define SCENEBOSSL_H
 
 #include "Scene.h"
 
@@ -12,13 +12,12 @@
 #include "MatrixStack.h"
 #include "Light.h"
 #include "DataBase.h"
-#include "PlayerBase.h"
 
 #include <string>
 #include <vector>
 using std::vector;
 
-class StudioProject : public Scene
+class SceneBossL : public Scene
 {
 	enum GEOMETRY_TYPE
 	{
@@ -92,8 +91,8 @@ class StudioProject : public Scene
 
 	MS modelStack, viewStack, projectionStack;
 public:
-	StudioProject();
-	~StudioProject();
+	SceneBossL();
+	~SceneBossL();
 
 	virtual void Init();
 	virtual void Update(double dt);
