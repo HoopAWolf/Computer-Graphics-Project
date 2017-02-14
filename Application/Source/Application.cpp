@@ -105,9 +105,9 @@ void Application::Init()
 void Application::Run()
 {
 	//Main Loop
-	Scene *scene = new StudioProject();
+	Scene *scene = new Mainmenu();
 	SceneManager::getSceneManger()->addScene(scene);
-	scene = new Mainmenu();
+	scene = new StudioProject();
 	SceneManager::getSceneManger()->addScene(scene);
 	scene = new SceneBossL();
 	SceneManager::getSceneManger()->addScene(scene);

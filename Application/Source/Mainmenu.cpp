@@ -103,7 +103,7 @@ void Mainmenu::Init()
 
 
 	//Initialize camera settings
-	camera.Init(Vector3(-0.4, 0, 0), Vector3(1, 0, 0), Vector3(0, 1, 0));
+	camera.Init(Vector3(0, 5, 0), Vector3(1, 5, 0), Vector3(0, 1, 0));
 
 	//meshes------------------------------------------------------------------------------------------
 	meshList[GEO_AXES] = MeshBuilder::GenerateAxes("reference", 1000, 1000, 1000);

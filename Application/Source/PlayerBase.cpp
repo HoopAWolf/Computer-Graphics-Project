@@ -11,6 +11,9 @@ void PlayerBase::startPlayer()
 	ammo_ = 20;
 	attribute_points_ = 0;
 	resistance_ = 1;
+	level_ = 1;
+	level_cap_ = 500;
+	experience_ = 0;
 	player_state_ = IDLE;
 	size_ = Vector3(2, 3, 2);
 
@@ -111,6 +114,26 @@ int PlayerBase::getPlayerHealth()
 	return player_health_;
 }
 
+unsigned PlayerBase::getDimension()
+{
+	return dimension_;
+}
+
+unsigned PlayerBase::getPlayerLevel()
+{
+	return level_;
+}
+
+unsigned PlayerBase::getPlayerExperience()
+{
+	return experience_;
+}
+
+unsigned PlayerBase::getPlayerLevelCap()
+{
+	return level_cap_;
+}
+
 AABB PlayerBase::getBoundingBox()
 {
 	AABB bounding;
@@ -183,7 +206,16 @@ void PlayerBase::setPlayerState(PLAYER_STATE player_state)
 	player_state_ = player_state;
 }
 
-unsigned PlayerBase::getDimension()
+void PlayerBase::increaseExperience(unsigned ammount)
 {
-	return dimension_;
+	experience_ += ammount;
+	while (experience_ > getPlayerLevelCap())
+	{
+		if (getPlayerExperience() >= getPlayerLevelCap())
+		{
+			experience_ -= level_cap_;
+			level_cap_ = getPlayerLevelCap() + (getPlayerLevelCap() * (3 / 100));
+			level_ += 1;	
+		}
+	}
 }
