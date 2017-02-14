@@ -1,16 +1,16 @@
-#ifndef ITEM_LIGHT_SWORD
-#define ITEM_LIGHT_SWORD
+#ifndef ITEM_WOODEN_SWORD
+#define ITEM_WOODEN_SWORD
 
 #include "ItemWeapon.h"
 
-class ItemLightSword : public ItemWeapon
+class ItemWoodenSword : public ItemWeapon
 {
 public:
-	ItemLightSword()
+	ItemWoodenSword()
 	{
 		itemID_ = 0;
-		texture_string_ = "lightsword";
-		item_name_ = "Light Sword";
+		texture_string_ = "texture1.tga";
+		item_name_ = "Wooden Sword";
 		
 		weapon_type_ = LIGHT;
 		durability_ = 10;
