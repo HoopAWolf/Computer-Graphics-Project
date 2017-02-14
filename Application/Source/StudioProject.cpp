@@ -345,9 +345,9 @@ void StudioProject::Render()
 	LoadAtom("Atom//Chicken.atom", &modelStack, frame, "pCylinder2");
 	RenderMesh(meshList[GEO_CUBE], false);
 	modelStack.PopMatrix();
-	frame++;
+	frame += (1 % 120);
 
-	if (frame >= 60)
+	if (frame >= 120)
 		frame = 1;
 
 }
