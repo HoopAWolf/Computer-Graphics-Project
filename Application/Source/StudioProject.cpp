@@ -35,7 +35,7 @@ void StudioProject::Init()
 	PlayerBase::instance()->startPlayer();
 
 	MapBase::instance()->setMapSize(1, 20, 20);
-	MapBase::instance()->generateMap(1);
+	MapBase::instance()->generateMap(1, "test.txt");
 
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
@@ -115,19 +115,19 @@ void StudioProject::Init()
 
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1, 1, 1), 24, 13, 1);
 
-	meshList[GEO_RIGHT_WING] = MeshBuilder::GenerateOBJ("chicken", "OBJ//RightWing.obj");
+	meshList[GEO_RIGHT_WING] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_arm_1.obj");
 	meshList[GEO_RIGHT_WING]->textureID = LoadTGA("Image//chicken_.tga");
 
-	meshList[GEO_BODY] = MeshBuilder::GenerateOBJ("chicken", "OBJ//ChickenBody.obj");
+	meshList[GEO_BODY] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_body.obj");
 	meshList[GEO_BODY]->textureID = LoadTGA("Image//chicken_.tga");
 
-	meshList[GEO_LEFT_WING] = MeshBuilder::GenerateOBJ("chicken", "OBJ//chickenleftwing.obj");
+	meshList[GEO_LEFT_WING] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_arm_2.obj");
 	meshList[GEO_LEFT_WING]->textureID = LoadTGA("Image//chicken_.tga");
 
-	meshList[GEO_LEFT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//chickenleftleg.obj");
+	meshList[GEO_LEFT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_leg_1.obj");
 	meshList[GEO_LEFT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
 
-	meshList[GEO_RIGHT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//chickenrightleg.obj");
+	meshList[GEO_RIGHT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_leg_2.obj");
 	meshList[GEO_RIGHT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
 
 	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1), 1.f, 1.f);
@@ -272,7 +272,7 @@ void StudioProject::Update(double dt)
 
 }
 
-double frame = 1.25;
+static double timeelaspedforanimation = 2;
 void StudioProject::Render()
 {
 	// Render VBO here
@@ -354,7 +354,6 @@ void StudioProject::Render()
 	RenderMesh(meshList[GEO_LIGHTBALL], false);
 	modelStack.PopMatrix();
 	//===================================================================================================
-	static double timeelaspedforanimation = 0.0;
 	for (int x = 0; x < MapBase::instance()->getMapData(1).size_.x; x++)
 	{
 		for (int z = 0; z < MapBase::instance()->getMapData(1).size_.z; z++)
@@ -365,26 +364,25 @@ void StudioProject::Render()
 				modelStack.PushMatrix();
 				modelStack.Translate(x, 0, z);
 
-
 				modelStack.PushMatrix();
-				LoadAtom("Atom//chicks.atom", &modelStack, timeelaspedforanimation, "Chicken_rightwing");
+				LoadAtom("Atom//boss_3.atom", &modelStack, timeelaspedforanimation, "boss_3_arm_1");
 				RenderMesh(meshList[GEO_RIGHT_WING], true);
 				modelStack.PopMatrix();
 
-				//modelStack.PushMatrix();
-				//LoadAtom("Atom//chicks.atom", &modelStack, timeelaspedforanimation, "Chicken_leftwing");
-				//RenderMesh(meshList[GEO_LEFT_WING], true);
-				//modelStack.PopMatrix();
+				modelStack.PushMatrix();
+				LoadAtom("Atom//boss_3.atom", &modelStack, timeelaspedforanimation, "boss_3_arm_2");
+				RenderMesh(meshList[GEO_LEFT_WING], true);
+				modelStack.PopMatrix();
 
-				//modelStack.PushMatrix();
-				//LoadAtom("Atom//chicks.atom", &modelStack, timeelaspedforanimation, "chicken_leftLeg");
-				//RenderMesh(meshList[GEO_LEFT_LEG], true);
-				//modelStack.PopMatrix();
+				modelStack.PushMatrix();
+				LoadAtom("Atom//boss_3.atom", &modelStack, timeelaspedforanimation, "boss_3_leg_1");
+				RenderMesh(meshList[GEO_LEFT_LEG], true);
+				modelStack.PopMatrix();
 
-				//modelStack.PushMatrix();
-				//LoadAtom("Atom//chicks.atom", &modelStack, timeelaspedforanimation, "Chicken_rightleg");
-				//RenderMesh(meshList[GEO_RIGHT_LEG], true);
-				//modelStack.PopMatrix();
+				modelStack.PushMatrix();
+				LoadAtom("Atom//boss_3.atom", &modelStack, timeelaspedforanimation, "boss_3_leg_2");
+				RenderMesh(meshList[GEO_RIGHT_LEG], true);
+				modelStack.PopMatrix();
 
 				RenderMesh(meshList[GEO_BODY], true);
 				modelStack.PopMatrix();
@@ -393,13 +391,9 @@ void StudioProject::Render()
 	}
 
 	timeelaspedforanimation += (double)((double)1 / (double)60);
-	if (timeelaspedforanimation > 1.2333333333333333333)
-		timeelaspedforanimation = 0.01666666666666666666666;
 
-	frame = (int)(++frame) % 30;
-
-	if (frame >= ((double)74 * (double)((double)1 / (double)30)))
-		frame = 1.25;
+	if (timeelaspedforanimation > 1.8)
+		timeelaspedforanimation = 0;
 }
 
 

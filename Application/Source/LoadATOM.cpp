@@ -67,6 +67,8 @@ bool LoadAtom(const char *file_path, MS* modelStack, double timeElapsed, const s
 			//FPSType == "ntsc;"
 			if (strncmp(FPSType, "ntsc;", 5) == 0)
 				fps = 30;//SETTING OF FPS FOR REQUIRED ANIMATION SPEED
+			else if (strncmp(FPSType, "film;", 5) == 0)
+				fps = 25;
 			//Add more types if needed
 
 			atThisFrame = (unsigned)(timeElapsed / ((double)((double)1 / (double)fps)));//GETTING THE REQUIRED FRAME NUMBER FOR TRANSFORMATION USING TIME
