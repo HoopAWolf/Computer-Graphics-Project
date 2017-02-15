@@ -41,6 +41,7 @@ class Mainmenu : public Scene
 		GEO_FRONT,
 		GEO_BACK,
 		GEO_TEXT,
+		GEO_ARROW,
 		NUM_GEOMETRY,
 	};
 	enum UNIFORM_TYPE
@@ -98,7 +99,9 @@ public:
 	virtual void Update(double dt);
 	virtual void Render();
 	virtual void Exit();
-
+	int arrowlocation;
+	float timer;
+	int arrowselect;
 private:
 
 	unsigned m_vertexArrayID;
@@ -115,7 +118,7 @@ private:
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void RenderUI(Mesh* mesh, Color color, float size, float x, float y, bool enableLight);
-	void RenderMeshOnScreen(Mesh* mesh, int x, int y, int sizex, int sizey);
+	void RenderMeshOnScreen(Mesh* mesh, float x, float y, int sizex, int sizey);
 
 	void RenderSkybox();
 

@@ -28,7 +28,9 @@ Mainmenu::~Mainmenu()
 
 void Mainmenu::Init()
 {
-
+	arrowlocation = 43;
+	timer = 0.0f;
+	arrowselect = 0;
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
@@ -136,7 +138,7 @@ void Mainmenu::Init()
 	meshList[GEO_TOP]->textureID = LoadTGA("Image//top.tga");
 
 	meshList[GEO_TOP] = MeshBuilder::GenerateCube("top", Color(0, 0, 0));
-
+	meshList[GEO_ARROW] = MeshBuilder::GenerateTRI("ARROW", Color(0, 0, 0),1,1);
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 	//------------------------------------------------------------------------------------------
@@ -200,12 +202,11 @@ void Mainmenu::Init()
 
 static float ROT_LIMIT = 45.f;
 static float SCALE_LIMIT = 5.f;
-
 void Mainmenu::Update(double dt)
 {
 
-	ShowCursor(true);
-
+	ShowCursor(false);
+	Application::elapsed_timer_ += dt;
 	float LSPEED = 10.f;
 
 	if (Application::IsKeyPressed('1')) //enable back face culling
@@ -257,9 +258,56 @@ void Mainmenu::Update(double dt)
 		light[0].type = Light::LIGHT_SPOT;
 		glUniform1i(m_parameters[U_LIGHT0_TYPE], light[0].type);
 	}
-
-
 	//--------------------------------------------------------------------------------
+	if (timer==0.0f)
+	{
+		timer = Application::elapsed_timer_;
+	}
+	if (Application::elapsed_timer_>timer+.2)
+	{
+		if (Application::IsKeyPressed('W'))
+		{
+			//43 26 8 
+			if (arrowselect == 0)
+			{
+				arrowselect = 2;
+			}
+			else
+			{
+				arrowselect--;
+			}
+		}
+		if (Application::IsKeyPressed('S'))
+		{
+			if (arrowselect == 2)
+			{
+				arrowselect = 0;
+			}
+			else
+			{
+				arrowselect++;
+			}
+		}
+
+		timer = Application::elapsed_timer_;
+	}
+	switch (arrowselect)
+	{
+	case 0:
+		arrowlocation = 43;
+		break;
+	case 1:
+		arrowlocation = 26;
+		break;
+	case 2:
+		arrowlocation = 8;
+		break;
+	}
+
+	if (Application::IsKeyPressed(VK_RETURN) && arrowselect == 0)
+	{
+		SceneManager::getSceneManger()->setNextScene(1);
+	}
 
 }
 
@@ -364,7 +412,7 @@ void Mainmenu::Render()
 	modelStack.Scale(0.05, 0.1, 0.15);
 	RenderMesh(meshList[GEO_TOP], false);
 	modelStack.PopMatrix();//end front
-
+	RenderMeshOnScreen(meshList[GEO_ARROW],12,arrowlocation,8,8);
 	RenderTextOnScreen(meshList[GEO_TEXT], "play", Color(1, 1, 1), 8, 4.1, 6);
 	RenderTextOnScreen(meshList[GEO_TEXT], "sound", Color(1, 1, 1), 8, 3.7, 3.8);
 	RenderTextOnScreen(meshList[GEO_TEXT], "quit", Color(1, 1, 1), 8, 4.1, 1.8);
@@ -569,7 +617,7 @@ void Mainmenu::RenderUI(Mesh* mesh, Color color, float size, float x, float y, b
 
 	glEnable(GL_DEPTH_TEST);
 }
-void Mainmenu::RenderMeshOnScreen(Mesh* mesh, int x, int y, int sizex, int sizey)
+void Mainmenu::RenderMeshOnScreen(Mesh* mesh, float x, float y, int sizex, int sizey)
 {
 	glDisable(GL_DEPTH_TEST);
 	Mtx44 ortho;
@@ -580,8 +628,8 @@ void Mainmenu::RenderMeshOnScreen(Mesh* mesh, int x, int y, int sizex, int sizey
 	viewStack.LoadIdentity(); //No need camera for ortho mode
 	modelStack.PushMatrix();
 	modelStack.LoadIdentity();
-	modelStack.Scale(sizex, sizey, 0);
 	modelStack.Translate(x, y, 0);
+	modelStack.Scale(sizex, sizey, 0);
 	RenderMesh(mesh, false); //UI should not have light
 	projectionStack.PopMatrix();
 	viewStack.PopMatrix();

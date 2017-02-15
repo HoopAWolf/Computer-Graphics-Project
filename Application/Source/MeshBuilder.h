@@ -27,6 +27,7 @@ public:
 	static Mesh* GenerateOBJ(const std::string &meshName, const std::string &file_path);
 	static Mesh* GenerateText(const std::string &meshName, unsigned numRow, unsigned numCol);
 	static Mesh*GenerateUI(const std::string &meshName, unsigned numRow, unsigned numCol);
+	static Mesh*GenerateTRI(const std::string &meshName, Color color, float lengthX, float lengthY);
 };
 
 #endif
