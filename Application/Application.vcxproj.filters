@@ -253,11 +253,11 @@
     <ClInclude Include="Source\Mainmenu.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="MapBase.h">
-      <Filter>Header Files\DataBase</Filter>
-    </ClInclude>
     <ClInclude Include="Source\LoadATOM.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MapBase.h">
+      <Filter>Header Files\DataBase</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

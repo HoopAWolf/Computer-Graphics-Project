@@ -7,10 +7,10 @@ void DataBase::registerItems()
 		int item_starting = 0;  //STARTING ITEM PLACEMENT
 		ItemBase *temp_obj;  //TEMP OBJ TO STORE ITEM ID
 		
-		temp_obj = new ItemLightSword;
-		item_base_[temp_obj->getItemID()] = new ItemLightSword;  //REGISTER WEAPON
-		delete temp_obj;  //DELETE OBJ WHEN REGISTERED
-		item_starting++;  //INCREASE BY ONE WHEN ITEM REGISTERED IS WEAPON
+		//temp_obj = new ItemLightSword;
+		//item_base_[temp_obj->getItemID()] = new ItemLightSword;  //REGISTER WEAPON
+		//delete temp_obj;  //DELETE OBJ WHEN REGISTERED
+		//item_starting++;  //INCREASE BY ONE WHEN ITEM REGISTERED IS WEAPON
 	}
 }
 

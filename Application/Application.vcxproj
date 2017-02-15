@@ -126,7 +126,6 @@
     <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MapBase.h" />
     <ClInclude Include="Source\AABB.h" />
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\Camera.h" />
@@ -145,6 +144,7 @@
     <ClInclude Include="Source\LoadOBJ.h" />
     <ClInclude Include="Source\LoadTGA.h" />
     <ClInclude Include="Source\Mainmenu.h" />
+    <ClInclude Include="Source\MapBase.h" />
     <ClInclude Include="Source\Material.h" />
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
