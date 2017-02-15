@@ -196,6 +196,9 @@ static float SCALE_LIMIT = 5.f;
 void SceneBossM::Update(double dt)
 {
 	camera.Update(dt);
+	ShowCursor(false);
+	Application::elapsed_timer_ += dt;
+	PlayerBase::instance()->playerUpdate(dt);
 
 	float LSPEED = 10.f;
 
