@@ -4,6 +4,7 @@
 #include "Scene.h"
 #include <map>
 #include "PlayerBase.h"
+#include "MapBase.h"
 using std::map;
 
 class SceneManager

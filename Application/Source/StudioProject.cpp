@@ -15,6 +15,7 @@
 
 
 DataBase *DataBase::s_instance = nullptr;
+MapBase *MapBase::s_instance = nullptr;
 Vector3 Camera::position = 0;
 Vector3 Camera::target = 0;
 Vector3 Camera::up = 0;
@@ -34,6 +35,10 @@ void StudioProject::Init()
 	
 	DataBase::instance()->registerItems();
 	PlayerBase::instance()->startPlayer();
+
+	MapBase::instance()->setMapSize(1, 6, 10);
+	MapBase::instance()->generateMap(1);
+
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
@@ -340,16 +345,25 @@ void StudioProject::Render()
 	modelStack.PopMatrix();
 	//===================================================================================================
 
-	modelStack.PushMatrix();
-	modelStack.Scale(10, 10, 10);
-	LoadAtom("Atom//Chicken.atom", &modelStack, frame, "pCylinder2");
-	RenderMesh(meshList[GEO_CUBE], false);
-	modelStack.PopMatrix();
-	frame += (1 % 120);
+	for (int x = 0; x < MapBase::instance()->getMapData(1).size_.x; x++)
+	{
+		for (int z = 0; z < MapBase::instance()->getMapData(1).size_.z; z++)
+		{
+			if (MapBase::instance()->checkingMapDataByCoord(1, x, z) == 'C')
+			{
+				modelStack.PushMatrix();
+				modelStack.Translate(x * 10, 0, z * 10);
+				modelStack.Scale(1, 1, 1);
+				LoadAtom("Atom//Chicken.atom", &modelStack, frame, "pCylinder2");
+				RenderMesh(meshList[GEO_CUBE], false);
+				modelStack.PopMatrix();
+				frame += (1 % 120);
 
-	if (frame >= 120)
-		frame = 1;
-
+				if (frame >= 120)
+					frame = 1;
+			}
+		}
+	}
 }
 
 

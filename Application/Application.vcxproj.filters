@@ -158,6 +158,9 @@
     <ClCompile Include="Source\ItemShuriken.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MapBase.cpp">
+      <Filter>Source Files\DataBase</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
