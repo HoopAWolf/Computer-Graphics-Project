@@ -3,8 +3,12 @@
 
 #include <map>
 #include "Vector3.h"
+#include <fstream>
+#include <iostream>
+#include <string>
 
 using std::map;
+using std::string;
 
 struct ArrayData
 {
@@ -29,6 +33,7 @@ public:
 
 	void setMapSize(unsigned dimensionID, int x, int z);
 	void generateMap(unsigned dimensionID);
+	void generateMap(unsigned dimensionID, const std::string fileName);
 	void setMapDataByCoord(unsigned dimensionID, char data, unsigned coordX, unsigned coordZ);
 
 	ArrayData getMapData(unsigned dimensionID);

@@ -89,12 +89,12 @@
     <ClCompile Include="Source\Camera2.cpp" />
     <ClCompile Include="Source\Camera3.cpp" />
     <ClCompile Include="Source\DataBase.cpp" />
-    <ClCompile Include="Source\GreatSword.cpp" />
     <ClCompile Include="Source\ItemBattleAxe.cpp" />
     <ClCompile Include="Source\ItemChestPlate.cpp" />
     <ClCompile Include="Source\ItemChickenGun.cpp" />
     <ClCompile Include="Source\ItemDagger.cpp" />
     <ClCompile Include="Source\ItemGiggsGun.cpp" />
+    <ClCompile Include="Source\ItemGreatSword.cpp" />
     <ClCompile Include="Source\ItemHammer.cpp" />
     <ClCompile Include="Source\ItemKiteShield.cpp" />
     <ClCompile Include="Source\ItemKunai.cpp" />

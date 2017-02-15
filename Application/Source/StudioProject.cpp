@@ -20,8 +20,6 @@ Vector3 Camera::position = 0;
 Vector3 Camera::target = 0;
 Vector3 Camera::up = 0;
 
-int frame = 1;
-
 StudioProject::StudioProject()
 {
 }
@@ -36,7 +34,7 @@ void StudioProject::Init()
 	DataBase::instance()->registerItems();
 	PlayerBase::instance()->startPlayer();
 
-	MapBase::instance()->setMapSize(1, 6, 10);
+	MapBase::instance()->setMapSize(1, 20, 20);
 	MapBase::instance()->generateMap(1);
 
 	// Set background color to dark blue
@@ -117,8 +115,20 @@ void StudioProject::Init()
 
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1, 1, 1), 24, 13, 1);
 
-	meshList[GEO_CUBE] = MeshBuilder::GenerateOBJ("chicken", "OBJ//chicken.obj");
-	meshList[GEO_CUBE]->textureID = LoadTGA("Image//chicken.tga");
+	meshList[GEO_RIGHT_WING] = MeshBuilder::GenerateOBJ("chicken", "OBJ//chickenRightWing.obj");
+	meshList[GEO_RIGHT_WING]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_BODY] = MeshBuilder::GenerateOBJ("chicken", "OBJ//ChickenBody.obj");
+	meshList[GEO_BODY]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_LEFT_WING] = MeshBuilder::GenerateOBJ("chicken", "OBJ//chickenleftwing.obj");
+	meshList[GEO_LEFT_WING]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_LEFT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//chickenleftleg.obj");
+	meshList[GEO_LEFT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_RIGHT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//chickenrightleg.obj");
+	meshList[GEO_RIGHT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
 
 	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_FRONT]->textureID = LoadTGA("Image//front.tga");
@@ -262,7 +272,7 @@ void StudioProject::Update(double dt)
 
 }
 
-
+double frame = 1.25;
 void StudioProject::Render()
 {
 	// Render VBO here
@@ -351,19 +361,41 @@ void StudioProject::Render()
 		{
 			if (MapBase::instance()->checkingMapDataByCoord(1, x, z) == 'C')
 			{
-				modelStack.PushMatrix();
-				modelStack.Translate(x * 10, 0, z * 10);
-				modelStack.Scale(1, 1, 1);
-				LoadAtom("Atom//Chicken.atom", &modelStack, frame, "pCylinder2");
-				RenderMesh(meshList[GEO_CUBE], false);
-				modelStack.PopMatrix();
-				frame += (1 % 120);
 
-				if (frame >= 120)
-					frame = 1;
+				modelStack.PushMatrix();
+				modelStack.Translate(x, 0, z);
+
+
+				modelStack.PushMatrix();
+				LoadAtom("Atom//chicks.atom", &modelStack, frame, "Chicken_rightwing");
+				RenderMesh(meshList[GEO_RIGHT_WING], true);
+				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				LoadAtom("Atom//chicks.atom", &modelStack, frame, "Chicken_leftwing");
+				RenderMesh(meshList[GEO_LEFT_WING], true);
+				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				LoadAtom("Atom//chicks.atom", &modelStack, frame, "chicken_leftLeg");
+				RenderMesh(meshList[GEO_LEFT_LEG], true);
+				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				LoadAtom("Atom//chicks.atom", &modelStack, frame, "Chicken_rightleg");
+				RenderMesh(meshList[GEO_RIGHT_LEG], true);
+				modelStack.PopMatrix();
+
+				RenderMesh(meshList[GEO_BODY], true);
+				modelStack.PopMatrix();
 			}
 		}
 	}
+
+	frame = (int)(++frame) % 30;
+
+	if (frame >= ((double)74 * (double)((double)1 / (double)30)))
+		frame = 1.25;
 }
 
 
