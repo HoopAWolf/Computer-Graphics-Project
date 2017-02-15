@@ -18,6 +18,7 @@ private:
 	map<unsigned, Scene*> SceneDataBase;
 	int currSceneID, nextSceneID;
 	static SceneManager *s_instance;
+	bool quit;
 
 public:
 
@@ -26,6 +27,8 @@ public:
 	void initAllScene();
 	void quitAllScene();
 	void update();
+	bool isQuit();
+	void setQuit();
 
 	static SceneManager* getSceneManger()
 	{

@@ -219,11 +219,11 @@ void Mainmenu::Update(double dt)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //wireframe mode
 	if (Application::IsKeyPressed(VK_F1))
 	{
-		SceneManager::getSceneManger()->setNextScene(1);
+		SceneManager::getSceneManger()->setNextScene(0);
 	}
 	if (Application::IsKeyPressed(VK_F2))
 	{
-		SceneManager::getSceneManger()->setNextScene(0);
+		SceneManager::getSceneManger()->setNextScene(1);
 	}
 	//light_controls---------------------------------------------------------------
 	if (Application::IsKeyPressed('I'))
@@ -304,9 +304,17 @@ void Mainmenu::Update(double dt)
 		break;
 	}
 
-	if (Application::IsKeyPressed(VK_RETURN) && arrowselect == 0)
+	if (Application::IsKeyPressed(VK_RETURN))
 	{
-		SceneManager::getSceneManger()->setNextScene(1);
+		switch (arrowselect)
+		{
+
+		case 0:	
+			SceneManager::getSceneManger()->setNextScene(1);
+			break;
+		case 2:
+			SceneManager::getSceneManger()->setQuit();
+		}
 	}
 
 }

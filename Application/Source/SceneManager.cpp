@@ -12,6 +12,7 @@ void SceneManager::initAllScene()
 	{
 		SceneDataBase[i]->Init();
 	}
+	quit = false;
 }
 
 void SceneManager::quitAllScene()
@@ -41,4 +42,14 @@ void SceneManager::update()
 	glfwPollEvents();
 	Application::m_timer.waitUntil(Application::frameTime);       // Frame rate limiter. Limits each frame to a specified time in ms.   
 
+}
+
+bool SceneManager::isQuit()
+{
+	return quit;
+}
+
+void SceneManager::setQuit()
+{
+	quit = true;
 }
