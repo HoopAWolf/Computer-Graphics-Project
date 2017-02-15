@@ -20,6 +20,13 @@ struct AABB
 		max = maxInput;
 	}
 
+	bool isAABBInsideAABB(AABB entity2) {
+		return (min.x <= entity2.max.x && max.x >= entity2.min.x) &&
+			(min.y <= entity2.max.y && max.y >= entity2.min.y) &&
+			(min.z <= entity2.max.z && max.z >= entity2.min.z);
+	}
+
+
 	Vector3 min, max;
 };
 

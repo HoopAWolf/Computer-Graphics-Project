@@ -98,10 +98,6 @@ void SceneBossM::Init()
 
 	//variable to rotate geometry
 
-
-	//Initialize camera settings
-	camera.Init(Vector3(1000, 950, 1010), Vector3(1000, 950, 1000), Vector3(0, 1, 0));
-
 	//meshes------------------------------------------------------------------------------------------
 	meshList[GEO_AXES] = MeshBuilder::GenerateAxes("reference", 1000, 1000, 1000);
 
