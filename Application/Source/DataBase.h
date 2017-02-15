@@ -2,7 +2,6 @@
 #define _DATA_BASE_H_
 
 #include "ItemWeapon.h"
-#include "ItemLightSword.cpp"
 #include "EntityDrop.h"
 #include "EntityMinion.h"
 #include "EntityBoss.h"

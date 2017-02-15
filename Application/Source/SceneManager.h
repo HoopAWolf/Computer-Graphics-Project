@@ -3,7 +3,7 @@
 
 #include "Scene.h"
 #include <map>
-
+#include "PlayerBase.h"
 using std::map;
 
 class SceneManager

@@ -10,7 +10,7 @@
 #include "MatrixStack.h"
 #include "Light.h"
 #include "DataBase.h"
-#include "PlayerBase.h"
+
 
 #include <string>
 #include <vector>
