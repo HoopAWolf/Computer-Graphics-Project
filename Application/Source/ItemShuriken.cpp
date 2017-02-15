@@ -13,7 +13,7 @@ public:
 		item_name_ = "Shuriken";
 
 
-		weapon_type_ = LIGHT;
+		weapon_type_ = RANGE_AUTO;
 		durability_ = 25;
 		damage_ = 17;
 		attack_speed_ = 3.5;

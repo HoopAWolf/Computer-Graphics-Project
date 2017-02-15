@@ -11,7 +11,6 @@
 #include "Light.h"
 #include "DataBase.h"
 
-
 #include <string>
 #include <vector>
 using std::vector;
@@ -40,8 +39,16 @@ class StudioProject : public Scene
 		GEO_FRONT,
 		GEO_BACK,
 		GEO_TEXT,
+
+		GEO_BODY,
+		GEO_LEFT_WING,
+		GEO_RIGHT_WING,
+		GEO_LEFT_LEG,
+		GEO_RIGHT_LEG,
+
 		NUM_GEOMETRY,
 	};
+
 	enum UNIFORM_TYPE
 	{
 		U_MVP = 0,

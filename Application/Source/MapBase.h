@@ -1,16 +1,19 @@
 #ifndef _MAP_BASE_H
 #define _MAP_BASE_H_
 
-#define MAXSIZEX 20
-#define MAXSIZEZ 20
-
 #include <map>
+#include "Vector3.h"
+#include <fstream>
+#include <iostream>
+#include <string>
 
 using std::map;
+using std::string;
 
 struct ArrayData
 {
-	int mapArray[MAXSIZEX][MAXSIZEZ];
+	char **mapArray_;
+	Vector3 size_;
 };
 
 class MapBase
@@ -28,11 +31,13 @@ public:
 		return s_instance;
 	}
 
+	void setMapSize(unsigned dimensionID, int x, int z);
 	void generateMap(unsigned dimensionID);
-	void setMapDataByCoord(char data, unsigned coordX, unsigned coordZ);
+	void generateMap(unsigned dimensionID, const std::string fileName);
+	void setMapDataByCoord(unsigned dimensionID, char data, unsigned coordX, unsigned coordZ);
 
 	ArrayData getMapData(unsigned dimensionID);
-	char checkingMapDataByCoord(unsigned coordX, unsigned coordZ);
+	char checkingMapDataByCoord(unsigned dimensionID, unsigned coordX, unsigned coordZ);
 
 
 };
