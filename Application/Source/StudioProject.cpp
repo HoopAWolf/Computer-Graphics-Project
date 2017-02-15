@@ -115,7 +115,7 @@ void StudioProject::Init()
 
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1, 1, 1), 24, 13, 1);
 
-	meshList[GEO_RIGHT_WING] = MeshBuilder::GenerateOBJ("chicken", "OBJ//chickenRightWing.obj");
+	meshList[GEO_RIGHT_WING] = MeshBuilder::GenerateOBJ("chicken", "OBJ//RightWing.obj");
 	meshList[GEO_RIGHT_WING]->textureID = LoadTGA("Image//chicken_.tga");
 
 	meshList[GEO_BODY] = MeshBuilder::GenerateOBJ("chicken", "OBJ//ChickenBody.obj");
@@ -354,7 +354,7 @@ void StudioProject::Render()
 	RenderMesh(meshList[GEO_LIGHTBALL], false);
 	modelStack.PopMatrix();
 	//===================================================================================================
-
+	static double timeelaspedforanimation = 0.0;
 	for (int x = 0; x < MapBase::instance()->getMapData(1).size_.x; x++)
 	{
 		for (int z = 0; z < MapBase::instance()->getMapData(1).size_.z; z++)
@@ -367,30 +367,34 @@ void StudioProject::Render()
 
 
 				modelStack.PushMatrix();
-				LoadAtom("Atom//chicks.atom", &modelStack, frame, "Chicken_rightwing");
+				LoadAtom("Atom//chicks.atom", &modelStack, timeelaspedforanimation, "Chicken_rightwing");
 				RenderMesh(meshList[GEO_RIGHT_WING], true);
 				modelStack.PopMatrix();
 
-				modelStack.PushMatrix();
-				LoadAtom("Atom//chicks.atom", &modelStack, frame, "Chicken_leftwing");
-				RenderMesh(meshList[GEO_LEFT_WING], true);
-				modelStack.PopMatrix();
+				//modelStack.PushMatrix();
+				//LoadAtom("Atom//chicks.atom", &modelStack, timeelaspedforanimation, "Chicken_leftwing");
+				//RenderMesh(meshList[GEO_LEFT_WING], true);
+				//modelStack.PopMatrix();
 
-				modelStack.PushMatrix();
-				LoadAtom("Atom//chicks.atom", &modelStack, frame, "chicken_leftLeg");
-				RenderMesh(meshList[GEO_LEFT_LEG], true);
-				modelStack.PopMatrix();
+				//modelStack.PushMatrix();
+				//LoadAtom("Atom//chicks.atom", &modelStack, timeelaspedforanimation, "chicken_leftLeg");
+				//RenderMesh(meshList[GEO_LEFT_LEG], true);
+				//modelStack.PopMatrix();
 
-				modelStack.PushMatrix();
-				LoadAtom("Atom//chicks.atom", &modelStack, frame, "Chicken_rightleg");
-				RenderMesh(meshList[GEO_RIGHT_LEG], true);
-				modelStack.PopMatrix();
+				//modelStack.PushMatrix();
+				//LoadAtom("Atom//chicks.atom", &modelStack, timeelaspedforanimation, "Chicken_rightleg");
+				//RenderMesh(meshList[GEO_RIGHT_LEG], true);
+				//modelStack.PopMatrix();
 
 				RenderMesh(meshList[GEO_BODY], true);
 				modelStack.PopMatrix();
 			}
 		}
 	}
+
+	timeelaspedforanimation += (double)((double)1 / (double)60);
+	if (timeelaspedforanimation > 1.2333333333333333333)
+		timeelaspedforanimation = 0.01666666666666666666666;
 
 	frame = (int)(++frame) % 30;
 
