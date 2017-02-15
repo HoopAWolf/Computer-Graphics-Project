@@ -201,13 +201,9 @@ void StudioProject::Update(double dt)
 {
 	camera.Update(dt);
 	ShowCursor(false);
-<<<<<<< HEAD
-	Application::elapsed_timer_ += dt;
-=======
 
 	Application::elapsed_timer_ += dt;
 
->>>>>>> 68e237b7c7b633779b5bfb8c023f43a53a82b915
 	PlayerBase::instance()->playerUpdate(dt);
 
 	float LSPEED = 10.f;
