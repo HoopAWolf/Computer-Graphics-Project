@@ -25,6 +25,7 @@ public:
 
 	void registerAllRenderingData();
 	Mesh* getItemMesh(unsigned itemID);
+	Mesh* getBuildingMesh(unsigned dimension);
 
 };
 

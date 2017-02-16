@@ -14,6 +14,7 @@ protected:
 	string texture_string_;
 	Vector3 position_;
 	unsigned buildingID;
+	Vector3 size_;
 
 public:
 	virtual ~BuildingBase(){}

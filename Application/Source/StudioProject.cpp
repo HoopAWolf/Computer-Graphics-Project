@@ -45,6 +45,12 @@ void StudioProject::Init()
 		RenderingBase::instance()->getItemMesh(i)->textureID = LoadTGA(tempString.c_str());
 	}
 
+	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(2, 1); i++)
+	{
+		string tempString = "Image//" + DataBase::instance()->getBuilding(1, i)->getTextureString() + ".tga";
+		RenderingBase::instance()->getBuildingMesh(i)->textureID = LoadTGA(tempString.c_str());
+	}
+
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
@@ -373,12 +379,20 @@ void StudioProject::Render()
 				modelStack.PushMatrix();
 				modelStack.Translate(x, 0, z);
 
-				for (int i = 0; i < 18; i++)
+				for (int i = 0; i < DataBase::instance()->sizeOfDataBase(0); i++)
 				{
 					modelStack.PushMatrix();
 					modelStack.Translate(x + 1 + i * 5, 0, z);
 					modelStack.Rotate(Application::elapsed_timer_ * 15, 0, 1, 0);
 					RenderMesh(RenderingBase::instance()->getItemMesh(i), true);
+					modelStack.PopMatrix();
+				}
+
+				for (int i = 0; i < DataBase::instance()->sizeOfDataBase(2, 1); i++)
+				{
+					modelStack.PushMatrix();
+					modelStack.Translate(x + 1 + i * 5, 0, z + 1 + i * 10);
+					RenderMesh(RenderingBase::instance()->getBuildingMesh(i), true);
 					modelStack.PopMatrix();
 				}
 
