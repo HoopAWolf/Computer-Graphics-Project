@@ -17,3 +17,9 @@ Mesh* RenderingBase::getItemMesh(unsigned itemID)
 {
 	return item_mesh[itemID];
 }
+
+
+Mesh* RenderingBase::getBuildingMesh(unsigned buildingID)
+{
+	return building_mesh[buildingID];
+}
