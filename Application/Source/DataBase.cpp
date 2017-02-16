@@ -11,8 +11,112 @@ void DataBase::registerItems()
 		//item_base_[temp_obj->getItemID()] = new ItemLightSword;  //REGISTER WEAPON
 		//delete temp_obj;  //DELETE OBJ WHEN REGISTERED
 		//item_starting++;  //INCREASE BY ONE WHEN ITEM REGISTERED IS WEAPON
+
+
+
+		//Weapons
+		temp_obj = new ItemBattleAxe;
+		item_base_[temp_obj->getItemID()] = new ItemBattleAxe; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+		temp_obj = new ItemGreatSword;
+		item_base_[temp_obj->getItemID()] = new ItemGreatSword; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+
+		temp_obj = new ItemChickenGun;
+		item_base_[temp_obj->getItemID()] = new ItemChickenGun; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+		temp_obj = new ItemDagger;
+		item_base_[temp_obj->getItemID()] = new ItemDagger; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+		temp_obj = new ItemGiggsGun;
+		item_base_[temp_obj->getItemID()] = new ItemGiggsGun; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+		temp_obj = new ItemHammer;
+		item_base_[temp_obj->getItemID()] = new ItemHammer; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+		temp_obj = new ItemKunai;
+		item_base_[temp_obj->getItemID()] = new ItemKunai; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+		temp_obj = new ItemLaserGun;
+		item_base_[temp_obj->getItemID()] = new ItemLaserGun; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+		temp_obj = new ItemLucille;
+		item_base_[temp_obj->getItemID()] = new ItemLucille; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+		temp_obj = new ItemM4A4;
+		item_base_[temp_obj->getItemID()] = new ItemM4A4; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+		temp_obj = new ItemMinigun;
+		item_base_[temp_obj->getItemID()] = new ItemMinigun; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+		temp_obj = new Itemshotgun;
+		item_base_[temp_obj->getItemID()] = new Itemshotgun; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+		temp_obj = new ItemShuriken;
+		item_base_[temp_obj->getItemID()] = new ItemShuriken; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+		temp_obj = new ItemSpear;
+		item_base_[temp_obj->getItemID()] = new ItemSpear; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+		temp_obj = new ItemSword;
+		item_base_[temp_obj->getItemID()] = new ItemSword; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+		temp_obj = new ItemWoodenSword;
+		item_base_[temp_obj->getItemID()] = new ItemWoodenSword; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+
+		//Shields
+		temp_obj = new ItemKiteShield;
+		item_base_[temp_obj->getItemID()] = new ItemKiteShield; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+		temp_obj = new ItemRoundShield;
+		item_base_[temp_obj->getItemID()] = new ItemRoundShield; //Register Weapon
+		delete temp_obj;
+		item_starting++;
+
+
+
+
+
+
 	}
 }
+
+
 
 ItemBase* DataBase::getItem(unsigned itemID)
 {
