@@ -108,7 +108,6 @@
     <ClCompile Include="Source\ItemWoodenSword.cpp" />
     <ClCompile Include="Source\ItemLucille.cpp" />
     <ClCompile Include="Source\Itemshotgun.cpp" />
-    <ClCompile Include="Source\LoadATOM.cpp" />
     <ClCompile Include="Source\LoadOBJ.cpp" />
     <ClCompile Include="Source\LoadTGA.cpp" />
     <ClCompile Include="Source\main.cpp" />
@@ -142,7 +141,6 @@
     <ClInclude Include="Source\ItemBase.h" />
     <ClInclude Include="Source\ItemWeapon.h" />
     <ClInclude Include="Source\Light.h" />
-    <ClInclude Include="Source\LoadATOM.h" />
     <ClInclude Include="Source\LoadOBJ.h" />
     <ClInclude Include="Source\LoadTGA.h" />
     <ClInclude Include="Source\Mainmenu.h" />

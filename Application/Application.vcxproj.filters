@@ -98,9 +98,6 @@
     <ClCompile Include="Source\Mainmenu.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LoadATOM.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\ItemLucille.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
@@ -258,9 +255,6 @@
     </ClInclude>
     <ClInclude Include="Source\Mainmenu.h">
       <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\LoadATOM.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\MapBase.h">
       <Filter>Header Files\DataBase</Filter>

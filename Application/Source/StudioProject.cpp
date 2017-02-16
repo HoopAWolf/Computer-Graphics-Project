@@ -9,7 +9,6 @@
 
 #include "Utility.h"
 #include "LoadTGA.h"
-#include "LoadATOM.h"
 
 #include <iostream>
 
@@ -226,6 +225,8 @@ void StudioProject::Update(double dt)
 	camera.Update(dt);
 	ShowCursor(false);
 
+	SceneManager::getSceneManger()->frameRate = ((int)(1 / dt));
+
 	Application::elapsed_timer_ += dt;
 
 	PlayerBase::instance()->playerUpdate(dt);
@@ -281,7 +282,6 @@ void StudioProject::Update(double dt)
 
 }
 
-static double timeelaspedforanimation = 0;
 void StudioProject::Render()
 {
 	// Render VBO here
@@ -376,24 +376,26 @@ void StudioProject::Render()
 				for (int i = 0; i < 18; i++)
 				{
 					modelStack.PushMatrix();
-					modelStack.Translate(x + i * 5, 0, z);
+					modelStack.Translate(x + 1 + i * 5, 0, z);
 					modelStack.Rotate(Application::elapsed_timer_ * 15, 0, 1, 0);
 					RenderMesh(RenderingBase::instance()->getItemMesh(i), true);
 					modelStack.PopMatrix();
 				}
 
+				modelStack.Translate(x, 0, z + 20);
 				modelStack.PushMatrix();
-				LoadAtom("Atom//boss_3.atom", &modelStack, timeelaspedforanimation, "boss_3_arm_2");
+				RenderMesh(meshList[GEO_RIGHT_WING], true);
+				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
 				RenderMesh(meshList[GEO_LEFT_WING], true);
 				modelStack.PopMatrix();
 
 				modelStack.PushMatrix();
-				LoadAtom("Atom//boss_3.atom", &modelStack, timeelaspedforanimation, "boss_3_leg_1");
 				RenderMesh(meshList[GEO_LEFT_LEG], true);
 				modelStack.PopMatrix();
 
 				modelStack.PushMatrix();
-				LoadAtom("Atom//boss_3.atom", &modelStack, timeelaspedforanimation, "boss_3_leg_2");
 				RenderMesh(meshList[GEO_RIGHT_LEG], true);
 				modelStack.PopMatrix();
 
@@ -403,10 +405,7 @@ void StudioProject::Render()
 		}
 	}
 
-	timeelaspedforanimation += (double)((double)1 / (double)60);
-
-	if (timeelaspedforanimation > 1.8)
-		timeelaspedforanimation = 0;
+	RenderTextOnScreen(meshList[GEO_TEXT], "FPS: " + std::to_string(SceneManager::getSceneManger()->frameRate), Color(0, 1, 0), 1.8, 1, 1);
 }
 
 

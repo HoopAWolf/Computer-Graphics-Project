@@ -24,6 +24,7 @@ private:
 
 public:
 
+	unsigned frameRate = 0;
 	void addScene(Scene * scene);
 	void setNextScene(int sceneID);
 	void initAllScene();
