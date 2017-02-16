@@ -7,7 +7,6 @@
 #include "MapBase.h"
 #include "RenderingBase.h"
 
-
 using std::map;
 
 class SceneManager

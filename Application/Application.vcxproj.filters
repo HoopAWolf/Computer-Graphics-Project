@@ -36,9 +36,6 @@
     <Filter Include="Source Files\Items">
       <UniqueIdentifier>{908f74a8-9737-4e7b-af0a-5b33f750897a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Entities">
-      <UniqueIdentifier>{a255dbbc-1c22-4306-905a-f95ceee0f23a}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -164,9 +161,6 @@
     <ClCompile Include="Source\ItemGreatSword.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
-    <ClCompile Include="Source\RenderingBase.cpp">
-      <Filter>Source Files\DataBase</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -266,12 +260,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\MapBase.h">
-      <Filter>Header Files\DataBase</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\RenderingBase.h">
-      <Filter>Header Files\DataBase</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\BuildingBase.h">
       <Filter>Header Files\DataBase</Filter>
     </ClInclude>
   </ItemGroup>

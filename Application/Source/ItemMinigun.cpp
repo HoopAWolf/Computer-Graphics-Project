@@ -8,8 +8,8 @@ class ItemMinigun : public ItemWeapon
 public:
 	ItemMinigun()
 	{
-		itemID_ = 10;
-		texture_string_ = "minigun";
+		itemID_ = 0;
+		texture_string_ = "texture2.tga";
 		item_name_ = "Minigun";
 
 

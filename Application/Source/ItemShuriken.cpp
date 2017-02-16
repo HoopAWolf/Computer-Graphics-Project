@@ -8,8 +8,8 @@ class ItemShuriken : public ItemWeapon
 public:
 	ItemShuriken()
 	{
-		itemID_ = 12;
-		texture_string_ = "shuriken";
+		itemID_ = 0;
+		texture_string_ = "texture2.tga";
 		item_name_ = "Shuriken";
 
 

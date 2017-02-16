@@ -1,5 +1,6 @@
 #include "DetectMemoryLeak.h"
 #include "StudioProject.h"
+#include "GL\glew.h"
 
 #include "shader.hpp"
 #include "Mtx44.h"
@@ -7,15 +8,14 @@
 #include "Application.h"
 
 #include "Utility.h"
-#include "LoadATOM.h"
 #include "LoadTGA.h"
-#include "GL\glew.h"
+#include "LoadATOM.h"
+
 #include <iostream>
 
 
 DataBase *DataBase::s_instance = nullptr;
 MapBase *MapBase::s_instance = nullptr;
-//RenderingBase *RenderingBase::s_instance = nullptr;
 Vector3 Camera::position = 0;
 Vector3 Camera::target = 0;
 Vector3 Camera::up = 0;
@@ -36,8 +36,6 @@ void StudioProject::Init()
 
 	MapBase::instance()->setMapSize(1, 20, 20);
 	MapBase::instance()->generateMap(1, "test.txt");
-
-	//RenderingBase::instance()->registerAllRenderingData();
 
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);

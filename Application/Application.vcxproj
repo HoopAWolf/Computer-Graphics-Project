@@ -117,7 +117,6 @@
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\PlayerBase.cpp" />
-    <ClCompile Include="Source\RenderingBase.cpp" />
     <ClCompile Include="Source\SceneBossH.cpp" />
     <ClCompile Include="Source\SceneBossL.cpp" />
     <ClCompile Include="Source\SceneBossM.cpp" />
@@ -130,7 +129,6 @@
   <ItemGroup>
     <ClInclude Include="Source\AABB.h" />
     <ClInclude Include="Source\Application.h" />
-    <ClInclude Include="Source\BuildingBase.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Camera2.h" />
     <ClInclude Include="Source\Camera3.h" />
@@ -152,7 +150,6 @@
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshBuilder.h" />
     <ClInclude Include="Source\PlayerBase.h" />
-    <ClInclude Include="Source\RenderingBase.h" />
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneBossH.h" />
     <ClInclude Include="Source\SceneBossL.h" />

@@ -8,8 +8,8 @@ class ItemLucille : public ItemWeapon
 public:
 	ItemLucille()
 	{
-		itemID_ = 8;
-		texture_string_ = "lucille";
+		itemID_ = 0;
+		texture_string_ = "negan_.tga";
 		item_name_ = "Lucille";
 
 

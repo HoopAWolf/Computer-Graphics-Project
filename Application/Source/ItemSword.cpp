@@ -8,8 +8,8 @@ class ItemSword : public ItemWeapon
 public:
 	ItemSword()
 	{
-		itemID_ = 14;
-		texture_string_ = "sword";
+		itemID_ = 0;
+		texture_string_ = "texture1.tga";
 		item_name_ = "Sword";
 
 		weapon_type_ = LIGHT;

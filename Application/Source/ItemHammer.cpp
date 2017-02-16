@@ -8,8 +8,8 @@ class ItemHammer : public ItemWeapon
 public:
 	ItemHammer()
 	{
-		itemID_ = 5;
-		texture_string_ = "hammer";
+		itemID_ = 0;
+		texture_string_ = "texture2.tga";
 		item_name_ = "Hammer";
 
 

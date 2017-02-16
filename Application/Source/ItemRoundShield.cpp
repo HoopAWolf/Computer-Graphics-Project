@@ -8,8 +8,8 @@ class ItemRoundShield : public ItemWeapon
 public:
 	ItemRoundShield()
 	{
-		itemID_ = 17;
-		texture_string_ = "round_shield";
+		itemID_ = 0;
+		texture_string_ = "texture2.tga";
 		item_name_ = "Round Shield";
 
 		weapon_type_ = MEDIUM;
