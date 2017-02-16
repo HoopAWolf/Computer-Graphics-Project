@@ -9,7 +9,7 @@ public:
 	ItemBattleAxe()
 	{
 		itemID_ = 0;
-		texture_string_ = "texture2.tga";
+		texture_string_ = "battleaxe";
 		item_name_ = "Battle Axe";
 
 

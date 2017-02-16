@@ -8,8 +8,8 @@ class ItemSpear : public ItemWeapon
 public:
 	ItemSpear()
 	{
-		itemID_ = 0;
-		texture_string_ = "texture2.tga";
+		itemID_ = 13;
+		texture_string_ = "spear";
 		item_name_ = "Spear";
 
 
