@@ -8,8 +8,8 @@ class ItemDagger : public ItemWeapon
 public:
 	ItemDagger()
 	{
-		itemID_ = 0;
-		texture_string_ = "texture2.tga";
+		itemID_ = 3;
+		texture_string_ = "dagger";
 		item_name_ = "Dagger";
 
 

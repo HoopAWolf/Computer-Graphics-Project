@@ -8,8 +8,8 @@ class ItemKiteShield : public ItemWeapon
 public:
 	ItemKiteShield()
 	{
-		itemID_ = 0;
-		texture_string_ = "texture2.tga";
+		itemID_ = 16;
+		texture_string_ = "kite_texture";
 		item_name_ = "Kite Shield";
 
 

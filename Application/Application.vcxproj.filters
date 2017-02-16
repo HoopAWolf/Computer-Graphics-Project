@@ -161,6 +161,9 @@
     <ClCompile Include="Source\ItemGreatSword.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
+    <ClCompile Include="Source\RenderingBase.cpp">
+      <Filter>Source Files\DataBase</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -260,6 +263,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\MapBase.h">
+      <Filter>Header Files\DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RenderingBase.h">
       <Filter>Header Files\DataBase</Filter>
     </ClInclude>
   </ItemGroup>

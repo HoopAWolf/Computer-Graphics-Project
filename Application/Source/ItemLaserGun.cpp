@@ -8,8 +8,8 @@ class ItemLaserGun : public ItemWeapon
 public:
 	ItemLaserGun()
 	{
-		itemID_ = 0;
-		texture_string_ = "texture1.tga";
+		itemID_ = 7;
+		texture_string_ = "laser_gun";
 		item_name_ = "Laser Gun";
 
 		weapon_type_ = RANGE_AUTO;

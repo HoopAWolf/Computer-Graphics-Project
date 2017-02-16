@@ -8,9 +8,9 @@ class ItemM4A4 : public ItemWeapon
 public:
 	ItemM4A4()
 	{
-		itemID_ = 0;
-		texture_string_ = "texture2.tga";
-		item_name_ = "Great Sword";
+		itemID_ = 9;
+		texture_string_ = "m4a4";
+		item_name_ = "M4A4";
 
 
 		weapon_type_ = RANGE_AUTO;
