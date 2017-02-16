@@ -6,7 +6,7 @@
 #include "Mtx44.h"
 
 #include "Application.h"
-#include "MeshBuilder.h"
+
 #include "Utility.h"
 #include "LoadTGA.h"
 #include "LoadATOM.h"
@@ -272,7 +272,7 @@ void StudioProject::Update(double dt)
 
 }
 
-static double timeelaspedforanimation = 2;
+static double timeelaspedforanimation = 0;
 void StudioProject::Render()
 {
 	// Render VBO here

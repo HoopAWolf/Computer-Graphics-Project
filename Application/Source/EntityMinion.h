@@ -20,12 +20,14 @@ protected:
 		DEATH
 	};
 	MINION_STATE minion_state_;
+	unsigned minionID;
 
 public:
 	virtual ~EntityMinion(){};
 
 	virtual MINION_STATE getMinionState() = 0;
 
+	virtual unsigned getMinionID() = 0;
 };
 
 #endif

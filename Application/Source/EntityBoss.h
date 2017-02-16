@@ -29,6 +29,7 @@ protected:
 		DEATH
 	};
 	string boss_name_;
+	unsigned bossID;
 	BOSS_STATE boss_state_;
 	unsigned armor_;
 
@@ -38,6 +39,7 @@ public:
 	virtual string getBossName() = 0;
 	virtual BOSS_STATE getBossState() = 0;
 	virtual unsigned getBossArmor() = 0;
+	virtual unsigned getBossID() = 0;
 
 };
 

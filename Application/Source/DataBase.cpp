@@ -43,3 +43,57 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 		}
 	}
 }
+
+BuildingBase* DataBase::getBuilding(unsigned dimensionID, int positionInVector)
+{
+	if (positionInVector < building_base_[dimensionID].size())
+		return building_base_[dimensionID][positionInVector];
+}
+
+EntityDrop* DataBase::getEntityDrop(unsigned dimensionID, int positionInVector)
+{
+	if (positionInVector < drop_base_[dimensionID].size())
+		return drop_base_[dimensionID][positionInVector];
+}
+
+EntityBase* DataBase::getEntityMinion(unsigned dimensionID, int positionInVector)
+{
+	if (positionInVector < minion_base_[dimensionID].size())
+		return minion_base_[dimensionID][positionInVector];
+}
+
+EntityBase* DataBase::getEntityBoss(unsigned dimensionID, int positionInVector)
+{
+	if (positionInVector < boss_base_[dimensionID].size())
+		return boss_base_[dimensionID][positionInVector];
+}
+
+void DataBase::setEntity(bool isBoss, bool isMinion, unsigned dimensionID, EntityBase* entity)
+{
+	if (isBoss)
+		boss_base_[dimensionID].push_back(entity);
+
+	else if (isMinion)
+		minion_base_[dimensionID].push_back(entity);
+}
+
+int DataBase::sizeOfDataBase(unsigned base, unsigned dimensionID)
+{
+
+	//0 - ITEM BASE, 1 - DROP BASE, 2 - BUILDING BASE, 3 - ENTITY MINION BASE
+	switch (base)
+	{
+	case 0:
+		return item_base_.size();
+	case 1:
+		return drop_base_[dimensionID].size();
+	case 2:
+		return building_base_[dimensionID].size();
+	case 3:
+		return minion_base_[dimensionID].size();
+	case 4: 
+		return boss_base_[dimensionID].size();
+	default:
+		return 0;
+	};
+}
