@@ -36,7 +36,7 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 
 void Camera3::Update(double dt)
 {
-		static const float CAMERA_SPEED = 5.f, MOVING_SPEED = 500.f;
+		static const float CAMERA_SPEED = 5.f, MOVING_SPEED = 50.f;
 		glfwGetWindowSize(Application::m_window, &windowX, &windowY);
 
 		Vector3 oldTarget = target;

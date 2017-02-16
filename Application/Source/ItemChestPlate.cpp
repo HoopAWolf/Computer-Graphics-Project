@@ -9,7 +9,7 @@ public:
 	ItemChestPlate()
 	{
 		itemID_ = 0;
-		texture_string_ = "texture1.tga";
+		texture_string_ = "chest_plate";
 		item_name_ = "Chest Plate";
 
 		weapon_type_ = LIGHT;

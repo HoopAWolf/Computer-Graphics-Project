@@ -43,7 +43,7 @@ void StudioProject::Init()
 	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(0); i++)
 	{
 		string tempString = "Image//" + DataBase::instance()->getItem(i)->getTextureString() + ".tga";
-		RenderingBase::instance()->getItemMesh(0)->textureID = LoadTGA(tempString.c_str());
+		RenderingBase::instance()->getItemMesh(i)->textureID = LoadTGA(tempString.c_str());
 	}
 
 	// Set background color to dark blue
@@ -373,10 +373,14 @@ void StudioProject::Render()
 				modelStack.PushMatrix();
 				modelStack.Translate(x, 0, z);
 
-				modelStack.PushMatrix();
-				LoadAtom("Atom//boss_3.atom", &modelStack, timeelaspedforanimation, "boss_3_leg_1");
-				RenderMesh(RenderingBase::instance()->getItemMesh(0), true);
-				modelStack.PopMatrix();
+				for (int i = 0; i < 18; i++)
+				{
+					modelStack.PushMatrix();
+					modelStack.Translate(x + i * 5, 0, z);
+					modelStack.Rotate(Application::elapsed_timer_ * 15, 0, 1, 0);
+					RenderMesh(RenderingBase::instance()->getItemMesh(i), true);
+					modelStack.PopMatrix();
+				}
 
 				modelStack.PushMatrix();
 				LoadAtom("Atom//boss_3.atom", &modelStack, timeelaspedforanimation, "boss_3_arm_2");

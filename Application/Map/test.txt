@@ -1,6 +1,1 @@
-CCCCCCC
-
-
-CCCCCC
-
-CCCC         CCC
+C

@@ -9,7 +9,7 @@ public:
 	ItemKiteShield()
 	{
 		itemID_ = 16;
-		texture_string_ = "kite_texture";
+		texture_string_ = "kite_shield";	
 		item_name_ = "Kite Shield";
 
 
