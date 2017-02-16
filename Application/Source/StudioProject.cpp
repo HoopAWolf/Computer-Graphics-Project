@@ -16,6 +16,7 @@
 
 DataBase *DataBase::s_instance = nullptr;
 MapBase *MapBase::s_instance = nullptr;
+RenderingBase *RenderingBase::s_instance = nullptr;
 Vector3 Camera::position = 0;
 Vector3 Camera::target = 0;
 Vector3 Camera::up = 0;
@@ -36,6 +37,10 @@ void StudioProject::Init()
 
 	MapBase::instance()->setMapSize(1, 20, 20);
 	MapBase::instance()->generateMap(1, "test.txt");
+
+	RenderingBase::instance()->registerAllRenderingData();
+
+	RenderingBase::instance()->getItemMesh(0)->textureID = LoadTGA("Image//chicken_.tga");	
 
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
@@ -365,8 +370,8 @@ void StudioProject::Render()
 				modelStack.Translate(x, 0, z);
 
 				modelStack.PushMatrix();
-				LoadAtom("Atom//boss_3.atom", &modelStack, timeelaspedforanimation, "boss_3_arm_1");
-				RenderMesh(meshList[GEO_RIGHT_WING], true);
+				LoadAtom("Atom//boss_3.atom", &modelStack, timeelaspedforanimation, "boss_3_leg_1");
+				RenderMesh(RenderingBase::instance()->getItemMesh(0), true);
 				modelStack.PopMatrix();
 
 				modelStack.PushMatrix();

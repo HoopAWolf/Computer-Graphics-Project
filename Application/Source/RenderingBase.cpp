@@ -14,3 +14,8 @@ void RenderingBase::registerAllRenderingData()
 
 	}
 }
+
+Mesh* RenderingBase::getItemMesh(unsigned itemID)
+{
+	return item_mesh[itemID];
+}

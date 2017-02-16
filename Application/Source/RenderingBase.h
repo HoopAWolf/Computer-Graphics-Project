@@ -24,6 +24,7 @@ public:
 	}
 
 	void registerAllRenderingData();
+	Mesh* getItemMesh(unsigned itemID);
 
 };
 
