@@ -34,7 +34,7 @@ void StudioProject::Init()
 	DataBase::instance()->registerItems();
 	PlayerBase::instance()->startPlayer();
 
-	MapBase::instance()->setMapSize(1, 20, 20);
+	MapBase::instance()->setMapSize(1, 50, 50);
 	MapBase::instance()->generateMap(1, "test.txt");
 
 	RenderingBase::instance()->registerAllRenderingData();
@@ -138,11 +138,17 @@ void StudioProject::Init()
 	meshList[GEO_RIGHT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_leg_2.obj");
 	meshList[GEO_RIGHT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
 
+
+	meshList[GEO_STATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//statueBase_FullSet.obj");
+	meshList[GEO_STATUE]->textureID = LoadTGA("Image//texture2.tga");
+
+
 	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_FRONT]->textureID = LoadTGA("Image//front.tga");
 
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BACK]->textureID = LoadTGA("Image//back.tga");
+
 
 	meshList[GEO_LEFT] = MeshBuilder::GenerateQuad("left", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_LEFT]->textureID = LoadTGA("Image//left.tga");
@@ -402,6 +408,19 @@ void StudioProject::Render()
 				RenderMesh(meshList[GEO_BODY], true);
 				modelStack.PopMatrix();
 			}
+
+			if (MapBase::instance()->checkingMapDataByCoord(1, x, z) == 'S')
+			{
+				modelStack.PushMatrix();
+				
+				modelStack.Translate(5,0,60);
+				modelStack.Rotate(180, 0, 1, 0);
+				RenderMesh(meshList[GEO_STATUE], true);
+				modelStack.PopMatrix();
+
+
+			}
+
 		}
 	}
 
