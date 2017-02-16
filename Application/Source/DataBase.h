@@ -6,6 +6,34 @@
 #include "EntityMinion.h"
 #include "EntityBoss.h"
 
+
+//Weapons 
+#include "ItemBattleAxe.cpp"
+#include "ItemGreatSword.cpp"
+#include "ItemChestPlate.cpp"
+#include "ItemChickenGun.cpp"
+#include "ItemDagger.cpp"
+#include "ItemGiggsGun.cpp"
+#include "ItemHammer.cpp"
+#include "ItemKunai.cpp"
+#include "ItemLaserGun.cpp"
+#include "ItemLucille.cpp"
+#include "ItemM4A4.cpp"
+#include "ItemMinigun.cpp"
+#include "Itemshotgun.cpp"
+#include "ItemShuriken.cpp"
+#include "ItemSpear.cpp"
+#include "ItemSword.cpp"
+#include "itemWoodenSword.cpp"
+
+
+
+//non weapons but still here for I dont know what reason lel
+#include "ItemKiteShield.cpp"
+#include "ItemRoundShield.cpp"
+
+
+
 #include <vector>
 #include <map>
 #include <string>
