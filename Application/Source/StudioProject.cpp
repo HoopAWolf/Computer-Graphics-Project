@@ -40,7 +40,11 @@ void StudioProject::Init()
 
 	RenderingBase::instance()->registerAllRenderingData();
 
-	RenderingBase::instance()->getItemMesh(0)->textureID = LoadTGA("Image//chicken_.tga");	
+	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(0); i++)
+	{
+		string tempString = "Image//" + DataBase::instance()->getItem(i)->getTextureString() + ".tga";
+		RenderingBase::instance()->getItemMesh(0)->textureID = LoadTGA(tempString.c_str());
+	}
 
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
