@@ -40,13 +40,27 @@ class StudioProject : public Scene
 		GEO_BACK,
 		GEO_TEXT,
 
-		GEO_BODY,
-		GEO_LEFT_WING,
-		GEO_RIGHT_WING,
-		GEO_LEFT_LEG,
-		GEO_RIGHT_LEG,
+		GEO_BOSS_1_BODY,
+		GEO_BOSS_1_LEFT_ARM,
+		GEO_BOSS_1_RIGHT_ARM,
+		GEO_BOSS_1_LEFT_LEG,
+		GEO_BOSS_1_RIGHT_LEG,
+		GEO_BOSS_2_BODY,
+		GEO_BOSS_2_LEFT_ARM,
+		GEO_BOSS_2_RIGHT_ARM,
+		GEO_BOSS_2_LEFT_LEG,
+		GEO_BOSS_2_RIGHT_LEG,
+		GEO_BOSS_3_BODY,
+		GEO_BOSS_3_LEFT_ARM,
+		GEO_BOSS_3_RIGHT_ARM,
+		GEO_BOSS_3_LEFT_LEG,
+		GEO_BOSS_3_RIGHT_LEG,
+		GEO_BOSS_4_BODY,
+		GEO_BOSS_4_LEFT_ARM,
+		GEO_BOSS_4_RIGHT_ARM,
+		GEO_BOSS_4_LEFT_LEG,
+		GEO_BOSS_4_RIGHT_LEG,
 
-		//Models imported by me yo!
 		GEO_NOSTATUE,
 		GEO_STATUE,
 		GEO_HALFSTATUE,
@@ -68,20 +82,13 @@ class StudioProject : public Scene
 		GEO_TARGETPRACTISE,
 		GEO_WEAPONMERCHANT,
 
-
-
-		//NPC MODELS imported by me yo ! 
-		GEO_EMOKIDNPC,   //
+		GEO_EMOKIDNPC,   
 		GEO_ELENPC,
 		GEO_SCIENTISTNPC,
 	    GEO_BOYNPC, 
-		GEO_GIRL,    //
- 		GEO_LADY,    //
+		GEO_GIRL,    
+ 		GEO_LADY,    
 		GEO_NEGAN,
-
-
-
-
 
 		NUM_GEOMETRY,
 	};
@@ -141,6 +148,20 @@ public:
 	virtual void Update(double dt);
 	virtual void Render();
 	virtual void Exit();
+
+	float rotateleftLeg = 0.0f;
+	float rotaterightLeg = 0.0f;
+	float rotateleftArm = 0.0f;
+	float attacktime = 0.0f;
+
+	bool rightlegForward = true;
+	bool rightlegBackward = false;
+	bool leftlegForward = false;
+	bool leftlegBackward = true;
+	bool walking = false;
+	bool attacking = false;
+	bool attacking1 = false;
+	bool attacking2 = false;
 
 private:
 

@@ -139,27 +139,71 @@ void StudioProject::Init()
 
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1, 1, 1), 24, 13, 1);
 
-	meshList[GEO_RIGHT_WING] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_arm_1.obj");
-	meshList[GEO_RIGHT_WING]->textureID = LoadTGA("Image//chicken_.tga");
+	meshList[GEO_BOSS_1_BODY] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_1_body.obj");
+	meshList[GEO_BOSS_1_BODY]->textureID = LoadTGA("Image//chicken_.tga");
 
-	meshList[GEO_BODY] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_body.obj");
-	meshList[GEO_BODY]->textureID = LoadTGA("Image//chicken_.tga");
+	meshList[GEO_BOSS_1_RIGHT_ARM] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_1_arm_1.obj");
+	meshList[GEO_BOSS_1_RIGHT_ARM]->textureID = LoadTGA("Image//chicken_.tga");
 
-	meshList[GEO_LEFT_WING] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_arm_2.obj");
-	meshList[GEO_LEFT_WING]->textureID = LoadTGA("Image//chicken_.tga");
+	meshList[GEO_BOSS_1_LEFT_ARM] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_1_arm_2.obj");
+	meshList[GEO_BOSS_1_LEFT_ARM]->textureID = LoadTGA("Image//chicken_.tga");
 
-	meshList[GEO_LEFT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_leg_1.obj");
-	meshList[GEO_LEFT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
+	meshList[GEO_BOSS_1_RIGHT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_1_leg_1.obj");
+	meshList[GEO_BOSS_1_RIGHT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
 
-	meshList[GEO_RIGHT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_leg_2.obj");
-	meshList[GEO_RIGHT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
+	meshList[GEO_BOSS_1_LEFT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_1_leg_2.obj");
+	meshList[GEO_BOSS_1_LEFT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_BOSS_2_BODY] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_2_body.obj");
+	meshList[GEO_BOSS_2_BODY]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_BOSS_2_RIGHT_ARM] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_2_arm_1.obj");
+	meshList[GEO_BOSS_2_RIGHT_ARM]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_BOSS_2_LEFT_ARM] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_2_arm_2.obj");
+	meshList[GEO_BOSS_2_LEFT_ARM]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_BOSS_2_RIGHT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_2_leg_1.obj");
+	meshList[GEO_BOSS_2_RIGHT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_BOSS_2_LEFT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_2_leg_2.obj");
+	meshList[GEO_BOSS_2_LEFT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_BOSS_3_BODY] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_body.obj");
+	meshList[GEO_BOSS_3_BODY]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_BOSS_3_RIGHT_ARM] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_arm_1.obj");
+	meshList[GEO_BOSS_3_RIGHT_ARM]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_BOSS_3_LEFT_ARM] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_arm_2.obj");
+	meshList[GEO_BOSS_3_LEFT_ARM]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_BOSS_3_RIGHT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_leg_1.obj");
+	meshList[GEO_BOSS_3_RIGHT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_BOSS_3_LEFT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_leg_2.obj");
+	meshList[GEO_BOSS_3_LEFT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_BOSS_4_BODY] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_4_body.obj");
+	meshList[GEO_BOSS_4_BODY]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_BOSS_4_RIGHT_ARM] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_4_arm_1.obj");
+	meshList[GEO_BOSS_4_RIGHT_ARM]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_BOSS_4_LEFT_ARM] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_4_arm_2.obj");
+	meshList[GEO_BOSS_4_LEFT_ARM]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_BOSS_4_RIGHT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_4_leg_1.obj");
+	meshList[GEO_BOSS_4_RIGHT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
+
+	meshList[GEO_BOSS_4_LEFT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_4_leg_2.obj");
+	meshList[GEO_BOSS_4_LEFT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
 
 	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_FRONT]->textureID = LoadTGA("Image//front.tga");
 
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BACK]->textureID = LoadTGA("Image//back.tga");
-
 
 	meshList[GEO_LEFT] = MeshBuilder::GenerateQuad("left", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_LEFT]->textureID = LoadTGA("Image//left.tga");
@@ -308,6 +352,120 @@ void StudioProject::Update(double dt)
 	}
 	//--------------------------------------------------------------------------------
 
+	if (Application::IsKeyPressed('Z'))
+	{
+		walking = true;
+		if (rotateleftLeg < 20 && leftlegForward == true)
+		{
+			rotateleftLeg += (float)(80 * dt);
+		}
+		else
+		{
+			leftlegForward = false;
+			leftlegBackward = true;
+		}
+		if (rotateleftLeg > -20 && leftlegBackward == true)
+		{
+			rotateleftLeg -= (float)(80 * dt);
+		}
+		else
+		{
+			leftlegForward = true;
+			leftlegBackward = false;
+		}
+		if (rotaterightLeg < 20 && rightlegForward == true)
+		{
+			rotaterightLeg += (float)(80 * dt);
+		}
+		else
+		{
+			rightlegForward = false;
+			rightlegBackward = true;
+		}
+		if (rotaterightLeg > -20 && rightlegBackward == true)
+		{
+			rotaterightLeg -= (float)(80 * dt);
+		}
+		else
+		{
+			rightlegForward = true;
+			rightlegBackward = false;
+		}
+	}
+	else
+	{
+		walking = false;
+	}
+
+
+	if (Application::IsKeyPressed('X'))
+	{
+		attacking = true;
+		attacking1 = true;
+	}
+	if (attacking == false)
+	{
+		attacktime = 0;
+	}
+	if (attacking == true)
+	{
+		if (attacking1 == true)
+		{
+			rotateleftArm -= (float)(80 * dt);
+			if (rotateleftArm <= -90)
+			{
+				attacking1 = false;
+				//attacking2 = true;
+			}
+		}
+		//if (attacking2 == true)
+		//{
+		//	if (rotateleftArm <= 0)
+		//	{
+		//		rotateleftArm += (float)(80 * dt);
+		//	}
+		//	if (rotateleftArm == 0)
+		//	{
+		//		attacking = false;
+		//		attacking2 = false;
+		//	}
+		//}
+	}
+	if (attacktime == 150)
+	{
+		attacking = false;
+	}
+
+	//=====================================================
+
+	if (walking == false)
+	{
+		if (rotaterightLeg > 0)
+		{
+			rotaterightLeg--;
+		}
+		if (rotaterightLeg < 0)
+		{
+			rotaterightLeg++;
+		}
+		if (rotateleftLeg > 0)
+		{
+			rotateleftLeg--;
+		}
+		if (rotateleftLeg < 0)
+		{
+			rotateleftLeg++;
+		}
+	}
+	if (attacking1 == false)
+	{
+		if (rotateleftArm < 0)
+		{
+			rotateleftArm++;
+		}
+	}
+
+	//======================================================
 }
 
 void StudioProject::Render()
@@ -426,44 +584,109 @@ void StudioProject::Render()
 					RenderMesh(RenderingBase::instance()->getBuildingMesh(i), true);
 					modelStack.PopMatrix();
 				}
-
-				modelStack.Translate(x, 0, z + 20);
 				modelStack.PushMatrix();
-				RenderMesh(meshList[GEO_RIGHT_WING], true);
-				modelStack.PopMatrix();
-
-				modelStack.PushMatrix();
-				RenderMesh(meshList[GEO_LEFT_WING], true);
+				modelStack.Translate(0, 5, 0);
+				modelStack.Rotate(rotateleftArm, 1, 0, 0);
+				RenderMesh(meshList[GEO_BOSS_3_LEFT_ARM], true);
 				modelStack.PopMatrix();
 
 				modelStack.PushMatrix();
-				RenderMesh(meshList[GEO_LEFT_LEG], true);
+				modelStack.Translate(0, 5, 0);
+				modelStack.Rotate(0, 1, 0, 0);
+				RenderMesh(meshList[GEO_BOSS_3_RIGHT_ARM], true);
 				modelStack.PopMatrix();
 
 				modelStack.PushMatrix();
-				RenderMesh(meshList[GEO_RIGHT_LEG], true);
+				modelStack.Rotate(rotateleftLeg, 1, 0, 0);
+				RenderMesh(meshList[GEO_BOSS_3_LEFT_LEG], true);
 				modelStack.PopMatrix();
 
-				RenderMesh(meshList[GEO_BODY], true);
+				modelStack.PushMatrix();
+				modelStack.Rotate(rotaterightLeg, 1, 0, 0);
+				RenderMesh(meshList[GEO_BOSS_3_RIGHT_LEG], true);
 				modelStack.PopMatrix();
+
+				RenderMesh(meshList[GEO_BOSS_3_BODY], true);
+				modelStack.PopMatrix();
+
+				//modelStack.PushMatrix();
+				//modelStack.Translate(0, 5, 0);
+				//modelStack.Rotate(rotateleftArm, 1, 0, 0);
+				//RenderMesh(meshList[GEO_BOSS_1_LEFT_ARM], true);
+				//modelStack.PopMatrix();
+
+				//modelStack.PushMatrix();
+				//modelStack.Translate(0, 5, 0);
+				//modelStack.Rotate(0, 1, 0, 0);
+				//RenderMesh(meshList[GEO_BOSS_1_RIGHT_ARM], true);
+				//modelStack.PopMatrix();
+
+				//modelStack.PushMatrix();
+				//modelStack.Rotate(rotateleftLeg, 1, 0, 0);
+				//RenderMesh(meshList[GEO_BOSS_1_LEFT_LEG], true);
+				//modelStack.PopMatrix();
+
+				//modelStack.PushMatrix();
+				//modelStack.Rotate(rotaterightLeg, 1, 0, 0);
+				//RenderMesh(meshList[GEO_BOSS_1_RIGHT_LEG], true);
+				//modelStack.PopMatrix();
+
+				//RenderMesh(meshList[GEO_BOSS_1_BODY], true);
+				//modelStack.PopMatrix();
+
+	/*			modelStack.PushMatrix();
+				modelStack.Translate(0, 5, 0);
+				modelStack.Rotate(rotateleftArm, 1, 0, 0);
+				RenderMesh(meshList[GEO_BOSS_2_LEFT_ARM], true);
+				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				modelStack.Translate(0, 5, 0);
+				modelStack.Rotate(0, 1, 0, 0);
+				RenderMesh(meshList[GEO_BOSS_2_RIGHT_ARM], true);
+				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				modelStack.Rotate(rotateleftLeg, 1, 0, 0);
+				RenderMesh(meshList[GEO_BOSS_2_LEFT_LEG], true);
+				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				modelStack.Rotate(rotaterightLeg, 1, 0, 0);
+				RenderMesh(meshList[GEO_BOSS_2_RIGHT_LEG], true);
+				modelStack.PopMatrix();
+
+				RenderMesh(meshList[GEO_BOSS_2_BODY], true);
+				modelStack.PopMatrix();*/
+
+				//modelStack.PushMatrix();
+				//modelStack.Translate(0, 3, 0);
+				//modelStack.Rotate(rotateleftArm, 1, 0, 0);
+				//RenderMesh(meshList[GEO_BOSS_4_LEFT_ARM], true);
+				//modelStack.PopMatrix();
+
+				//modelStack.PushMatrix();
+				//modelStack.Translate(0, 3, 0);
+				//modelStack.Rotate(rotateleftArm, 1, 0, 0);
+				//RenderMesh(meshList[GEO_BOSS_4_RIGHT_ARM], true);
+				//modelStack.PopMatrix();
+
+				//modelStack.PushMatrix();
+				//modelStack.Rotate(rotateleftLeg, 1, 0, 0);
+				//RenderMesh(meshList[GEO_BOSS_4_LEFT_LEG], true);
+				//modelStack.PopMatrix();
+
+				//modelStack.PushMatrix();
+				//modelStack.Rotate(rotaterightLeg, 1, 0, 0);
+				//RenderMesh(meshList[GEO_BOSS_4_RIGHT_LEG], true);
+				//modelStack.PopMatrix();
+
+				//RenderMesh(meshList[GEO_BOSS_4_BODY], true);
+				//modelStack.PopMatrix();
 			}
 
 
-			//
 
-			
-				
-
-
-
-
-
-
-
-
-
-
-			//
 
 
 	/*modelStack.PushMatrix();
