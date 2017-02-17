@@ -29,7 +29,7 @@ private:
 	static PlayerBase *s_instance;
 	int player_health_;
 	unsigned damage_, attack_speed_, moving_speed_, ammo_, attribute_points_, resistance_, dimension_ , 
-		level_, experience_, level_cap_;
+		level_, experience_, level_cap_, current_held_item_;
 	Vector3 size_;
 
 	vector<ItemBase *> inventory_data_;
@@ -49,7 +49,7 @@ public:
 	void startPlayer();
 	void playerUpdate(float timer);
 
-	ItemBase* getItemFromInvetory(int slot);
+	ItemBase* getItemFromInventory(int slot);
 	ItemBase* getCurrentHeldItem();
 	unsigned getPlayerDamage();
 	unsigned getPlayerAttackSpeed();
@@ -76,7 +76,10 @@ public:
 	void useSkills(unsigned skill_slot, float timer);
 	void healPlayer(unsigned ammount);
 	void setPlayerState(PLAYER_STATE player_state);
+	void addIntoPlayerInventory(unsigned itemID);
 	void increaseExperience(unsigned ammount);
+
+	bool isInventoryFull();
 
 
 

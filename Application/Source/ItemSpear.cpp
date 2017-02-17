@@ -8,7 +8,7 @@ class ItemSpear : public ItemWeapon
 public:
 	ItemSpear()
 	{
-		itemID_ = 13;
+		itemID_ = 5;
 		texture_string_ = "spear";
 		item_name_ = "Spear";
 
@@ -18,6 +18,7 @@ public:
 		damage_ = 27;
 		attack_speed_ = 5.5;
 
+		rarity_ = COMMON;
 	}
 
 	//------------------USES------------------

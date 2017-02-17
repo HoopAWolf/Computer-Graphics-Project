@@ -8,7 +8,7 @@ class ItemHammer : public ItemWeapon
 public:
 	ItemHammer()
 	{
-		itemID_ = 5;
+		itemID_ = 12;
 		texture_string_ = "hammer";
 		item_name_ = "Hammer";
 
@@ -17,6 +17,8 @@ public:
 		durability_ = 245;
 		damage_ = 148;
 		attack_speed_ = 4.5;
+
+		rarity_ = RARE;
 
 	}
 

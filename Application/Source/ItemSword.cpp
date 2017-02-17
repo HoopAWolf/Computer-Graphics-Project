@@ -8,7 +8,7 @@ class ItemSword : public ItemWeapon
 public:
 	ItemSword()
 	{
-		itemID_ = 14;
+		itemID_ = 6;
 		texture_string_ = "sword";
 		item_name_ = "Sword";
 
@@ -17,6 +17,7 @@ public:
 		damage_ = 3.5;
 		attack_speed_ = 1.5;
 
+		rarity_ = COMMON;
 	}
 
 	//------------------USES------------------
