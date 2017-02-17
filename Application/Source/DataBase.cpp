@@ -255,15 +255,18 @@ Color DataBase::getRarityColor(unsigned rarity)
 
 void DataBase::destroyEntityDrop(unsigned dimensionID, int positionInVector)
 {
+	delete drop_base_[dimensionID][positionInVector];
 	drop_base_[dimensionID].erase(drop_base_[dimensionID].begin() + positionInVector);
 }
 
 void DataBase::destroyEntityMinion(unsigned dimensionID, int positionInVector)
 {
+	delete minion_base_[dimensionID][positionInVector];
 	minion_base_[dimensionID].erase(minion_base_[dimensionID].begin() + positionInVector);
 }
 
 void DataBase::destroyEntityBoss(unsigned dimensionID, int positionInVector)
 {
+	delete boss_base_[dimensionID][positionInVector];
 	boss_base_[dimensionID].erase(boss_base_[dimensionID].begin() + positionInVector);
 }

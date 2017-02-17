@@ -115,20 +115,8 @@ void Camera3::Update(double dt)
 			target = position + view;
 		}
 
-		if (Application::IsKeyPressed('R'))
-		{
-			Reset();
-		}
-
 		mousePosXAnchor = (windowX / 2);
 		mousePosYAnchor = (windowY / 2);
 		SetCursorPos((windowX / 2), (windowY / 2));
-}
-
-void Camera3::Reset()
-{
-	position = defaultPosition;
-	target = defaultTarget;
-	up = defaultUp;
 }
 
