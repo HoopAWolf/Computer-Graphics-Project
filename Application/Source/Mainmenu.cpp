@@ -119,7 +119,7 @@ void Mainmenu::Init()
 	meshList[GEO_SPHERE]->material.kSpecular.Set(0.3f, 0.3f, 0.3f);
 	meshList[GEO_SPHERE]->material.kShininess = 1.f;
 
-	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1), 1.f, 1.f);
+	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad2("front", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_FRONT]->textureID = LoadTGA("Image//front.tga");
 
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f, 1.f);
@@ -139,6 +139,7 @@ void Mainmenu::Init()
 
 	meshList[GEO_TOP] = MeshBuilder::GenerateCube("top", Color(0, 0, 0));
 	meshList[GEO_ARROW] = MeshBuilder::GenerateTRI("ARROW", Color(0, 0, 0),1,1);
+
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 	//------------------------------------------------------------------------------------------
@@ -387,42 +388,20 @@ void Mainmenu::Render()
 	}
 
 
+	RenderMeshOnScreen(meshList[GEO_FRONT], 0, 60,60, 80,90);
 
-	modelStack.PushMatrix();//push front
-	modelStack.Rotate(90,0,0,1);
-	modelStack.Rotate(180, 0, 1, 0);
-	modelStack.Scale(1, 1, 1);
-	RenderMesh(meshList[GEO_FRONT], false);
-	modelStack.PopMatrix();//end front
+	RenderMeshOnScreen(meshList[GEO_TOP], 40, 47.5, 30, 10,0);
 
-	modelStack.PushMatrix();//push front
-	modelStack.Translate(-0.01, 0, 0);
-	modelStack.Rotate(90, 0, 0, 1);
-	modelStack.Rotate(180, 0, 1, 0);
-	modelStack.Scale(0.05, 0.1, 0.15);
-	RenderMesh(meshList[GEO_TOP], false);
-	modelStack.PopMatrix();//end front
+	RenderMeshOnScreen(meshList[GEO_TOP], 40, 30, 30, 10,0);
 
+	RenderMeshOnScreen(meshList[GEO_TOP], 40,14,30,10,0);
 
+	RenderMeshOnScreen(meshList[GEO_ARROW],12,arrowlocation,8,8,0);
 
-	modelStack.PushMatrix();//push front
-	modelStack.Translate(-0.01, 0.08, 0);
-	modelStack.Rotate(90, 0, 0, 1);
-	modelStack.Rotate(180, 0, 1, 0);
-	modelStack.Scale(0.05, 0.1, 0.15);
-	RenderMesh(meshList[GEO_TOP], false);
-	modelStack.PopMatrix();//end front
-
-	modelStack.PushMatrix();//push front
-	modelStack.Translate(-0.01, -0.08, 0);
-	modelStack.Rotate(90, 0, 0, 1);
-	modelStack.Rotate(180, 0, 1, 0);
-	modelStack.Scale(0.05, 0.1, 0.15);
-	RenderMesh(meshList[GEO_TOP], false);
-	modelStack.PopMatrix();//end front
-	RenderMeshOnScreen(meshList[GEO_ARROW],12,arrowlocation,8,8);
 	RenderTextOnScreen(meshList[GEO_TEXT], "play", Color(1, 1, 1), 8, 4.1, 6);
+
 	RenderTextOnScreen(meshList[GEO_TEXT], "sound", Color(1, 1, 1), 8, 3.7, 3.8);
+
 	RenderTextOnScreen(meshList[GEO_TEXT], "quit", Color(1, 1, 1), 8, 4.1, 1.8);
 }
 
@@ -625,7 +604,7 @@ void Mainmenu::RenderUI(Mesh* mesh, Color color, float size, float x, float y, b
 
 	glEnable(GL_DEPTH_TEST);
 }
-void Mainmenu::RenderMeshOnScreen(Mesh* mesh, float x, float y, int sizex, int sizey)
+void Mainmenu::RenderMeshOnScreen(Mesh* mesh, float x, float y, int sizex, int sizey,int rotate)
 {
 	glDisable(GL_DEPTH_TEST);
 	Mtx44 ortho;
@@ -637,6 +616,7 @@ void Mainmenu::RenderMeshOnScreen(Mesh* mesh, float x, float y, int sizex, int s
 	modelStack.PushMatrix();
 	modelStack.LoadIdentity();
 	modelStack.Translate(x, y, 0);
+	modelStack.Rotate(rotate,0,0,-1);
 	modelStack.Scale(sizex, sizey, 0);
 	RenderMesh(mesh, false); //UI should not have light
 	projectionStack.PopMatrix();

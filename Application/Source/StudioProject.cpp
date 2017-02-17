@@ -145,8 +145,8 @@ void StudioProject::Init()
 	meshList[GEO_RIGHT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
 
 
-	meshList[GEO_STATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//statueBase_FullSet.obj");
-	meshList[GEO_STATUE]->textureID = LoadTGA("Image//texture2.tga");
+	//meshList[GEO_STATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//statueBase_FullSet.obj");
+	//meshList[GEO_STATUE]->textureID = LoadTGA("Image//texture2.tga");
 
 
 	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1), 1.f, 1.f);
@@ -255,7 +255,12 @@ void StudioProject::Update(double dt)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //wireframe mode
 	if (Application::IsKeyPressed(VK_F1))
 	{
-		SceneManager::getSceneManger()->setNextScene(1);
+		SceneManager::getSceneManger()->setNextScene(0);
+	}
+	if (Application::IsKeyPressed(VK_ESCAPE))
+	{
+		currscene = SceneManager::getSceneManger()->getCurrentScene();
+		SceneManager::getSceneManger()->setNextScene(5);
 	}
 	//light_controls---------------------------------------------------------------
 	if (Application::IsKeyPressed('I'))
