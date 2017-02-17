@@ -409,42 +409,17 @@ void StudioProject::Update(double dt)
 	}
 
 
-	if (Application::IsKeyPressed('X'))
+	if (Application::IsKeyPressed('X') && rotateleftArm >= -90)
 	{
 		attacking = true;
-		attacking1 = true;
-	}
-	if (attacking == false)
-	{
-		attacktime = 0;
 	}
 	if (attacking == true)
 	{
-		if (attacking1 == true)
+		rotateleftArm -= (float)(80 * dt);
+		if (rotateleftArm <= -90)
 		{
-			rotateleftArm -= (float)(80 * dt);
-			if (rotateleftArm <= -90)
-			{
-				attacking1 = false;
-				//attacking2 = true;
-			}
+			attacking = false;
 		}
-		//if (attacking2 == true)
-		//{
-		//	if (rotateleftArm <= 0)
-		//	{
-		//		rotateleftArm += (float)(80 * dt);
-		//	}
-		//	if (rotateleftArm == 0)
-		//	{
-		//		attacking = false;
-		//		attacking2 = false;
-		//	}
-		//}
-	}
-	if (attacktime == 150)
-	{
-		attacking = false;
 	}
 
 	//=====================================================
@@ -468,7 +443,7 @@ void StudioProject::Update(double dt)
 			rotateleftLeg++;
 		}
 	}
-	if (attacking1 == false)
+	if (attacking == false)
 	{
 		if (rotateleftArm < 0)
 		{
