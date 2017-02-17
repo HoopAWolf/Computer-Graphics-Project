@@ -161,6 +161,9 @@
     <ClCompile Include="Source\RenderingBase.cpp">
       <Filter>Source Files\DataBase</Filter>
     </ClCompile>
+    <ClCompile Include="Source\exitmenu.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -264,6 +267,9 @@
     </ClInclude>
     <ClInclude Include="Source\BuildingBase.h">
       <Filter>Header Files\DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\exitmenu.h">
+      <Filter>Header Files\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
