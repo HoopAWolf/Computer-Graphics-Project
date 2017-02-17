@@ -45,16 +45,6 @@ void StudioProject::Init()
 		RenderingBase::instance()->getItemMesh(i)->textureID = LoadTGA(tempString.c_str());
 	}
 
-	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(0); i++)
-	{
-		DataBase::instance()->setEntity(1, new EntityDrop(i, Vector3(1 + i * 20, 0, 50)));
-	}
-
-	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(0); i++)
-	{
-		DataBase::instance()->setEntity(1, new EntityDrop(i, Vector3(1 + i * 20, 0, 80)));
-	}
-
 	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(2, 1); i++)
 	{
 		string tempString = "Image//" + DataBase::instance()->getBuilding(1, i)->getTextureString() + ".tga";
@@ -244,7 +234,7 @@ void StudioProject::Init()
 	meshList[GEO_LADY] = MeshBuilder::GenerateOBJ("LADY", "OBJ//lady_.obj");
 	meshList[GEO_LADY]->textureID = LoadTGA("Image//lady_.tga");
 
-
+	
 
 
 
@@ -342,17 +332,6 @@ void StudioProject::Update(double dt)
 	Application::elapsed_timer_ += dt;
 
 	PlayerBase::instance()->playerUpdate(dt);
-
-	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(1, 1); i++)
-	{
-		DataBase::instance()->getEntityDrop(1, i)->updateAI(Application::elapsed_timer_);
-		if (DataBase::instance()->getEntityDrop(1, i)->getHealth() <= 0)
-		{
-			DataBase::instance()->destroyEntityDrop(1, i);
-			--i;
-		}
-	}
-
 
 	float LSPEED = 10.f;
 
@@ -496,21 +475,12 @@ void StudioProject::Render()
 				modelStack.PushMatrix();
 				modelStack.Translate(x, 0, z);
 
-				for (int i = 0; i < DataBase::instance()->sizeOfDataBase(1, 1); i++)
+				for (int i = 0; i < DataBase::instance()->sizeOfDataBase(0); i++)
 				{
 					modelStack.PushMatrix();
-					modelStack.Translate(DataBase::instance()->getEntityDrop(1, i)->getPosition().x, 
-						DataBase::instance()->getEntityDrop(1, i)->getPosition().y, 
-						DataBase::instance()->getEntityDrop(1, i)->getPosition().z);
-
-					modelStack.PushMatrix();
-					modelStack.Translate(-((double)DataBase::instance()->getEntityDrop(1, i)->getDropInfo().size() / 2), 3, 0);
-					RenderText(meshList[GEO_TEXT], DataBase::instance()->getEntityDrop(1, i)->getDropInfo(), 
-						DataBase::instance()->getRarityColor(DataBase::instance()->getItem(DataBase::instance()->getEntityDrop(1, i)->getItemDrop())->getRarity()));
-					modelStack.PopMatrix();
-
+					modelStack.Translate(x + 1 + i * 5, 0, z);
 					modelStack.Rotate(Application::elapsed_timer_ * 15, 0, 1, 0);
-					RenderMesh(RenderingBase::instance()->getItemMesh(DataBase::instance()->getEntityDrop(1, i)->getItemDrop()), true);
+					RenderMesh(RenderingBase::instance()->getItemMesh(i), true);
 					modelStack.PopMatrix();
 				}
 
@@ -553,37 +523,37 @@ void StudioProject::Render()
 				modelStack.PopMatrix();
 
 
-				/*modelStack.PushMatrix();
-				modelStack.Translate(5, 0, 75);
-				modelStack.Rotate(180, 0, 1, 0);
-				RenderMesh(meshList[GEO_NOSTATUE], true);
-				modelStack.PopMatrix();*/
+				///*modelStack.PushMatrix();
+				//modelStack.Translate(5, 0, 75);
+				//modelStack.Rotate(180, 0, 1, 0);
+				//RenderMesh(meshList[GEO_NOSTATUE], true);
+				//modelStack.PopMatrix();*/
 
 
-				modelStack.PushMatrix();
-				modelStack.Translate(38, 0, 60);
-				RenderMesh(meshList[GEO_HOUSE], true);
-				modelStack.PopMatrix();
+				//modelStack.PushMatrix();
+				//modelStack.Translate(38, 0, 60);
+				//RenderMesh(meshList[GEO_HOUSE], true);
+				//modelStack.PopMatrix();
 
 
-				/*modelStack.PushMatrix();
-				modelStack.Translate(54, 0, 60);
-				RenderMesh(meshList[GEO_BIGHOUSE], true);
-				modelStack.PopMatrix();*/
+				///*modelStack.PushMatrix();
+				//modelStack.Translate(54, 0, 60);
+				//RenderMesh(meshList[GEO_BIGHOUSE], true);
+				//modelStack.PopMatrix();*/
 
 
-				modelStack.PushMatrix();
-				modelStack.Translate(55, 0, 60);
-				RenderMesh(meshList[GEO_APPLETREE], true);
-				modelStack.PopMatrix();
+				//modelStack.PushMatrix();
+				//modelStack.Translate(55, 0, 60);
+				//RenderMesh(meshList[GEO_APPLETREE], true);
+				//modelStack.PopMatrix();
 
 
 
 
-				modelStack.PushMatrix();
-				modelStack.Translate(95, 0, 60);
-				RenderMesh(meshList[GEO_EMOKIDNPC], true);
-				modelStack.PopMatrix();
+				//modelStack.PushMatrix();
+				//modelStack.Translate(95, 0, 60);
+				//RenderMesh(meshList[GEO_EMOKIDNPC], true);
+				//modelStack.PopMatrix();
 
 
 				modelStack.PushMatrix();
@@ -607,14 +577,6 @@ void StudioProject::Render()
 	}
 
 	RenderTextOnScreen(meshList[GEO_TEXT], "FPS: " + std::to_string(SceneManager::getSceneManger()->frameRate), Color(0, 1, 0), 1.8, 1, 1);
-
-	for (int i = 0; i < 20; i++)
-	{
-		if (PlayerBase::instance()->getItemFromInventory(i) != nullptr)
-			RenderTextOnScreen(meshList[GEO_TEXT], PlayerBase::instance()->getItemFromInventory(i)->getItemName(), DataBase::instance()->getRarityColor(PlayerBase::instance()->getItemFromInventory(i)->getRarity()), 1.8, 1, 30 - i);
-		else
-			RenderTextOnScreen(meshList[GEO_TEXT], "-", Color(1, 1, 1), 1.8, 1, 30 - i);
-	}
 }
 
 
