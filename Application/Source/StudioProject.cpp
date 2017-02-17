@@ -139,21 +139,6 @@ void StudioProject::Init()
 
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1, 1, 1), 24, 13, 1);
 
-	meshList[GEO_RIGHT_WING] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_arm_1.obj");
-	meshList[GEO_RIGHT_WING]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BODY] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_body.obj");
-	meshList[GEO_BODY]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_LEFT_WING] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_arm_2.obj");
-	meshList[GEO_LEFT_WING]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_LEFT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_leg_1.obj");
-	meshList[GEO_LEFT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_RIGHT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_leg_2.obj");
-	meshList[GEO_RIGHT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
-
 
 
 	//meshList[GEO_STATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//statueBase_FullSet.obj");
@@ -318,7 +303,95 @@ void StudioProject::Update(double dt)
 		glUniform1i(m_parameters[U_LIGHT0_TYPE], light[0].type);
 	}
 	//--------------------------------------------------------------------------------
+	if (Application::IsKeyPressed('Z'))
+	{
+		walking = true;
+		if (rotateleftLeg < 20 && leftlegForward == true)
+		{
+			rotateleftLeg += (float)(80 * dt);
+		}
+		else
+		{
+			leftlegForward = false;
+			leftlegBackward = true;
+		}
+		if (rotateleftLeg > -20 && leftlegBackward == true)
+		{
+			rotateleftLeg -= (float)(80 * dt);
+		}
+		else
+		{
+			leftlegForward = true;
+			leftlegBackward = false;
+		}
+		if (rotaterightLeg < 20 && rightlegForward == true)
+		{
+			rotaterightLeg += (float)(80 * dt);
+		}
+		else
+		{
+			rightlegForward = false;
+			rightlegBackward = true;
+		}
+		if (rotaterightLeg > -20 && rightlegBackward == true)
+		{
+			rotaterightLeg -= (float)(80 * dt);
+		}
+		else
+		{
+			rightlegForward = true;
+			rightlegBackward = false;
+		}
+	}
+	else
+	{
+		walking = false;
+	}
 
+
+	if (Application::IsKeyPressed('X') && rotateleftArm >= -90)
+	{
+		attacking = true;
+	}
+	if (attacking == true)
+	{
+		rotateleftArm -= (float)(80 * dt);
+		if (rotateleftArm <= -90)
+		{
+			attacking = false;
+		}
+	}
+
+	//=====================================================
+
+	if (walking == false)
+	{
+		if (rotaterightLeg > 0)
+		{
+			rotaterightLeg--;
+		}
+		if (rotaterightLeg < 0)
+		{
+			rotaterightLeg++;
+		}
+		if (rotateleftLeg > 0)
+		{
+			rotateleftLeg--;
+		}
+		if (rotateleftLeg < 0)
+		{
+			rotateleftLeg++;
+		}
+	}
+	if (attacking == false)
+	{
+		if (rotateleftArm < 0)
+		{
+			rotateleftArm++;
+		}
+	}
+
+	//======================================================
 }
 
 void StudioProject::Render()
@@ -437,45 +510,7 @@ void StudioProject::Render()
 					RenderMesh(RenderingBase::instance()->getBuildingMesh(i), true);
 					modelStack.PopMatrix();
 				}
-
-				modelStack.Translate(x, 0, z + 20);
-				modelStack.PushMatrix();
-				RenderMesh(meshList[GEO_RIGHT_WING], true);
-				modelStack.PopMatrix();
-
-				modelStack.PushMatrix();
-				RenderMesh(meshList[GEO_LEFT_WING], true);
-				modelStack.PopMatrix();
-
-				modelStack.PushMatrix();
-				RenderMesh(meshList[GEO_LEFT_LEG], true);
-				modelStack.PopMatrix();
-
-				modelStack.PushMatrix();
-				RenderMesh(meshList[GEO_RIGHT_LEG], true);
-				modelStack.PopMatrix();
-
-				RenderMesh(meshList[GEO_BODY], true);
-				modelStack.PopMatrix();
 			}
-
-
-			//
-
-			
-				
-
-
-
-
-
-
-
-
-
-
-			//
-
 
 	/*modelStack.PushMatrix();
 	modelStack.Translate(5,0,60);
