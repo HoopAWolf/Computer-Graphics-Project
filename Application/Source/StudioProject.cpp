@@ -453,7 +453,7 @@ void StudioProject::Render()
 				modelStack.PopMatrix();
 			}
 
-			if (MapBase::instance()->checkingMapDataByCoord(1, x, z) == 'S')
+			/*if (MapBase::instance()->checkingMapDataByCoord(1, x, z) == 'S')
 			{
 				modelStack.PushMatrix();
 				
@@ -463,7 +463,7 @@ void StudioProject::Render()
 				modelStack.PopMatrix();
 
 
-			}
+			}*/
 
 		}
 	}
