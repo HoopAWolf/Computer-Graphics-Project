@@ -8,7 +8,7 @@ class ItemGiggsGun : public ItemWeapon
 public:
 	ItemGiggsGun()
 	{
-		itemID_ = 4;
+		itemID_ = 15;
 		texture_string_ = "giggs_gun";
 		item_name_ = "Giggs Gun";
 
@@ -17,6 +17,8 @@ public:
 		durability_ = 45;
 		damage_ = 46;
 		attack_speed_ = 6;
+
+		rarity_ = LEGENDARY;
 
 	}
 

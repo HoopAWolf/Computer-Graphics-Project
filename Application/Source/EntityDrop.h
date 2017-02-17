@@ -2,27 +2,27 @@
 #define _ENTITY_DROP_H_
 
 #include "EntityBase.h"
+#include "PlayerBase.h"
 
 class EntityDrop : public EntityBase
 {
 public:
-	EntityDrop()
+	EntityDrop(unsigned itemID, Vector3 coord)
 	{
+		position_ = coord;
 		size_ = Vector3(2, 2, 2);
 		elemental_type_ = NONE;
 		texture_string_ = "";
-		health_ = 0;
+		health_ = 1;
 		damage_ = 0;
 		attack_speed_ = 0;
 		walking_speed_ = 0;
-		drop_ = nullptr;
+		drop_ID_ = itemID;
 	}
 
-	~EntityDrop();
-
-	ItemBase* getItemDrop()
+	unsigned getItemDrop()
 	{
-		return nullptr;
+		return drop_ID_;
 	}
 
 	void setTextureString(string texture_string)
@@ -32,17 +32,28 @@ public:
 
 	void onDeath(){}
 
-	bool isDead()
+	bool isEntityDead()
 	{
 		return false;
 	}
 
-	void updateAI(float timer){}
+
+	void updateAI(float timer)
+	{
+		if (getBoundingBox().isAABBInsideAABB(PlayerBase::instance()->getBoundingBox()) && !PlayerBase::instance()->isInventoryFull())
+		{
+			PlayerBase::instance()->addIntoPlayerInventory(drop_ID_);
+			health_ = 0;
+		}
+	
+	}
 
 	void setPosition(Vector3 position)
 	{
 		position_ = position;
 	}
+
+	string getDropInfo();
 
 };
 

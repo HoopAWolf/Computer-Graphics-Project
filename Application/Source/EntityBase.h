@@ -25,7 +25,7 @@ protected:
 	unsigned attack_speed_;
 	unsigned walking_speed_;
 	Vector3 position_, size_, up_, forward_, right_, target_;
-	ItemBase* drop_;
+	unsigned drop_ID_;
 
 public:
 	virtual ~EntityBase(){};
@@ -35,7 +35,7 @@ public:
 		return elemental_type_;
 	}
 
-	virtual ItemBase* getItemDrop() = 0;
+	virtual unsigned getItemDrop() = 0;
 
 	virtual int getHealth()
 	{
@@ -81,9 +81,8 @@ public:
 	{
 		AABB bounding;
 		bounding.setBoundry(-size_, size_);
-		bounding.getBoundryAtCoord(position_);
 
-		return bounding;
+		return bounding.getBoundryAtCoord(position_);;
 	}
 
 	virtual void onDeath() = 0;

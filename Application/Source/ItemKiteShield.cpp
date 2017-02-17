@@ -8,15 +8,17 @@ class ItemKiteShield : public ItemWeapon
 public:
 	ItemKiteShield()
 	{
-		itemID_ = 16;
+		itemID_ = 0;
 		texture_string_ = "kite_shield";	
 		item_name_ = "Kite Shield";
 
 
-		weapon_type_ = MEDIUM;
+		weapon_type_ = SHIELD;
 		durability_ = 25;
 		damage_ = 11;
 		attack_speed_ = 2.5;
+
+		rarity_ = COMMON;
 
 	}
 

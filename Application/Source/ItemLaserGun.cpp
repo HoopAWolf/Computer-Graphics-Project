@@ -8,7 +8,7 @@ class ItemLaserGun : public ItemWeapon
 public:
 	ItemLaserGun()
 	{
-		itemID_ = 7;
+		itemID_ = 10;
 		texture_string_ = "laser_gun";
 		item_name_ = "Laser Gun";
 
@@ -16,6 +16,8 @@ public:
 		durability_ = 10;
 		damage_ = 5;
 		attack_speed_ = 3;
+
+		rarity_ = UNCOMMON;
 
 	}
 

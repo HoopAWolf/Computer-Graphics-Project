@@ -8,7 +8,7 @@ class ItemKunai : public ItemWeapon
 public:
 	ItemKunai()
 	{
-		itemID_ = 6;
+		itemID_ = 13;
 		texture_string_ = "kunai";
 		item_name_ = "Kunai";
 
@@ -17,6 +17,8 @@ public:
 		durability_ = 25;
 		damage_ = 17;
 		attack_speed_ = 3.5;
+
+		rarity_ = RARE;
 
 	}
 

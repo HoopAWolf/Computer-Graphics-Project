@@ -3,6 +3,7 @@
 
 #include <string>
 #include "DetectMemoryLeak.h"
+#include "vertex.h"
 
 using std::string;
 
@@ -10,11 +11,18 @@ class ItemBase abstract
 {
 
 protected:
+	enum RARITY
+	{
+		COMMON,
+		UNCOMMON,
+		RARE,
+		LEGENDARY
+	};
 	unsigned itemID_;
 
 	string texture_string_;
 	string item_name_;
-
+	RARITY rarity_;
 
 public:
 	virtual ~ItemBase(){};
@@ -33,6 +41,11 @@ public:
 	virtual unsigned getItemID()
 	{
 		return itemID_;
+	}
+	
+	virtual RARITY getRarity()
+	{
+		return rarity_;
 	}
 
 	//------------------USES------------------

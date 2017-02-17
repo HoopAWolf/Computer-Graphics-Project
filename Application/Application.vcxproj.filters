@@ -36,6 +36,9 @@
     <Filter Include="Source Files\Items">
       <UniqueIdentifier>{908f74a8-9737-4e7b-af0a-5b33f750897a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Entities">
+      <UniqueIdentifier>{36236a53-94f0-47a7-8fd8-2b8cb478b2e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -161,6 +164,9 @@
     <ClCompile Include="Source\RenderingBase.cpp">
       <Filter>Source Files\DataBase</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EntityDrop.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -274,5 +280,7 @@
       <Filter>Shader</Filter>
     </None>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
 </Project>
