@@ -144,9 +144,99 @@ void StudioProject::Init()
 	meshList[GEO_RIGHT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_leg_2.obj");
 	meshList[GEO_RIGHT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
 
+	//Models Imported by le me
+	meshList[GEO_NOSTATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//StatueBase_noStatue.obj");
+	meshList[GEO_NOSTATUE]->textureID = LoadTGA("Image//texture2.tga");
+
+	
+	meshList[GEO_HALFSTATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//StatueBase_halfset.obj");
+	meshList[GEO_HALFSTATUE]->textureID = LoadTGA("Image//texture2.tga");
+
+
+
+	meshList[GEO_QUARTERSTATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//StatueBase_one quarter.obj");
+	meshList[GEO_QUARTERSTATUE]->textureID = LoadTGA("Image//texture2.tga");
+
+
+	meshList[GEO_THREEQUARTERSTATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//statueBase_Three Quarter Set.obj");
+	meshList[GEO_THREEQUARTERSTATUE]->textureID = LoadTGA("Image//texture2.tga");
+
+
 
 	meshList[GEO_STATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//statueBase_FullSet.obj");
 	meshList[GEO_STATUE]->textureID = LoadTGA("Image//texture2.tga");
+
+	//enviromental models 
+	meshList[GEO_HOUSE] = MeshBuilder::GenerateOBJ("House", "OBJ//house.obj");
+	meshList[GEO_HOUSE]->textureID = LoadTGA("Image//texture2.tga");
+
+	/*meshList[GEO_BIGHOUSE] = MeshBuilder::GenerateOBJ("Big house", "OBJ//giant_house.obj");
+	meshList[GEO_BIGHOUSE]->textureID = LoadTGA("Image//texture2.tga");*/
+
+	meshList[GEO_APPLETREE] = MeshBuilder::GenerateOBJ("AppleTree", "OBJ//apple_tree.obj");
+	meshList[GEO_APPLETREE]->textureID = LoadTGA("Image//texture3.tga");
+
+	meshList[GEO_CHRISTMASTREE] = MeshBuilder::GenerateOBJ("Christmas tree", "OBJ//christmas_tree.obj");
+	meshList[GEO_CHRISTMASTREE]->textureID = LoadTGA("Image//texture3.tga");
+
+
+	meshList[GEO_FENCE] = MeshBuilder::GenerateOBJ("Fence", "OBJ//fence.obj");
+	meshList[GEO_FENCE]->textureID = LoadTGA("Image//texture2.tga");
+
+
+	meshList[GEO_GIANTSWORDSTAND] = MeshBuilder::GenerateOBJ("GIANT SWORD", "OBJ//giant_sword_stand.obj");
+	meshList[GEO_GIANTSWORDSTAND]->textureID = LoadTGA("Image//texture2.tga");
+
+	meshList[GEO_HAMMERSTAND] = MeshBuilder::GenerateOBJ("Hammer Stand", "OBJ//hammer_stand.obj");
+	meshList[GEO_HAMMERSTAND]->textureID = LoadTGA("Image//texture2.tga");
+
+	meshList[GEO_KUNAISTAND] = MeshBuilder::GenerateOBJ("Kunai Stand", "OBJ//kunai_stand.obj");
+	meshList[GEO_KUNAISTAND]->textureID = LoadTGA("Image//texture2.tga");
+
+	meshList[GEO_MINIGUNSTAND] = MeshBuilder::GenerateOBJ("Mini gun", "OBJ//minigun_stan.obj");
+	meshList[GEO_MINIGUNSTAND]->textureID = LoadTGA("Image//texture2.tga");
+
+	meshList[GEO_NICELOOKINGTREE] = MeshBuilder::GenerateOBJ("Nice Looking Tree", "OBJ//nice_looking_tree.obj");
+	meshList[GEO_NICELOOKINGTREE]->textureID = LoadTGA("Image//texture3.tga");
+
+	meshList[GEO_PORTAL] = MeshBuilder::GenerateOBJ("Portal", "OBJ//portal.obj");
+	meshList[GEO_PORTAL]->textureID = LoadTGA("Image//portal2.tga");
+
+	meshList[GEO_POTIONMERCHANT] = MeshBuilder::GenerateOBJ("Potion Merchant", "OBJ//potion_merchant.obj");
+	meshList[GEO_POTIONMERCHANT]->textureID = LoadTGA("Image//texture2.tga");
+
+	meshList[GEO_TARGETPRACTISE] = MeshBuilder::GenerateOBJ("Target Practise", "OBJ//targetPractise.obj");
+	meshList[GEO_TARGETPRACTISE]->textureID = LoadTGA("Image//texture2.tga");
+
+
+	meshList[GEO_ROUNDASS] = MeshBuilder::GenerateOBJ("Round ASS", "OBJ//round_ass.obj");
+	meshList[GEO_ROUNDASS]->textureID = LoadTGA("Image//texture2.tga");
+
+	meshList[GEO_WEAPONMERCHANT] = MeshBuilder::GenerateOBJ("Weapon Merchant", "OBJ//weapon_merchant.obj");
+	meshList[GEO_WEAPONMERCHANT]->textureID = LoadTGA("Image//texture2.tga");
+
+
+
+
+
+
+
+
+
+
+	//NPC's 
+	meshList[GEO_EMOKIDNPC] = MeshBuilder::GenerateOBJ("EmoKid", "OBJ//emokid_.obj");
+	meshList[GEO_EMOKIDNPC]->textureID = LoadTGA("Image//emokid_.tga");
+
+	meshList[GEO_GIRL] = MeshBuilder::GenerateOBJ("Girl", "OBJ//girlwithboobs_.obj");
+	meshList[GEO_GIRL]->textureID = LoadTGA("Image//girl_.tga");
+
+	meshList[GEO_LADY] = MeshBuilder::GenerateOBJ("LADY", "OBJ//lady_.obj");
+	meshList[GEO_LADY]->textureID = LoadTGA("Image//lady_.tga");
+
+
+
+
 
 
 	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1), 1.f, 1.f);
@@ -423,17 +513,65 @@ void StudioProject::Render()
 				modelStack.PopMatrix();
 			}
 
-			if (MapBase::instance()->checkingMapDataByCoord(1, x, z) == 'S')
-			{
+			//
+
+			
 				modelStack.PushMatrix();
-				
 				modelStack.Translate(5,0,60);
 				modelStack.Rotate(180, 0, 1, 0);
 				RenderMesh(meshList[GEO_STATUE], true);
 				modelStack.PopMatrix();
 
 
-			}
+				/*modelStack.PushMatrix();
+				modelStack.Translate(5, 0, 75);
+				modelStack.Rotate(180, 0, 1, 0);
+				RenderMesh(meshList[GEO_NOSTATUE], true);
+				modelStack.PopMatrix();*/
+
+
+				modelStack.PushMatrix();
+				modelStack.Translate(38, 0, 60);
+				RenderMesh(meshList[GEO_HOUSE], true);
+				modelStack.PopMatrix();
+
+
+				/*modelStack.PushMatrix();
+				modelStack.Translate(54, 0, 60);
+				RenderMesh(meshList[GEO_BIGHOUSE], true);
+				modelStack.PopMatrix();*/
+
+
+				modelStack.PushMatrix();
+				modelStack.Translate(55, 0, 60);
+				RenderMesh(meshList[GEO_APPLETREE], true);
+				modelStack.PopMatrix();
+
+
+
+
+				modelStack.PushMatrix();
+				modelStack.Translate(95, 0, 60);
+				RenderMesh(meshList[GEO_EMOKIDNPC], true);
+				modelStack.PopMatrix();
+
+
+				modelStack.PushMatrix();
+				modelStack.Translate(105, 0, 60);
+				RenderMesh(meshList[GEO_GIRL], true);
+				modelStack.PopMatrix();
+
+
+
+
+
+
+
+
+
+
+
+			//
 
 		}
 	}
