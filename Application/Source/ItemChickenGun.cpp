@@ -8,7 +8,7 @@ class ItemChickenGun : public ItemWeapon
 public:
 	ItemChickenGun()
 	{
-		itemID_ = 2;
+		itemID_ = 16;
 		texture_string_ = "chicken_gun";
 		item_name_ = "Chicken Gun";
 
@@ -17,6 +17,8 @@ public:
 		durability_ = 280;
 		damage_ = 300;
 		attack_speed_ = 9;
+
+		rarity_ = LEGENDARY;
 
 	}
 

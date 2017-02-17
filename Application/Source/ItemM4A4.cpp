@@ -8,7 +8,7 @@ class ItemM4A4 : public ItemWeapon
 public:
 	ItemM4A4()
 	{
-		itemID_ = 9;
+		itemID_ = 11;
 		texture_string_ = "m4a4";
 		item_name_ = "M4A4";
 
@@ -17,6 +17,8 @@ public:
 		durability_ = 43;
 		damage_ = 15;
 		attack_speed_ = 6.5;
+
+		rarity_ = UNCOMMON;
 
 	}
 

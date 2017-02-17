@@ -1,4 +1,5 @@
 #include "PlayerBase.h"
+#include "DataBase.h"
 
 PlayerBase* PlayerBase::s_instance = 0;
 
@@ -54,7 +55,7 @@ void PlayerBase::playerUpdate(float timer)
 	}
 }
 
-ItemBase* PlayerBase::getItemFromInvetory(int slot)
+ItemBase* PlayerBase::getItemFromInventory(int slot)
 {
 	if (inventory_data_[slot] != nullptr)
 		return inventory_data_[slot];
@@ -138,9 +139,8 @@ AABB PlayerBase::getBoundingBox()
 {
 	AABB bounding;
 	bounding.setBoundry(-size_, size_);
-	bounding.getBoundryAtCoord(Camera::position);
 
-	return bounding;
+	return bounding.getBoundryAtCoord(Camera::position);;
 }
 
 bool PlayerBase::isPlayerDead()
@@ -218,4 +218,29 @@ void PlayerBase::increaseExperience(unsigned ammount)
 			level_ += 1;	
 		}
 	}
+}
+
+void PlayerBase::addIntoPlayerInventory(unsigned itemID)
+{
+	for (int i = 0; i < inventory_data_.size(); i++)
+	{
+		if (inventory_data_[i] == nullptr)
+		{
+			inventory_data_[i] = DataBase::instance()->getItem(itemID);
+			break;
+		}
+	}
+}
+
+bool PlayerBase::isInventoryFull()
+{
+	for (int i = 0; i < inventory_data_.size(); i++)
+	{
+		if (inventory_data_[i] == nullptr)
+		{
+			return false;
+		}
+	}
+
+	return true;
 }

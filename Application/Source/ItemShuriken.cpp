@@ -8,7 +8,7 @@ class ItemShuriken : public ItemWeapon
 public:
 	ItemShuriken()
 	{
-		itemID_ = 12;
+		itemID_ = 4;
 		texture_string_ = "shuriken";
 		item_name_ = "Shuriken";
 
@@ -18,6 +18,7 @@ public:
 		damage_ = 17;
 		attack_speed_ = 3.5;
 
+		rarity_ = COMMON;
 	}
 
 	//------------------USES------------------

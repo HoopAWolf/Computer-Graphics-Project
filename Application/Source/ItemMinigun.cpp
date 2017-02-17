@@ -8,16 +8,17 @@ class ItemMinigun : public ItemWeapon
 public:
 	ItemMinigun()
 	{
-		itemID_ = 10;
+		itemID_ = 17;
 		texture_string_ = "mini_gun";
 		item_name_ = "Minigun";
 
 
 		weapon_type_ = RANGE_AUTO;
 		durability_ = 250;
-		damage_ = 150;
+		damage_ = 50;
 		attack_speed_ = 6.5;
 
+		rarity_ = LEGENDARY;
 	}
 
 	//------------------USES------------------

@@ -8,7 +8,7 @@ class Itemshotgun : public ItemWeapon
 public:
 	Itemshotgun()
 	{
-		itemID_ = 11;
+		itemID_ = 3;
 		texture_string_ = "shotgun";
 		item_name_ = "Shotgun";
 
@@ -19,6 +19,8 @@ public:
 		durability_ = 43;
 		damage_ = 20;
 		attack_speed_ = 4;
+
+		rarity_ = COMMON;
 
 	}
 
