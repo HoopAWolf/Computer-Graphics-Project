@@ -11,6 +11,7 @@
 #include "SceneBossM.h"
 #include "SceneBossH.h"
 #include "SceneBossR.h"
+#include "exitmenu.h"
 #include "Mainmenu.h"
 
 GLFWwindow* Application::m_window = nullptr;
@@ -115,12 +116,14 @@ void Application::Run()
 	SceneManager::getSceneManger()->addScene(scene);
 	scene = new SceneBossH();
 	SceneManager::getSceneManger()->addScene(scene);
+	scene = new exitmenu();
+	SceneManager::getSceneManger()->addScene(scene);
 	
 
 	SceneManager::getSceneManger()->initAllScene();
 
 	Application::m_timer.startTimer();    // Start timer to calculate how long it takes to render this frame
-	while (!glfwWindowShouldClose(m_window) && !IsKeyPressed(VK_ESCAPE) && !SceneManager::getSceneManger()->isQuit())
+	while (!glfwWindowShouldClose(m_window) && !SceneManager::getSceneManger()->isQuit())
 	{
 		SceneManager::getSceneManger()->update();
 

@@ -27,12 +27,14 @@ public:
 	unsigned frameRate = 0;
 	void addScene(Scene * scene);
 	void setNextScene(int sceneID);
+	int getCurrentScene();
+	int go();
 	void initAllScene();
 	void quitAllScene();
 	void update();
 	bool isQuit();
 	void setQuit();
-
+	int sceneat = 0;
 	static SceneManager* getSceneManger()
 	{
 		if (!s_instance)

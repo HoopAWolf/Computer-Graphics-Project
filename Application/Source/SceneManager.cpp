@@ -31,7 +31,15 @@ void SceneManager::setNextScene(int sceneID)
 
 	currSceneID = sceneID;
 }
-
+int SceneManager::getCurrentScene()
+{
+	sceneat = currSceneID;
+	return currSceneID;
+}
+int SceneManager::go()
+{
+	return sceneat;
+}
 void SceneManager::update()
 {
 	SceneManager::getSceneManger()->SceneDataBase[currSceneID]->Update(Application::m_timer.getElapsedTime());

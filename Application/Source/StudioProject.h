@@ -148,6 +148,7 @@ public:
 	virtual void Update(double dt);
 	virtual void Render();
 	virtual void Exit();
+	int currscene;
 
 	float rotateleftLeg = 0.0f;
 	float rotaterightLeg = 0.0f;

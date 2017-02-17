@@ -89,6 +89,7 @@
     <ClCompile Include="Source\Camera2.cpp" />
     <ClCompile Include="Source\Camera3.cpp" />
     <ClCompile Include="Source\DataBase.cpp" />
+    <ClCompile Include="Source\exitmenu.cpp" />
     <ClCompile Include="Source\EntityDrop.cpp" />
     <ClCompile Include="Source\ItemBattleAxe.cpp" />
     <ClCompile Include="Source\ItemChestPlate.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="Source\EntityBoss.h" />
     <ClInclude Include="Source\EntityDrop.h" />
     <ClInclude Include="Source\EntityMinion.h" />
+    <ClInclude Include="Source\exitmenu.h" />
     <ClInclude Include="Source\ItemBase.h" />
     <ClInclude Include="Source\ItemWeapon.h" />
     <ClInclude Include="Source\Light.h" />

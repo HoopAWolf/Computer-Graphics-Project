@@ -241,7 +241,11 @@ void SceneBossM::Update(double dt)
 		glUniform1i(m_parameters[U_LIGHT0_TYPE], light[0].type);
 	}
 	//--------------------------------------------------------------------------------
-
+	if (Application::IsKeyPressed(VK_ESCAPE))
+	{
+		currscene = SceneManager::getSceneManger()->getCurrentScene();
+		SceneManager::getSceneManger()->setNextScene(5);
+	}
 }
 
 
