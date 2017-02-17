@@ -546,51 +546,7 @@ void StudioProject::Render()
 			//
 
 			
-				/*modelStack.PushMatrix();
-				modelStack.Translate(5,0,60);
-				modelStack.Rotate(180, 0, 1, 0);
-				RenderMesh(meshList[GEO_STATUE], true);
-				modelStack.PopMatrix();*/
-
-
-				/*modelStack.PushMatrix();
-				modelStack.Translate(5, 0, 75);
-				modelStack.Rotate(180, 0, 1, 0);
-				RenderMesh(meshList[GEO_NOSTATUE], true);
-				modelStack.PopMatrix();*/
-
-
-				modelStack.PushMatrix();
-				modelStack.Translate(38, 0, 60);
-				RenderMesh(meshList[GEO_HOUSE], true);
-				modelStack.PopMatrix();
-
-
-				/*modelStack.PushMatrix();
-				modelStack.Translate(54, 0, 60);
-				RenderMesh(meshList[GEO_BIGHOUSE], true);
-				modelStack.PopMatrix();*/
-
-
-				modelStack.PushMatrix();
-				modelStack.Translate(55, 0, 60);
-				RenderMesh(meshList[GEO_APPLETREE], true);
-				modelStack.PopMatrix();
-
-
-
-
-				modelStack.PushMatrix();
-				modelStack.Translate(95, 0, 60);
-				RenderMesh(meshList[GEO_EMOKIDNPC], true);
-				modelStack.PopMatrix();
-
-
-			/*	modelStack.PushMatrix();
-				modelStack.Translate(105, 0, 60);
-				RenderMesh(meshList[GEO_GIRL], true);
-				modelStack.PopMatrix();*/
-
+				
 
 
 
@@ -605,6 +561,58 @@ void StudioProject::Render()
 
 		}
 	}
+
+
+
+	/*modelStack.PushMatrix();
+	modelStack.Translate(5,0,60);
+	modelStack.Rotate(180, 0, 1, 0);
+	RenderMesh(meshList[GEO_STATUE], true);
+	modelStack.PopMatrix();
+
+
+	modelStack.PushMatrix();
+	modelStack.Translate(5, 0, 75);
+	modelStack.Rotate(180, 0, 1, 0);
+	RenderMesh(meshList[GEO_NOSTATUE], true);
+	modelStack.PopMatrix();
+*/
+
+	/*modelStack.PushMatrix();
+	modelStack.Translate(38, 0, 60);
+	RenderMesh(meshList[GEO_HOUSE], true);
+	modelStack.PopMatrix();
+
+
+	modelStack.PushMatrix();
+	modelStack.Translate(54, 0, 60);
+	RenderMesh(meshList[GEO_BIGHOUSE], true);
+	modelStack.PopMatrix();
+
+*/
+
+
+
+	modelStack.PushMatrix();
+	modelStack.Translate(105, 0, 60);
+	RenderMesh(meshList[GEO_GIRL], true);
+	modelStack.PopMatrix();
+
+
+
+	modelStack.PushMatrix();
+	modelStack.Translate(55, 0, 60);
+	RenderMesh(meshList[GEO_APPLETREE], true);
+	modelStack.PopMatrix();
+
+
+
+
+	modelStack.PushMatrix();
+	modelStack.Translate(95, 0, 60);
+	RenderMesh(meshList[GEO_EMOKIDNPC], true);
+	modelStack.PopMatrix();
+
 
 	RenderTextOnScreen(meshList[GEO_TEXT], "FPS: " + std::to_string(SceneManager::getSceneManger()->frameRate), Color(0, 1, 0), 1.8, 1, 1);
 
