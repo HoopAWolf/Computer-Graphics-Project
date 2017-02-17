@@ -46,6 +46,9 @@ class StudioProject : public Scene
 		GEO_LEFT_LEG,
 		GEO_RIGHT_LEG,
 
+
+		GEO_STATUE,
+
 		NUM_GEOMETRY,
 	};
 
