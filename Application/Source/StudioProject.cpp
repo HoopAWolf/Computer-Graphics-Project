@@ -516,11 +516,11 @@ void StudioProject::Render()
 			//
 
 			
-				modelStack.PushMatrix();
+				/*modelStack.PushMatrix();
 				modelStack.Translate(5,0,60);
 				modelStack.Rotate(180, 0, 1, 0);
 				RenderMesh(meshList[GEO_STATUE], true);
-				modelStack.PopMatrix();
+				modelStack.PopMatrix();*/
 
 
 				///*modelStack.PushMatrix();
@@ -556,10 +556,10 @@ void StudioProject::Render()
 				//modelStack.PopMatrix();
 
 
-				modelStack.PushMatrix();
+			/*	modelStack.PushMatrix();
 				modelStack.Translate(105, 0, 60);
 				RenderMesh(meshList[GEO_GIRL], true);
-				modelStack.PopMatrix();
+				modelStack.PopMatrix();*/
 
 
 
