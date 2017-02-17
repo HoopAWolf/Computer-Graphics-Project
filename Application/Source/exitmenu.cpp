@@ -1,66 +1,36 @@
+
 #include "DetectMemoryLeak.h"
-#include "StudioProject.h"
+#include "exitmenu.h"
 #include "GL\glew.h"
 
 #include "shader.hpp"
 #include "Mtx44.h"
 
 #include "Application.h"
-
+#include "MeshBuilder.h"
 #include "Utility.h"
 #include "LoadTGA.h"
+#include "AABB.h"
 
 #include <iostream>
 
 
-DataBase *DataBase::s_instance = nullptr;
-MapBase *MapBase::s_instance = nullptr;
-RenderingBase *RenderingBase::s_instance = nullptr;
-Vector3 Camera::position = 0;
-Vector3 Camera::target = 0;
-Vector3 Camera::up = 0;
 
-StudioProject::StudioProject()
+
+
+exitmenu::exitmenu()
 {
 }
 
-StudioProject::~StudioProject()
+exitmenu::~exitmenu()
 {
 }
 
-void StudioProject::Init()
+void exitmenu::Init()
 {
-	
-	DataBase::instance()->registerItems();
-	PlayerBase::instance()->startPlayer();
-
-	MapBase::instance()->setMapSize(1, 50, 50);
-	MapBase::instance()->generateMap(1, "test.txt");
-
-	RenderingBase::instance()->registerAllRenderingData();
-
-	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(0); i++)
-	{
-		string tempString = "Image//" + DataBase::instance()->getItem(i)->getTextureString() + ".tga";
-		RenderingBase::instance()->getItemMesh(i)->textureID = LoadTGA(tempString.c_str());
-	}
-
-	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(0); i++)
-	{
-		DataBase::instance()->setEntity(1, new EntityDrop(i, Vector3(1 + i * 20, 0, 50)));
-	}
-
-	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(0); i++)
-	{
-		DataBase::instance()->setEntity(1, new EntityDrop(i, Vector3(1 + i * 20, 0, 80)));
-	}
-
-	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(2, 1); i++)
-	{
-		string tempString = "Image//" + DataBase::instance()->getBuilding(1, i)->getTextureString() + ".tga";
-		RenderingBase::instance()->getBuildingMesh(i)->textureID = LoadTGA(tempString.c_str());
-	}
-
+	arrowlocation = 43;
+	timer = 0.0f;
+	arrowselect = 0;
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
@@ -134,115 +104,26 @@ void StudioProject::Init()
 
 	//variable to rotate geometry
 
+
+	//Initialize camera settings
+	camera.Init(Vector3(-0.4, 0, 0), Vector3(1, 0, 0), Vector3(0, 1, 0));
+
 	//meshes------------------------------------------------------------------------------------------
 	meshList[GEO_AXES] = MeshBuilder::GenerateAxes("reference", 1000, 1000, 1000);
 
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1, 1, 1), 24, 13, 1);
 
+	meshList[GEO_SPHERE] = MeshBuilder::GenerateSphere("sphere", Color(1, 0, 0), 24, 13, 1);
+	meshList[GEO_SPHERE]->material.kAmbient.Set(0.2f, 0.2f, 0.2f);
+	meshList[GEO_SPHERE]->material.kDiffuse.Set(0.6f, 0.6f, 0.6f);
+	meshList[GEO_SPHERE]->material.kSpecular.Set(0.3f, 0.3f, 0.3f);
+	meshList[GEO_SPHERE]->material.kShininess = 1.f;
 
-
-	//meshList[GEO_STATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//statueBase_FullSet.obj");
-	//meshList[GEO_STATUE]->textureID = LoadTGA("Image//texture2.tga");
-
-	meshList[GEO_NOSTATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//StatueBase_noStatue.obj");
-	meshList[GEO_NOSTATUE]->textureID = LoadTGA("Image//texture2.tga");
-
-
-	meshList[GEO_HALFSTATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//StatueBase_halfset.obj");
-	meshList[GEO_HALFSTATUE]->textureID = LoadTGA("Image//texture2.tga");
-
-
-
-	meshList[GEO_QUARTERSTATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//StatueBase_one quarter.obj");
-	meshList[GEO_QUARTERSTATUE]->textureID = LoadTGA("Image//texture2.tga");
-
-
-	meshList[GEO_THREEQUARTERSTATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//statueBase_Three Quarter Set.obj");
-	meshList[GEO_THREEQUARTERSTATUE]->textureID = LoadTGA("Image//texture2.tga");
-
-
-
-	meshList[GEO_STATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//statueBase_FullSet.obj");
-	meshList[GEO_STATUE]->textureID = LoadTGA("Image//texture2.tga");
-
-	//enviromental models 
-	meshList[GEO_HOUSE] = MeshBuilder::GenerateOBJ("House", "OBJ//house.obj");
-	meshList[GEO_HOUSE]->textureID = LoadTGA("Image//texture2.tga");
-
-	/*meshList[GEO_BIGHOUSE] = MeshBuilder::GenerateOBJ("Big house", "OBJ//giant_house.obj");
-	meshList[GEO_BIGHOUSE]->textureID = LoadTGA("Image//texture2.tga");*/
-
-	meshList[GEO_APPLETREE] = MeshBuilder::GenerateOBJ("AppleTree", "OBJ//apple_tree.obj");
-	meshList[GEO_APPLETREE]->textureID = LoadTGA("Image//texture3.tga");
-
-	meshList[GEO_CHRISTMASTREE] = MeshBuilder::GenerateOBJ("Christmas tree", "OBJ//christmas_tree.obj");
-	meshList[GEO_CHRISTMASTREE]->textureID = LoadTGA("Image//texture3.tga");
-
-
-	meshList[GEO_FENCE] = MeshBuilder::GenerateOBJ("Fence", "OBJ//fence.obj");
-	meshList[GEO_FENCE]->textureID = LoadTGA("Image//texture2.tga");
-
-
-	meshList[GEO_GIANTSWORDSTAND] = MeshBuilder::GenerateOBJ("GIANT SWORD", "OBJ//giant_sword_stand.obj");
-	meshList[GEO_GIANTSWORDSTAND]->textureID = LoadTGA("Image//texture2.tga");
-
-	meshList[GEO_HAMMERSTAND] = MeshBuilder::GenerateOBJ("Hammer Stand", "OBJ//hammer_stand.obj");
-	meshList[GEO_HAMMERSTAND]->textureID = LoadTGA("Image//texture2.tga");
-
-	meshList[GEO_KUNAISTAND] = MeshBuilder::GenerateOBJ("Kunai Stand", "OBJ//kunai_stand.obj");
-	meshList[GEO_KUNAISTAND]->textureID = LoadTGA("Image//texture2.tga");
-
-	meshList[GEO_MINIGUNSTAND] = MeshBuilder::GenerateOBJ("Mini gun", "OBJ//minigun_stan.obj");
-	meshList[GEO_MINIGUNSTAND]->textureID = LoadTGA("Image//texture2.tga");
-
-	meshList[GEO_NICELOOKINGTREE] = MeshBuilder::GenerateOBJ("Nice Looking Tree", "OBJ//nice_looking_tree.obj");
-	meshList[GEO_NICELOOKINGTREE]->textureID = LoadTGA("Image//texture3.tga");
-
-	meshList[GEO_PORTAL] = MeshBuilder::GenerateOBJ("Portal", "OBJ//portal.obj");
-	meshList[GEO_PORTAL]->textureID = LoadTGA("Image//portal2.tga");
-
-	meshList[GEO_POTIONMERCHANT] = MeshBuilder::GenerateOBJ("Potion Merchant", "OBJ//potion_merchant.obj");
-	meshList[GEO_POTIONMERCHANT]->textureID = LoadTGA("Image//texture2.tga");
-
-	meshList[GEO_TARGETPRACTISE] = MeshBuilder::GenerateOBJ("Target Practise", "OBJ//targetPractise.obj");
-	meshList[GEO_TARGETPRACTISE]->textureID = LoadTGA("Image//texture2.tga");
-
-
-	meshList[GEO_ROUNDASS] = MeshBuilder::GenerateOBJ("Round ASS", "OBJ//round_ass.obj");
-	meshList[GEO_ROUNDASS]->textureID = LoadTGA("Image//texture2.tga");
-
-	meshList[GEO_WEAPONMERCHANT] = MeshBuilder::GenerateOBJ("Weapon Merchant", "OBJ//weapon_merchant.obj");
-	meshList[GEO_WEAPONMERCHANT]->textureID = LoadTGA("Image//texture2.tga");
-
-
-
-
-
-
-	//NPC's 
-	meshList[GEO_EMOKIDNPC] = MeshBuilder::GenerateOBJ("EmoKid", "OBJ//emokid_.obj");
-	meshList[GEO_EMOKIDNPC]->textureID = LoadTGA("Image//emokid_.tga");
-
-	meshList[GEO_GIRL] = MeshBuilder::GenerateOBJ("Girl", "OBJ//girlwithboobs_.obj");
-	meshList[GEO_GIRL]->textureID = LoadTGA("Image//girl_.tga");
-
-	meshList[GEO_LADY] = MeshBuilder::GenerateOBJ("LADY", "OBJ//lady_.obj");
-	meshList[GEO_LADY]->textureID = LoadTGA("Image//lady_.tga");
-
-
-	meshList[GEO_NEGAN] = MeshBuilder::GenerateOBJ("negan", "OBJ//negan_.obj");
-	meshList[GEO_NEGAN]->textureID = LoadTGA("Image//negan_.tga");
-
-
-	//..........................................................................................
-
-
-	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1), 1.f, 1.f);
+	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad2 ("front", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_FRONT]->textureID = LoadTGA("Image//front.tga");
 
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BACK]->textureID = LoadTGA("Image//back.tga");
-
 
 	meshList[GEO_LEFT] = MeshBuilder::GenerateQuad("left", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_LEFT]->textureID = LoadTGA("Image//left.tga");
@@ -256,6 +137,8 @@ void StudioProject::Init()
 	meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_TOP]->textureID = LoadTGA("Image//top.tga");
 
+	meshList[GEO_TOP] = MeshBuilder::GenerateCube("top", Color(0, 0, 0));
+	meshList[GEO_ARROW] = MeshBuilder::GenerateTRI("ARROW", Color(0, 0, 0), 1, 1);
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 	//------------------------------------------------------------------------------------------
@@ -319,29 +202,11 @@ void StudioProject::Init()
 
 static float ROT_LIMIT = 45.f;
 static float SCALE_LIMIT = 5.f;
-
-void StudioProject::Update(double dt)
+void exitmenu::Update(double dt)
 {
-	camera.Update(dt);
+
 	ShowCursor(false);
-
-	SceneManager::getSceneManger()->frameRate = ((int)(1 / dt));
-
 	Application::elapsed_timer_ += dt;
-
-	PlayerBase::instance()->playerUpdate(dt);
-
-	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(1, 1); i++)
-	{
-		DataBase::instance()->getEntityDrop(1, i)->updateAI(Application::elapsed_timer_);
-		if (DataBase::instance()->getEntityDrop(1, i)->getHealth() <= 0)
-		{
-			DataBase::instance()->destroyEntityDrop(1, i);
-			--i;
-		}
-	}
-
-
 	float LSPEED = 10.f;
 
 	if (Application::IsKeyPressed('1')) //enable back face culling
@@ -356,10 +221,9 @@ void StudioProject::Update(double dt)
 	{
 		SceneManager::getSceneManger()->setNextScene(0);
 	}
-	if (Application::IsKeyPressed(VK_ESCAPE))
+	if (Application::IsKeyPressed(VK_F2))
 	{
-		currscene = SceneManager::getSceneManger()->getCurrentScene();
-		SceneManager::getSceneManger()->setNextScene(5);
+		SceneManager::getSceneManger()->setNextScene(1);
 	}
 	//light_controls---------------------------------------------------------------
 	if (Application::IsKeyPressed('I'))
@@ -394,99 +258,70 @@ void StudioProject::Update(double dt)
 		light[0].type = Light::LIGHT_SPOT;
 		glUniform1i(m_parameters[U_LIGHT0_TYPE], light[0].type);
 	}
+	prevscene=SceneManager::getSceneManger()->go();
 	//--------------------------------------------------------------------------------
-	if (Application::IsKeyPressed('Z'))
+	if (timer == 0.0f)
 	{
-		walking = true;
-		if (rotateleftLeg < 20 && leftlegForward == true)
-		{
-			rotateleftLeg += (float)(80 * dt);
-		}
-		else
-		{
-			leftlegForward = false;
-			leftlegBackward = true;
-		}
-		if (rotateleftLeg > -20 && leftlegBackward == true)
-		{
-			rotateleftLeg -= (float)(80 * dt);
-		}
-		else
-		{
-			leftlegForward = true;
-			leftlegBackward = false;
-		}
-		if (rotaterightLeg < 20 && rightlegForward == true)
-		{
-			rotaterightLeg += (float)(80 * dt);
-		}
-		else
-		{
-			rightlegForward = false;
-			rightlegBackward = true;
-		}
-		if (rotaterightLeg > -20 && rightlegBackward == true)
-		{
-			rotaterightLeg -= (float)(80 * dt);
-		}
-		else
-		{
-			rightlegForward = true;
-			rightlegBackward = false;
-		}
+		timer = Application::elapsed_timer_;
 	}
-	else
+	if (Application::elapsed_timer_>timer + .2)
 	{
-		walking = false;
+		if (Application::IsKeyPressed('W'))
+		{
+			//43 26 8 
+			if (arrowselect == 0)
+			{
+				arrowselect = 2;
+			}
+			else
+			{
+				arrowselect--;
+			}
+		}
+		if (Application::IsKeyPressed('S'))
+		{
+			if (arrowselect == 2)
+			{
+				arrowselect = 0;
+			}
+			else
+			{
+				arrowselect++;
+			}
+		}
+
+		timer = Application::elapsed_timer_;
+	}
+	switch (arrowselect)
+	{
+	case 0:
+		arrowlocation = 43;
+		break;
+	case 1:
+		arrowlocation = 26;
+		break;
+	case 2:
+		arrowlocation = 8;
+		break;
 	}
 
+	if (Application::IsKeyPressed(VK_RETURN))
+	{
+		switch (arrowselect)
+		{
 
-	if (Application::IsKeyPressed('X') && rotateleftArm >= -90)
-	{
-		attacking = true;
-	}
-	if (attacking == true)
-	{
-		rotateleftArm -= (float)(80 * dt);
-		if (rotateleftArm <= -90)
-		{
-			attacking = false;
-		}
-	}
-
-	//=====================================================
-
-	if (walking == false)
-	{
-		if (rotaterightLeg > 0)
-		{
-			rotaterightLeg--;
-		}
-		if (rotaterightLeg < 0)
-		{
-			rotaterightLeg++;
-		}
-		if (rotateleftLeg > 0)
-		{
-			rotateleftLeg--;
-		}
-		if (rotateleftLeg < 0)
-		{
-			rotateleftLeg++;
-		}
-	}
-	if (attacking == false)
-	{
-		if (rotateleftArm < 0)
-		{
-			rotateleftArm++;
+		case 0:
+			SceneManager::getSceneManger()->setNextScene(prevscene);
+			break;
+		case 2:
+			SceneManager::getSceneManger()->setQuit();
 		}
 	}
 
-	//======================================================
 }
 
-void StudioProject::Render()
+
+void exitmenu::Render()
 {
 	// Render VBO here
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -552,100 +387,26 @@ void StudioProject::Render()
 		glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightPosition_cameraspace.x);
 	}
 
-	RenderMesh(meshList[GEO_AXES], false);
 
-	RenderSkybox();
+	RenderMeshOnScreen(meshList[GEO_FRONT], 0, 60, 60, 80, 90);
 
-	//=================================================================================================
-	modelStack.PushMatrix();
-	modelStack.Translate(light[0].LightPosition.x, light[0].LightPosition.y, light[0].LightPosition.z);
-	RenderMesh(meshList[GEO_LIGHTBALL], false);
-	modelStack.PopMatrix();
+	RenderMeshOnScreen(meshList[GEO_TOP], 41.2, 47.5, 50, 10, 0);
 
-	modelStack.PushMatrix();
-	modelStack.Translate(light[1].LightPosition.x, light[1].LightPosition.y, light[1].LightPosition.z);
-	RenderMesh(meshList[GEO_LIGHTBALL], false);
-	modelStack.PopMatrix();
-	//===================================================================================================
-	for (int x = 0; x < MapBase::instance()->getMapData(1).size_.x; x++)
-	{
-		for (int z = 0; z < MapBase::instance()->getMapData(1).size_.z; z++)
-		{
-			if (MapBase::instance()->checkingMapDataByCoord(1, x, z) == 'C')
-			{
+	RenderMeshOnScreen(meshList[GEO_TOP], 40, 30, 30, 10, 0);
 
-				modelStack.PushMatrix();
-				modelStack.Translate(x, 0, z);
+	RenderMeshOnScreen(meshList[GEO_TOP], 40, 14, 30, 10, 0);
 
-				for (int i = 0; i < DataBase::instance()->sizeOfDataBase(1, 1); i++)
-				{
-					modelStack.PushMatrix();
-					modelStack.Translate(DataBase::instance()->getEntityDrop(1, i)->getPosition().x, 
-						DataBase::instance()->getEntityDrop(1, i)->getPosition().y, 
-						DataBase::instance()->getEntityDrop(1, i)->getPosition().z);
+	RenderMeshOnScreen(meshList[GEO_ARROW], 8, arrowlocation, 8, 8, 0);
 
-					modelStack.PushMatrix();
-					modelStack.Translate(-((double)DataBase::instance()->getEntityDrop(1, i)->getDropInfo().size() / 2), 3, 0);
-					RenderText(meshList[GEO_TEXT], DataBase::instance()->getEntityDrop(1, i)->getDropInfo(), 
-						DataBase::instance()->getRarityColor(DataBase::instance()->getItem(DataBase::instance()->getEntityDrop(1, i)->getItemDrop())->getRarity()));
-					modelStack.PopMatrix();
+	RenderTextOnScreen(meshList[GEO_TEXT], "continue", Color(1, 1, 1), 8, 2.7, 6);
 
-					modelStack.Rotate(Application::elapsed_timer_ * 15, 0, 1, 0);
-					RenderMesh(RenderingBase::instance()->getItemMesh(DataBase::instance()->getEntityDrop(1, i)->getItemDrop()), true);
-					modelStack.PopMatrix();
-				}
+	RenderTextOnScreen(meshList[GEO_TEXT], "sound", Color(1, 1, 1), 8, 3.7, 3.8);
 
-				for (int i = 0; i < DataBase::instance()->sizeOfDataBase(2, 1); i++)
-				{
-					modelStack.PushMatrix();
-					modelStack.Translate(x + 1 + i * 5, 0, z + 1 + i * 10);
-					RenderMesh(RenderingBase::instance()->getBuildingMesh(i), true);
-					modelStack.PopMatrix();
-				}
-			}
-
-
-
-	
-
-
-
-
-	
-
-		}
-	}
-
-	modelStack.PushMatrix();
-	modelStack.Translate(95, 0, 60);
-	RenderMesh(meshList[GEO_EMOKIDNPC], true);
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-	modelStack.Translate(105, 0, 60);
-	RenderMesh(meshList[GEO_GIRL], true);
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-	modelStack.Translate(115, 0, 60);
-	RenderMesh(meshList[GEO_NEGAN], true);
-	modelStack.PopMatrix();
-
-
-
-	RenderTextOnScreen(meshList[GEO_TEXT], "FPS: " + std::to_string(SceneManager::getSceneManger()->frameRate), Color(0, 1, 0), 1.8, 1, 1);
-
-	for (int i = 0; i < 20; i++)
-	{
-		if (PlayerBase::instance()->getItemFromInventory(i) != nullptr)
-			RenderTextOnScreen(meshList[GEO_TEXT], PlayerBase::instance()->getItemFromInventory(i)->getItemName(), DataBase::instance()->getRarityColor(PlayerBase::instance()->getItemFromInventory(i)->getRarity()), 1.8, 1, 30 - i);
-		else
-			RenderTextOnScreen(meshList[GEO_TEXT], "-", Color(1, 1, 1), 1.8, 1, 30 - i);
-	}
+	RenderTextOnScreen(meshList[GEO_TEXT], "quit", Color(1, 1, 1), 8, 4.1, 1.8);
 }
 
 
-void StudioProject::RenderMesh(Mesh *mesh, bool enableLight)
+void exitmenu::RenderMesh(Mesh *mesh, bool enableLight)
 {
 	Mtx44 MVP, modelView, modelView_inverse_transpose;
 
@@ -697,7 +458,7 @@ void StudioProject::RenderMesh(Mesh *mesh, bool enableLight)
 
 }
 
-void StudioProject::RenderText(Mesh* mesh, std::string text, Color color)
+void exitmenu::RenderText(Mesh* mesh, std::string text, Color color)
 {
 	if (!mesh || mesh->textureID <= 0) //Proper error check
 		return;
@@ -724,7 +485,7 @@ void StudioProject::RenderText(Mesh* mesh, std::string text, Color color)
 	glEnable(GL_DEPTH_TEST);
 }
 
-void StudioProject::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y)
+void exitmenu::RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y)
 {
 	if (!mesh || mesh->textureID <= 0) //Proper error check
 		return;
@@ -770,7 +531,7 @@ void StudioProject::RenderTextOnScreen(Mesh* mesh, std::string text, Color color
 }
 
 //============================================TESTING===============================================
-void StudioProject::RenderUI(Mesh* mesh, Color color, float size, float x, float y, bool enableLight)
+void exitmenu::RenderUI(Mesh* mesh, Color color, float size, float x, float y, bool enableLight)
 {
 	if (!mesh || mesh->textureID <= 0) //Proper error check
 		return;
@@ -843,9 +604,30 @@ void StudioProject::RenderUI(Mesh* mesh, Color color, float size, float x, float
 
 	glEnable(GL_DEPTH_TEST);
 }
+void exitmenu::RenderMeshOnScreen(Mesh* mesh, float x, float y, int sizex, int sizey,int rotate)
+{
+	glDisable(GL_DEPTH_TEST);
+	Mtx44 ortho;
+	ortho.SetToOrtho(0, 80, 0, 60, -10, 10); //size of screen UI
+	projectionStack.PushMatrix();
+	projectionStack.LoadMatrix(ortho);
+	viewStack.PushMatrix();
+	viewStack.LoadIdentity(); //No need camera for ortho mode
+	modelStack.PushMatrix();
+	modelStack.LoadIdentity();
+	modelStack.Translate(x, y, 0);
+	modelStack.Rotate(rotate, 0, 0, -1);
+	modelStack.Scale(sizex, sizey, 0);
+	RenderMesh(mesh, false); //UI should not have light
+	projectionStack.PopMatrix();
+	viewStack.PopMatrix();
+	modelStack.PopMatrix();
+	glEnable(GL_DEPTH_TEST);
+}
+
 //=================================================================================================
 
-void StudioProject::RenderSkybox()
+void exitmenu::RenderSkybox()
 {
 	modelStack.PushMatrix();//push ground
 	modelStack.Translate(950, 0, 950);
@@ -904,8 +686,9 @@ void StudioProject::RenderSkybox()
 
 
 
-void StudioProject::Exit()
+void exitmenu::Exit()
 {
 	glDeleteVertexArrays(1, &m_vertexArrayID);
 	glDeleteProgram(m_programID);
+
 }

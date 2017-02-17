@@ -1,5 +1,7 @@
-#ifndef STUDIO_PROJECT_H
-#define STUDIO_PROJECT_H
+#ifndef exitmenu_H
+#define exitmenu_H
+
+#include "Scene.h"
 
 //Azimuth_Camera_System
 #include "Camera2.h"
@@ -15,7 +17,7 @@
 #include <vector>
 using std::vector;
 
-class StudioProject : public Scene
+class exitmenu : public Scene
 {
 	enum GEOMETRY_TYPE
 	{
@@ -39,60 +41,9 @@ class StudioProject : public Scene
 		GEO_FRONT,
 		GEO_BACK,
 		GEO_TEXT,
-
-		GEO_BOSS_1_BODY,
-		GEO_BOSS_1_LEFT_ARM,
-		GEO_BOSS_1_RIGHT_ARM,
-		GEO_BOSS_1_LEFT_LEG,
-		GEO_BOSS_1_RIGHT_LEG,
-		GEO_BOSS_2_BODY,
-		GEO_BOSS_2_LEFT_ARM,
-		GEO_BOSS_2_RIGHT_ARM,
-		GEO_BOSS_2_LEFT_LEG,
-		GEO_BOSS_2_RIGHT_LEG,
-		GEO_BOSS_3_BODY,
-		GEO_BOSS_3_LEFT_ARM,
-		GEO_BOSS_3_RIGHT_ARM,
-		GEO_BOSS_3_LEFT_LEG,
-		GEO_BOSS_3_RIGHT_LEG,
-		GEO_BOSS_4_BODY,
-		GEO_BOSS_4_LEFT_ARM,
-		GEO_BOSS_4_RIGHT_ARM,
-		GEO_BOSS_4_LEFT_LEG,
-		GEO_BOSS_4_RIGHT_LEG,
-
-		GEO_NOSTATUE,
-		GEO_STATUE,
-		GEO_HALFSTATUE,
-		GEO_QUARTERSTATUE,
-		GEO_THREEQUARTERSTATUE,
-		GEO_BIGHOUSE,
-		GEO_HOUSE,
-		GEO_APPLETREE,
-		GEO_CHRISTMASTREE,
-		GEO_FENCE,
-		GEO_GIANTSWORDSTAND,
-		GEO_HAMMERSTAND,
-		GEO_KUNAISTAND,
-		GEO_MINIGUNSTAND,
-		GEO_NICELOOKINGTREE,
-		GEO_PORTAL,
-		GEO_POTIONMERCHANT,
-		GEO_ROUNDASS,
-		GEO_TARGETPRACTISE,
-		GEO_WEAPONMERCHANT,
-
-		GEO_EMOKIDNPC,   
-		GEO_ELENPC,
-		GEO_SCIENTISTNPC,
-	    GEO_BOYNPC, 
-		GEO_GIRL,    
- 		GEO_LADY,    
-		GEO_NEGAN,
-
+		GEO_ARROW,
 		NUM_GEOMETRY,
 	};
-
 	enum UNIFORM_TYPE
 	{
 		U_MVP = 0,
@@ -141,29 +92,16 @@ class StudioProject : public Scene
 
 	MS modelStack, viewStack, projectionStack;
 public:
-	StudioProject();
-	~StudioProject();
+	exitmenu();
+	~exitmenu();
 
 	virtual void Init();
 	virtual void Update(double dt);
 	virtual void Render();
 	virtual void Exit();
-	int currscene;
-
-	float rotateleftLeg = 0.0f;
-	float rotaterightLeg = 0.0f;
-	float rotateleftArm = 0.0f;
-	float attacktime = 0.0f;
-
-	bool rightlegForward = true;
-	bool rightlegBackward = false;
-	bool leftlegForward = false;
-	bool leftlegBackward = true;
-	bool walking = false;
-	bool attacking = false;
-	bool attacking1 = false;
-	bool attacking2 = false;
-
+	int arrowlocation;
+	float timer;
+	int arrowselect,prevscene;
 private:
 
 	unsigned m_vertexArrayID;
@@ -180,6 +118,8 @@ private:
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void RenderUI(Mesh* mesh, Color color, float size, float x, float y, bool enableLight);
+	void RenderMeshOnScreen(Mesh* mesh, float x, float y, int sizex, int sizey,int rotate);
+
 
 	void RenderSkybox();
 
