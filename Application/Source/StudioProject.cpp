@@ -273,10 +273,6 @@ void StudioProject::Init()
 	meshList[GEO_WEAPONMERCHANT]->textureID = LoadTGA("Image//texture2.tga");
 
 
-
-
-
-
 	//NPC's 
 	meshList[GEO_EMOKIDNPC] = MeshBuilder::GenerateOBJ("EmoKid", "OBJ//emokid_.obj");
 	meshList[GEO_EMOKIDNPC]->textureID = LoadTGA("Image//emokid_.tga");
