@@ -34,7 +34,10 @@ public:
 	void update();
 	bool isQuit();
 	void setQuit();
+	//void cmpls();
 	int sceneat = 0;
+	int wx, wy;
+	double cx, cy;
 	static SceneManager* getSceneManger()
 	{
 		if (!s_instance)

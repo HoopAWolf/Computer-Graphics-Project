@@ -32,7 +32,11 @@ class exitmenu : public Scene
 		GEO_SPHERE,
 		GEO_LIGHTBALL,
 		GEO_CYLINDER,
-
+		GEO_CONT1,
+		GEO_CONT2,
+		GEO_QUIT1,
+		GEO_QUIT2,
+		GEO_TITLE,
 		//skybox
 		GEO_LEFT,
 		GEO_RIGHT,

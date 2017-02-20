@@ -32,6 +32,11 @@ class Mainmenu : public Scene
 		GEO_SPHERE,
 		GEO_LIGHTBALL,
 		GEO_CYLINDER,
+		GEO_PLAY1,
+		GEO_PLAY2,
+		GEO_QUIT1,
+		GEO_QUIT2,
+		GEO_TITLE,
 
 		//skybox
 		GEO_LEFT,
@@ -43,6 +48,7 @@ class Mainmenu : public Scene
 		GEO_TEXT,
 		GEO_ARROW,
 		NUM_GEOMETRY,
+
 	};
 	enum UNIFORM_TYPE
 	{
@@ -102,6 +108,7 @@ public:
 	int arrowlocation;
 	float timer;
 	int arrowselect;
+	
 private:
 
 	unsigned m_vertexArrayID;
