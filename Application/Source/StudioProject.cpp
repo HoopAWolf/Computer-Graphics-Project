@@ -12,7 +12,9 @@
 
 #include <iostream>
 
+#define DIMENSIONID 1
 
+float timer = 0.0f;
 DataBase *DataBase::s_instance = nullptr;
 MapBase *MapBase::s_instance = nullptr;
 RenderingBase *RenderingBase::s_instance = nullptr;
@@ -31,35 +33,40 @@ StudioProject::~StudioProject()
 void StudioProject::Init()
 {
 	
-	DataBase::instance()->registerItems();
-	PlayerBase::instance()->startPlayer();
+	DataBase::instance()->registerItems();  //RUN ONCE
+	DataBase::instance()->registerEnvironments();  //RUN ONCE
+	PlayerBase::instance()->startPlayer();  //RUN ONCE
 
-	MapBase::instance()->setMapSize(1, 50, 50);
-	MapBase::instance()->generateMap(1, "test.txt");
+	MapBase::instance()->setMapSize(1, 20, 20);  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->generateMap(1, "test.txt");  //RUN ONCE FOR EACH SCENE
 
-	RenderingBase::instance()->registerAllRenderingData();
+	RenderingBase::instance()->registerAllRenderingData();  //RUN ONCE
 
+	//RUN ONCE
 	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(0); i++)
 	{
 		string tempString = "Image//" + DataBase::instance()->getItem(i)->getTextureString() + ".tga";
 		RenderingBase::instance()->getItemMesh(i)->textureID = LoadTGA(tempString.c_str());
 	}
 
+	//RUN ONCE
+	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(1); i++)
+	{
+		string tempString = "Image//" + DataBase::instance()->getEnvironmentBase(i)->getTextureString() + ".tga";
+		RenderingBase::instance()->getEnviornmentMesh(i)->textureID = LoadTGA(tempString.c_str());
+	}
+
+	//-------------------------------------------------------TESTING PURPOSES-----------------------------------------------------------
 	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(0); i++)
 	{
-		DataBase::instance()->setEntity(1, new EntityDrop(i, Vector3(1 + i * 20, 0, 50)));
+		DataBase::instance()->setEntity(1, new EntityDrop(i, Vector3(1 + i * 20, 0, 50), Application::elapsed_timer_));
 	}
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(0); i++)
 	{
-		DataBase::instance()->setEntity(1, new EntityDrop(i, Vector3(1 + i * 20, 0, 80)));
+		DataBase::instance()->setEntity(1, new EntityDrop(i, Vector3(1 + i * 20, 0, 80), Application::elapsed_timer_));
 	}
-
-	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(2, 1); i++)
-	{
-		string tempString = "Image//" + DataBase::instance()->getBuilding(1, i)->getTextureString() + ".tga";
-		RenderingBase::instance()->getBuildingMesh(i)->textureID = LoadTGA(tempString.c_str());
-	}
+	//--------------------------------------------------------^REMOVE ONCE DONE^--------------------------------------------------------
 
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
@@ -138,155 +145,6 @@ void StudioProject::Init()
 	meshList[GEO_AXES] = MeshBuilder::GenerateAxes("reference", 1000, 1000, 1000);
 
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1, 1, 1), 24, 13, 1);
-
-	meshList[GEO_BOSS_1_BODY] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_1_body.obj");
-	meshList[GEO_BOSS_1_BODY]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_1_RIGHT_ARM] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_1_arm_1.obj");
-	meshList[GEO_BOSS_1_RIGHT_ARM]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_1_LEFT_ARM] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_1_arm_2.obj");
-	meshList[GEO_BOSS_1_LEFT_ARM]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_1_RIGHT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_1_leg_1.obj");
-	meshList[GEO_BOSS_1_RIGHT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_1_LEFT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_1_leg_2.obj");
-	meshList[GEO_BOSS_1_LEFT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_2_BODY] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_2_body.obj");
-	meshList[GEO_BOSS_2_BODY]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_2_RIGHT_ARM] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_2_arm_1.obj");
-	meshList[GEO_BOSS_2_RIGHT_ARM]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_2_LEFT_ARM] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_2_arm_2.obj");
-	meshList[GEO_BOSS_2_LEFT_ARM]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_2_RIGHT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_2_leg_1.obj");
-	meshList[GEO_BOSS_2_RIGHT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_2_LEFT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_2_leg_2.obj");
-	meshList[GEO_BOSS_2_LEFT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_3_BODY] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_body.obj");
-	meshList[GEO_BOSS_3_BODY]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_3_RIGHT_ARM] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_arm_1.obj");
-	meshList[GEO_BOSS_3_RIGHT_ARM]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_3_LEFT_ARM] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_arm_2.obj");
-	meshList[GEO_BOSS_3_LEFT_ARM]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_3_RIGHT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_leg_1.obj");
-	meshList[GEO_BOSS_3_RIGHT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_3_LEFT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_3_leg_2.obj");
-	meshList[GEO_BOSS_3_LEFT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_4_BODY] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_4_body.obj");
-	meshList[GEO_BOSS_4_BODY]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_4_RIGHT_ARM] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_4_arm_1.obj");
-	meshList[GEO_BOSS_4_RIGHT_ARM]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_4_LEFT_ARM] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_4_arm_2.obj");
-	meshList[GEO_BOSS_4_LEFT_ARM]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_4_RIGHT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_4_leg_1.obj");
-	meshList[GEO_BOSS_4_RIGHT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
-
-	meshList[GEO_BOSS_4_LEFT_LEG] = MeshBuilder::GenerateOBJ("chicken", "OBJ//boss_4_leg_2.obj");
-	meshList[GEO_BOSS_4_LEFT_LEG]->textureID = LoadTGA("Image//chicken_.tga");
-
-	//meshList[GEO_STATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//statueBase_FullSet.obj");
-	//meshList[GEO_STATUE]->textureID = LoadTGA("Image//texture2.tga");
-
-	meshList[GEO_NOSTATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//StatueBase_noStatue.obj");
-	meshList[GEO_NOSTATUE]->textureID = LoadTGA("Image//texture2.tga");
-
-
-	meshList[GEO_HALFSTATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//StatueBase_halfset.obj");
-	meshList[GEO_HALFSTATUE]->textureID = LoadTGA("Image//texture2.tga");
-
-
-
-	meshList[GEO_QUARTERSTATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//StatueBase_one quarter.obj");
-	meshList[GEO_QUARTERSTATUE]->textureID = LoadTGA("Image//texture2.tga");
-
-
-	meshList[GEO_THREEQUARTERSTATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//statueBase_Three Quarter Set.obj");
-	meshList[GEO_THREEQUARTERSTATUE]->textureID = LoadTGA("Image//texture2.tga");
-
-
-
-	meshList[GEO_STATUE] = MeshBuilder::GenerateOBJ("Statue", "OBJ//statueBase_FullSet.obj");
-	meshList[GEO_STATUE]->textureID = LoadTGA("Image//texture2.tga");
-
-	//enviromental models 
-	meshList[GEO_HOUSE] = MeshBuilder::GenerateOBJ("House", "OBJ//house.obj");
-	meshList[GEO_HOUSE]->textureID = LoadTGA("Image//texture2.tga");
-
-	/*meshList[GEO_BIGHOUSE] = MeshBuilder::GenerateOBJ("Big house", "OBJ//giant_house.obj");
-	meshList[GEO_BIGHOUSE]->textureID = LoadTGA("Image//texture2.tga");*/
-
-	meshList[GEO_APPLETREE] = MeshBuilder::GenerateOBJ("AppleTree", "OBJ//apple_tree.obj");
-	meshList[GEO_APPLETREE]->textureID = LoadTGA("Image//texture3.tga");
-
-	meshList[GEO_CHRISTMASTREE] = MeshBuilder::GenerateOBJ("Christmas tree", "OBJ//christmas_tree.obj");
-	meshList[GEO_CHRISTMASTREE]->textureID = LoadTGA("Image//texture3.tga");
-
-
-	meshList[GEO_FENCE] = MeshBuilder::GenerateOBJ("Fence", "OBJ//fence.obj");
-	meshList[GEO_FENCE]->textureID = LoadTGA("Image//texture2.tga");
-
-
-	meshList[GEO_GIANTSWORDSTAND] = MeshBuilder::GenerateOBJ("GIANT SWORD", "OBJ//giant_sword_stand.obj");
-	meshList[GEO_GIANTSWORDSTAND]->textureID = LoadTGA("Image//texture2.tga");
-
-	meshList[GEO_HAMMERSTAND] = MeshBuilder::GenerateOBJ("Hammer Stand", "OBJ//hammer_stand.obj");
-	meshList[GEO_HAMMERSTAND]->textureID = LoadTGA("Image//texture2.tga");
-
-	meshList[GEO_KUNAISTAND] = MeshBuilder::GenerateOBJ("Kunai Stand", "OBJ//kunai_stand.obj");
-	meshList[GEO_KUNAISTAND]->textureID = LoadTGA("Image//texture2.tga");
-
-	meshList[GEO_MINIGUNSTAND] = MeshBuilder::GenerateOBJ("Mini gun", "OBJ//minigun_stan.obj");
-	meshList[GEO_MINIGUNSTAND]->textureID = LoadTGA("Image//texture2.tga");
-
-	meshList[GEO_NICELOOKINGTREE] = MeshBuilder::GenerateOBJ("Nice Looking Tree", "OBJ//nice_looking_tree.obj");
-	meshList[GEO_NICELOOKINGTREE]->textureID = LoadTGA("Image//texture3.tga");
-
-	meshList[GEO_PORTAL] = MeshBuilder::GenerateOBJ("Portal", "OBJ//portal.obj");
-	meshList[GEO_PORTAL]->textureID = LoadTGA("Image//portal2.tga");
-
-	meshList[GEO_POTIONMERCHANT] = MeshBuilder::GenerateOBJ("Potion Merchant", "OBJ//potion_merchant.obj");
-	meshList[GEO_POTIONMERCHANT]->textureID = LoadTGA("Image//texture2.tga");
-
-	meshList[GEO_TARGETPRACTISE] = MeshBuilder::GenerateOBJ("Target Practise", "OBJ//targetPractise.obj");
-	meshList[GEO_TARGETPRACTISE]->textureID = LoadTGA("Image//texture2.tga");
-
-
-	meshList[GEO_ROUNDASS] = MeshBuilder::GenerateOBJ("Round ASS", "OBJ//round_ass.obj");
-	meshList[GEO_ROUNDASS]->textureID = LoadTGA("Image//texture2.tga");
-
-	meshList[GEO_WEAPONMERCHANT] = MeshBuilder::GenerateOBJ("Weapon Merchant", "OBJ//weapon_merchant.obj");
-	meshList[GEO_WEAPONMERCHANT]->textureID = LoadTGA("Image//texture2.tga");
-
-
-	//NPC's 
-	meshList[GEO_EMOKIDNPC] = MeshBuilder::GenerateOBJ("EmoKid", "OBJ//emokid_.obj");
-	meshList[GEO_EMOKIDNPC]->textureID = LoadTGA("Image//emokid_.tga");
-
-	meshList[GEO_GIRL] = MeshBuilder::GenerateOBJ("Girl", "OBJ//girlwithboobs_.obj");
-	meshList[GEO_GIRL]->textureID = LoadTGA("Image//girl_.tga");
-
-	meshList[GEO_LADY] = MeshBuilder::GenerateOBJ("LADY", "OBJ//lady_.obj");
-	meshList[GEO_LADY]->textureID = LoadTGA("Image//lady_.tga");
-
-
-	meshList[GEO_NEGAN] = MeshBuilder::GenerateOBJ("negan", "OBJ//negan_.obj");
-	meshList[GEO_NEGAN]->textureID = LoadTGA("Image//negan_.tga");
-
 
 	//..........................................................................................
 
@@ -371,9 +229,6 @@ void StudioProject::Init()
 	projectionStack.LoadMatrix(projection);
 }
 
-static float ROT_LIMIT = 45.f;
-static float SCALE_LIMIT = 5.f;
-
 void StudioProject::Update(double dt)
 {
 	camera.Update(dt);
@@ -383,14 +238,34 @@ void StudioProject::Update(double dt)
 
 	Application::elapsed_timer_ += dt;
 
-	PlayerBase::instance()->playerUpdate(dt);
+	PlayerBase::instance()->playerUpdate(Application::elapsed_timer_);
 
-	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(1, 1); i++)
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(0, DIMENSIONID); i++)
 	{
-		DataBase::instance()->getEntityDrop(1, i)->updateAI(Application::elapsed_timer_);
-		if (DataBase::instance()->getEntityDrop(1, i)->getHealth() <= 0)
+		DataBase::instance()->getEntityDrop(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		if (DataBase::instance()->getEntityDrop(DIMENSIONID, i)->isEntityDead())
 		{
-			DataBase::instance()->destroyEntityDrop(1, i);
+			DataBase::instance()->destroyEntityDrop(DIMENSIONID, i);
+			--i;
+		}
+	}
+
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(2, DIMENSIONID); i++)
+	{
+		DataBase::instance()->getEntityMinion(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		if (DataBase::instance()->getEntityMinion(DIMENSIONID, i)->isEntityDead())
+		{
+			DataBase::instance()->destroyEntityMinion(DIMENSIONID, i);
+			--i;
+		}
+	}
+
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(3, DIMENSIONID); i++)
+	{
+		DataBase::instance()->getEntityBoss(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		if (DataBase::instance()->getEntityBoss(DIMENSIONID, i)->isEntityDead())
+		{
+			DataBase::instance()->destroyEntityBoss(DIMENSIONID, i);
 			--i;
 		}
 	}
@@ -406,14 +281,11 @@ void StudioProject::Update(double dt)
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); //default fill mode
 	if (Application::IsKeyPressed('4'))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //wireframe mode
-	if (Application::IsKeyPressed(VK_F1))
-	{
-		SceneManager::getSceneManger()->setNextScene(0);
-	}
+	
 	if (Application::IsKeyPressed(VK_ESCAPE))
 	{
 		currscene = SceneManager::getSceneManger()->getCurrentScene();
-		SceneManager::getSceneManger()->setNextScene(5);
+		SceneManager::getSceneManger()->setNextScene(6);
 	}
 	//light_controls---------------------------------------------------------------
 	if (Application::IsKeyPressed('I'))
@@ -448,96 +320,33 @@ void StudioProject::Update(double dt)
 		light[0].type = Light::LIGHT_SPOT;
 		glUniform1i(m_parameters[U_LIGHT0_TYPE], light[0].type);
 	}
-	//--------------------------------------------------------------------------------
-	if (Application::IsKeyPressed('Z'))
+
+	if (timer == 0.0f)
 	{
-		walking = true;
-		if (rotateleftLeg < 20 && leftlegForward == true)
+		timer = Application::elapsed_timer_;
+	}
+	if (Application::elapsed_timer_ > timer + .2)
+	{
+		if (Application::IsKeyPressed('Q'))
 		{
-			rotateleftLeg += (float)(80 * dt);
+			PlayerBase::instance()->moveCurrItem(false);
+			timer = Application::elapsed_timer_;
 		}
-		else
+		else if (Application::IsKeyPressed('E'))
 		{
-			leftlegForward = false;
-			leftlegBackward = true;
+			PlayerBase::instance()->moveCurrItem(true);
+			timer = Application::elapsed_timer_;
 		}
-		if (rotateleftLeg > -20 && leftlegBackward == true)
-		{
-			rotateleftLeg -= (float)(80 * dt);
-		}
-		else
-		{
-			leftlegForward = true;
-			leftlegBackward = false;
-		}
-		if (rotaterightLeg < 20 && rightlegForward == true)
-		{
-			rotaterightLeg += (float)(80 * dt);
-		}
-		else
-		{
-			rightlegForward = false;
-			rightlegBackward = true;
-		}
-		if (rotaterightLeg > -20 && rightlegBackward == true)
-		{
-			rotaterightLeg -= (float)(80 * dt);
-		}
-		else
-		{
-			rightlegForward = true;
-			rightlegBackward = false;
-		}
+	}
+
+	if (Application::IsKeyPressed(VK_LSHIFT))
+	{
+		PlayerBase::instance()->setPlayerState(PlayerBase::instance()->SPRINTING);
 	}
 	else
 	{
-		walking = false;
+		PlayerBase::instance()->setPlayerState(PlayerBase::instance()->WALKING);
 	}
-
-
-	if (Application::IsKeyPressed('X') && rotateleftArm >= -90)
-	{
-		attacking = true;
-	}
-	if (attacking == true)
-	{
-		rotateleftArm -= (float)(80 * dt);
-		if (rotateleftArm <= -90)
-		{
-			attacking = false;
-		}
-	}
-
-	//=====================================================
-
-	if (walking == false)
-	{
-		if (rotaterightLeg > 0)
-		{
-			rotaterightLeg--;
-		}
-		if (rotaterightLeg < 0)
-		{
-			rotaterightLeg++;
-		}
-		if (rotateleftLeg > 0)
-		{
-			rotateleftLeg--;
-		}
-		if (rotateleftLeg < 0)
-		{
-			rotateleftLeg++;
-		}
-	}
-	if (attacking == false)
-	{
-		if (rotateleftArm < 0)
-		{
-			rotateleftArm++;
-		}
-	}
-
-	//======================================================
 }
 
 void StudioProject::Render()
@@ -621,179 +430,69 @@ void StudioProject::Render()
 	RenderMesh(meshList[GEO_LIGHTBALL], false);
 	modelStack.PopMatrix();
 	//===================================================================================================
-	for (int x = 0; x < MapBase::instance()->getMapData(1).size_.x; x++)
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(0, DIMENSIONID); i++)
 	{
-		for (int z = 0; z < MapBase::instance()->getMapData(1).size_.z; z++)
+		Color tempColor;
+		modelStack.PushMatrix();
+		modelStack.Translate(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().x,
+			DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().y,
+			DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().z);
+
+		AABB playerItemDetectionRange;
+		playerItemDetectionRange.setBoundry(Vector3(-12, -3, -12), Vector3(12, 3, 12));
+
+		modelStack.Rotate(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
+		RenderMesh(RenderingBase::instance()->getItemMesh(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getItemDrop()), true);
+
+		if (DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getBoundingBox().isAABBInsideAABB(playerItemDetectionRange.getBoundryAtCoord(camera.position)))
 		{
-			if (MapBase::instance()->checkingMapDataByCoord(1, x, z) == 'C')
+			for (int j = 0; j < 4; j++)
 			{
-
 				modelStack.PushMatrix();
-				modelStack.Translate(x, 0, z);
+				modelStack.Translate(0, 4 - j, 0);
 
-				for (int i = 0; i < DataBase::instance()->sizeOfDataBase(1, 1); i++)
+				if (camera.getRotationY() != 0)
+					modelStack.Rotate((camera.getRotationY() - 90) - DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
+
+				if (j != 0)
 				{
-					modelStack.PushMatrix();
-					modelStack.Translate(DataBase::instance()->getEntityDrop(1, i)->getPosition().x, 
-						DataBase::instance()->getEntityDrop(1, i)->getPosition().y, 
-						DataBase::instance()->getEntityDrop(1, i)->getPosition().z);
-
-					modelStack.PushMatrix();
-					modelStack.Translate(-((double)DataBase::instance()->getEntityDrop(1, i)->getDropInfo().size() / 2), 3, 0);
-					RenderText(meshList[GEO_TEXT], DataBase::instance()->getEntityDrop(1, i)->getDropInfo(), 
-						DataBase::instance()->getRarityColor(DataBase::instance()->getItem(DataBase::instance()->getEntityDrop(1, i)->getItemDrop())->getRarity()));
-					modelStack.PopMatrix();
-
-					modelStack.Rotate(Application::elapsed_timer_ * 15, 0, 1, 0);
-					RenderMesh(RenderingBase::instance()->getItemMesh(DataBase::instance()->getEntityDrop(1, i)->getItemDrop()), true);
-					modelStack.PopMatrix();
+					modelStack.Scale(.25, .25, .25);
+					tempColor = Color(1, 1, 1);
 				}
-
-				for (int i = 0; i < DataBase::instance()->sizeOfDataBase(2, 1); i++)
+				else
 				{
-					modelStack.PushMatrix();
-					modelStack.Translate(x + 1 + i * 5, 0, z + 1 + i * 10);
-					RenderMesh(RenderingBase::instance()->getBuildingMesh(i), true);
-					modelStack.PopMatrix();
+					modelStack.Scale(.4, .4, .4);
+					tempColor = DataBase::instance()->getRarityColor(DataBase::instance()->getItem(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getItemDrop())->getRarity());
 				}
-				modelStack.PushMatrix();
-				modelStack.Translate(0, 5, 0);
-				modelStack.Rotate(rotateleftArm, 1, 0, 0);
-				RenderMesh(meshList[GEO_BOSS_3_LEFT_ARM], true);
+				RenderText(meshList[GEO_TEXT], DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getDropInfo(j), tempColor);
 				modelStack.PopMatrix();
-
-				modelStack.PushMatrix();
-				modelStack.Translate(0, 5, 0);
-				modelStack.Rotate(0, 1, 0, 0);
-				RenderMesh(meshList[GEO_BOSS_3_RIGHT_ARM], true);
-				modelStack.PopMatrix();
-
-				modelStack.PushMatrix();
-				modelStack.Rotate(rotateleftLeg, 1, 0, 0);
-				RenderMesh(meshList[GEO_BOSS_3_LEFT_LEG], true);
-				modelStack.PopMatrix();
-
-				modelStack.PushMatrix();
-				modelStack.Rotate(rotaterightLeg, 1, 0, 0);
-				RenderMesh(meshList[GEO_BOSS_3_RIGHT_LEG], true);
-				modelStack.PopMatrix();
-
-				RenderMesh(meshList[GEO_BOSS_3_BODY], true);
-				modelStack.PopMatrix();
-
-				//modelStack.PushMatrix();
-				//modelStack.Translate(0, 5, 0);
-				//modelStack.Rotate(rotateleftArm, 1, 0, 0);
-				//RenderMesh(meshList[GEO_BOSS_1_LEFT_ARM], true);
-				//modelStack.PopMatrix();
-
-				//modelStack.PushMatrix();
-				//modelStack.Translate(0, 5, 0);
-				//modelStack.Rotate(0, 1, 0, 0);
-				//RenderMesh(meshList[GEO_BOSS_1_RIGHT_ARM], true);
-				//modelStack.PopMatrix();
-
-				//modelStack.PushMatrix();
-				//modelStack.Rotate(rotateleftLeg, 1, 0, 0);
-				//RenderMesh(meshList[GEO_BOSS_1_LEFT_LEG], true);
-				//modelStack.PopMatrix();
-
-				//modelStack.PushMatrix();
-				//modelStack.Rotate(rotaterightLeg, 1, 0, 0);
-				//RenderMesh(meshList[GEO_BOSS_1_RIGHT_LEG], true);
-				//modelStack.PopMatrix();
-
-				//RenderMesh(meshList[GEO_BOSS_1_BODY], true);
-				//modelStack.PopMatrix();
-
-				/*			modelStack.PushMatrix();
-				modelStack.Translate(0, 5, 0);
-				modelStack.Rotate(rotateleftArm, 1, 0, 0);
-				RenderMesh(meshList[GEO_BOSS_2_LEFT_ARM], true);
-				modelStack.PopMatrix();
-
-				modelStack.PushMatrix();
-				modelStack.Translate(0, 5, 0);
-				modelStack.Rotate(0, 1, 0, 0);
-				RenderMesh(meshList[GEO_BOSS_2_RIGHT_ARM], true);
-				modelStack.PopMatrix();
-
-				modelStack.PushMatrix();
-				modelStack.Rotate(rotateleftLeg, 1, 0, 0);
-				RenderMesh(meshList[GEO_BOSS_2_LEFT_LEG], true);
-				modelStack.PopMatrix();
-
-				modelStack.PushMatrix();
-				modelStack.Rotate(rotaterightLeg, 1, 0, 0);
-				RenderMesh(meshList[GEO_BOSS_2_RIGHT_LEG], true);
-				modelStack.PopMatrix();
-
-				RenderMesh(meshList[GEO_BOSS_2_BODY], true);
-				modelStack.PopMatrix();*/
-
-				//modelStack.PushMatrix();
-				//modelStack.Translate(0, 3, 0);
-				//modelStack.Rotate(rotateleftArm, 1, 0, 0);
-				//RenderMesh(meshList[GEO_BOSS_4_LEFT_ARM], true);
-				//modelStack.PopMatrix();
-
-				//modelStack.PushMatrix();
-				//modelStack.Translate(0, 3, 0);
-				//modelStack.Rotate(rotateleftArm, 1, 0, 0);
-				//RenderMesh(meshList[GEO_BOSS_4_RIGHT_ARM], true);
-				//modelStack.PopMatrix();
-
-				//modelStack.PushMatrix();
-				//modelStack.Rotate(rotateleftLeg, 1, 0, 0);
-				//RenderMesh(meshList[GEO_BOSS_4_LEFT_LEG], true);
-				//modelStack.PopMatrix();
-
-				//modelStack.PushMatrix();
-				//modelStack.Rotate(rotaterightLeg, 1, 0, 0);
-				//RenderMesh(meshList[GEO_BOSS_4_RIGHT_LEG], true);
-				//modelStack.PopMatrix();
-
-				//RenderMesh(meshList[GEO_BOSS_4_BODY], true);
-				//modelStack.PopMatrix();
 			}
-
-
-
-	
-
-
-
-
-	
-
 		}
+		modelStack.PopMatrix();
 	}
 
-	modelStack.PushMatrix();
-	modelStack.Translate(95, 0, 60);
-	RenderMesh(meshList[GEO_EMOKIDNPC], true);
-	modelStack.PopMatrix();
+	if (PlayerBase::instance()->getCurrentHeldItem() != nullptr)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(camera.target.x, camera.position.y - 1, camera.target.z);
+		modelStack.Rotate(camera.getRotationY() + 90, 0, 1, 0);
+		modelStack.Scale(.5, .5, .5);
+		RenderMesh(RenderingBase::instance()->getItemMesh(PlayerBase::instance()->getCurrentHeldItem()->getItemID()), true);
 
-	modelStack.PushMatrix();
-	modelStack.Translate(105, 0, 60);
-	RenderMesh(meshList[GEO_GIRL], true);
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-	modelStack.Translate(115, 0, 60);
-	RenderMesh(meshList[GEO_NEGAN], true);
-	modelStack.PopMatrix();
+		modelStack.PopMatrix();
+	}
 
 
+	RenderTextOnScreen(meshList[GEO_TEXT], "FPS: " + std::to_string(SceneManager::getSceneManger()->frameRate), Color(0, 1, 0), 1.8, 1, 32);
 
-	RenderTextOnScreen(meshList[GEO_TEXT], "FPS: " + std::to_string(SceneManager::getSceneManger()->frameRate), Color(0, 1, 0), 1.8, 1, 1);
-
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		if (PlayerBase::instance()->getItemFromInventory(i) != nullptr)
-			RenderTextOnScreen(meshList[GEO_TEXT], PlayerBase::instance()->getItemFromInventory(i)->getItemName(), DataBase::instance()->getRarityColor(PlayerBase::instance()->getItemFromInventory(i)->getRarity()), 1.8, 1, 30 - i);
+			RenderTextOnScreen(meshList[GEO_TEXT], 
+			((PlayerBase::instance()->getCurrentItemSlot() == i) ? "> " : "") + PlayerBase::instance()->getItemFromInventory(i)->getItemName(), 
+			DataBase::instance()->getRarityColor(PlayerBase::instance()->getItemFromInventory(i)->getRarity()), 1.8, 1, 5 - i);
 		else
-			RenderTextOnScreen(meshList[GEO_TEXT], "-", Color(1, 1, 1), 1.8, 1, 30 - i);
+			RenderTextOnScreen(meshList[GEO_TEXT], "-", Color(1, 1, 1), 1.8, 1, 5 - i);
 	}
 }
 

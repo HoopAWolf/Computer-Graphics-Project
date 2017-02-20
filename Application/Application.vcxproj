@@ -92,7 +92,6 @@
     <ClCompile Include="Source\exitmenu.cpp" />
     <ClCompile Include="Source\EntityDrop.cpp" />
     <ClCompile Include="Source\ItemBattleAxe.cpp" />
-    <ClCompile Include="Source\ItemChestPlate.cpp" />
     <ClCompile Include="Source\ItemChickenGun.cpp" />
     <ClCompile Include="Source\ItemDagger.cpp" />
     <ClCompile Include="Source\ItemGiggsGun.cpp" />
@@ -126,12 +125,13 @@
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\StudioProject.cpp" />
+    <ClCompile Include="Source\Test.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\AABB.h" />
     <ClInclude Include="Source\Application.h" />
-    <ClInclude Include="Source\BuildingBase.h" />
+    <ClInclude Include="Source\EnvironmentBase.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Camera2.h" />
     <ClInclude Include="Source\Camera3.h" />
@@ -168,9 +168,6 @@
   <ItemGroup>
     <None Include="..\..\..\..\..\Downloads\Practical2_files(1)\Practical2_files\Application\Shader\SimpleFragmentShader.fragmentshader" />
     <None Include="..\..\..\..\..\Downloads\Practical2_files(1)\Practical2_files\Application\Shader\SimpleVertexShader.vertexshader" />
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

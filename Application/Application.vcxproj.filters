@@ -39,6 +39,9 @@
     <Filter Include="Source Files\Entities">
       <UniqueIdentifier>{36236a53-94f0-47a7-8fd8-2b8cb478b2e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Environment">
+      <UniqueIdentifier>{a9470c21-d701-4fef-9e2c-83d3bb305d92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp">
@@ -122,9 +125,6 @@
     <ClCompile Include="Source\ItemSword.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ItemChestPlate.cpp">
-      <Filter>Source Files\Items</Filter>
-    </ClCompile>
     <ClCompile Include="Source\ItemBattleAxe.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
@@ -166,9 +166,12 @@
     </ClCompile>
     <ClCompile Include="Source\exitmenu.cpp">
       <Filter>Source Files\Scenes</Filter>
-	 </ClCompile>
+    </ClCompile>
     <ClCompile Include="Source\EntityDrop.cpp">
       <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Test.cpp">
+      <Filter>Source Files\Environment</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -271,11 +274,11 @@
     <ClInclude Include="Source\RenderingBase.h">
       <Filter>Header Files\DataBase</Filter>
     </ClInclude>
-    <ClInclude Include="Source\BuildingBase.h">
-      <Filter>Header Files\DataBase</Filter>
-    </ClInclude>
     <ClInclude Include="Source\exitmenu.h">
       <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EnvironmentBase.h">
+      <Filter>Header Files\DataBase</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -285,8 +288,5 @@
     <None Include="..\..\..\..\..\Downloads\Practical2_files(1)\Practical2_files\Application\Shader\SimpleVertexShader.vertexshader">
       <Filter>Shader</Filter>
     </None>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
 </Project>

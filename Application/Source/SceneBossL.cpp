@@ -12,6 +12,7 @@
 
 #include <iostream>
 
+#define DIMENSIONID 2
 
 
 SceneBossL::SceneBossL()
@@ -185,15 +186,47 @@ void SceneBossL::Init()
 	projectionStack.LoadMatrix(projection);
 }
 
-static float ROT_LIMIT = 45.f;
-static float SCALE_LIMIT = 5.f;
 
 void SceneBossL::Update(double dt)
 {
 	camera.Update(dt);
 	ShowCursor(false);
+
+	SceneManager::getSceneManger()->frameRate = ((int)(1 / dt));
+
 	Application::elapsed_timer_ += dt;
+
 	PlayerBase::instance()->playerUpdate(dt);
+
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(0, DIMENSIONID); i++)
+	{
+		DataBase::instance()->getEntityDrop(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		if (DataBase::instance()->getEntityDrop(DIMENSIONID, i)->isEntityDead())
+		{
+			DataBase::instance()->destroyEntityDrop(DIMENSIONID, i);
+			--i;
+		}
+	}
+
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(2, DIMENSIONID); i++)
+	{
+		DataBase::instance()->getEntityMinion(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		if (DataBase::instance()->getEntityMinion(DIMENSIONID, i)->isEntityDead())
+		{
+			DataBase::instance()->destroyEntityMinion(DIMENSIONID, i);
+			--i;
+		}
+	}
+
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(3, DIMENSIONID); i++)
+	{
+		DataBase::instance()->getEntityBoss(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		if (DataBase::instance()->getEntityBoss(DIMENSIONID, i)->isEntityDead())
+		{
+			DataBase::instance()->destroyEntityBoss(DIMENSIONID, i);
+			--i;
+		}
+	}
 
 	float LSPEED = 10.f;
 
@@ -243,7 +276,7 @@ void SceneBossL::Update(double dt)
 	if (Application::IsKeyPressed(VK_ESCAPE))
 	{
 		currscene = SceneManager::getSceneManger()->getCurrentScene();
-		SceneManager::getSceneManger()->setNextScene(5);
+		SceneManager::getSceneManger()->setNextScene(6);
 	}
 }
 

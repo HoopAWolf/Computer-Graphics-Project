@@ -15,8 +15,8 @@ public:
 
 		weapon_type_ = SHIELD;
 		durability_ = 25;
-		damage_ = 11;
-		attack_speed_ = 2.5;
+		damage_ = 2;
+		attack_speed_ = 1;
 
 		rarity_ = COMMON;
 

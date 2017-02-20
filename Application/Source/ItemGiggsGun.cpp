@@ -15,8 +15,8 @@ public:
 
 		weapon_type_ = RANGE_AUTO;
 		durability_ = 45;
-		damage_ = 46;
-		attack_speed_ = 6;
+		damage_ = 20;
+		attack_speed_ = 3;
 
 		rarity_ = LEGENDARY;
 

@@ -15,8 +15,8 @@ public:
 
 		weapon_type_ = HEAVY;
 		durability_ = 245;
-		damage_ = 148;
-		attack_speed_ = 4.5;
+		damage_ = 100;
+		attack_speed_ = 1;
 
 		rarity_ = RARE;
 

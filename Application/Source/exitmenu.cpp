@@ -102,12 +102,6 @@ void exitmenu::Init()
 	// Get a handle for our "MVP" uniform
 	m_parameters[U_MVP] = glGetUniformLocation(m_programID, "MVP");
 
-	//variable to rotate geometry
-
-
-	//Initialize camera settings
-	camera.Init(Vector3(-0.4, 0, 0), Vector3(1, 0, 0), Vector3(0, 1, 0));
-
 	//meshes------------------------------------------------------------------------------------------
 	meshList[GEO_AXES] = MeshBuilder::GenerateAxes("reference", 1000, 1000, 1000);
 

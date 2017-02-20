@@ -116,6 +116,8 @@ void Application::Run()
 	SceneManager::getSceneManger()->addScene(scene);
 	scene = new SceneBossH();
 	SceneManager::getSceneManger()->addScene(scene);
+	scene = new SceneBossR();
+	SceneManager::getSceneManger()->addScene(scene);
 	scene = new exitmenu();
 	SceneManager::getSceneManger()->addScene(scene);
 	
