@@ -505,6 +505,20 @@ void StudioProject::Render()
 		else
 			RenderTextOnScreen(meshList[GEO_TEXT], "-", Color(1, 1, 1), 1.8, 1, 5 - i);
 	}
+
+	modelStack.PushMatrix();
+	string experienceBar = "";
+	for (int i = 0; i < 20; i++)
+	{
+		if (i == 20/2)
+			RenderTextOnScreen(meshList[GEO_TEXT], "[" + std::to_string(PlayerBase::instance()->getPlayerLevel()) + "]", Color(1, 1, 0), 2.5, 15.3, 2);
+		if (i < ((double)((((double)PlayerBase::instance()->getPlayerExperience()) / ((double)PlayerBase::instance()->getPlayerLevelCap())) * 100) / 5))
+			experienceBar += "O";  
+		else
+			experienceBar += "-";
+	}
+	RenderTextOnScreen(meshList[GEO_TEXT], experienceBar, Color(1, 1, 0), 2, 12, 1);
+	modelStack.PopMatrix();
 }
 
 
@@ -519,6 +533,7 @@ void StudioProject::RenderMesh(Mesh *mesh, bool enableLight)
 
 	if (Application::IsKeyPressed('9'))
 	{
+
 		bEnableLight = false;
 	}
 	if (Application::IsKeyPressed('0'))
