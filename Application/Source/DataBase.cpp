@@ -107,9 +107,102 @@ void DataBase::registerItems()
 
 void DataBase::registerEnvironments()
 {
+	//0
 	EnvironmentBase *temp_obj;
-	temp_obj = new Test();
-	environment_data_base[temp_obj->getEnvironmentID()] = new Test(); //Register Environment Obj
+	temp_obj = new EnvironmentAppleTree();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentAppleTree(); //Register Environment Obj
+	delete temp_obj;
+
+	//1
+
+	temp_obj = new EnvironmentChristmasTree();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentChristmasTree(); //Register Environment Obj
+	delete temp_obj;
+
+	//2
+
+	temp_obj = new EnvironmentFence();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentFence(); //Register Environment Obj
+	delete temp_obj;
+
+	//3
+
+	temp_obj = new EnvironmentGiantSwordStand();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentGiantSwordStand(); //Register Environment Obj
+	delete temp_obj;
+
+
+	//4
+	temp_obj = new EnvironmentHammerStand();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentHammerStand(); //Register Environment Obj
+	delete temp_obj;
+
+
+	//5
+	temp_obj = new EnvironmentHouse();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentHouse(); //Register Environment Obj
+	delete temp_obj;
+
+	//6
+	temp_obj = new EnvironmentKunaiStand();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentKunaiStand(); //Register Environment Obj
+	delete temp_obj;
+
+	//7
+	temp_obj = new EnvironmentNicelookingTree();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentNicelookingTree(); //Register Environment Obj
+	delete temp_obj;
+
+	//8
+	temp_obj = new EnvironmentPortal();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentPortal(); //Register Environment Obj
+	delete temp_obj;
+
+	//9
+	temp_obj = new EnvironmentstatueFullSet();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentstatueFullSet(); //Register Environment Obj
+	delete temp_obj;
+
+
+	//10
+	temp_obj = new Environmentstatuehalfset();
+	environment_data_base[temp_obj->getEnvironmentID()] = new Environmentstatuehalfset(); //Register Environment Obj
+	delete temp_obj;
+
+	//11
+	temp_obj = new EnvironmentNoStatue();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentNoStatue(); //Register Environment Obj
+	delete temp_obj;
+
+	//12
+	temp_obj = new EnvironmentOneQuarterSet();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentOneQuarterSet(); //Register Environment Obj
+	delete temp_obj;
+
+	//13
+	temp_obj = new EnvironmentTargetPractise();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentTargetPractise(); //Register Environment Obj
+	delete temp_obj;
+
+	//14
+	temp_obj = new EnvironmentThreeQuarterSet();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentThreeQuarterSet(); //Register Environment Obj
+	delete temp_obj;
+
+	//15
+	temp_obj = new EnvironmentWeaponMerchant();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentWeaponMerchant(); //Register Environment Obj
+	delete temp_obj;
+
+	//16
+	temp_obj = new EnvironmentRoundAss();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentRoundAss(); //Register Environment Obj
+	delete temp_obj;
+
+
+	//17
+	temp_obj = new EnvironmentMinigunStan();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentMinigunStan(); //Register Environment Obj
 	delete temp_obj;
 }
 

@@ -142,10 +142,127 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 				{
 					if (DataBase::instance()->getEnvironmentBase(i)->getEnvironmentSymbol() == *(*(getMapData(dimensionID).mapArray_ + x) + z))
 					{
-						EnvironmentBase *tempObj = DataBase::instance()->getEnvironmentBase(i);
-						tempObj->setPosition(Vector3(x, 0, z));
+						EnvironmentBase *tempObj;
+						switch (i)
+						{
+						case 0:
+							tempObj = new EnvironmentAppleTree;
+							tempObj->setPosition(Vector3(x, 0, z));
 
-						DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 1:
+							tempObj = new EnvironmentChristmasTree;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 2:
+							tempObj = new EnvironmentFence;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 3:
+							tempObj = new EnvironmentGiantSwordStand;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 4:
+							tempObj = new EnvironmentHammerStand;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 5:
+							tempObj = new EnvironmentHouse;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 6:
+							tempObj = new EnvironmentKunaiStand;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 7:
+							tempObj = new EnvironmentNicelookingTree;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 8:
+							tempObj = new EnvironmentPortal;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 9:
+							tempObj = new EnvironmentstatueFullSet;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 10:
+							tempObj = new Environmentstatuehalfset;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 11:
+							tempObj = new EnvironmentNoStatue;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 12:
+							tempObj = new EnvironmentOneQuarterSet;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 13:
+							tempObj = new EnvironmentTargetPractise;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 14:
+							tempObj = new EnvironmentThreeQuarterSet;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 15:
+							tempObj = new EnvironmentWeaponMerchant;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 16:
+							tempObj = new EnvironmentRoundAss;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 17:
+							tempObj = new EnvironmentMinigunStan;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+							//If Item spawninng goes wrong,Item Apple tree will spawn 
+						default:
+							tempObj = new EnvironmentAppleTree;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+
+						
+						}
 					}
 				}
 			}
@@ -221,14 +338,14 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 		}
 	}
 
-	/*for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
-	{
-		for (int z = 0; z < getMapData(dimensionID).size_.z; z++)
-		{
-			std::cout << checkingMapDataByCoord(dimensionID, x, z);
-		}
-		std::cout << std::endl;
-	}*/
+	//for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
+	//{
+	//	for (int z = 0; z < getMapData(dimensionID).size_.z; z++)
+	//	{
+	//		std::cout << checkingMapDataByCoord(dimensionID, x, z);
+	//	}
+	//	std::cout << std::endl;
+	//}
 }
 
 void MapBase::setMapDataByCoord(unsigned dimensionID, char data, unsigned coordX, unsigned coordZ)

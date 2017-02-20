@@ -37,7 +37,7 @@ void StudioProject::Init()
 	DataBase::instance()->registerEnvironments();  //RUN ONCE
 	PlayerBase::instance()->startPlayer();  //RUN ONCE
 
-	MapBase::instance()->setMapSize(1, 20, 20);  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->setMapSize(1, 500, 500);  //RUN ONCE FOR EACH SCENE
 	MapBase::instance()->generateMap(1, "test.txt");  //RUN ONCE FOR EACH SCENE
 
 	RenderingBase::instance()->registerAllRenderingData();  //RUN ONCE
@@ -471,6 +471,17 @@ void StudioProject::Render()
 		modelStack.PopMatrix();
 	}
 
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(1, DIMENSIONID); i++)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().x,
+			DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().y,
+			DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().z);
+
+		RenderMesh(RenderingBase::instance()->getEnviornmentMesh(DataBase::instance()->getEnvironment(DIMENSIONID, i)->getEnvironmentID()), true);
+		modelStack.PopMatrix();
+	}
+
 	if (PlayerBase::instance()->getCurrentHeldItem() != nullptr)
 	{
 		modelStack.PushMatrix();
@@ -494,6 +505,36 @@ void StudioProject::Render()
 		else
 			RenderTextOnScreen(meshList[GEO_TEXT], "-", Color(1, 1, 1), 1.8, 1, 5 - i);
 	}
+
+	//--------------------------------------------------LEVEL--------------------------------------------------
+	modelStack.PushMatrix();
+	string experienceBar = "";
+	for (int i = 0; i < 20; i++)
+	{
+		if (i == 20/2)
+			RenderTextOnScreen(meshList[GEO_TEXT], "[" + std::to_string(PlayerBase::instance()->getPlayerLevel()) + "]", Color(1, 1, 0), 2.5, 15.1, 4);
+		if (i < ((double)((((double)PlayerBase::instance()->getPlayerExperience()) / ((double)PlayerBase::instance()->getPlayerLevelCap())) * 100) / 5))
+			experienceBar += "O";  
+		else
+			experienceBar += "-";
+	}
+	RenderTextOnScreen(meshList[GEO_TEXT], experienceBar, Color(1, 1, 0), 2, 12, 3);
+	modelStack.PopMatrix();
+
+	//--------------------------------------------------HEALTH--------------------------------------------------
+	modelStack.PushMatrix();
+	string healthBar = "";
+	for (int i = 0; i < 20; i++)
+	{
+		if (i == 20 / 2)
+			RenderTextOnScreen(meshList[GEO_TEXT], "[" + std::to_string(PlayerBase::instance()->getPlayerHealth()) + "]", Color(1, 1, 0), 2, 18, 2);
+		if (i < ((double)((((double)PlayerBase::instance()->getPlayerHealth()) / 100) * 100) / 5))
+			healthBar += "#";
+		else
+			healthBar += "-";
+	}
+	RenderTextOnScreen(meshList[GEO_TEXT], healthBar, Color(1, 0, 0), 2, 12, 1);
+	modelStack.PopMatrix();
 }
 
 
@@ -508,6 +549,7 @@ void StudioProject::RenderMesh(Mesh *mesh, bool enableLight)
 
 	if (Application::IsKeyPressed('9'))
 	{
+
 		bEnableLight = false;
 	}
 	if (Application::IsKeyPressed('0'))

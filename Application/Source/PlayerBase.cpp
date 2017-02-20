@@ -220,7 +220,7 @@ void PlayerBase::increaseExperience(unsigned ammount)
 		if (getPlayerExperience() >= getPlayerLevelCap())
 		{
 			experience_ -= level_cap_;
-			level_cap_ = getPlayerLevelCap() + (getPlayerLevelCap() * (3 / 100));
+			level_cap_ = getPlayerLevelCap() + (int)((double)getPlayerLevelCap() * (8. / 100.));
 			level_ += 1;	
 		}
 	}

@@ -48,8 +48,7 @@ void SceneManager::update()
 	glfwSwapBuffers(Application::m_window);
 	//Get and organize events, like keyboard and mouse input, window resizing, etc...
 	glfwPollEvents();
-	Application::m_timer.waitUntil(Application::frameTime);       // Frame rate limiter. Limits each frame to a specified time in ms.   
-
+	Application::m_timer.waitUntil(Application::frameTime);       // Frame rate limiter. Limits each frame to a specified time in ms.
 }
 //void SceneManager::cmpls()
 //{

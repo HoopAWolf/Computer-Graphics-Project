@@ -32,7 +32,26 @@
 #include "ItemKiteShield.cpp"
 #include "ItemRoundShield.cpp"
 
-#include "Test.cpp"
+
+#include "EnvironmentAppleTree.cpp"
+#include "EnvironmentChristmasTree.cpp"
+#include "EnviromentStatueHalfSet.cpp"
+#include "EnviromentTargetPractise.cpp"
+#include "EnvironmentFence.cpp"
+#include "EnvironmentGiantSwordStand.cpp"
+#include "EnvironmentHammerStand.cpp"
+#include "EnvironmentHouse.cpp"
+#include "EnvironmentNiceLookingTree.cpp"
+#include "EnvironmentNoStatue.cpp"
+#include "EnvironmentOnequarterSet.cpp"
+#include "EnvironmentPortal.cpp"
+#include "EnvironmentRoundAss.cpp"
+#include "EnvironmentStatueFullSet.cpp"
+#include "EnvironmentThreeQuarterSetStatue.cpp"
+#include "EnvironmentWeaponMerchant.cpp"
+#include "EnvironmentKunaiStand.cpp"
+#include "EnvironmentMinigunStan.cpp"
+
 
 #include <vector>
 #include <map>
