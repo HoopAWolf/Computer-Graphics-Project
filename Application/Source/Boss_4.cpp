@@ -44,7 +44,92 @@ public:
 
 	void updateAI(float timer, unsigned dimensionID)
 	{
+		if (boss_state_ == WALKING)
+		{
+			walking = true;
+			if (rotateleftLeg < 20 && leftlegForward == true)
+			{
+				rotateleftLeg += (float)(80 * 0.017);
+			}
+			else
+			{
+				leftlegForward = false;
+				leftlegBackward = true;
+			}
+			if (rotateleftLeg > -20 && leftlegBackward == true)
+			{
+				rotateleftLeg -= (float)(80 * 0.017);
+			}
+			else
+			{
+				leftlegForward = true;
+				leftlegBackward = false;
+			}
+			if (rotaterightLeg < 20 && rightlegForward == true)
+			{
+				rotaterightLeg += (float)(80 * 0.017);
+			}
+			else
+			{
+				rightlegForward = false;
+				rightlegBackward = true;
+			}
+			if (rotaterightLeg > -20 && rightlegBackward == true)
+			{
+				rotaterightLeg -= (float)(80 * 0.017);
+			}
+			else
+			{
+				rightlegForward = true;
+				rightlegBackward = false;
+			}
+		}
+		else
+		{
+			walking = false;
+		}
 
+		if (boss_state_ == BASIC_ATTACK)
+		{
+			attacking = true;
+		}
+		if (attacking == true)
+		{
+			rotateleftArm -= (float)(80 * 0.017);
+			if (rotateleftArm <= -90)
+			{
+				attacking = false;
+			}
+		}
+
+		//=====================================================
+
+		if (walking == false)
+		{
+			if (rotaterightLeg > 0)
+			{
+				rotaterightLeg--;
+			}
+			if (rotaterightLeg < 0)
+			{
+				rotaterightLeg++;
+			}
+			if (rotateleftLeg > 0)
+			{
+				rotateleftLeg--;
+			}
+			if (rotateleftLeg < 0)
+			{
+				rotateleftLeg++;
+			}
+		}
+		if (attacking == false)
+		{
+			if (rotateleftArm < 0)
+			{
+				rotateleftArm++;
+			}
+		}
 	}
 
 	void setPosition(Vector3 position)

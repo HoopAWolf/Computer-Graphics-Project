@@ -153,7 +153,6 @@ public:
 	float rotateleftLeg = 0.0f;
 	float rotaterightLeg = 0.0f;
 	float rotateleftArm = 0.0f;
-	float attacktime = 0.0f;
 
 	bool rightlegForward = true;
 	bool rightlegBackward = false;
@@ -161,8 +160,6 @@ public:
 	bool leftlegBackward = true;
 	bool walking = false;
 	bool attacking = false;
-	bool attacking1 = false;
-	bool attacking2 = false;
 
 private:
 

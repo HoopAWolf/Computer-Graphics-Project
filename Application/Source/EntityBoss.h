@@ -33,6 +33,18 @@ protected:
 	BOSS_STATE boss_state_;
 	unsigned armor_;
 
+	float rotateleftLeg = 0.0f;
+	float rotaterightLeg = 0.0f;
+	float rotateleftArm = 0.0f;
+
+	bool rightlegForward = true;
+	bool rightlegBackward = false;
+	bool leftlegForward = false;
+	bool leftlegBackward = true;
+	bool walking = false;
+	bool attacking = false;
+
+
 public:
 	virtual ~EntityBoss();
 
@@ -59,6 +71,21 @@ public:
 	virtual string getMultiTextureString(unsigned dataNo)
 	{
 		return multiple_texture_string_[dataNo];
+	}
+
+	virtual float getrotateleftLeg()
+	{
+		return rotateleftLeg;
+	}
+
+	virtual float getrotaterightLeg()
+	{
+		return rotaterightLeg;
+	}
+
+	virtual float getrotateleftArm()
+	{
+		return rotateleftArm;
 	}
 
 };
