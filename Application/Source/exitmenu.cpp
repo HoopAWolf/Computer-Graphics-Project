@@ -30,7 +30,7 @@ void exitmenu::Init()
 {
 	arrowlocation = 43;
 	timer = 0.0f;
-	arrowselect = 0;
+
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
@@ -135,6 +135,18 @@ void exitmenu::Init()
 	meshList[GEO_ARROW] = MeshBuilder::GenerateTRI("ARROW", Color(0, 0, 0), 1, 1);
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
+
+
+	meshList[GEO_CONT1] = MeshBuilder::GenerateOBJ("", "OBJ//cont1.obj");
+	meshList[GEO_CONT1]->textureID = LoadTGA("Image//cont1.tga");
+	meshList[GEO_CONT2] = MeshBuilder::GenerateOBJ("", "OBJ//cont2.obj");
+	meshList[GEO_CONT2]->textureID = LoadTGA("Image//cont2.tga");
+	meshList[GEO_QUIT1] = MeshBuilder::GenerateOBJ("", "OBJ//quit1.obj");
+	meshList[GEO_QUIT1]->textureID = LoadTGA("Image//quit1.tga");
+	meshList[GEO_QUIT2] = MeshBuilder::GenerateOBJ("", "OBJ//quit2.obj");
+	meshList[GEO_QUIT2]->textureID = LoadTGA("Image//quit2.tga");
+	meshList[GEO_TITLE] = MeshBuilder::GenerateOBJ("", "OBJ//title.obj");
+	meshList[GEO_TITLE]->textureID = LoadTGA("Image//title.tga");
 	//------------------------------------------------------------------------------------------
 	//light
 	light[0].type = Light::LIGHT_DIRECTIONAL;
@@ -198,8 +210,8 @@ static float ROT_LIMIT = 45.f;
 static float SCALE_LIMIT = 5.f;
 void exitmenu::Update(double dt)
 {
-
-	ShowCursor(false);
+	SceneManager::getSceneManger()->cmpls();
+	ShowCursor(true);
 	Application::elapsed_timer_ += dt;
 	float LSPEED = 10.f;
 
@@ -254,62 +266,29 @@ void exitmenu::Update(double dt)
 	}
 	prevscene=SceneManager::getSceneManger()->go();
 	//--------------------------------------------------------------------------------
-	if (timer == 0.0f)
+	if (SceneManager::getSceneManger()->cx>250 && SceneManager::getSceneManger()->cx<553 && SceneManager::getSceneManger()->cy>260 && SceneManager::getSceneManger()->cy<392)
 	{
-		timer = Application::elapsed_timer_;
-	}
-	if (Application::elapsed_timer_>timer + .2)
-	{
-		if (Application::IsKeyPressed('W') || Application::IsKeyPressed(VK_UP))
+		mp = true;
+		if (Application::IsKeyPressed(VK_LBUTTON))
 		{
-			//43 26 8 
-			if (arrowselect == 0)
-			{
-				arrowselect = 2;
-			}
-			else
-			{
-				arrowselect--;
-			}
-		}
-		if (Application::IsKeyPressed('S') || Application::IsKeyPressed(VK_DOWN))
-		{
-			if (arrowselect == 2)
-			{
-				arrowselect = 0;
-			}
-			else
-			{
-				arrowselect++;
-			}
-		}
-
-		timer = Application::elapsed_timer_;
-	}
-	switch (arrowselect)
-	{
-	case 0:
-		arrowlocation = 43;
-		break;
-	case 1:
-		arrowlocation = 26;
-		break;
-	case 2:
-		arrowlocation = 8;
-		break;
-	}
-
-	if (Application::IsKeyPressed(VK_RETURN))
-	{
-		switch (arrowselect)
-		{
-
-		case 0:
 			SceneManager::getSceneManger()->setNextScene(prevscene);
-			break;
-		case 2:
+		}
+	}
+	else
+	{
+		mp = false;
+	}
+	if (SceneManager::getSceneManger()->cx>250 && SceneManager::getSceneManger()->cx<553 && SceneManager::getSceneManger()->cy>446 && SceneManager::getSceneManger()->cy<578)
+	{
+		mq = true;
+		if (Application::IsKeyPressed(VK_LBUTTON))
+		{
 			SceneManager::getSceneManger()->setQuit();
 		}
+	}
+	else
+	{
+		mq = false;
 	}
 
 }
@@ -382,21 +361,16 @@ void exitmenu::Render()
 	}
 
 
-	RenderMeshOnScreen(meshList[GEO_FRONT], 0, 60, 60, 80, 90);
+	RenderMeshOnScreen(meshList[GEO_TITLE], 40, 47.5, 60, 30, 90);
+	if (!mp)
+		RenderMeshOnScreen(meshList[GEO_CONT1], 40, 27.5, 30, 30, 90);
+	else if (mp)
+		RenderMeshOnScreen(meshList[GEO_CONT2], 40, 27.5, 30, 30, 90);
 
-	RenderMeshOnScreen(meshList[GEO_TOP], 41.2, 47.5, 50, 10, 0);
-
-	RenderMeshOnScreen(meshList[GEO_TOP], 40, 30, 30, 10, 0);
-
-	RenderMeshOnScreen(meshList[GEO_TOP], 40, 14, 30, 10, 0);
-
-	RenderMeshOnScreen(meshList[GEO_ARROW], 8, arrowlocation, 8, 8, 0);
-
-	RenderTextOnScreen(meshList[GEO_TEXT], "continue", Color(1, 1, 1), 8, 2.7, 6);
-
-	RenderTextOnScreen(meshList[GEO_TEXT], "sound", Color(1, 1, 1), 8, 3.7, 3.8);
-
-	RenderTextOnScreen(meshList[GEO_TEXT], "quit", Color(1, 1, 1), 8, 4.1, 1.8);
+	if (!mq)
+		RenderMeshOnScreen(meshList[GEO_QUIT1], 40, 9, 30, 30, 90);
+	else if (mq)
+		RenderMeshOnScreen(meshList[GEO_QUIT2], 40, 9, 30, 30, 90);
 }
 
 
@@ -610,8 +584,10 @@ void exitmenu::RenderMeshOnScreen(Mesh* mesh, float x, float y, int sizex, int s
 	modelStack.PushMatrix();
 	modelStack.LoadIdentity();
 	modelStack.Translate(x, y, 0);
-	modelStack.Rotate(rotate, 0, 0, -1);
-	modelStack.Scale(sizex, sizey, 0);
+	modelStack.Rotate(rotate, 0, 0, 1);
+	modelStack.Rotate(rotate, 1, 0, 0);
+	modelStack.Rotate(rotate, 0, -1, 0);
+	modelStack.Scale(sizex, sizey, sizey);
 	RenderMesh(mesh, false); //UI should not have light
 	projectionStack.PopMatrix();
 	viewStack.PopMatrix();
@@ -620,63 +596,6 @@ void exitmenu::RenderMeshOnScreen(Mesh* mesh, float x, float y, int sizex, int s
 }
 
 //=================================================================================================
-
-void exitmenu::RenderSkybox()
-{
-	modelStack.PushMatrix();//push ground
-	modelStack.Translate(950, 0, 950);
-
-	modelStack.PushMatrix();//seperate from ground
-	modelStack.PushMatrix();//push top
-	modelStack.Translate(0, 1995, 0);
-	modelStack.Rotate(180, 0, 0, 1);
-	modelStack.Scale(2000, 1, 2000);
-	RenderMesh(meshList[GEO_TOP], false);
-	modelStack.PopMatrix();//end top
-
-
-	modelStack.PushMatrix();//push back
-	modelStack.Translate(0, 997, 997);
-	modelStack.Rotate(-90, 1, 0, 0);
-	modelStack.Rotate(90, 0, 1, 0);
-	modelStack.Scale(2000, 1, 2000);
-	RenderMesh(meshList[GEO_BACK], false);
-	modelStack.PopMatrix();//end back
-
-	modelStack.PushMatrix();//push front
-	modelStack.Translate(0, 997, -997);
-	modelStack.Rotate(-90, 1, 0, 0);
-	modelStack.Rotate(90, 0, 1, 0);
-	modelStack.Rotate(180, 1, 0, 0);
-	modelStack.Scale(2000, 1, 2000);
-	RenderMesh(meshList[GEO_FRONT], false);
-	modelStack.PopMatrix();//end front
-
-	modelStack.PushMatrix();//push left
-	modelStack.Translate(997, 997, 0);
-	modelStack.Rotate(-90, 1, 0, 0);
-	modelStack.Rotate(90, 0, 1, 0);
-	modelStack.Rotate(-90, 1, 0, 0);
-	modelStack.Scale(2000, 1, 2000);
-	RenderMesh(meshList[GEO_LEFT], false);
-	modelStack.PopMatrix();//end left
-
-	modelStack.PushMatrix();//push right
-	modelStack.Translate(-997, 997, 0);
-	modelStack.Rotate(-90, 1, 0, 0);
-	modelStack.Rotate(90, 0, 1, 0);
-	modelStack.Rotate(90, 1, 0, 0);
-	modelStack.Scale(2000, 1, 2000);
-	RenderMesh(meshList[GEO_RIGHT], false);
-	modelStack.PopMatrix();//end right
-
-	modelStack.PopMatrix();//end speration
-
-	modelStack.Translate(0, 900, 0);
-	modelStack.Scale(2000, 1, 2000);
-	RenderMesh(meshList[GEO_BOTTOM], true);
-	modelStack.PopMatrix();//end ground
-}
 
 
 

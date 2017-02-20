@@ -108,7 +108,7 @@ public:
 	int arrowlocation;
 	float timer;
 	int arrowselect;
-	
+	bool mp, mq;
 private:
 
 	unsigned m_vertexArrayID;

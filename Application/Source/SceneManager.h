@@ -34,7 +34,7 @@ public:
 	void update();
 	bool isQuit();
 	void setQuit();
-	//void cmpls();
+	void cmpls();
 	int sceneat = 0;
 	int wx, wy;
 	double cx, cy;

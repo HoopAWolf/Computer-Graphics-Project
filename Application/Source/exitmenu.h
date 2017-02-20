@@ -105,7 +105,8 @@ public:
 	virtual void Exit();
 	int arrowlocation;
 	float timer;
-	int arrowselect,prevscene;
+	int prevscene;
+	bool mp, mq;
 private:
 
 	unsigned m_vertexArrayID;

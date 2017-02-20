@@ -31,10 +31,11 @@ void Mainmenu::Init()
 	arrowlocation = 43;
 	timer = 0.0f;
 	arrowselect = 0;
+	mp = mq = false;
 	//cx = cy = 0;
 	//wx = wy = 0;
 	// Set background color to dark blue
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 	//Enable depth buffer and depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -219,8 +220,7 @@ static float ROT_LIMIT = 45.f;
 static float SCALE_LIMIT = 5.f;
 void Mainmenu::Update(double dt)
 {
-
-	
+	SceneManager::getSceneManger()->cmpls();
 	ShowCursor(true);
 	Application::elapsed_timer_ += dt;
 	float LSPEED = 10.f;
@@ -276,8 +276,32 @@ void Mainmenu::Update(double dt)
 	}
 	//--------------------------------------------------------------------------------
 
-	//176 551 72 248
-
+	//250 260  553 392
+	//578 446 
+	if (SceneManager::getSceneManger()->cx>250&&SceneManager::getSceneManger()->cx<553&&SceneManager::getSceneManger()->cy>260&&SceneManager::getSceneManger()->cy<392)
+	{
+		mp = true;
+		if (Application::IsKeyPressed(VK_LBUTTON))
+		{
+			SceneManager::getSceneManger()->setNextScene(1);
+		}
+	}
+	else
+	{
+		mp = false;
+	}
+	if (SceneManager::getSceneManger()->cx>250&&SceneManager::getSceneManger()->cx<553&&SceneManager::getSceneManger()->cy>446&&SceneManager::getSceneManger()->cy<578)
+	{
+		mq = true;
+		if (Application::IsKeyPressed(VK_LBUTTON))
+		{
+			SceneManager::getSceneManger()->setQuit();
+		}
+	}
+	else
+	{
+		mq = false;
+	}
 
 
 }
@@ -350,12 +374,16 @@ void Mainmenu::Render()
 	}
 
 
-	RenderMeshOnScreen(meshList[GEO_TITLE],40 ,47.5,40,30,90);
+	RenderMeshOnScreen(meshList[GEO_TITLE],40 ,47.5,60,30,90);
+	if (!mp)	
+		RenderMeshOnScreen(meshList[GEO_PLAY1], 40, 27.5, 30, 30, 90);
+	else if (mp)
+		RenderMeshOnScreen(meshList[GEO_PLAY2], 40, 27.5, 30, 30, 90);
 
-	//RenderMeshOnScreen(meshList[GEO_TITLE], 40, 50, 40, 30, 90);
-
-
-
+	if (!mq)
+		RenderMeshOnScreen(meshList[GEO_QUIT1], 40, 9, 30, 30, 90);
+	else if (mq)
+		RenderMeshOnScreen(meshList[GEO_QUIT2], 40, 9, 30, 30, 90);
 	
 }
 
