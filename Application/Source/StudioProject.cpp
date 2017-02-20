@@ -473,10 +473,13 @@ void StudioProject::Render()
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(1, DIMENSIONID); i++)
 	{
+		std::cout << DataBase::instance()->sizeOfDimensionObjBase(1, DIMENSIONID) << std::endl;
 		modelStack.PushMatrix();
 		modelStack.Translate(DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().x,
 			DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().y,
 			DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().z);
+
+		std::cout << DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition() << std::endl;
 
 		RenderMesh(RenderingBase::instance()->getEnviornmentMesh(DataBase::instance()->getEnvironment(DIMENSIONID, i)->getEnvironmentID()), true);
 		modelStack.PopMatrix();
