@@ -1,12 +1,12 @@
 #include "EnvironmentBase.h"
 
-class Test : public EnvironmentBase
+class EnvironmentChristmasTree : public EnvironmentBase
 {
 public:
-	Test()
+	EnvironmentChristmasTree()
 	{
 		texture_string_ = "christmas_tree";
-		environmentID_ = 0;
+		environmentID_ = 1;
 		environment_symbol_ = 'C';
 
 		boundry_[0][0] = '#';

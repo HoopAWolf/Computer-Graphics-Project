@@ -1,20 +1,20 @@
 #include "EnvironmentBase.h"
 
-class EnvironmentGiantSwordStand : public EnvironmentBase
+class EnvironmentHammerStand : public EnvironmentBase
 {
 public:
-	EnvironmentGiantSwordStand()
+	EnvironmentHammerStand()
 	{
-		texture_string_ = "giant_sword_stand";
-		environmentID_ = 3;
-		environment_symbol_ = 'G';
+		texture_string_ = "hammer_stand";
+		environmentID_ = 4;
+		environment_symbol_ = 'M';
 
 		boundry_[0][0] = '#';
 		boundry_[0][1] = '#';
 		boundry_[0][2] = '#';
 
 		boundry_[1][0] = '#';
-		boundry_[1][1] = 'G';
+		boundry_[1][1] = 'M';
 		boundry_[1][2] = '#';
 
 		boundry_[2][0] = '#';

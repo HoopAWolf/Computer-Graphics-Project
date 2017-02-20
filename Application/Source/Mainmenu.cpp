@@ -266,7 +266,7 @@ void Mainmenu::Update(double dt)
 	}
 	if (Application::elapsed_timer_>timer+.2)
 	{
-		if (Application::IsKeyPressed('W'))
+		if (Application::IsKeyPressed('W') || Application::IsKeyPressed(VK_UP))
 		{
 			//43 26 8 
 			if (arrowselect == 0)
@@ -278,7 +278,7 @@ void Mainmenu::Update(double dt)
 				arrowselect--;
 			}
 		}
-		if (Application::IsKeyPressed('S'))
+		if (Application::IsKeyPressed('S') || Application::IsKeyPressed(VK_DOWN))
 		{
 			if (arrowselect == 2)
 			{

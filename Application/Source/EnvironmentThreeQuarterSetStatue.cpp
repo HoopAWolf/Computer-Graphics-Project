@@ -1,20 +1,20 @@
 #include "EnvironmentBase.h"
 
-class Test : public EnvironmentBase
+class EnvironmentThreeQuarterSet : public EnvironmentBase
 {
 public:
-	Test()
+	 EnvironmentThreeQuarterSet()
 	{
-		texture_string_ = "nice_looking_tree";
-		environmentID_ = 0;
-		environment_symbol_ = 'N';
+		texture_string_ = "statueBase_Three Quarter Set";
+		environmentID_ = 14;
+		environment_symbol_ = 'T';
 
 		boundry_[0][0] = '#';
 		boundry_[0][1] = '#';
 		boundry_[0][2] = '#';
 
 		boundry_[1][0] = '#';
-		boundry_[1][1] = 'N';
+		boundry_[1][1] = 'T';
 		boundry_[1][2] = '#';
 
 		boundry_[2][0] = '#';

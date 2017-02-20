@@ -1,12 +1,12 @@
 #include "EnvironmentBase.h"
 
-class Test : public EnvironmentBase
+class EnvironmentRoundAss : public EnvironmentBase
 {
 public:
-	Test()
+	EnvironmentRoundAss()
 	{
 		texture_string_ = "round_ass";
-		environmentID_ = 0;
+		environmentID_ = 16;
 		environment_symbol_ = 'S';
 
 		boundry_[0][0] = '#';
@@ -14,7 +14,7 @@ public:
 		boundry_[0][2] = '#';
 
 		boundry_[1][0] = '#';
-		boundry_[1][1] = 'A';
+		boundry_[1][1] = 'S';
 		boundry_[1][2] = '#';
 
 		boundry_[2][0] = '#';
