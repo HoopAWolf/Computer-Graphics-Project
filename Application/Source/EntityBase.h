@@ -19,7 +19,7 @@ protected:
 	};
 
 	string texture_string_;
-	string multiple_texture_string_[4];
+	string multiple_texture_string_[5];
 	ELEMENTAL_TYPE elemental_type_;
 	int health_, rotation_Y_;
 	unsigned damage_;
