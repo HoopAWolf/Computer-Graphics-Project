@@ -93,6 +93,7 @@
     <ClCompile Include="Source\Camera2.cpp" />
     <ClCompile Include="Source\Camera3.cpp" />
     <ClCompile Include="Source\DataBase.cpp" />
+    <ClCompile Include="Source\EnvironmentAppleTree.cpp" />
     <ClCompile Include="Source\exitmenu.cpp" />
     <ClCompile Include="Source\EntityDrop.cpp" />
     <ClCompile Include="Source\ItemBattleAxe.cpp" />

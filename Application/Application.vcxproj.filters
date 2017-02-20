@@ -182,6 +182,9 @@
     <ClCompile Include="Source\Boss_4.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EnvironmentAppleTree.cpp">
+      <Filter>Source Files\Environment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
