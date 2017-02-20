@@ -257,7 +257,7 @@ void StudioProject::Init()
 	meshList[GEO_NICELOOKINGTREE]->textureID = LoadTGA("Image//texture3.tga");
 
 	meshList[GEO_PORTAL] = MeshBuilder::GenerateOBJ("Portal", "OBJ//portal.obj");
-	meshList[GEO_PORTAL]->textureID = LoadTGA("Image//portal_2.tga");
+	meshList[GEO_PORTAL]->textureID = LoadTGA("Image//portal2.tga");
 
 	meshList[GEO_POTIONMERCHANT] = MeshBuilder::GenerateOBJ("Potion Merchant", "OBJ//potion_merchant.obj");
 	meshList[GEO_POTIONMERCHANT]->textureID = LoadTGA("Image//texture2.tga");
@@ -770,33 +770,20 @@ void StudioProject::Render()
 	}
 
 	modelStack.PushMatrix();
-	modelStack.Translate(95, -5, 60);
+	modelStack.Translate(95, 0, 60);
 	RenderMesh(meshList[GEO_EMOKIDNPC], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(105, -5, 60);
+	modelStack.Translate(105, 0, 60);
 	RenderMesh(meshList[GEO_GIRL], true);
 	modelStack.PopMatrix();
 
 	modelStack.PushMatrix();
-	modelStack.Translate(115, -5, 60);
+	modelStack.Translate(115, 0, 60);
 	RenderMesh(meshList[GEO_NEGAN], true);
 	modelStack.PopMatrix();
 
-
-
-	modelStack.PushMatrix();
-	modelStack.Translate(130, -5, 60);
-	RenderMesh(meshList[GEO_PORTAL], true);
-	modelStack.PopMatrix();
-
-
-
-	modelStack.PushMatrix();
-	modelStack.Translate(145, -5, 60);
-	RenderMesh(meshList[GEO_STATUE], true);
-	modelStack.PopMatrix();
 
 
 	RenderTextOnScreen(meshList[GEO_TEXT], "FPS: " + std::to_string(SceneManager::getSceneManger()->frameRate), Color(0, 1, 0), 1.8, 1, 1);
