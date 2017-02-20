@@ -1,20 +1,20 @@
 #include "EnvironmentBase.h"
 
-class Test : public EnvironmentBase
+class EnvironmentAppleTree : public EnvironmentBase
 {
 public:
-	Test()
+	EnvironmentAppleTree()
 	{
-		texture_string_ = "battle_axe";
+		texture_string_ = "apple_tree";
 		environmentID_ = 0;
-		environment_symbol_ = 'C';
+		environment_symbol_ = 'A';
 
 		boundry_[0][0] = '#';
 		boundry_[0][1] = '#';
 		boundry_[0][2] = '#';
 
 		boundry_[1][0] = '#';
-		boundry_[1][1] = 'C';
+		boundry_[1][1] = 'A';
 		boundry_[1][2] = '#';
 
 		boundry_[2][0] = '#';

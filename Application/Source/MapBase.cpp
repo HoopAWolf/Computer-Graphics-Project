@@ -142,10 +142,22 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 				{
 					if (DataBase::instance()->getEnvironmentBase(i)->getEnvironmentSymbol() == *(*(getMapData(dimensionID).mapArray_ + x) + z))
 					{
-						EnvironmentBase *tempObj = DataBase::instance()->getEnvironmentBase(i);
-						tempObj->setPosition(Vector3(x, 0, z));
+						EnvironmentBase *tempObj;
+						switch (i)
+						{
+						case 0:
+							tempObj = new EnvironmentAppleTree;
+							tempObj->setPosition(Vector3(x, 0, z));
 
-						DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						default:
+							tempObj = new EnvironmentAppleTree;
+							tempObj->setPosition(Vector3(x, 0, z));
+	
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						}
 					}
 				}
 			}
@@ -221,14 +233,14 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 		}
 	}
 
-	/*for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
-	{
-		for (int z = 0; z < getMapData(dimensionID).size_.z; z++)
-		{
-			std::cout << checkingMapDataByCoord(dimensionID, x, z);
-		}
-		std::cout << std::endl;
-	}*/
+	//for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
+	//{
+	//	for (int z = 0; z < getMapData(dimensionID).size_.z; z++)
+	//	{
+	//		std::cout << checkingMapDataByCoord(dimensionID, x, z);
+	//	}
+	//	std::cout << std::endl;
+	//}
 }
 
 void MapBase::setMapDataByCoord(unsigned dimensionID, char data, unsigned coordX, unsigned coordZ)
