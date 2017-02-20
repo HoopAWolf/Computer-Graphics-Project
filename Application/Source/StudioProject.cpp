@@ -37,7 +37,7 @@ void StudioProject::Init()
 	DataBase::instance()->registerEnvironments();  //RUN ONCE
 	PlayerBase::instance()->startPlayer();  //RUN ONCE
 
-	MapBase::instance()->setMapSize(1, 20, 20);  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->setMapSize(1, 500, 500);  //RUN ONCE FOR EACH SCENE
 	MapBase::instance()->generateMap(1, "test.txt");  //RUN ONCE FOR EACH SCENE
 
 	RenderingBase::instance()->registerAllRenderingData();  //RUN ONCE
@@ -473,13 +473,10 @@ void StudioProject::Render()
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(1, DIMENSIONID); i++)
 	{
-		std::cout << DataBase::instance()->sizeOfDimensionObjBase(1, DIMENSIONID) << std::endl;
 		modelStack.PushMatrix();
 		modelStack.Translate(DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().x,
 			DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().y,
 			DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().z);
-
-		std::cout << DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition() << std::endl;
 
 		RenderMesh(RenderingBase::instance()->getEnviornmentMesh(DataBase::instance()->getEnvironment(DIMENSIONID, i)->getEnvironmentID()), true);
 		modelStack.PopMatrix();

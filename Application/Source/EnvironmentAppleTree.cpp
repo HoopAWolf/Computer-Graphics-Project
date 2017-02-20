@@ -1,9 +1,9 @@
 #include "EnvironmentBase.h"
 
-class Test : public EnvironmentBase
+class EnvironmentAppleTree : public EnvironmentBase
 {
 public:
-	Test()
+	EnvironmentAppleTree()
 	{
 		texture_string_ = "apple_tree";
 		environmentID_ = 0;

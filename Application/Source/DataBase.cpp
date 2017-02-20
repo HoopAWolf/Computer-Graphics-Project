@@ -108,8 +108,8 @@ void DataBase::registerItems()
 void DataBase::registerEnvironments()
 {
 	EnvironmentBase *temp_obj;
-	temp_obj = new Test();
-	environment_data_base[temp_obj->getEnvironmentID()] = new Test(); //Register Environment Obj
+	temp_obj = new EnvironmentAppleTree();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentAppleTree(); //Register Environment Obj
 	delete temp_obj;
 }
 

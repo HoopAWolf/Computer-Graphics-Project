@@ -146,17 +146,15 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 						switch (i)
 						{
 						case 0:
-							tempObj = new Test;
+							tempObj = new EnvironmentAppleTree;
 							tempObj->setPosition(Vector3(x, 0, z));
-							std::cout << tempObj->getPosition() << std::endl;
 
 							DataBase::instance()->setEnvironment(dimensionID, tempObj);
 							break;
 						default:
-							tempObj = new Test;
+							tempObj = new EnvironmentAppleTree;
 							tempObj->setPosition(Vector3(x, 0, z));
-							std::cout << tempObj->getPosition() << std::endl;
-
+	
 							DataBase::instance()->setEnvironment(dimensionID, tempObj);
 							break;
 						}
@@ -235,14 +233,14 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 		}
 	}
 
-	for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
-	{
-		for (int z = 0; z < getMapData(dimensionID).size_.z; z++)
-		{
-			std::cout << checkingMapDataByCoord(dimensionID, x, z);
-		}
-		std::cout << std::endl;
-	}
+	//for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
+	//{
+	//	for (int z = 0; z < getMapData(dimensionID).size_.z; z++)
+	//	{
+	//		std::cout << checkingMapDataByCoord(dimensionID, x, z);
+	//	}
+	//	std::cout << std::endl;
+	//}
 }
 
 void MapBase::setMapDataByCoord(unsigned dimensionID, char data, unsigned coordX, unsigned coordZ)
