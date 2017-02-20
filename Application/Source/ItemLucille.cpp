@@ -15,8 +15,8 @@ public:
 
 		weapon_type_ = MEDIUM;
 		durability_ = 180;
-		damage_ = 50;
-		attack_speed_ = 6;
+		damage_ = 10;
+		attack_speed_ = 4;
 
 		rarity_ = RARE;
 

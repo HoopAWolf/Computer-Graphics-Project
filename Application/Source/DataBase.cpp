@@ -105,13 +105,59 @@ void DataBase::registerItems()
 	}
 }
 
+void DataBase::registerEnvironments()
+{
+	EnvironmentBase *temp_obj;
+	temp_obj = new Test();
+	environment_data_base[temp_obj->getEnvironmentID()] = new Test(); //Register Environment Obj
+	delete temp_obj;
+}
 
+void DataBase::registerEntityMinion()
+{
+
+}
+
+void DataBase::registerEntityBoss()
+{
+
+}
 
 ItemBase* DataBase::getItem(unsigned itemID)
 {
 	if (itemID < item_base_.size())  //CHECK IF ITEMID IS IN THE ITEM BASE
 	{
 		return item_base_[itemID];  //RETURN ITEM FROM ITEM BASE VIA ITEMID
+	}
+
+	return nullptr;  //RETURN NULL IF THERE IS NO ITME
+}
+
+EnvironmentBase* DataBase::getEnvironmentBase(unsigned environmentID)
+{
+	if (environmentID < environment_data_base.size())  //CHECK IF ENVIORNMENTID IS IN THE ITEM BASE
+	{
+		return environment_data_base[environmentID];  //RETURN ENVIONMENT FROM ENVIONMENT BASE VIA ENVIORNMENTID
+	}
+
+	return nullptr;  //RETURN NULL IF THERE IS NO ITME
+}
+
+EntityBase* DataBase::getMinionEntityBase(unsigned minionID)
+{
+	if (minionID < minion_data_base.size())  //CHECK IF MINIONID IS IN THE MINION BASE
+	{
+		return minion_data_base[minionID];  //RETURN ENTITYMINION FROM MINION BASE VIA MINIONID
+	}
+
+	return nullptr;  //RETURN NULL IF THERE IS NO ITME
+}
+
+EntityBase* DataBase::getBossEntityBase(unsigned bossID)
+{
+	if (bossID < boss_data_base.size())  //CHECK IF BOSSID IS IN THE BOSS BASE
+	{
+		return boss_data_base[bossID];  //RETURN ENTITYBASE FROM BOSS BASE VIA BOSSID
 	}
 
 	return nullptr;  //RETURN NULL IF THERE IS NO ITME
@@ -189,28 +235,32 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 	return nullptr;
 }
 
-BuildingBase* DataBase::getBuilding(unsigned dimensionID, int positionInVector)
+EnvironmentBase* DataBase::getEnvironment(unsigned dimensionID, int positionInVector)
 {
-	if (positionInVector < building_base_[dimensionID].size())
-		return building_base_[dimensionID][positionInVector];
+	if (positionInVector < enviornment_base_[dimensionID].size())
+		return enviornment_base_[dimensionID][positionInVector];
+	return nullptr;
 }
 
 EntityDrop* DataBase::getEntityDrop(unsigned dimensionID, int positionInVector)
 {
 	if (positionInVector < drop_base_[dimensionID].size())
 		return drop_base_[dimensionID][positionInVector];
+	return nullptr;
 }
 
 EntityBase* DataBase::getEntityMinion(unsigned dimensionID, int positionInVector)
 {
 	if (positionInVector < minion_base_[dimensionID].size())
 		return minion_base_[dimensionID][positionInVector];
+	return nullptr;
 }
 
 EntityBase* DataBase::getEntityBoss(unsigned dimensionID, int positionInVector)
 {
 	if (positionInVector < boss_base_[dimensionID].size())
 		return boss_base_[dimensionID][positionInVector];
+	return nullptr;
 }
 
 void DataBase::setEntity(bool isBoss, bool isMinion, unsigned dimensionID, EntityBase* entity)
@@ -227,21 +277,42 @@ void DataBase::setEntity(unsigned dimensionID, EntityDrop* entity)
 	drop_base_[dimensionID].push_back(entity);
 }
 
-int DataBase::sizeOfDataBase(unsigned base, unsigned dimensionID)
+void DataBase::setEnvironment(unsigned dimensionID, EnvironmentBase* environment)
 {
+	enviornment_base_[dimensionID].push_back(environment);
+}
 
-	//0 - ITEM BASE, 1 - DROP BASE, 2 - BUILDING BASE, 3 - ENTITY MINION BASE
+//0 - ITEM BASE, 1 - ENVIRONMENT BASE, 2 - MINION BASE, 3 - BOSS BASE
+int DataBase::sizeOfDataBase(unsigned base)
+{
 	switch (base)
 	{
 	case 0:
 		return item_base_.size();
 	case 1:
-		return drop_base_[dimensionID].size();
+		return environment_data_base.size();
 	case 2:
-		return building_base_[dimensionID].size();
+		return minion_data_base.size();
 	case 3:
+		return boss_data_base.size();
+	default:
+		return 0;
+	};
+}
+
+//0 - DROP BASE, 1 - BUILDING BASE, 2 - ENTITY MINION BASE, 3 - ENTITY BOSS BASE
+int DataBase::sizeOfDimensionObjBase(unsigned base, unsigned dimensionID)
+{
+
+	switch (base)
+	{
+	case 0:
+		return drop_base_[dimensionID].size();
+	case 1:
+		return enviornment_base_[dimensionID].size();
+	case 2:
 		return minion_base_[dimensionID].size();
-	case 4: 
+	case 3:
 		return boss_base_[dimensionID].size();
 	default:
 		return 0;

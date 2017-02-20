@@ -6,8 +6,10 @@
 
 class EntityDrop : public EntityBase
 {
+	float timer_;
+
 public:
-	EntityDrop(unsigned itemID, Vector3 coord)
+	EntityDrop(unsigned itemID, Vector3 coord, float timer)
 	{
 		position_ = coord;
 		size_ = Vector3(2, 2, 2);
@@ -18,6 +20,7 @@ public:
 		attack_speed_ = 0;
 		walking_speed_ = 0;
 		drop_ID_ = itemID;
+		timer_ = timer;
 	}
 
 	unsigned getItemDrop()
@@ -34,17 +37,24 @@ public:
 
 	bool isEntityDead()
 	{
-		return false;
+		if (health_ <= 0)
+			return true;
+		else
+			return false;
 	}
 
 
-	void updateAI(float timer)
+	void updateAI(float timer, unsigned dimensionID)
 	{
+		rotation_Y_ = timer * 15;
 		if (getBoundingBox().isAABBInsideAABB(PlayerBase::instance()->getBoundingBox()) && !PlayerBase::instance()->isInventoryFull())
 		{
 			PlayerBase::instance()->addIntoPlayerInventory(drop_ID_);
 			health_ = 0;
 		}
+
+		if (timer > timer_ + 60)
+			health_ = 0;
 	
 	}
 
@@ -53,7 +63,7 @@ public:
 		position_ = position;
 	}
 
-	string getDropInfo();
+	string getDropInfo(unsigned iterator);
 
 };
 

@@ -13,10 +13,10 @@ public:
 		item_name_ = "Shuriken";
 
 
-		weapon_type_ = RANGE_AUTO;
+		weapon_type_ = MEDIUM;
 		durability_ = 25;
-		damage_ = 17;
-		attack_speed_ = 3.5;
+		damage_ = 10;
+		attack_speed_ = 4;
 
 		rarity_ = COMMON;
 	}

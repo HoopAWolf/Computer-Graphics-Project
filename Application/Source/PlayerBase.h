@@ -14,7 +14,7 @@ using std::map;
 
 class PlayerBase
 {
-private:
+public:
 	enum PLAYER_STATE
 	{
 		IDLE,
@@ -22,14 +22,19 @@ private:
 		WALKING,
 		SPRINTING,
 
-		RIGHT_CLICK
+		LEFT_CLICK,
+		RIGHT_CLICK, 
+
+		USE_SKILLS
 	};
+
+private:
 
 	PlayerBase(){};
 	static PlayerBase *s_instance;
-	int player_health_;
+	int player_health_, current_held_item_;
 	unsigned damage_, attack_speed_, moving_speed_, ammo_, attribute_points_, resistance_, dimension_ , 
-		level_, experience_, level_cap_, current_held_item_;
+		level_, experience_, level_cap_;
 	Vector3 size_;
 
 	vector<ItemBase *> inventory_data_;
@@ -38,6 +43,7 @@ private:
 	PLAYER_STATE player_state_;
 
 public:
+
 	static PlayerBase* instance()
 	{
 		if (!s_instance)
@@ -51,6 +57,7 @@ public:
 
 	ItemBase* getItemFromInventory(int slot);
 	ItemBase* getCurrentHeldItem();
+	unsigned getCurrentItemSlot();
 	unsigned getPlayerDamage();
 	unsigned getPlayerAttackSpeed();
 	unsigned getPlayerMovingSpeed();
@@ -80,16 +87,7 @@ public:
 	void increaseExperience(unsigned ammount);
 
 	bool isInventoryFull();
-
-
-
-
-
-
-
-
-
-
+	void moveCurrItem(bool forward);
 
 };
 

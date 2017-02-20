@@ -18,7 +18,7 @@ public:
 		weapon_type_ = RANGE_AUTO;
 		durability_ = 43;
 		damage_ = 20;
-		attack_speed_ = 4;
+		attack_speed_ = 1;
 
 		rarity_ = COMMON;
 

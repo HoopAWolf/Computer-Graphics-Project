@@ -6,6 +6,7 @@
 #include <GL/glew.h>
 //Include GLFW
 #include <GLFW/glfw3.h>
+#include "PlayerBase.h"
 
 #include <iostream>
 
@@ -36,7 +37,7 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 
 void Camera3::Update(double dt)
 {
-		static const float CAMERA_SPEED = 5.f, MOVING_SPEED = 50.f;
+		static const float CAMERA_SPEED = 5.f, MOVING_SPEED = 40.f;
 		glfwGetWindowSize(Application::m_window, &windowX, &windowY);
 
 		Vector3 oldTarget = target;
@@ -77,6 +78,7 @@ void Camera3::Update(double dt)
 			rotation.SetToRotation(yaw, up.x, up.y, up.z);
 			view = rotation * view;
 			target = position + view;
+			rotationY += yaw;
 		}
 		else if (p.x > mousePosXAnchor)
 		{
@@ -85,6 +87,7 @@ void Camera3::Update(double dt)
 			rotation.SetToRotation(yaw, up.x, up.y, up.z);
 			view = rotation * view;
 			target = position + view;
+			rotationY += yaw;
 		}
 
 		if (Application::IsKeyPressed('A'))
@@ -104,7 +107,7 @@ void Camera3::Update(double dt)
 
 		if (Application::IsKeyPressed('W'))
 		{
-			position.x = position.x + (view.x * MOVING_SPEED * dt);
+			position.x = position.x + (view.x * (MOVING_SPEED + ((PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->SPRINTING) ? 20 : 0)) * dt);
 			position.z = position.z + (view.z * MOVING_SPEED * dt);
 			target = position + view;
 		}
@@ -120,3 +123,7 @@ void Camera3::Update(double dt)
 		SetCursorPos((windowX / 2), (windowY / 2));
 }
 
+double Camera3::getRotationY()
+{
+	return rotationY;
+}

@@ -1,4 +1,5 @@
 #include "MapBase.h"
+#include "DataBase.h"
 
 void MapBase::setMapSize(unsigned dimensionID, int x, int z)
 {
@@ -16,36 +17,91 @@ void MapBase::setMapSize(unsigned dimensionID, int x, int z)
 
 void MapBase::generateMap(unsigned dimensionID)
 {
+	char currChar;
+	int minPosX, minPosZ, maxPosX, maxPosZ;
 	for (int x = 0; x < map_data_[dimensionID].size_.x; x++)
 	{
 		for (int z = 0; z < map_data_[dimensionID].size_.z; z++)
 		{
 			if (rand() % 100 < 5)
+			{
 				*(*(getMapData(dimensionID).mapArray_ + x) + z) = 'C';
+				for (int i = 0; i < DataBase::instance()->sizeOfDataBase(1); i++)
+				{
+					if (DataBase::instance()->getEnvironmentBase(i)->getEnvironmentSymbol() == *(*(getMapData(dimensionID).mapArray_ + x) + z))
+					{
+						EnvironmentBase *tempObj = DataBase::instance()->getEnvironmentBase(i);
+						tempObj->setPosition(Vector3(x, 0, z));
+
+						DataBase::instance()->setEnvironment(dimensionID, tempObj);
+					}
+				}
+			}
 		}
 	}
 
+	//SETTING BOUNDRY BASED ON CUSTOM OBJ BOUNDRY IN CLASS
 	for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
 	{
 		for (int z = 0; z < getMapData(dimensionID).size_.z; z++)
 		{
-			if (checkingMapDataByCoord(dimensionID, x, z) == 'C')
+			if (checkingMapDataByCoord(dimensionID, x, z) != '#' && checkingMapDataByCoord(dimensionID, x, z) != 'O')
 			{
-				for (int a = x - 1; a < x + 2; a++)
+				currChar = checkingMapDataByCoord(dimensionID, x, z);
+				for (int i = 0; i < DataBase::instance()->sizeOfDataBase(1); i++)
 				{
-					if (a > -1 && a < getMapData(dimensionID).size_.x)
+					if (DataBase::instance()->getEnvironmentBase(i)->getEnvironmentSymbol() == currChar)
 					{
-						for (int b = z - 1; b < z + 2; b++)
+						for (int a = 0; a < 5; a++)
 						{
-							if (b > -1 && b < getMapData(dimensionID).size_.z)
+							for (int b = 0; b < 5; b++)
 							{
-								if (checkingMapDataByCoord(dimensionID, a, b) != '#' && checkingMapDataByCoord(dimensionID, a, b) != 'C')
-									setMapDataByCoord(dimensionID, '#', a, b);
+								if (DataBase::instance()->getEnvironmentBase(i)->getBoundryChar(a, b) == currChar)
+								{
+									minPosX = -a;
+									minPosZ = -b;
+									goto here;
+								}
+							}
+						}
+
+					here:
+						for (int a = 0; a < 5; a++)
+						{
+							if (x + minPosX > -1 && x + 5 < getMapData(dimensionID).size_.x)
+							{
+								for (int b = 0; b < 5; b++)
+								{
+									if (z + minPosZ > -1 && z + 5 < getMapData(dimensionID).size_.z)
+									{
+										if (checkingMapDataByCoord(dimensionID, (x + minPosX) + a, (z + minPosZ) + b) != currChar)
+										{
+											if (DataBase::instance()->getEnvironmentBase(i)->getBoundryChar(a, b) == '#')
+											{
+												setMapDataByCoord(dimensionID, DataBase::instance()->getEnvironmentBase(i)->getBoundryChar(a, b),
+													(x + minPosX) + a,
+													(z + minPosZ) + b);
+											}
+										}
+									}
+								}
 							}
 						}
 					}
 				}
 			}
+		}
+	}
+
+	//SETTING BOUNDRY FOR BORDERS
+	for (int i = 0; i < getMapData(dimensionID).size_.x; i++)
+	{
+		for (int j = 0; j < getMapData(dimensionID).size_.z; j++)
+		{
+			if (i == 0 || i == getMapData(dimensionID).size_.x - 1)
+				setMapDataByCoord(dimensionID, '#', i, j);
+			else if (j == 0 || j == getMapData(dimensionID).size_.z - 1)
+				setMapDataByCoord(dimensionID, '#', i, j);
 		}
 	}
 
@@ -63,6 +119,8 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 {
 	std::ifstream myReadFile;
 	string lineInfo;
+	char currChar;
+	int minPosX, minPosZ, maxPosX, maxPosZ;
 
 	myReadFile.open("Map//" + fileName);
 
@@ -79,6 +137,17 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 			for (int z = 0; z < lineInfo.size(); z++)
 			{
 				*(*(getMapData(dimensionID).mapArray_ + x) + z) = lineInfo[z];
+
+				for (int i = 0; i < DataBase::instance()->sizeOfDataBase(1); i++)
+				{
+					if (DataBase::instance()->getEnvironmentBase(i)->getEnvironmentSymbol() == *(*(getMapData(dimensionID).mapArray_ + x) + z))
+					{
+						EnvironmentBase *tempObj = DataBase::instance()->getEnvironmentBase(i);
+						tempObj->setPosition(Vector3(x, 0, z));
+
+						DataBase::instance()->setEnvironment(dimensionID, tempObj);
+					}
+				}
 			}
 			
 			x++;
@@ -87,27 +156,68 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 
 	myReadFile.close();
 
+	//SETTING BOUNDRY BASED ON CUSTOM OBJ BOUNDRY IN CLASS
 	for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
 	{
 		for (int z = 0; z < getMapData(dimensionID).size_.z; z++)
 		{
-			if (checkingMapDataByCoord(dimensionID, x, z) == 'C')
+			if (checkingMapDataByCoord(dimensionID, x, z) != '#' && checkingMapDataByCoord(dimensionID, x, z) != 'O')
 			{
-				for (int a = x - 1; a < x + 2; a++)
+				currChar = checkingMapDataByCoord(dimensionID, x, z);
+				for (int i = 0; i < DataBase::instance()->sizeOfDataBase(1); i++)
 				{
-					if (a > -1 && a < getMapData(dimensionID).size_.x)
+					if (DataBase::instance()->getEnvironmentBase(i)->getEnvironmentSymbol() == currChar)
 					{
-						for (int b = z - 1; b < z + 2; b++)
+						for (int a = 0; a < 5; a++)
 						{
-							if (b > -1 && b < getMapData(dimensionID).size_.z)
+							for (int b = 0; b < 5; b++)
 							{
-								if (checkingMapDataByCoord(dimensionID, a, b) != '#' && checkingMapDataByCoord(dimensionID, a, b) != 'C')
-									setMapDataByCoord(dimensionID, '#', a, b);
+								if (DataBase::instance()->getEnvironmentBase(i)->getBoundryChar(a, b) == currChar)
+								{
+									minPosX = -a;
+									minPosZ = -b;
+									goto here;
+								}
+							}
+						}
+
+					here:
+						for (int a = 0; a < 5; a++)
+						{
+							if (x + minPosX > -1 && x + 5 < getMapData(dimensionID).size_.x)
+							{
+								for (int b = 0; b < 5; b++)
+								{
+									if (z + minPosZ > -1 && z + 5 < getMapData(dimensionID).size_.z)
+									{
+										if (checkingMapDataByCoord(dimensionID, (x + minPosX) + a, (z + minPosZ) + b) != currChar)
+										{
+											if (DataBase::instance()->getEnvironmentBase(i)->getBoundryChar(a, b) == '#')
+											{
+												setMapDataByCoord(dimensionID, DataBase::instance()->getEnvironmentBase(i)->getBoundryChar(a, b),
+													(x + minPosX) + a,
+													(z + minPosZ) + b);
+											}
+										}
+									}
+								}
 							}
 						}
 					}
 				}
 			}
+		}
+	}
+
+	//SETTING BOUNDRY FOR BORDERS
+	for (int i = 0; i < getMapData(dimensionID).size_.x; i++)
+	{
+		for (int j = 0; j < getMapData(dimensionID).size_.z; j++)
+		{
+			if (i == 0 || i == getMapData(dimensionID).size_.x - 1)
+				setMapDataByCoord(dimensionID, '#', i, j);
+			else if (j == 0 || j == getMapData(dimensionID).size_.z - 1)
+				setMapDataByCoord(dimensionID, '#', i, j);
 		}
 	}
 

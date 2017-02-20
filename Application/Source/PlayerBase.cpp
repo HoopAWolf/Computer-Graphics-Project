@@ -5,7 +5,7 @@ PlayerBase* PlayerBase::s_instance = 0;
 
 void PlayerBase::startPlayer()
 {
-	player_health_ = 20;
+	player_health_ = 100;
 	damage_ = 1;
 	attack_speed_ = 1;
 	moving_speed_ = 1;
@@ -16,6 +16,7 @@ void PlayerBase::startPlayer()
 	level_cap_ = 500;
 	experience_ = 0;
 	player_state_ = IDLE;
+	current_held_item_ = 0;
 	size_ = Vector3(2, 3, 2);
 
 	for (int i = 0; i < 20; i++)
@@ -57,31 +58,36 @@ void PlayerBase::playerUpdate(float timer)
 
 ItemBase* PlayerBase::getItemFromInventory(int slot)
 {
-	if (inventory_data_[slot] != nullptr)
-		return inventory_data_[slot];
+	return inventory_data_[slot];
+}
 
-	return nullptr;
+unsigned PlayerBase::getCurrentItemSlot()
+{
+	return current_held_item_;
 }
 
 ItemBase* PlayerBase::getCurrentHeldItem()
 {
-	if (inventory_data_[0] != nullptr)
-		return inventory_data_[0];
-
-	return nullptr;
+	return inventory_data_[current_held_item_];
 }
 
 unsigned PlayerBase::getPlayerDamage()
 {
+	if (getCurrentHeldItem()->getItemID() <= DataBase::instance()->getItemStarting())
+		return damage_ + ((ItemWeapon*)getCurrentHeldItem())->getWeaponDamage();
 	return damage_;
 }
 unsigned PlayerBase::getPlayerAttackSpeed()
 {
+	if (getCurrentHeldItem()->getItemID() <= DataBase::instance()->getItemStarting())
+		return attack_speed_ * ((ItemWeapon*)getCurrentHeldItem())->getWeaponDamage();
 	return attack_speed_;
 }
 
 unsigned PlayerBase::getPlayerMovingSpeed()
 {
+	if (getCurrentHeldItem()->getItemID() <= DataBase::instance()->getItemStarting())
+		return moving_speed_ * ((ItemWeapon*)getCurrentHeldItem())->getWeaponAttackSpeed();
 	return moving_speed_;
 }
 
@@ -140,7 +146,7 @@ AABB PlayerBase::getBoundingBox()
 	AABB bounding;
 	bounding.setBoundry(-size_, size_);
 
-	return bounding.getBoundryAtCoord(Camera::position);;
+	return bounding.getBoundryAtCoord(Camera::position);
 }
 
 bool PlayerBase::isPlayerDead()
@@ -243,4 +249,20 @@ bool PlayerBase::isInventoryFull()
 	}
 
 	return true;
+}
+
+void PlayerBase::moveCurrItem(bool forward)
+{
+	if (forward)
+	{
+		++current_held_item_;
+		if (current_held_item_ > 3)
+			current_held_item_ = 0;
+	}
+	else
+	{
+		--current_held_item_;
+		if (current_held_item_ < 0)
+			current_held_item_ = 3;
+	}
 }

@@ -19,6 +19,7 @@ protected:
 	};
 
 	string texture_string_;
+	string multiple_texture_string_[4];
 	ELEMENTAL_TYPE elemental_type_;
 	int health_, rotation_Y_;
 	unsigned damage_;
@@ -89,7 +90,7 @@ public:
 	virtual bool isEntityDead() = 0;
 
 	virtual void setPosition(Vector3 position) = 0;
-	virtual void updateAI(float timer) = 0;
+	virtual void updateAI(float timer, unsigned dimensionID) = 0;
 
 };
 

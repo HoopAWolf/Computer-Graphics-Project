@@ -29,17 +29,37 @@ protected:
 		DEATH
 	};
 	string boss_name_;
-	unsigned bossID;
+	unsigned bossID_;
 	BOSS_STATE boss_state_;
 	unsigned armor_;
 
 public:
 	virtual ~EntityBoss();
 
-	virtual string getBossName() = 0;
-	virtual BOSS_STATE getBossState() = 0;
-	virtual unsigned getBossArmor() = 0;
-	virtual unsigned getBossID() = 0;
+	virtual string getBossName()
+	{
+		return boss_name_;
+	}
+
+	virtual BOSS_STATE getBossState()
+	{
+		return boss_state_;
+	}
+
+	virtual unsigned getBossArmor()
+	{
+		return armor_;
+	}
+
+	virtual unsigned getBossID()
+	{
+		return bossID_;
+	}
+
+	virtual string getMultiTextureString(unsigned dataNo)
+	{
+		return multiple_texture_string_[dataNo];
+	}
 
 };
 

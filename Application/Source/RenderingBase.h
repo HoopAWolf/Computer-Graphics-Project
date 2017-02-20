@@ -11,8 +11,10 @@ private:
 	static RenderingBase *s_instance;  //CREATE AN INSTANCE OF THE CLASS OBJECT
 	RenderingBase(){};
 	
-	vector<Mesh*> item_mesh;
-	vector<Mesh*> building_mesh;
+	map<unsigned, Mesh*> item_mesh;
+	map<unsigned, Mesh*> environment_mesh;
+	map<unsigned, vector<Mesh*>> minion_mesh;
+	map<unsigned, vector<Mesh*>> boss_mesh;
 
 public:
 	static RenderingBase *instance()  //GETTING THE INSTANCE OF THE CLASS
@@ -25,7 +27,7 @@ public:
 
 	void registerAllRenderingData();
 	Mesh* getItemMesh(unsigned itemID);
-	Mesh* getBuildingMesh(unsigned dimension);
+	Mesh* getEnviornmentMesh(unsigned dimension);
 
 };
 
