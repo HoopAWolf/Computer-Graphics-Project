@@ -142,10 +142,24 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 				{
 					if (DataBase::instance()->getEnvironmentBase(i)->getEnvironmentSymbol() == *(*(getMapData(dimensionID).mapArray_ + x) + z))
 					{
-						EnvironmentBase *tempObj = DataBase::instance()->getEnvironmentBase(i);
-						tempObj->setPosition(Vector3(x, 0, z));
+						EnvironmentBase *tempObj;
+						switch (i)
+						{
+						case 0:
+							tempObj = new Test;
+							tempObj->setPosition(Vector3(x, 0, z));
+							std::cout << tempObj->getPosition() << std::endl;
 
-						DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						default:
+							tempObj = new Test;
+							tempObj->setPosition(Vector3(x, 0, z));
+							std::cout << tempObj->getPosition() << std::endl;
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						}
 					}
 				}
 			}
