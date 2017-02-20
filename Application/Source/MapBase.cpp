@@ -221,14 +221,14 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 		}
 	}
 
-	/*for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
+	for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
 	{
 		for (int z = 0; z < getMapData(dimensionID).size_.z; z++)
 		{
 			std::cout << checkingMapDataByCoord(dimensionID, x, z);
 		}
 		std::cout << std::endl;
-	}*/
+	}
 }
 
 void MapBase::setMapDataByCoord(unsigned dimensionID, char data, unsigned coordX, unsigned coordZ)

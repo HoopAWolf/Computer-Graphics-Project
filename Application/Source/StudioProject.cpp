@@ -471,6 +471,17 @@ void StudioProject::Render()
 		modelStack.PopMatrix();
 	}
 
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(1, DIMENSIONID); i++)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().x,
+			DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().y,
+			DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().z);
+
+		RenderMesh(RenderingBase::instance()->getEnviornmentMesh(DataBase::instance()->getEnvironment(DIMENSIONID, i)->getEnvironmentID()), true);
+		modelStack.PopMatrix();
+	}
+
 	if (PlayerBase::instance()->getCurrentHeldItem() != nullptr)
 	{
 		modelStack.PushMatrix();
