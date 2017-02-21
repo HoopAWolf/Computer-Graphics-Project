@@ -225,7 +225,23 @@ void DataBase::registerEntityMinion()
 
 void DataBase::registerEntityBoss()
 {
+	EntityBase *temp_obj;
 
+	temp_obj = new Boss_1(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	boss_data_base[((EntityBoss*)temp_obj)->getBossID()] = new Boss_1(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
+	temp_obj = new Boss_2(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	boss_data_base[((EntityBoss*)temp_obj)->getBossID()] = new Boss_2(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
+	temp_obj = new Boss_3(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	boss_data_base[((EntityBoss*)temp_obj)->getBossID()] = new Boss_3(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
+	temp_obj = new Boss_4(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	boss_data_base[((EntityBoss*)temp_obj)->getBossID()] = new Boss_4(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
 }
 
 ItemBase* DataBase::getItem(unsigned itemID)

@@ -28,6 +28,8 @@ public:
 	void registerAllRenderingData();
 	Mesh* getItemMesh(unsigned itemID);
 	Mesh* getEnviornmentMesh(unsigned dimension);
+	Mesh* getMinionEntityMesh(unsigned minionID, int positionInLoop);
+	Mesh* getBossEntityMesh(unsigned bossID, int positionInLoop);
 
 };
 

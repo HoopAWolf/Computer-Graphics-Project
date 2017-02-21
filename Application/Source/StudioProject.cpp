@@ -35,6 +35,7 @@ void StudioProject::Init()
 	
 	DataBase::instance()->registerItems();  //RUN ONCE
 	DataBase::instance()->registerEnvironments();  //RUN ONCE
+	DataBase::instance()->registerEntityBoss();  //RUN ONCE
 	PlayerBase::instance()->startPlayer();  //RUN ONCE
 
 	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
@@ -54,6 +55,26 @@ void StudioProject::Init()
 	{
 		string tempString = "Image//" + DataBase::instance()->getEnvironmentBase(i)->getTextureString() + ".tga";
 		RenderingBase::instance()->getEnviornmentMesh(i)->textureID = LoadTGA(tempString.c_str());
+	}
+
+	//RUN ONCE
+	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(2); i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			string tempString = "Image//" + DataBase::instance()->getMinionEntityBase(i)->getTextureString(j) + ".tga";
+			RenderingBase::instance()->getMinionEntityMesh(i, j)->textureID = LoadTGA(tempString.c_str());
+		}
+	}
+
+	//RUN ONCE
+	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(3); i++)
+	{
+		for (int j = 0; j < 5; j++)
+		{
+			string tempString = "Image//" + DataBase::instance()->getBossEntityBase(i)->getTextureString(j) + ".tga";
+			RenderingBase::instance()->getBossEntityMesh(i, j)->textureID = LoadTGA(tempString.c_str());
+		}
 	}
 
 	//-------------------------------------------------------TESTING PURPOSES-----------------------------------------------------------
@@ -540,12 +561,29 @@ void StudioProject::Render()
 		else
 			healthBar += "-";
 	}
+
 	RenderTextOnScreen(meshList[GEO_TEXT], healthBar, Color(1, 0, 0), 2, 12, 1);
 	modelStack.PopMatrix();
 
 	RenderTextOnScreen(meshList[GEO_TEXT], "X:  " + std::to_string((int)camera.position.x), Color(1, 0, 0), 1.8, 1, 30);
 	RenderTextOnScreen(meshList[GEO_TEXT], "Y:  " + std::to_string((int)camera.position.y), Color(0, 1, 0), 1.8, 1, 28);
 	RenderTextOnScreen(meshList[GEO_TEXT], "Z:  " + std::to_string((int)camera.position.z), Color(0, 0, 1), 1.8, 1, 26);
+
+	//--------------------------------------------------SKILLS--------------------------------------------------
+	for (int i = 0; i < 2; i++)
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT], "Skills ", Color(0, 1, 1), 1.8, 32, 32);
+
+		if (PlayerBase::instance()->getCurrentSkillPoint(PlayerBase::instance()->getCurrentEquippedSkill(i)) > 0
+			&& PlayerBase::instance()->getCurrentSkillCoolDown(PlayerBase::instance()->getCurrentEquippedSkill(i)) <= 0)
+		{
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(i + 1) + " : " + PlayerBase::instance()->getSkillName(PlayerBase::instance()->getCurrentEquippedSkill(i)), Color(0, 1, 0), 1.8, 32, 31 - (i + 1));
+		}
+		else
+		{
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(i + 1) + " : " + PlayerBase::instance()->getSkillName(PlayerBase::instance()->getCurrentEquippedSkill(i)), Color(.4, .4, .4), 1.8, 32, 31 - (i + 1));
+		}
+	}
 }
 
 
@@ -753,7 +791,7 @@ void StudioProject::RenderUI(Mesh* mesh, Color color, float size, float x, float
 void StudioProject::RenderSkybox()
 {
 	modelStack.PushMatrix();//push ground
-	modelStack.Translate(950, -900, 950);
+	modelStack.Translate(950, 0, 950);
 
 	modelStack.PushMatrix();//seperate from ground
 	modelStack.PushMatrix();//push top
