@@ -106,7 +106,8 @@ public:
 	int arrowlocation;
 	float timer;
 	int prevscene;
-	bool mp, mq;
+	bool mc, mq;
+	bool t,q;
 private:
 
 	unsigned m_vertexArrayID;

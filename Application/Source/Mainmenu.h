@@ -109,6 +109,7 @@ public:
 	float timer;
 	int arrowselect;
 	bool mp, mq;
+	bool t,q;
 private:
 
 	unsigned m_vertexArrayID;

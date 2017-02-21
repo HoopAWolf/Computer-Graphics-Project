@@ -114,7 +114,7 @@ void exitmenu::Init()
 	meshList[GEO_SPHERE]->material.kShininess = 1.f;
 
 	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad2 ("front", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_FRONT]->textureID = LoadTGA("Image//front.tga");
+	meshList[GEO_FRONT]->textureID = LoadTGA("Image//black.tga");
 
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BACK]->textureID = LoadTGA("Image//back.tga");
@@ -210,7 +210,7 @@ static float ROT_LIMIT = 45.f;
 static float SCALE_LIMIT = 5.f;
 void exitmenu::Update(double dt)
 {
-	SceneManager::getSceneManger()->cmpls();
+	SceneManager::getSceneManger()->getmycursor();
 	ShowCursor(true);
 	Application::elapsed_timer_ += dt;
 	float LSPEED = 10.f;
@@ -268,28 +268,47 @@ void exitmenu::Update(double dt)
 	//--------------------------------------------------------------------------------
 	if (SceneManager::getSceneManger()->cx>250 && SceneManager::getSceneManger()->cx<553 && SceneManager::getSceneManger()->cy>260 && SceneManager::getSceneManger()->cy<392)
 	{
-		mp = true;
-		if (Application::IsKeyPressed(VK_LBUTTON))
-		{
-			SceneManager::getSceneManger()->setNextScene(prevscene);
-		}
+		mc = true;
 	}
 	else
 	{
-		mp = false;
+		mc = false;
 	}
 	if (SceneManager::getSceneManger()->cx>250 && SceneManager::getSceneManger()->cx<553 && SceneManager::getSceneManger()->cy>446 && SceneManager::getSceneManger()->cy<578)
 	{
 		mq = true;
-		if (Application::IsKeyPressed(VK_LBUTTON))
-		{
-			SceneManager::getSceneManger()->setQuit();
-		}
 	}
 	else
 	{
 		mq = false;
 	}
+		if (Application::IsKeyPressed(VK_LBUTTON)&&!t)
+		{
+			if (SceneManager::getSceneManger()->cx > 250 && SceneManager::getSceneManger()->cx < 553 && SceneManager::getSceneManger()->cy>260 && SceneManager::getSceneManger()->cy < 392)
+			{
+				SceneManager::getSceneManger()->setNextScene(prevscene);
+			}
+			t = true;
+		}
+		else
+		{
+			t = false;
+		}
+
+
+		if (Application::IsKeyPressed(VK_LBUTTON)&&!q)
+		{
+			if (SceneManager::getSceneManger()->cx > 250 && SceneManager::getSceneManger()->cx < 553 && SceneManager::getSceneManger()->cy>446 && SceneManager::getSceneManger()->cy < 578)
+			{
+				SceneManager::getSceneManger()->setQuit();
+			}
+			q = true;
+		}
+		else
+		{
+			q = false;
+		}
+
 
 }
 
@@ -360,11 +379,11 @@ void exitmenu::Render()
 		glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightPosition_cameraspace.x);
 	}
 
-
+	RenderMeshOnScreen(meshList[GEO_FRONT], 0, 0, 600, 600, 0);
 	RenderMeshOnScreen(meshList[GEO_TITLE], 40, 47.5, 60, 30, 90);
-	if (!mp)
+	if (!mc)
 		RenderMeshOnScreen(meshList[GEO_CONT1], 40, 27.5, 30, 30, 90);
-	else if (mp)
+	else if (mc)
 		RenderMeshOnScreen(meshList[GEO_CONT2], 40, 27.5, 30, 30, 90);
 
 	if (!mq)

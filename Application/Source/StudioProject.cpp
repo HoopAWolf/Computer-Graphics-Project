@@ -282,11 +282,16 @@ void StudioProject::Update(double dt)
 	if (Application::IsKeyPressed('4'))
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); //wireframe mode
 	
-	if (Application::IsKeyPressed(VK_ESCAPE))
-	{
-		currscene = SceneManager::getSceneManger()->getCurrentScene();
-		SceneManager::getSceneManger()->setNextScene(6);
-	}
+		if (Application::IsKeyPressed(VK_ESCAPE)&&!pause)
+		{
+			currscene = SceneManager::getSceneManger()->getCurrentScene();
+			SceneManager::getSceneManger()->setNextScene(6);
+			pause = true;
+		}
+		else
+		{
+			pause = false;
+		}
 	//light_controls---------------------------------------------------------------
 	if (Application::IsKeyPressed('I'))
 	{

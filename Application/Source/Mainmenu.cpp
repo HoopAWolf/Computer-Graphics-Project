@@ -122,6 +122,7 @@ void Mainmenu::Init()
 	meshList[GEO_SPHERE]->material.kShininess = 1.f;
 
 	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad2("front", Color(0, 0, 0), 1.f, 1.f);
+	meshList[GEO_FRONT]->textureID = LoadTGA("Image//black.tga");
 	
 
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f, 1.f);
@@ -220,7 +221,7 @@ static float ROT_LIMIT = 45.f;
 static float SCALE_LIMIT = 5.f;
 void Mainmenu::Update(double dt)
 {
-	SceneManager::getSceneManger()->cmpls();
+	SceneManager::getSceneManger()->getmycursor();
 	ShowCursor(true);
 	Application::elapsed_timer_ += dt;
 	float LSPEED = 10.f;
@@ -278,32 +279,51 @@ void Mainmenu::Update(double dt)
 
 	//250 260  553 392
 	//578 446 
-	if (SceneManager::getSceneManger()->cx>250&&SceneManager::getSceneManger()->cx<553&&SceneManager::getSceneManger()->cy>260&&SceneManager::getSceneManger()->cy<392)
+	if (SceneManager::getSceneManger()->cx > 250 && SceneManager::getSceneManger()->cx < 553 && SceneManager::getSceneManger()->cy>260 && SceneManager::getSceneManger()->cy < 392)
 	{
 		mp = true;
-		if (Application::IsKeyPressed(VK_LBUTTON))
-		{
-			SceneManager::getSceneManger()->setNextScene(1);
-		}
 	}
 	else
 	{
+		
 		mp = false;
 	}
-	if (SceneManager::getSceneManger()->cx>250&&SceneManager::getSceneManger()->cx<553&&SceneManager::getSceneManger()->cy>446&&SceneManager::getSceneManger()->cy<578)
+	if (SceneManager::getSceneManger()->cx>250 && SceneManager::getSceneManger()->cx<553 && SceneManager::getSceneManger()->cy>446 && SceneManager::getSceneManger()->cy<578)
 	{
 		mq = true;
-		if (Application::IsKeyPressed(VK_LBUTTON))
-		{
-			SceneManager::getSceneManger()->setQuit();
-		}
 	}
 	else
 	{
 		mq = false;
 	}
 
+	if (Application::IsKeyPressed(VK_LBUTTON) && !t)
+	{
+		if (SceneManager::getSceneManger()->cx > 250 && SceneManager::getSceneManger()->cx < 553 && SceneManager::getSceneManger()->cy>260 && SceneManager::getSceneManger()->cy < 392)
+		{
+			SceneManager::getSceneManger()->setNextScene(1);
+		}
+		t = true;
+		
+	}
+	else
+	{
+		t = false;
+	}
 
+	if (Application::IsKeyPressed(VK_LBUTTON)&&!q)
+	{
+		if (SceneManager::getSceneManger()->cx > 250 && SceneManager::getSceneManger()->cx < 553 && SceneManager::getSceneManger()->cy>446 && SceneManager::getSceneManger()->cy < 578)
+		{
+
+			SceneManager::getSceneManger()->setQuit();
+		}
+		q = true;
+	}
+	else
+	{
+		q = false;
+	}
 }
 
 
@@ -373,7 +393,7 @@ void Mainmenu::Render()
 		glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightPosition_cameraspace.x);
 	}
 
-
+	RenderMeshOnScreen(meshList[GEO_FRONT], 0, 0, 600, 600, 0);
 	RenderMeshOnScreen(meshList[GEO_TITLE],40 ,47.5,60,30,90);
 	if (!mp)	
 		RenderMeshOnScreen(meshList[GEO_PLAY1], 40, 27.5, 30, 30, 90);

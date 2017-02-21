@@ -160,7 +160,7 @@ public:
 	bool leftlegBackward = true;
 	bool walking = false;
 	bool attacking = false;
-
+	bool pause=false;
 private:
 
 	unsigned m_vertexArrayID;

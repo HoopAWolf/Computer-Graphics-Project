@@ -50,7 +50,7 @@ void SceneManager::update()
 	glfwPollEvents();
 	Application::m_timer.waitUntil(Application::frameTime);       // Frame rate limiter. Limits each frame to a specified time in ms.
 }
-void SceneManager::cmpls()
+void SceneManager::getmycursor()
 {
 	glfwGetWindowSize(Application::m_window, &wx, &wy);
 	glfwGetCursorPos(Application::m_window, &cx, &cy);
