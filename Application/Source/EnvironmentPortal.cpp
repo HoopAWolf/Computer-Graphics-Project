@@ -7,7 +7,7 @@ public:
 	{
 		texture_string_ = "portal";
 		environmentID_ = 8;
-		environment_symbol_ = 'p';
+		environment_symbol_ = 'P';
 
 		boundry_[0][0] = '#';
 		boundry_[0][1] = '#';
