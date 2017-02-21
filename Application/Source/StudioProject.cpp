@@ -459,7 +459,7 @@ void StudioProject::Render()
 				modelStack.Translate(0, 4 - j, 0);
 
 				if (camera.getRotationY() != 0)
-					modelStack.Rotate((camera.getRotationY() - 90) - DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
+					modelStack.Rotate((camera.getRotationY() + 750) - DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
 
 				if (j != 0)
 				{
@@ -493,7 +493,7 @@ void StudioProject::Render()
 	{
 		modelStack.PushMatrix();
 		modelStack.Translate(camera.target.x, camera.position.y - 1, camera.target.z);
-		modelStack.Rotate(camera.getRotationY() + 90, 0, 1, 0);
+		modelStack.Rotate(camera.getRotationY() - 155, 0, 1, 0);
 		modelStack.Scale(.5, .5, .5);
 		RenderMesh(RenderingBase::instance()->getItemMesh(PlayerBase::instance()->getCurrentHeldItem()->getItemID()), true);
 

@@ -97,10 +97,6 @@ void Camera3::Update(double dt)
 				((int)(position.x - (right.x * MOVING_SPEED * dt))),
 				position.z) != '#')
 			{
-				std::cout << MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
-					((int)(position.x - (right.x * MOVING_SPEED * dt))),
-					position.z) << std::endl;
-
 				position.x = position.x - (right.x * MOVING_SPEED * dt);
 			}
 
@@ -108,9 +104,6 @@ void Camera3::Update(double dt)
 				position.x,
 				((int)(position.z - (right.z * MOVING_SPEED * dt)))) != '#')
 			{
-				std::cout << MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
-					position.x,
-					((int)(position.z - (right.z * MOVING_SPEED * dt)))) << std::endl;
 
 				position.z = position.z - (right.z * MOVING_SPEED * dt);
 			}
@@ -138,10 +131,6 @@ void Camera3::Update(double dt)
 
 		if (Application::IsKeyPressed('W'))
 		{
-
-			std::cout << MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
-				((int)(position.x + (view.x * (MOVING_SPEED + ((PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->SPRINTING) ? 20 : 0)) * dt))),
-				((int)(position.z - (right.z * MOVING_SPEED * dt)))) << std::endl;
 
 			if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
 				((int)(position.x + (view.x * (MOVING_SPEED + ((PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->SPRINTING) ? 20 : 0)) * dt))),
