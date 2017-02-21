@@ -31,8 +31,11 @@ void Mainmenu::Init()
 	arrowlocation = 43;
 	timer = 0.0f;
 	arrowselect = 0;
+	mp = mq = false;
+	//cx = cy = 0;
+	//wx = wy = 0;
 	// Set background color to dark blue
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 	//Enable depth buffer and depth testing
 	glEnable(GL_DEPTH_TEST);
@@ -104,7 +107,6 @@ void Mainmenu::Init()
 
 	//variable to rotate geometry
 
-
 	//Initialize camera settings
 	camera.Init(Vector3(-0.4, 2, 0), Vector3(2, 2, 0), Vector3(0, 1, 0));
 
@@ -119,8 +121,8 @@ void Mainmenu::Init()
 	meshList[GEO_SPHERE]->material.kSpecular.Set(0.3f, 0.3f, 0.3f);
 	meshList[GEO_SPHERE]->material.kShininess = 1.f;
 
-	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad2("front", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_FRONT]->textureID = LoadTGA("Image//front.tga");
+	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad2("front", Color(0, 0, 0), 1.f, 1.f);
+	
 
 	meshList[GEO_BACK] = MeshBuilder::GenerateQuad("back", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BACK]->textureID = LoadTGA("Image//back.tga");
@@ -134,14 +136,27 @@ void Mainmenu::Init()
 	meshList[GEO_BOTTOM] = MeshBuilder::GenerateQuad("bottom", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_BOTTOM]->textureID = LoadTGA("Image//bottom.tga");
 
-	meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
-	meshList[GEO_TOP]->textureID = LoadTGA("Image//top.tga");
+
 
 	meshList[GEO_TOP] = MeshBuilder::GenerateCube("top", Color(0, 0, 0));
+	meshList[GEO_TOP]->textureID = LoadTGA("Image//top.tga");
+
 	meshList[GEO_ARROW] = MeshBuilder::GenerateTRI("ARROW", Color(0, 0, 0),1,1);
 
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
+
+
+	meshList[GEO_PLAY1] = MeshBuilder::GenerateOBJ("", "OBJ//play1.obj");
+	meshList[GEO_PLAY1]->textureID = LoadTGA("Image//play1.tga");
+	meshList[GEO_PLAY2] = MeshBuilder::GenerateOBJ("", "OBJ//play2.obj");
+	meshList[GEO_PLAY2]->textureID = LoadTGA("Image//play2.tga");
+	meshList[GEO_QUIT1] = MeshBuilder::GenerateOBJ("", "OBJ//quit1.obj");
+	meshList[GEO_QUIT1]->textureID = LoadTGA("Image//quit1.tga");
+	meshList[GEO_QUIT2] = MeshBuilder::GenerateOBJ("", "OBJ//quit2.obj");
+	meshList[GEO_QUIT2]->textureID = LoadTGA("Image//quit2.tga");
+	meshList[GEO_TITLE] = MeshBuilder::GenerateOBJ("", "OBJ//title.obj");
+	meshList[GEO_TITLE]->textureID = LoadTGA("Image//title.tga");
 	//------------------------------------------------------------------------------------------
 	//light
 	light[0].type = Light::LIGHT_DIRECTIONAL;
@@ -205,8 +220,8 @@ static float ROT_LIMIT = 45.f;
 static float SCALE_LIMIT = 5.f;
 void Mainmenu::Update(double dt)
 {
-
-	ShowCursor(false);
+	SceneManager::getSceneManger()->cmpls();
+	ShowCursor(true);
 	Application::elapsed_timer_ += dt;
 	float LSPEED = 10.f;
 
@@ -260,63 +275,34 @@ void Mainmenu::Update(double dt)
 		glUniform1i(m_parameters[U_LIGHT0_TYPE], light[0].type);
 	}
 	//--------------------------------------------------------------------------------
-	if (timer==0.0f)
-	{
-		timer = Application::elapsed_timer_;
-	}
-	if (Application::elapsed_timer_>timer+.2)
-	{
-		if (Application::IsKeyPressed('W') || Application::IsKeyPressed(VK_UP))
-		{
-			//43 26 8 
-			if (arrowselect == 0)
-			{
-				arrowselect = 2;
-			}
-			else
-			{
-				arrowselect--;
-			}
-		}
-		if (Application::IsKeyPressed('S') || Application::IsKeyPressed(VK_DOWN))
-		{
-			if (arrowselect == 2)
-			{
-				arrowselect = 0;
-			}
-			else
-			{
-				arrowselect++;
-			}
-		}
 
-		timer = Application::elapsed_timer_;
-	}
-	switch (arrowselect)
+	//250 260  553 392
+	//578 446 
+	if (SceneManager::getSceneManger()->cx>250&&SceneManager::getSceneManger()->cx<553&&SceneManager::getSceneManger()->cy>260&&SceneManager::getSceneManger()->cy<392)
 	{
-	case 0:
-		arrowlocation = 43;
-		break;
-	case 1:
-		arrowlocation = 26;
-		break;
-	case 2:
-		arrowlocation = 8;
-		break;
-	}
-
-	if (Application::IsKeyPressed(VK_RETURN))
-	{
-		switch (arrowselect)
+		mp = true;
+		if (Application::IsKeyPressed(VK_LBUTTON))
 		{
-
-		case 0:	
 			SceneManager::getSceneManger()->setNextScene(1);
-			break;
-		case 2:
+		}
+	}
+	else
+	{
+		mp = false;
+	}
+	if (SceneManager::getSceneManger()->cx>250&&SceneManager::getSceneManger()->cx<553&&SceneManager::getSceneManger()->cy>446&&SceneManager::getSceneManger()->cy<578)
+	{
+		mq = true;
+		if (Application::IsKeyPressed(VK_LBUTTON))
+		{
 			SceneManager::getSceneManger()->setQuit();
 		}
 	}
+	else
+	{
+		mq = false;
+	}
+
 
 }
 
@@ -388,21 +374,17 @@ void Mainmenu::Render()
 	}
 
 
-	RenderMeshOnScreen(meshList[GEO_FRONT], 0, 60,60, 80,90);
+	RenderMeshOnScreen(meshList[GEO_TITLE],40 ,47.5,60,30,90);
+	if (!mp)	
+		RenderMeshOnScreen(meshList[GEO_PLAY1], 40, 27.5, 30, 30, 90);
+	else if (mp)
+		RenderMeshOnScreen(meshList[GEO_PLAY2], 40, 27.5, 30, 30, 90);
 
-	RenderMeshOnScreen(meshList[GEO_TOP], 40, 47.5, 30, 10,0);
-
-	RenderMeshOnScreen(meshList[GEO_TOP], 40, 30, 30, 10,0);
-
-	RenderMeshOnScreen(meshList[GEO_TOP], 40,14,30,10,0);
-
-	RenderMeshOnScreen(meshList[GEO_ARROW],12,arrowlocation,8,8,0);
-
-	RenderTextOnScreen(meshList[GEO_TEXT], "play", Color(1, 1, 1), 8, 4.1, 6);
-
-	RenderTextOnScreen(meshList[GEO_TEXT], "sound", Color(1, 1, 1), 8, 3.7, 3.8);
-
-	RenderTextOnScreen(meshList[GEO_TEXT], "quit", Color(1, 1, 1), 8, 4.1, 1.8);
+	if (!mq)
+		RenderMeshOnScreen(meshList[GEO_QUIT1], 40, 9, 30, 30, 90);
+	else if (mq)
+		RenderMeshOnScreen(meshList[GEO_QUIT2], 40, 9, 30, 30, 90);
+	
 }
 
 
@@ -616,8 +598,10 @@ void Mainmenu::RenderMeshOnScreen(Mesh* mesh, float x, float y, int sizex, int s
 	modelStack.PushMatrix();
 	modelStack.LoadIdentity();
 	modelStack.Translate(x, y, 0);
-	modelStack.Rotate(rotate,0,0,-1);
-	modelStack.Scale(sizex, sizey, 0);
+	modelStack.Rotate(rotate,0,0,1);
+	modelStack.Rotate(rotate, 1, 0, 0);
+	modelStack.Rotate(rotate, 0, -1, 0);
+	modelStack.Scale(sizex, sizey, sizey);
 	RenderMesh(mesh, false); //UI should not have light
 	projectionStack.PopMatrix();
 	viewStack.PopMatrix();
@@ -627,62 +611,6 @@ void Mainmenu::RenderMeshOnScreen(Mesh* mesh, float x, float y, int sizex, int s
 
 //=================================================================================================
 
-void Mainmenu::RenderSkybox()
-{
-	modelStack.PushMatrix();//push ground
-	modelStack.Translate(950, 0, 950);
-
-	modelStack.PushMatrix();//seperate from ground
-	modelStack.PushMatrix();//push top
-	modelStack.Translate(0, 1995, 0);
-	modelStack.Rotate(180, 0, 0, 1);
-	modelStack.Scale(2000, 1, 2000);
-	RenderMesh(meshList[GEO_TOP], false);
-	modelStack.PopMatrix();//end top
-
-
-	modelStack.PushMatrix();//push back
-	modelStack.Translate(0, 997, 997);
-	modelStack.Rotate(-90, 1, 0, 0);
-	modelStack.Rotate(90, 0, 1, 0);
-	modelStack.Scale(2000, 1, 2000);
-	RenderMesh(meshList[GEO_BACK], false);
-	modelStack.PopMatrix();//end back
-
-	modelStack.PushMatrix();//push front
-	modelStack.Translate(0, 997, -997);
-	modelStack.Rotate(-90, 1, 0, 0);
-	modelStack.Rotate(90, 0, 1, 0);
-	modelStack.Rotate(180, 1, 0, 0);
-	modelStack.Scale(2000, 1, 2000);
-	RenderMesh(meshList[GEO_FRONT], false);
-	modelStack.PopMatrix();//end front
-
-	modelStack.PushMatrix();//push left
-	modelStack.Translate(997, 997, 0);
-	modelStack.Rotate(-90, 1, 0, 0);
-	modelStack.Rotate(90, 0, 1, 0);
-	modelStack.Rotate(-90, 1, 0, 0);
-	modelStack.Scale(2000, 1, 2000);
-	RenderMesh(meshList[GEO_LEFT], false);
-	modelStack.PopMatrix();//end left
-
-	modelStack.PushMatrix();//push right
-	modelStack.Translate(-997, 997, 0);
-	modelStack.Rotate(-90, 1, 0, 0);
-	modelStack.Rotate(90, 0, 1, 0);
-	modelStack.Rotate(90, 1, 0, 0);
-	modelStack.Scale(2000, 1, 2000);
-	RenderMesh(meshList[GEO_RIGHT], false);
-	modelStack.PopMatrix();//end right
-
-	modelStack.PopMatrix();//end speration
-
-	modelStack.Translate(0, 900, 0);
-	modelStack.Scale(2000, 1, 2000);
-	RenderMesh(meshList[GEO_BOTTOM], true);
-	modelStack.PopMatrix();//end ground
-}
 
 
 
