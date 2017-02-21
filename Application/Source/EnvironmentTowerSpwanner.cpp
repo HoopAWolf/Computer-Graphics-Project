@@ -1,20 +1,20 @@
 #include "EnvironmentBase.h"
 
-class EnvironmentPortal : public EnvironmentBase
+class EnvironmentTowerSpwanner : public EnvironmentBase
 {
 public:
-	EnvironmentPortal()
+	EnvironmentTowerSpwanner()
 	{
-		texture_string_ = "portal";
-		environmentID_ = 8;
-		environment_symbol_ = 'P';
+		texture_string_ = "tower_spwanner";
+		environmentID_ = 15;
+		environment_symbol_ = 'X';
 
 		boundry_[0][0] = '#';
 		boundry_[0][1] = '#';
 		boundry_[0][2] = '#';
 
 		boundry_[1][0] = '#';
-		boundry_[1][1] = 'P';
+		boundry_[1][1] = 'X';
 		boundry_[1][2] = '#';
 
 		boundry_[2][0] = '#';

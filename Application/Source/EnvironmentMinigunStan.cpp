@@ -7,14 +7,14 @@ public:
 	{
 		texture_string_ = "minigun_stan";
 		environmentID_ = 17;
-		environment_symbol_ = 'S';
+		environment_symbol_ = 'Z';
 
 		boundry_[0][0] = '#';
 		boundry_[0][1] = '#';
 		boundry_[0][2] = '#';
 
 		boundry_[1][0] = '#';
-		boundry_[1][1] = 'S';
+		boundry_[1][1] = 'Z';
 		boundry_[1][2] = '#';
 
 		boundry_[2][0] = '#';

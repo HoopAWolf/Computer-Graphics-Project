@@ -51,6 +51,8 @@
 #include "EnvironmentWeaponMerchant.cpp"
 #include "EnvironmentKunaiStand.cpp"
 #include "EnvironmentMinigunStan.cpp"
+#include "EnvironmentTowerSpwanner.cpp"
+#include "EnvironmentTowerStructure.cpp"
 
 
 #include <vector>
