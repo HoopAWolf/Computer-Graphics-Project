@@ -1,20 +1,20 @@
 #include "EnvironmentBase.h"
 
-class EnvironmentRoundAss : public EnvironmentBase
+class EnvironmentTowerSpwanner : public EnvironmentBase
 {
 public:
-	EnvironmentRoundAss()
+	EnvironmentTowerSpwanner()
 	{
-		texture_string_ = "round_ass";
-		environmentID_ = 16;
-		environment_symbol_ = 'Z';
+		texture_string_ = "tower_spwanner";
+		environmentID_ = 15;
+		environment_symbol_ = 'X';
 
 		boundry_[0][0] = '#';
 		boundry_[0][1] = '#';
 		boundry_[0][2] = '#';
 
 		boundry_[1][0] = '#';
-		boundry_[1][1] = 'S';
+		boundry_[1][1] = 'X';
 		boundry_[1][2] = '#';
 
 		boundry_[2][0] = '#';

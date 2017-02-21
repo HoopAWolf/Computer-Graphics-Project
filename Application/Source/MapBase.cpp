@@ -253,6 +253,18 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 
 							DataBase::instance()->setEnvironment(dimensionID, tempObj);
 							break;
+						case 18:
+							tempObj = new EnvironmentTowerSpwanner;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 19:
+							tempObj = new EnvironmentTowerStructure;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
 							//If Item spawninng goes wrong,Item Apple tree will spawn 
 						default:
 							tempObj = new EnvironmentAppleTree;

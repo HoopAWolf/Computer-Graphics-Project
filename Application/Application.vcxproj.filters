@@ -236,6 +236,12 @@
     <ClCompile Include="Source\EnvironmentWeaponMerchant.cpp">
       <Filter>Source Files\Environment</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EnvironmentTowerStructure.cpp">
+      <Filter>Source Files\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EnvironmentTowerSpwanner.cpp">
+      <Filter>Source Files\Environment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
