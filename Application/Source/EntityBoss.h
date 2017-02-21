@@ -68,11 +68,6 @@ public:
 		return bossID_;
 	}
 
-	virtual string getMultiTextureString(unsigned dataNo)
-	{
-		return multiple_texture_string_[dataNo];
-	}
-
 	virtual float getrotateleftLeg()
 	{
 		return rotateleftLeg;
