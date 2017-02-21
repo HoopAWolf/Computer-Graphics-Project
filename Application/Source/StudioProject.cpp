@@ -37,8 +37,8 @@ void StudioProject::Init()
 	DataBase::instance()->registerEnvironments();  //RUN ONCE
 	PlayerBase::instance()->startPlayer();  //RUN ONCE
 
-	MapBase::instance()->setMapSize(1, 500, 500);  //RUN ONCE FOR EACH SCENE
-	MapBase::instance()->generateMap(1, "test.txt");  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->generateMap(DIMENSIONID, "test.txt");  //RUN ONCE FOR EACH SCENE
 
 	RenderingBase::instance()->registerAllRenderingData();  //RUN ONCE
 
@@ -351,6 +351,8 @@ void StudioProject::Update(double dt)
 
 void StudioProject::Render()
 {
+	if (PlayerBase::instance()->getDimension() != DIMENSIONID)
+		PlayerBase::instance()->setPlayerDimension(DIMENSIONID);
 	// Render VBO here
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -535,6 +537,10 @@ void StudioProject::Render()
 	}
 	RenderTextOnScreen(meshList[GEO_TEXT], healthBar, Color(1, 0, 0), 2, 12, 1);
 	modelStack.PopMatrix();
+
+	RenderTextOnScreen(meshList[GEO_TEXT], "X:  " + std::to_string((int)camera.position.x), Color(1, 0, 0), 1.8, 1, 30);
+	RenderTextOnScreen(meshList[GEO_TEXT], "Y:  " + std::to_string((int)camera.position.y), Color(0, 1, 0), 1.8, 1, 28);
+	RenderTextOnScreen(meshList[GEO_TEXT], "Z:  " + std::to_string((int)camera.position.z), Color(0, 0, 1), 1.8, 1, 26);
 }
 
 
