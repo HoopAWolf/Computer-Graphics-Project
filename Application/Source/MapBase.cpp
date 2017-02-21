@@ -297,9 +297,9 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 				{
 					if (DataBase::instance()->getEnvironmentBase(i)->getEnvironmentSymbol() == currChar)
 					{
-						for (int a = 0; a < 5; a++)
+						for (int a = 0; a < 20; a++)
 						{
-							for (int b = 0; b < 5; b++)
+							for (int b = 0; b < 20; b++)
 							{
 								if (DataBase::instance()->getEnvironmentBase(i)->getBoundryChar(a, b) == currChar)
 								{
@@ -311,11 +311,11 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 						}
 
 					here:
-						for (int a = 0; a < 5; a++)
+						for (int a = 0; a < 20; a++)
 						{
 							if (x + minPosX > -1 && x + 5 < getMapData(dimensionID).size_.x)
 							{
-								for (int b = 0; b < 5; b++)
+								for (int b = 0; b < 20; b++)
 								{
 									if (z + minPosZ > -1 && z + 5 < getMapData(dimensionID).size_.z)
 									{
