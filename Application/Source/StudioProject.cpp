@@ -753,7 +753,7 @@ void StudioProject::RenderUI(Mesh* mesh, Color color, float size, float x, float
 void StudioProject::RenderSkybox()
 {
 	modelStack.PushMatrix();//push ground
-	modelStack.Translate(950, 0, 950);
+	modelStack.Translate(950, -900, 950);
 
 	modelStack.PushMatrix();//seperate from ground
 	modelStack.PushMatrix();//push top

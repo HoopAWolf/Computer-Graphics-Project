@@ -7,7 +7,7 @@ public:
 	{
 		texture_string_ = "round_ass";
 		environmentID_ = 16;
-		environment_symbol_ = 'Z';
+		environment_symbol_ = 'S';
 
 		boundry_[0][0] = '#';
 		boundry_[0][1] = '#';
