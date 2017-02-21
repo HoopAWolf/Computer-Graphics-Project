@@ -26,7 +26,7 @@ public:
 		target_ = target;
 		drop_ID_ = 0;
 		boss_name_ = "hi i am boss 3";
-		bossID_ = 3;
+		bossID_ = 2;
 		boss_state_ = IDLE;
 		armor_ = 0;
 	}
@@ -38,6 +38,11 @@ public:
 			return true;
 		else
 			return false;
+	}
+
+	unsigned getItemDrop()
+	{
+		return drop_ID_;
 	}
 
 	void updateAI(float timer, unsigned dimensionID)

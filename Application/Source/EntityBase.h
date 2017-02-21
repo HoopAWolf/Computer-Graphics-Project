@@ -68,6 +68,11 @@ public:
 		return texture_string_;
 	}
 
+	virtual string getTextureString(unsigned position)
+	{
+		return multiple_texture_string_[position];
+	}
+
 	virtual Vector3 getPosition()
 	{
 		return position_;

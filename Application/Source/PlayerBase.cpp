@@ -18,6 +18,8 @@ void PlayerBase::startPlayer()
 	player_state_ = IDLE;
 	current_held_item_ = 0;
 	size_ = Vector3(2, 3, 2);
+	current_skill_active_[0] = 0;
+	current_skill_active_[1] = 1;
 
 	for (int i = 0; i < 20; i++)
 	{
@@ -69,6 +71,18 @@ unsigned PlayerBase::getCurrentItemSlot()
 ItemBase* PlayerBase::getCurrentHeldItem()
 {
 	return inventory_data_[current_held_item_];
+}
+
+unsigned PlayerBase::getCurrentEquippedSkill(unsigned slotNum)
+{
+	unsigned num = slotNum;
+
+	if (num < 0)
+		num = 0;
+	else if (num > 1)
+		num = 1;
+
+	return current_skill_active_[num];
 }
 
 unsigned PlayerBase::getPlayerDamage()
@@ -147,6 +161,24 @@ AABB PlayerBase::getBoundingBox()
 	bounding.setBoundry(-size_, size_);
 
 	return bounding.getBoundryAtCoord(Camera::position);
+}
+
+string PlayerBase::getSkillName(unsigned skillID)
+{
+
+	switch (skillID)
+	{
+	case 0:
+		return "Fire Ball";
+	case 1:
+		return "Water Heal";
+	case 2:
+		return "Lightning Speed";
+	case 3:
+		return "Rock Hard";
+	default:
+		return "Dafug";
+	}
 }
 
 bool PlayerBase::isPlayerDead()

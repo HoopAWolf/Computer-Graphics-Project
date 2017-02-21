@@ -46,7 +46,7 @@ protected:
 
 
 public:
-	virtual ~EntityBoss();
+	virtual ~EntityBoss(){};
 
 	virtual string getBossName()
 	{

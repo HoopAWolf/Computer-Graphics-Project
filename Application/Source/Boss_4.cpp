@@ -41,6 +41,10 @@ public:
 			return false;
 	}
 
+	unsigned getItemDrop()
+	{
+		return drop_ID_;
+	}
 
 	void updateAI(float timer, unsigned dimensionID)
 	{

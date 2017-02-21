@@ -54,6 +54,10 @@
 #include "EnvironmentTowerSpwanner.cpp"
 #include "EnvironmentTowerStructure.cpp"
 
+#include "Boss_1.cpp"
+#include "Boss_2.cpp"
+#include "Boss_3.cpp"
+#include "Boss_4.cpp"
 
 #include <vector>
 #include <map>
