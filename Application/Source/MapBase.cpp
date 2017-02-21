@@ -253,6 +253,18 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 
 							DataBase::instance()->setEnvironment(dimensionID, tempObj);
 							break;
+						case 18:
+							tempObj = new EnvironmentTowerSpwanner;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
+						case 19:
+							tempObj = new EnvironmentTowerStructure;
+							tempObj->setPosition(Vector3(x, 0, z));
+
+							DataBase::instance()->setEnvironment(dimensionID, tempObj);
+							break;
 							//If Item spawninng goes wrong,Item Apple tree will spawn 
 						default:
 							tempObj = new EnvironmentAppleTree;
@@ -285,9 +297,9 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 				{
 					if (DataBase::instance()->getEnvironmentBase(i)->getEnvironmentSymbol() == currChar)
 					{
-						for (int a = 0; a < 5; a++)
+						for (int a = 0; a < 20; a++)
 						{
-							for (int b = 0; b < 5; b++)
+							for (int b = 0; b < 20; b++)
 							{
 								if (DataBase::instance()->getEnvironmentBase(i)->getBoundryChar(a, b) == currChar)
 								{
@@ -299,11 +311,11 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 						}
 
 					here:
-						for (int a = 0; a < 5; a++)
+						for (int a = 0; a < 20; a++)
 						{
 							if (x + minPosX > -1 && x + 5 < getMapData(dimensionID).size_.x)
 							{
-								for (int b = 0; b < 5; b++)
+								for (int b = 0; b < 20; b++)
 								{
 									if (z + minPosZ > -1 && z + 5 < getMapData(dimensionID).size_.z)
 									{
@@ -338,14 +350,14 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 		}
 	}
 
-	//for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
-	//{
-	//	for (int z = 0; z < getMapData(dimensionID).size_.z; z++)
-	//	{
-	//		std::cout << checkingMapDataByCoord(dimensionID, x, z);
-	//	}
-	//	std::cout << std::endl;
-	//}
+	/*for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
+	{
+		for (int z = 0; z < getMapData(dimensionID).size_.z; z++)
+		{
+			std::cout << checkingMapDataByCoord(dimensionID, x, z);
+		}
+		std::cout << std::endl;
+	}*/
 }
 
 void MapBase::setMapDataByCoord(unsigned dimensionID, char data, unsigned coordX, unsigned coordZ)
@@ -360,5 +372,7 @@ ArrayData MapBase::getMapData(unsigned dimensionID)
 
 char MapBase::checkingMapDataByCoord(unsigned dimensionID, unsigned coordX, unsigned coordZ)
 {
-	return *(*(getMapData(dimensionID).mapArray_ + coordX) + coordZ);
+	if (coordX >= 0 && coordX < getMapData(dimensionID).size_.x && coordZ >= 0 && coordZ < getMapData(dimensionID).size_.z)
+		return *(*(getMapData(dimensionID).mapArray_ + coordX) + coordZ);
+	return '#';
 }

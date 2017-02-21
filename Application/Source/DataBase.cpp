@@ -204,6 +204,18 @@ void DataBase::registerEnvironments()
 	temp_obj = new EnvironmentMinigunStan();
 	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentMinigunStan(); //Register Environment Obj
 	delete temp_obj;
+
+	//18
+	temp_obj = new EnvironmentTowerSpwanner();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentTowerSpwanner(); //Register Environment Obj
+	delete temp_obj;
+
+	//19
+	temp_obj = new EnvironmentTowerStructure();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentTowerStructure(); //Register Environment Obj
+	delete temp_obj;
+
+
 }
 
 void DataBase::registerEntityMinion()

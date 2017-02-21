@@ -9,6 +9,7 @@
 #include "PlayerBase.h"
 
 #include <iostream>
+#include "MapBase.h"
 
 short mousePosYAnchor, mousePosXAnchor;
 int windowX, windowY;
@@ -92,29 +93,89 @@ void Camera3::Update(double dt)
 
 		if (Application::IsKeyPressed('A'))
 		{
-			
-			position.x = position.x - (right.x * MOVING_SPEED * dt);
-			position.z = position.z - (right.z * MOVING_SPEED * dt);
+			if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
+				((int)(position.x - (right.x * MOVING_SPEED * dt))),
+				position.z) != '#')
+			{
+				std::cout << MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
+					((int)(position.x - (right.x * MOVING_SPEED * dt))),
+					position.z) << std::endl;
+
+				position.x = position.x - (right.x * MOVING_SPEED * dt);
+			}
+
+			if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
+				position.x,
+				((int)(position.z - (right.z * MOVING_SPEED * dt)))) != '#')
+			{
+				std::cout << MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
+					position.x,
+					((int)(position.z - (right.z * MOVING_SPEED * dt)))) << std::endl;
+
+				position.z = position.z - (right.z * MOVING_SPEED * dt);
+			}
+
 			target = position + view;
 		}
 		else if (Application::IsKeyPressed('D'))
 		{
-			
-			position.x = position.x + (right.x * MOVING_SPEED * dt);
-			position.z = position.z + (right.z * MOVING_SPEED * dt);
+			if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
+				((int)(position.x + (right.x * MOVING_SPEED * dt))),
+				position.z) != '#')
+			{
+				position.x = position.x + (right.x * MOVING_SPEED * dt);
+			}
+
+			if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
+				position.x,
+				((int)(position.z + (right.z * MOVING_SPEED * dt)))) != '#')
+			{
+				position.z = position.z + (right.z * MOVING_SPEED * dt);
+			}
+
 			target = position + view;
 		}
 
 		if (Application::IsKeyPressed('W'))
 		{
-			position.x = position.x + (view.x * (MOVING_SPEED + ((PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->SPRINTING) ? 20 : 0)) * dt);
-			position.z = position.z + (view.z * MOVING_SPEED * dt);
+
+			std::cout << MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
+				((int)(position.x + (view.x * (MOVING_SPEED + ((PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->SPRINTING) ? 20 : 0)) * dt))),
+				((int)(position.z - (right.z * MOVING_SPEED * dt)))) << std::endl;
+
+			if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
+				((int)(position.x + (view.x * (MOVING_SPEED + ((PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->SPRINTING) ? 20 : 0)) * dt))),
+				position.z) != '#')
+			{
+				position.x = position.x + (view.x * (MOVING_SPEED + ((PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->SPRINTING) ? 20 : 0)) * dt);
+			}
+
+			if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
+				position.x,
+				((int)(position.z + (view.z * MOVING_SPEED * dt)))) != '#')
+			{
+				position.z = position.z + (view.z * MOVING_SPEED * dt);
+			}
+
 			target = position + view;
 		}
 		else if (Application::IsKeyPressed('S'))
 		{
-			position.x = position.x - (view.x * MOVING_SPEED * dt);
-			position.z = position.z - (view.z * MOVING_SPEED * dt);
+
+			if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
+				((int)(position.x - (view.x * MOVING_SPEED * dt))),
+				position.z) != '#')
+			{
+				position.x = position.x - (view.x * MOVING_SPEED * dt);
+			}
+
+			if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
+				position.x,
+				((int)(position.z - (view.z * MOVING_SPEED * dt)))) != '#')
+			{
+				position.z = position.z - (view.z * MOVING_SPEED * dt);
+			}
+
 			target = position + view;
 		}
 
