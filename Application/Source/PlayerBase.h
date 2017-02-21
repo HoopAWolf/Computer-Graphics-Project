@@ -83,6 +83,7 @@ public:
 	void useSkills(unsigned skill_slot, float timer);
 	void healPlayer(unsigned ammount);
 	void setPlayerState(PLAYER_STATE player_state);
+	void setPlayerDimension(unsigned dimensionID);
 	void addIntoPlayerInventory(unsigned itemID);
 	void increaseExperience(unsigned ammount);
 

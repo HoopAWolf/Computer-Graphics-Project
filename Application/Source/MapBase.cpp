@@ -338,14 +338,14 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 		}
 	}
 
-	//for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
-	//{
-	//	for (int z = 0; z < getMapData(dimensionID).size_.z; z++)
-	//	{
-	//		std::cout << checkingMapDataByCoord(dimensionID, x, z);
-	//	}
-	//	std::cout << std::endl;
-	//}
+	/*for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
+	{
+		for (int z = 0; z < getMapData(dimensionID).size_.z; z++)
+		{
+			std::cout << checkingMapDataByCoord(dimensionID, x, z);
+		}
+		std::cout << std::endl;
+	}*/
 }
 
 void MapBase::setMapDataByCoord(unsigned dimensionID, char data, unsigned coordX, unsigned coordZ)
@@ -360,5 +360,7 @@ ArrayData MapBase::getMapData(unsigned dimensionID)
 
 char MapBase::checkingMapDataByCoord(unsigned dimensionID, unsigned coordX, unsigned coordZ)
 {
-	return *(*(getMapData(dimensionID).mapArray_ + coordX) + coordZ);
+	if (coordX >= 0 && coordX < getMapData(dimensionID).size_.x && coordZ >= 0 && coordZ < getMapData(dimensionID).size_.z)
+		return *(*(getMapData(dimensionID).mapArray_ + coordX) + coordZ);
+	return '#';
 }

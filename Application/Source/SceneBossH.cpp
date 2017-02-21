@@ -189,6 +189,8 @@ void SceneBossH::Init()
 
 void SceneBossH::Update(double dt)
 {
+	if (PlayerBase::instance()->getDimension() != DIMENSIONID)
+		PlayerBase::instance()->setPlayerDimension(DIMENSIONID);
 	camera.Update(dt);
 	ShowCursor(false);
 

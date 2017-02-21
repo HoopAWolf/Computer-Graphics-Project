@@ -212,6 +212,11 @@ void PlayerBase::setPlayerState(PLAYER_STATE player_state)
 	player_state_ = player_state;
 }
 
+void PlayerBase::setPlayerDimension(unsigned dimensionID)
+{
+	dimension_ = dimensionID;
+}
+
 void PlayerBase::increaseExperience(unsigned ammount)
 {
 	experience_ += ammount;
