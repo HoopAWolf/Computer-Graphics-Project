@@ -15,13 +15,13 @@ void RenderingBase::registerAllRenderingData()
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(2); i++)
 	{
-		for (int j = 0; j < 4; j++)
+		for (int j = 0; j < 5; j++)
 			minion_mesh[i].push_back(MeshBuilder::GenerateOBJ(((EntityMinion*)DataBase::instance()->getMinionEntityBase(i))->getMinionName(), "OBJ//" + DataBase::instance()->getMinionEntityBase(i)->getTextureString(j) + ".obj"));
 	}
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(3); i++)
 	{
-		for (int j = 0; j < 4; j++)
+		for (int j = 0; j < 5; j++)
 			boss_mesh[i].push_back(MeshBuilder::GenerateOBJ(((EntityBoss*)DataBase::instance()->getBossEntityBase(i))->getBossName(), "OBJ//" + DataBase::instance()->getBossEntityBase(i)->getTextureString(j) + ".obj"));
 	}
 
