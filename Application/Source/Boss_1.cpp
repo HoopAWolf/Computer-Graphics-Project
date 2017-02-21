@@ -8,11 +8,11 @@ class Boss_1 : public EntityBoss
 public:
 	Boss_1(Vector3 position, Vector3 up, Vector3 forward, Vector3 right, Vector3 target)
 	{
-		multiple_texture_string_[0] = "OBJ//boss_1_body.obj";
-		multiple_texture_string_[1] = "OBJ//boss_1_arm_1.obj";
-		multiple_texture_string_[2] = "OBJ//boss_1_arm_2.obj";
-		multiple_texture_string_[3] = "OBJ//boss_1_leg_1.obj";
-		multiple_texture_string_[4] = "OBJ//boss_1_leg_2.obj";
+		multiple_texture_string_[0] = "boss_1_body";
+		multiple_texture_string_[1] = "boss_1_arm_1";
+		multiple_texture_string_[2] = "boss_1_arm_2";
+		multiple_texture_string_[3] = "boss_1_leg_1";
+		multiple_texture_string_[4] = "boss_1_leg_2";
 		elemental_type_ = LIGHTNING;
 		health_ = 10;
 		damage_ = 1;

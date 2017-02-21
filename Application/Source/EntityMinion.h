@@ -41,6 +41,7 @@ public:
 	{
 		return minionID_;
 	}
+
 };
 
 #endif
