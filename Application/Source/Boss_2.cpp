@@ -47,6 +47,7 @@ public:
 
 	void updateAI(float timer, unsigned dimensionID)
 	{
+		boss_state_ = SKILL_1;
 		if (boss_state_ == WALKING)
 		{
 			walking = true;
@@ -99,7 +100,7 @@ public:
 		if (attacking == true)
 		{
 			rotateleftArmX += (float)(80 * dt);
-			if (rotateleftArmX <= -90)
+			if (rotateleftArmX <= -90);
 			{
 				limit = true;
 			}
@@ -145,7 +146,55 @@ public:
 				rotateleftArmX++;
 			}
 		}
+		//==========================================================================================
+		if (boss_state_ == SKILL_1)
+		{
+			rotateleftArmX += (float)(80 * dt);
+			if (rotaterightArmX <= -90)
+			{
+				limit = true;
+			}
+			if (rotaterightArmX >= 135)
+			{
+				limit = false;
+			}
+			if (limit3 == true)
+			{
+				dt = 0.3;
+			}
+			if (limit3 == false)
+			{
+				dt = -0.017;
+			}
+		}
+		//===========================================================================================
+		if (boss_state_ == SKILL_2)
+		{
+			rotateleftArmY += (float)(80 * dt);
+			if (rotateleftArmY <= -90);
+			{
+				limit = true;
+			}
+			if (rotateleftArmY >= 0)
+			{
+				count++;
+			}
+			if (limit == true)
+			{
+				dt = 0.017;
+			}
+			if (count >= 200)
+			{
+				dt = -0.017;
+			}
+		}
+		//===========================================================================================
 	}
+
+	
+
+
+
 
 	void setPosition(Vector3 position)
 	{
