@@ -145,12 +145,13 @@ private:
 	map<unsigned, EnvironmentBase *> environment_data_base;  //STORES ALL ENVIRONMENT DATA
 	map<unsigned, EntityBase *> minion_data_base;  //STORES ALL ENVIRONMENT DATA
 	map<unsigned, EntityBase *> boss_data_base;  //STORES ALL ENVIRONMENT DATA
+	map<unsigned, EntityBase *> projectile_data_base;  //STORES ALL PROJECTILE DATA
 
 	map<unsigned, vector<EntityDrop *>> drop_base_;  //STORES ALL ENTITY DROPS IN THE WORLD
 	map<unsigned, vector<EnvironmentBase *>> enviornment_base_;  //STORES ALL BUILDINGS IN THE WORLD
 	map<unsigned, vector<EntityBase *>> minion_base_;  //STORES ALL ENTITY MINION IN THE WORLD
 	map<unsigned, vector<EntityBase *>> boss_base_;  //STORES ALL ENTITY BOSS IN THE WORLD
-	map<unsigned, vector<EntityBase*>> projectile_base_;
+	map<unsigned, vector<EntityBase*>> projectile_base_;  //STORES ALL PROJECTILES IN THE WORLD
 	Color rarity_color_[4];
 
 public:
@@ -166,10 +167,13 @@ public:
 	void registerEnvironments();  //REGISTER ALL ENVIRONMENT ONLY ONCE
 	void registerEntityMinion();  //REGISTER ALL MINIONS ONLY ONCE
 	void registerEntityBoss();  //REGISTER ALL BOSS ONLY ONCE
+	void registerEntityProjectiles();  //REGISTER ALL PROJECTILES ONLY ONCE
 	ItemBase* getItem(unsigned itemID);  //RETURN ITEM THROUGH ITEMID
 	EnvironmentBase* getEnvironmentBase(unsigned environmentID);  //RETURN ENVIONMENT OBJ THROUGH ENVIONRMENT ID
 	EntityBase* getMinionEntityBase(unsigned minionID);  //RETURN MINION ENTITY THROUGH ENTITY ID
 	EntityBase* getBossEntityBase(unsigned bossID);  //RETURN BOSS THROUGH BOSS ID
+	EntityBase* getProjectileEntityBase(unsigned projectileID);  //RETURN PROJECTILE THROUGH PROJECTILE ID
+
 
 	ItemBase* getRandomItem(bool normal_item, bool weapon_item, unsigned rarity = 100);  //GET RANDOM ITEM THROUGH RARITY AND IF IT IS A NORMAL ITEM OR A WEAPON ITEM
 
@@ -177,11 +181,13 @@ public:
 	EntityDrop* getEntityDrop(unsigned dimensionID, int positionInVector);
 	EntityBase* getEntityMinion(unsigned dimensionID, int positionInVector);
 	EntityBase* getEntityBoss(unsigned dimensionID, int positionInVector);
+	EntityBase* getEntityProjectile(unsigned dimensionID, int positionInVector);
 
 	int sizeOfDataBase(unsigned base);
 	int sizeOfDimensionObjBase(unsigned base, unsigned dimensionID);
 	void setEntity(bool isBoss, bool isMinion, unsigned dimensionID, EntityBase* entity);
 	void setEntity(unsigned dimensionID, EntityDrop* entity);
+	void setEntity(unsigned dimensionID, EntityProjectile* entity);
 	void setEnvironment(unsigned dimensionID, EnvironmentBase* environment);
 	void increaseItemStarting()
 	{
@@ -198,6 +204,7 @@ public:
 	void destroyEntityDrop(unsigned dimensionID, int positionInVector);
 	void destroyEntityMinion(unsigned dimensionID, int positionInVector);
 	void destroyEntityBoss(unsigned dimensionID, int positionInVector);
+	void destroyEntityProjectile(unsigned dimensionID, int positionInVector);
 	
 };
 

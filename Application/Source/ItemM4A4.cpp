@@ -2,9 +2,12 @@
 #define ITEM_M4A4
 
 #include "ItemWeapon.h"
+#include "EntityFireBall.cpp"
+#include "Camera3.h"
 
 class ItemM4A4 : public ItemWeapon
 {
+	float timer_;
 public:
 	ItemM4A4()
 	{
@@ -22,10 +25,18 @@ public:
 
 	}
 
+	void onItemUse(float timer){}
+
 	//------------------USES------------------
-	void onItemUse()
+	EntityProjectile* onItemAttackProjectile(float timer)
 	{
-		;
+		if (timer > timer_ + (timer * ((10 - attack_speed_) / 100.)))
+		{
+			EntityFireBall* fireball = new EntityFireBall(Camera::position, Camera::forward, damage_);
+			return fireball;
+		}
+
+		return nullptr;
 	}
 };
 

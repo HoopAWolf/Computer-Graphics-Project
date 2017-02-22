@@ -9,11 +9,11 @@ public:
 	static Vector3 position;
 	static Vector3 target;
 	static Vector3 up;
+	static Vector3 forward;
 
 	int anchorX, anchorY;
 	int WindowX, WindowY;
 
-	Vector3 forward;
 	Vector3 back;
 	Vector3 playerLeft;
 	Vector3 playerRight;

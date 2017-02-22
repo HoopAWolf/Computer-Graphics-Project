@@ -22,10 +22,18 @@ public:
 	}
 
 	//------------------USES------------------
-	void onItemUse()
+	void onItemUse(float timer)
 	{
 		;
 	}
+
+	EntityProjectile* onItemAttackProjectile(float timer)
+	{
+	
+		return nullptr;
+
+	}
+
 };
 
 #endif

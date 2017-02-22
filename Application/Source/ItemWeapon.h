@@ -2,6 +2,8 @@
 #define _ITEM_WEAPON_H_
 
 #include "ItemBase.h"
+#include "EntityFireBall.cpp"
+#include "Camera3.h"
 
 class ItemWeapon abstract  : public ItemBase
 {
@@ -48,6 +50,9 @@ public:
 	{
 		return attack_speed_;
 	}
+
+	//------------------USES------------------
+	virtual EntityProjectile* onItemAttackProjectile(float timer) = 0;
 };
 
 #endif
