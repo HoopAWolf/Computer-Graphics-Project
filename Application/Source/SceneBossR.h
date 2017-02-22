@@ -97,6 +97,7 @@ public:
 	virtual void Render();
 	virtual void Exit();
 	int currscene;
+	bool pause = false;
 private:
 
 	unsigned m_vertexArrayID;

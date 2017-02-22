@@ -242,6 +242,9 @@
     <ClCompile Include="Source\EnvironmentTowerSpwanner.cpp">
       <Filter>Source Files\Environment</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EntityFireBall.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -348,6 +351,9 @@
     </ClInclude>
     <ClInclude Include="Source\EnvironmentBase.h">
       <Filter>Header Files\DataBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityProjectile.h">
+      <Filter>Header Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
