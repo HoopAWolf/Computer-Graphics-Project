@@ -13,6 +13,8 @@ private:
 	
 	map<unsigned, Mesh*> item_mesh;
 	map<unsigned, Mesh*> environment_mesh;
+	map<unsigned, Mesh*> projectile_mesh;
+	map<unsigned, Mesh*> npc_mesh;
 	map<unsigned, vector<Mesh*>> minion_mesh;
 	map<unsigned, vector<Mesh*>> boss_mesh;
 
@@ -27,7 +29,9 @@ public:
 
 	void registerAllRenderingData();
 	Mesh* getItemMesh(unsigned itemID);
-	Mesh* getEnviornmentMesh(unsigned dimension);
+	Mesh* getEnviornmentMesh(unsigned environmentID);
+	Mesh* getNPCMesh(unsigned npcID);
+	Mesh* getProjectileMesh(unsigned projectileID);
 	Mesh* getMinionEntityMesh(unsigned minionID, int positionInLoop);
 	Mesh* getBossEntityMesh(unsigned bossID, int positionInLoop);
 

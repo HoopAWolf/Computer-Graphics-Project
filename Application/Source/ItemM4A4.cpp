@@ -32,7 +32,7 @@ public:
 	{
 		if (timer > timer_ + (timer * ((10 - attack_speed_) / 100.)))
 		{
-			EntityFireBall* fireball = new EntityFireBall(Camera::position, Camera::forward, damage_);
+			EntityFireBall* fireball = new EntityFireBall(Camera::position, Camera::forward, damage_, timer);
 			return fireball;
 		}
 

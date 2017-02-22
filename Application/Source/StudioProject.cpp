@@ -36,7 +36,9 @@ void StudioProject::Init()
 	
 	DataBase::instance()->registerItems();  //RUN ONCE
 	DataBase::instance()->registerEnvironments();  //RUN ONCE
+	DataBase::instance()->registerEntityMinion();  //RUN ONCE
 	DataBase::instance()->registerEntityBoss();  //RUN ONCE
+	DataBase::instance()->registerEntityProjectiles();  //RUN ONCE
 	PlayerBase::instance()->startPlayer();  //RUN ONCE
 
 	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
@@ -76,6 +78,13 @@ void StudioProject::Init()
 			string tempString = "Image//" + DataBase::instance()->getBossEntityBase(i)->getTextureString(j) + ".tga";
 			RenderingBase::instance()->getBossEntityMesh(i, j)->textureID = LoadTGA(tempString.c_str());
 		}
+	}
+
+	//RUN ONCE
+	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(4); i++)
+	{		
+		string tempString = "Image//" + DataBase::instance()->getProjectileEntityBase(i)->getTextureString() + ".tga";
+		RenderingBase::instance()->getProjectileMesh(i)->textureID = LoadTGA(tempString.c_str());
 	}
 
 	//-------------------------------------------------------TESTING PURPOSES-----------------------------------------------------------
@@ -268,6 +277,14 @@ void StudioProject::Update(double dt)
 
 	Application::elapsed_timer_ += dt;
 
+	if (PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->IDLE)
+	{
+		if (Application::IsKeyPressed(MK_LBUTTON))
+		{
+			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->LEFT_CLICK);
+		}
+	}
+
 	PlayerBase::instance()->playerUpdate(Application::elapsed_timer_);
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(0, DIMENSIONID); i++)
@@ -296,6 +313,16 @@ void StudioProject::Update(double dt)
 		if (DataBase::instance()->getEntityBoss(DIMENSIONID, i)->isEntityDead())
 		{
 			DataBase::instance()->destroyEntityBoss(DIMENSIONID, i);
+			--i;
+		}
+	}
+
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(4, DIMENSIONID); i++)
+	{
+		DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		if (DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->isEntityDead())
+		{
+			DataBase::instance()->destroyEntityProjectile(DIMENSIONID, i);
 			--i;
 		}
 	}
@@ -388,14 +415,6 @@ void StudioProject::Update(double dt)
 		{
 			PlayerBase::instance()->moveCurrItem(true);
 			timer = Application::elapsed_timer_;
-		}
-	}
-
-	if (PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->IDLE)
-	{
-		if (Application::IsKeyPressed(MK_LBUTTON))
-		{
-			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->LEFT_CLICK);
 		}
 	}
 
@@ -551,7 +570,7 @@ void StudioProject::Render()
 
 		for (int j = 0; j < 5; j++)
 		{
-			RenderMesh(RenderingBase::instance()->getBossEntityMesh(((EntityMinion*)DataBase::instance()->getEntityMinion(DIMENSIONID, i))->getMinionID(), j), true);
+			RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), j), true);
 		}
 		modelStack.PopMatrix();
 	}
@@ -565,30 +584,41 @@ void StudioProject::Render()
 
 		modelStack.PushMatrix();
 		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
-		RenderMesh(RenderingBase::instance()->getBossEntityMesh(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID(), 1), true);
+		RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 1), true);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
 		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
 		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftArmZ(), 0, 0, 1);
 		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftArmX(), 1, 0, 0);
-		RenderMesh(RenderingBase::instance()->getBossEntityMesh(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID(), 2), true);
+		RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 2), true);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
 		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
 		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotaterightLeg(), 1, 0, 0);
-		RenderMesh(RenderingBase::instance()->getBossEntityMesh(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID(), 3), true);
+		RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 3), true);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
 		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
 		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftLeg(), 1, 0, 0);
-		RenderMesh(RenderingBase::instance()->getBossEntityMesh(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID(), 4), true);
+		RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 4), true);
 		modelStack.PopMatrix();
 		
 		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
-		RenderMesh(RenderingBase::instance()->getBossEntityMesh(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID(), 0), true);
+		RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 0), true);
+		modelStack.PopMatrix();
+	}
+
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(4, DIMENSIONID); i++)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->getPosition().x,
+			DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->getPosition().y,
+			DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->getPosition().z);
+		modelStack.Scale(.5, .5, .5);
+		RenderMesh(RenderingBase::instance()->getProjectileMesh((dynamic_cast<EntityProjectile*>(DataBase::instance()->getEntityProjectile(DIMENSIONID, i)))->getProjectileID()), false);
 		modelStack.PopMatrix();
 	}
 

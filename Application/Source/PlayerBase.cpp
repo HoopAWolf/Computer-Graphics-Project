@@ -30,6 +30,8 @@ void PlayerBase::startPlayer()
 	{
 		skills_[i] = Vector3(0, 0, 0);
 	}
+
+	addIntoPlayerInventory(17);
 }
 
 void PlayerBase::playerUpdate(float timer)
@@ -44,7 +46,7 @@ void PlayerBase::playerUpdate(float timer)
 				{
 					if (((ItemWeapon *)getCurrentHeldItem())->onItemAttackProjectile(timer) != nullptr)
 					{
-						DataBase::instance()->setEntity(dimension_, ((ItemWeapon *)getCurrentHeldItem())->onItemAttackProjectile(timer));
+						DataBase::instance()->setEntity(dimension_, (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->onItemAttackProjectile(timer));
 					}
 					player_state_ = IDLE;
 				}

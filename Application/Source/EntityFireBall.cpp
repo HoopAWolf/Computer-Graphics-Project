@@ -6,8 +6,10 @@
 
 class EntityFireBall : public EntityProjectile
 {
+	float timer_;
+
 public:
-	EntityFireBall(Vector3 position, Vector3 forward, unsigned damage)
+	EntityFireBall(Vector3 position, Vector3 forward, unsigned damage, float timer)
 	{
 		texture_string_ = "fireball";
 		projectileID_ = 0;
@@ -16,6 +18,7 @@ public:
 		forward_ = forward;
 		damage_ = damage;
 		size_ = Vector3(1, 1, 1);
+		timer_ = timer;
 	}
 
 	unsigned getItemDrop()
@@ -43,7 +46,7 @@ public:
 
 	void updateAI(float timer, unsigned dimensionID)
 	{
-		unsigned MOVING_SPEED = 2;
+		unsigned MOVING_SPEED = 300;
 
 		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
 			((int)(position_.x + (forward_.x * (MOVING_SPEED * 0.017)))),
@@ -55,6 +58,9 @@ public:
 		{
 			health_ = 0;
 		}
+
+		if (timer > timer_ + 5)
+			health_ = 0;
 	}
 
 };

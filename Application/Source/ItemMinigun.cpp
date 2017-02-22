@@ -28,9 +28,9 @@ public:
 	//------------------USES------------------
 	EntityProjectile* onItemAttackProjectile(float timer)
 	{
-		if (timer > timer_ + (timer * ((10 - attack_speed_) / 100.)))
+		if (timer > timer_ + (timer * ((10. - attack_speed_) / 100.)))
 		{
-			EntityFireBall* fireball = new EntityFireBall(Camera::position, Camera::forward, damage_);
+			EntityFireBall* fireball = new EntityFireBall(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer);
 			return fireball;
 		}
 		

@@ -232,11 +232,6 @@ public:
 		}
 
 		//=====================================================================
-		std::cout << count << std::endl;
-		//std::cout << getrotateleftArmZ() << std::endl;
-		//std::cout << getrotateleftArmX() << std::endl;
-		//std::cout << getrotaterightLeg() << std::endl;
-		//std::cout << getrotateleftLeg() << std::endl;
 	}
 
 	void setPosition(Vector3 position)
