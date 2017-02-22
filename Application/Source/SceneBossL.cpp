@@ -25,6 +25,9 @@ SceneBossL::~SceneBossL()
 
 void SceneBossL::Init()
 {
+	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->generateMap(DIMENSIONID, "Town.txt");  //RUN ONCE FOR EACH SCENE
+
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
@@ -189,6 +192,7 @@ void SceneBossL::Init()
 
 void SceneBossL::Update(double dt)
 {
+
 	if (PlayerBase::instance()->getDimension() != DIMENSIONID)
 		PlayerBase::instance()->setPlayerDimension(DIMENSIONID);
 	camera.Update(dt);
@@ -275,10 +279,32 @@ void SceneBossL::Update(double dt)
 		glUniform1i(m_parameters[U_LIGHT0_TYPE], light[0].type);
 	}
 	//--------------------------------------------------------------------------------
-	if (Application::IsKeyPressed(VK_ESCAPE))
+	if (Application::IsKeyPressed(VK_ESCAPE) && !pause)
 	{
 		currscene = SceneManager::getSceneManger()->getCurrentScene();
 		SceneManager::getSceneManger()->setNextScene(6);
+		pause = true;
+	}
+	else
+	{
+		pause = false;
+	}
+
+	if (Application::IsKeyPressed(VK_F1))
+	{
+		SceneManager::getSceneManger()->setNextScene(2);
+	}
+	if (Application::IsKeyPressed(VK_F2))
+	{
+		SceneManager::getSceneManger()->setNextScene(3);
+	}
+	if (Application::IsKeyPressed(VK_F3))
+	{
+		SceneManager::getSceneManger()->setNextScene(4);
+	}
+	if (Application::IsKeyPressed(VK_F4))
+	{
+		SceneManager::getSceneManger()->setNextScene(5);
 	}
 }
 
@@ -573,7 +599,10 @@ void SceneBossL::RenderUI(Mesh* mesh, Color color, float size, float x, float y,
 void SceneBossL::RenderSkybox()
 {
 	modelStack.PushMatrix();//push ground
-	modelStack.Translate(950, 0, 950);
+	modelStack.Translate(camera.position.x, 0, camera.position.z);
+
+	modelStack.PushMatrix();//push ground
+	modelStack.Translate(0, -900, 0);
 
 	modelStack.PushMatrix();//seperate from ground
 	modelStack.PushMatrix();//push top
@@ -625,6 +654,7 @@ void SceneBossL::RenderSkybox()
 	modelStack.Scale(2000, 1, 2000);
 	RenderMesh(meshList[GEO_BOTTOM], true);
 	modelStack.PopMatrix();//end ground
+	modelStack.PopMatrix();
 }
 
 
