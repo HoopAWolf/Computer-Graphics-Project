@@ -21,6 +21,7 @@ RenderingBase *RenderingBase::s_instance = nullptr;
 Vector3 Camera::position = 0;
 Vector3 Camera::target = 0;
 Vector3 Camera::up = 0;
+Vector3 Camera::forward = 0;
 
 StudioProject::StudioProject()
 {
@@ -376,7 +377,7 @@ void StudioProject::Update(double dt)
 	{
 		timer = Application::elapsed_timer_;
 	}
-	if (Application::elapsed_timer_ > timer + .2)
+	if (Application::elapsed_timer_ > timer + .2 && PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->IDLE)
 	{
 		if (Application::IsKeyPressed('Q'))
 		{
@@ -390,13 +391,21 @@ void StudioProject::Update(double dt)
 		}
 	}
 
+	if (PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->IDLE)
+	{
+		if (Application::IsKeyPressed(MK_LBUTTON))
+		{
+			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->LEFT_CLICK);
+		}
+	}
+
 	if (Application::IsKeyPressed(VK_LSHIFT))
 	{
 		PlayerBase::instance()->setPlayerState(PlayerBase::instance()->SPRINTING);
 	}
 	else
 	{
-		PlayerBase::instance()->setPlayerState(PlayerBase::instance()->WALKING);
+		PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
 	}
 }
 

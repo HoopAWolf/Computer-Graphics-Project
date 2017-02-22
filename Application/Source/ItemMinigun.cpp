@@ -5,6 +5,8 @@
 
 class ItemMinigun : public ItemWeapon
 {
+	unsigned timer_ = 0;
+
 public:
 	ItemMinigun()
 	{
@@ -21,10 +23,18 @@ public:
 		rarity_ = LEGENDARY;
 	}
 
+	 void onItemUse(float timer){}
+
 	//------------------USES------------------
-	void onItemUse()
+	EntityProjectile* onItemAttackProjectile(float timer)
 	{
-		;
+		if (timer > timer_ + (timer * ((10 - attack_speed_) / 100.)))
+		{
+			EntityFireBall* fireball = new EntityFireBall(Camera::position, Camera::forward, damage_);
+			return fireball;
+		}
+		
+		return nullptr;
 	}
 };
 

@@ -11,6 +11,7 @@ public:
 	{
 		texture_string_ = "fireball";
 		projectileID_ = 0;
+		health_ = 1;
 		position_ = position;
 		forward_ = forward;
 		damage_ = damage;
@@ -45,10 +46,10 @@ public:
 		unsigned MOVING_SPEED = 2;
 
 		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
-			((int)(position_.x + (forward_.x * (MOVING_SPEED * timer)))),
-			((int)(position_.z + (forward_.z * (MOVING_SPEED * timer)))) != '#'))
+			((int)(position_.x + (forward_.x * (MOVING_SPEED * 0.017)))),
+			((int)(position_.z + (forward_.z * (MOVING_SPEED * 0.017))))) != '#')
 		{
-			position_ += (forward_ * (MOVING_SPEED * timer));
+			position_ += (forward_ * (MOVING_SPEED * 0.017));
 		}
 		else
 		{

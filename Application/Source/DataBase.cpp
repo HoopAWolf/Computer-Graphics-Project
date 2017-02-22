@@ -244,6 +244,15 @@ void DataBase::registerEntityBoss()
 	delete temp_obj;
 }
 
+void DataBase::registerEntityProjectiles()
+{
+	EntityBase *temp_obj;
+
+	temp_obj = new EntityFireBall(Vector3(0, 0, 0), Vector3(0, 0, 0), 0);
+	boss_data_base[((EntityProjectile*)temp_obj)->getProjectileID()] = new EntityFireBall(Vector3(0, 0, 0), Vector3(0, 0, 0), 0);
+	delete temp_obj;
+}
+
 ItemBase* DataBase::getItem(unsigned itemID)
 {
 	if (itemID < item_base_.size())  //CHECK IF ITEMID IS IN THE ITEM BASE
@@ -279,6 +288,16 @@ EntityBase* DataBase::getBossEntityBase(unsigned bossID)
 	if (bossID < boss_data_base.size())  //CHECK IF BOSSID IS IN THE BOSS BASE
 	{
 		return boss_data_base[bossID];  //RETURN ENTITYBASE FROM BOSS BASE VIA BOSSID
+	}
+
+	return nullptr;  //RETURN NULL IF THERE IS NO ITME
+}
+
+EntityBase* DataBase::getProjectileEntityBase(unsigned projectileID)
+{
+	if (projectileID < projectile_data_base.size())  //CHECK IF BOSSID IS IN THE BOSS BASE
+	{
+		return projectile_data_base[projectileID];  //RETURN ENTITYBASE FROM BOSS BASE VIA BOSSID
 	}
 
 	return nullptr;  //RETURN NULL IF THERE IS NO ITME
@@ -384,6 +403,13 @@ EntityBase* DataBase::getEntityBoss(unsigned dimensionID, int positionInVector)
 	return nullptr;
 }
 
+EntityBase* DataBase::getEntityProjectile(unsigned dimensionID, int positionInVector)
+{
+	if (positionInVector < projectile_base_[dimensionID].size())
+		return projectile_base_[dimensionID][positionInVector];
+	return nullptr;
+}
+
 void DataBase::setEntity(bool isBoss, bool isMinion, unsigned dimensionID, EntityBase* entity)
 {
 	if (isBoss)
@@ -398,12 +424,18 @@ void DataBase::setEntity(unsigned dimensionID, EntityDrop* entity)
 	drop_base_[dimensionID].push_back(entity);
 }
 
+void DataBase::setEntity(unsigned dimensionID, EntityProjectile* entity)
+{
+	projectile_base_[dimensionID].push_back(entity);
+}
+
 void DataBase::setEnvironment(unsigned dimensionID, EnvironmentBase* environment)
 {
 	enviornment_base_[dimensionID].push_back(environment);
 }
 
-//0 - ITEM BASE, 1 - ENVIRONMENT BASE, 2 - MINION BASE, 3 - BOSS BASE
+
+//0 - ITEM BASE, 1 - ENVIRONMENT BASE, 2 - MINION BASE, 3 - BOSS BASE, 4 - PROJECTILE BASE
 int DataBase::sizeOfDataBase(unsigned base)
 {
 	switch (base)
@@ -416,12 +448,14 @@ int DataBase::sizeOfDataBase(unsigned base)
 		return minion_data_base.size();
 	case 3:
 		return boss_data_base.size();
+	case 4:
+		return projectile_data_base.size();
 	default:
 		return 0;
 	};
 }
 
-//0 - DROP BASE, 1 - BUILDING BASE, 2 - ENTITY MINION BASE, 3 - ENTITY BOSS BASE
+//0 - DROP BASE, 1 - BUILDING BASE, 2 - ENTITY MINION BASE, 3 - ENTITY BOSS BASE, 4 - PROJECTILE BOSS BASE
 int DataBase::sizeOfDimensionObjBase(unsigned base, unsigned dimensionID)
 {
 
@@ -435,6 +469,8 @@ int DataBase::sizeOfDimensionObjBase(unsigned base, unsigned dimensionID)
 		return minion_base_[dimensionID].size();
 	case 3:
 		return boss_base_[dimensionID].size();
+	case 4:
+		return projectile_base_[dimensionID].size();
 	default:
 		return 0;
 	};
@@ -461,4 +497,10 @@ void DataBase::destroyEntityBoss(unsigned dimensionID, int positionInVector)
 {
 	delete boss_base_[dimensionID][positionInVector];
 	boss_base_[dimensionID].erase(boss_base_[dimensionID].begin() + positionInVector);
+}
+
+void DataBase::destroyEntityProjectile(unsigned dimensionID, int positionInVector)
+{
+	delete projectile_base_[dimensionID][positionInVector];
+	projectile_base_[dimensionID].erase(projectile_base_[dimensionID].begin() + positionInVector);
 }
