@@ -41,7 +41,11 @@ protected:
 	float rotateleftLeg = 0.0f;
 	float rotaterightLeg = 0.0f;
 	float rotateleftArmX = 0.0f;
+	float rotateleftArmY = 0.0f;
 	float rotateleftArmZ = 0.0f;
+	float rotaterightArmX = 0.0f;
+	float rotaterightArmY = 0.0f;
+	float rotaterightArmZ = 0.0f;
 	float spin = 0.0f;
 
 	bool rightlegForward = true;
@@ -96,9 +100,25 @@ public:
 	{
 		return rotateleftArmX;
 	}
+	virtual float getrotateleftArmY()
+	{
+		return rotateleftArmY;
+	}
 	virtual float getrotateleftArmZ()
 	{
 		return rotateleftArmZ;
+	}
+	virtual float getrotaterightArmX()
+	{
+		return rotaterightArmX;
+	}
+	virtual float getrotaterightArmY()
+	{
+		return rotaterightArmY;
+	}
+	virtual float getrotaterightArmZ()
+	{
+		return rotaterightArmZ;
 	}
 	virtual float getspin()
 	{

@@ -146,6 +146,34 @@ public:
 				rotateleftArmX++;
 			}
 		}
+		//=================================================================================================
+		if (boss_state_ == SKILL_1)
+		{
+			rotateleftArmZ += (float)(80 * dt1);
+			rotaterightArmZ -= (float)(80 * dt1);
+			rotateleftArmX += (float)(160 * dt1);
+			spin += (float)(80 * dt2);
+			if (rotateleftArmZ >= 90)
+			{
+				limit1 = true;
+			}
+			if (limit1 == true)
+			{
+				dt1 = 0;
+				dt2 = 0.05;
+			}
+			if (spin >= 1800)
+			{
+				limit2 = true;
+			}
+			if (limit2 == true)
+			{
+				spin = 0;
+				dt1 = 0.017;
+				dt2 = 0;
+			}
+		}
+		//==================================================================================================
 	}
 
 	void setPosition(Vector3 position)
