@@ -87,6 +87,11 @@ void StudioProject::Init()
 	{
 		DataBase::instance()->setEntity(1, new EntityDrop(i, Vector3(1 + i * 20, 0, 80), Application::elapsed_timer_));
 	}
+
+	DataBase::instance()->setEntity(true, false, 1, new Boss_1(Vector3(10 + 0 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(true, false, 1, new Boss_2(Vector3(10 + 5 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(true, false, 1, new Boss_3(Vector3(10 + 10 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(true, false, 1, new Boss_4(Vector3(10 + 15 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	//--------------------------------------------------------^REMOVE ONCE DONE^--------------------------------------------------------
 
 	// Set background color to dark blue
@@ -525,6 +530,50 @@ void StudioProject::Render()
 			DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().z);
 
 		RenderMesh(RenderingBase::instance()->getEnviornmentMesh(DataBase::instance()->getEnvironment(DIMENSIONID, i)->getEnvironmentID()), true);
+		modelStack.PopMatrix();
+	}
+
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(2, DIMENSIONID); i++)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().x,
+			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().y + 5,
+			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().z);
+
+		for (int j = 0; j < 5; j++)
+		{
+			RenderMesh(RenderingBase::instance()->getBossEntityMesh(((EntityMinion*)DataBase::instance()->getEntityMinion(DIMENSIONID, i))->getMinionID(), j), true);
+		}
+		modelStack.PopMatrix();
+	}
+
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(3, DIMENSIONID); i++)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().x,
+			DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().y + 5,
+			DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().z);
+
+		modelStack.PushMatrix();
+		RenderMesh(RenderingBase::instance()->getBossEntityMesh(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID(), 1), true);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftArm(), 1, 0, 0);
+		RenderMesh(RenderingBase::instance()->getBossEntityMesh(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID(), 2), true);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotaterightLeg(), 1, 0, 0);
+		RenderMesh(RenderingBase::instance()->getBossEntityMesh(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID(), 3), true);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftLeg(), 1, 0, 0);
+		RenderMesh(RenderingBase::instance()->getBossEntityMesh(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID(), 4), true);
+		modelStack.PopMatrix();
+		
+		RenderMesh(RenderingBase::instance()->getBossEntityMesh(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID(), 0), true);
 		modelStack.PopMatrix();
 	}
 

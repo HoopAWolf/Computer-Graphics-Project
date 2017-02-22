@@ -47,6 +47,11 @@ public:
 
 	void updateAI(float timer, unsigned dimensionID)
 	{
+		if (boss_state_ == IDLE)
+		{
+			boss_state_ = BASIC_ATTACK;
+		}
+
 		if (boss_state_ == WALKING)
 		{
 			walking = true;
@@ -96,6 +101,7 @@ public:
 		{
 			attacking = true;
 		}
+
 		if (attacking == true)
 		{
 			rotateleftArm -= (float)(80 * 0.017);
@@ -126,6 +132,7 @@ public:
 				rotateleftLeg++;
 			}
 		}
+
 		if (attacking == false)
 		{
 			if (rotateleftArm < 0)
@@ -133,6 +140,10 @@ public:
 				rotateleftArm++;
 			}
 		}
+
+		std::cout << getrotateleftArm() << std::endl;
+		std::cout << getrotaterightLeg() << std::endl;
+		std::cout << getrotateleftLeg() << std::endl;
 	}
 
 	void setPosition(Vector3 position)
