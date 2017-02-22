@@ -37,7 +37,8 @@ protected:
 	float dt1 = 0;
 	float rotateleftLeg = 0.0f;
 	float rotaterightLeg = 0.0f;
-	float rotateleftArm = 0.0f;
+	float rotateleftArmX = 0.0f;
+	float rotateleftArmZ = 0.0f;
 
 	bool rightlegForward = true;
 	bool rightlegBackward = false;
@@ -83,7 +84,7 @@ public:
 
 	virtual float getrotateleftArm()
 	{
-		return rotateleftArm;
+		return rotateleftArmX;
 	}
 
 };

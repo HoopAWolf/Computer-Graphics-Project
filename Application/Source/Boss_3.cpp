@@ -98,10 +98,22 @@ public:
 		}
 		if (attacking == true)
 		{
-			rotateleftArm -= (float)(80 * 0.017);
-			if (rotateleftArm <= -90)
+			rotateleftArmX += (float)(80 * dt);
+			if (rotateleftArmX <= -90)
 			{
-				attacking = false;
+				limit = true;
+			}
+			if (rotateleftArmX >= 0)
+			{
+				limit = false;
+			}
+			if (limit == true)
+			{
+				dt = 0.017;
+			}
+			if (limit == false)
+			{
+				dt = -0.017;
 			}
 		}
 
@@ -128,9 +140,9 @@ public:
 		}
 		if (attacking == false)
 		{
-			if (rotateleftArm < 0)
+			if (rotateleftArmX < 0)
 			{
-				rotateleftArm++;
+				rotateleftArmX++;
 			}
 		}
 	}
