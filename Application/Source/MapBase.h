@@ -1,4 +1,4 @@
-#ifndef _MAP_BASE_H
+#ifndef _MAP_BASE_H_
 #define _MAP_BASE_H_
 
 #include <map>

@@ -49,7 +49,7 @@ public:
 	}
 
 	//------------------USES------------------
-	virtual void onItemUse() = 0;
+	virtual void onItemUse(float timer) = 0;
 
 
 };

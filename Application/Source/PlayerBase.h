@@ -18,8 +18,6 @@ public:
 	enum PLAYER_STATE
 	{
 		IDLE,
-
-		WALKING,
 		SPRINTING,
 
 		LEFT_CLICK,
@@ -73,6 +71,7 @@ public:
 	unsigned getCurrentSkillCoolDown(unsigned skill_slot);
 	int getPlayerHealth();
 	unsigned getCurrentEquippedSkill(unsigned slotNum);
+	void playerAttack(float timer);
 
 	PLAYER_STATE getPlayerState()
 	{

@@ -34,6 +34,31 @@ void PlayerBase::startPlayer()
 
 void PlayerBase::playerUpdate(float timer)
 {
+	if (player_state_ == LEFT_CLICK)
+	{
+		if (getCurrentHeldItem() != nullptr)
+		{
+			if (getCurrentHeldItem()->getItemID() <= DataBase::instance()->getItemStarting())
+			{
+				if (((ItemWeapon *)getCurrentHeldItem())->getWeaponType() == 3)
+				{
+					if (((ItemWeapon *)getCurrentHeldItem())->onItemAttackProjectile(timer) != nullptr)
+					{
+						DataBase::instance()->setEntity(dimension_, ((ItemWeapon *)getCurrentHeldItem())->onItemAttackProjectile(timer));
+					}
+					player_state_ = IDLE;
+				}
+				else
+				{
+
+					player_state_ = IDLE;
+				}
+			}
+		}
+		else
+			player_state_ = IDLE;
+	}
+
 	//RESET COOLDOWN
 	for (int i = 0; i < skills_.size(); i++)
 	{
@@ -57,6 +82,7 @@ void PlayerBase::playerUpdate(float timer)
 		}
 	}
 }
+
 
 ItemBase* PlayerBase::getItemFromInventory(int slot)
 {
