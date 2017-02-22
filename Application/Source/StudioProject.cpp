@@ -252,6 +252,9 @@ void StudioProject::Init()
 
 void StudioProject::Update(double dt)
 {
+	if (PlayerBase::instance()->getDimension() != DIMENSIONID)
+		PlayerBase::instance()->setPlayerDimension(DIMENSIONID);
+
 	camera.Update(dt);
 	ShowCursor(false);
 
@@ -312,6 +315,23 @@ void StudioProject::Update(double dt)
 		else
 		{
 			pause = false;
+		}
+
+		if (Application::IsKeyPressed(VK_F1))
+		{
+			SceneManager::getSceneManger()->setNextScene(2);
+		}
+		if (Application::IsKeyPressed(VK_F2))
+		{
+			SceneManager::getSceneManger()->setNextScene(3);
+		}
+		if (Application::IsKeyPressed(VK_F3))
+		{
+			SceneManager::getSceneManger()->setNextScene(4);
+		}
+		if (Application::IsKeyPressed(VK_F4))
+		{
+			SceneManager::getSceneManger()->setNextScene(5);
 		}
 	//light_controls---------------------------------------------------------------
 	if (Application::IsKeyPressed('I'))
@@ -377,8 +397,6 @@ void StudioProject::Update(double dt)
 
 void StudioProject::Render()
 {
-	if (PlayerBase::instance()->getDimension() != DIMENSIONID)
-		PlayerBase::instance()->setPlayerDimension(DIMENSIONID);
 	// Render VBO here
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -791,7 +809,10 @@ void StudioProject::RenderUI(Mesh* mesh, Color color, float size, float x, float
 void StudioProject::RenderSkybox()
 {
 	modelStack.PushMatrix();//push ground
-	modelStack.Translate(950, -900, 950);
+	modelStack.Translate(camera.position.x, 0, camera.position.z);
+
+	modelStack.PushMatrix();//push ground
+	modelStack.Translate(0, -900, 0);
 
 	modelStack.PushMatrix();//seperate from ground
 	modelStack.PushMatrix();//push top
@@ -842,6 +863,7 @@ void StudioProject::RenderSkybox()
 	modelStack.Translate(0, 900, 0);
 	modelStack.Scale(2000, 1, 2000);
 	RenderMesh(meshList[GEO_BOTTOM], true);
+	modelStack.PopMatrix();//end ground
 	modelStack.PopMatrix();//end ground
 }
 
