@@ -9,32 +9,6 @@ public:
 		environmentID_ = 9;
 		environment_symbol_ = 'U';
 
-		///*boundry_[0][0] = '#';*/
-		//boundry_[0][1] = '#';
-		///*boundry_[0][2] = '#';*/
-
-		///*boundry_[1][0] = '#';*/
-		//boundry_[1][1] = 'U';
-		//boundry_[1][2] = 'U';
-		//boundry_[1][3] = 'U';
-		//boundry_[1][4] = '#';
-
-		///*boundry_[2][0] = '#';*/
-		//boundry_[2][1] = 'U';
-		//boundry_[2][2] = 'U';
-		//boundry_[2][3] = 'U';
-		///*boundry_[2][4] = '#';*/
-
-
-		//boundry_[3][0] = '#';
-		//boundry_[3][1] = 'U';
-		//boundry_[3][2] = 'U';
-		//boundry_[3][3] = 'U';
-
-
-		//boundry_[4][3] = '#';
-
-
 		boundry_[0][0] = '#';
 		boundry_[0][1] = '#';
 		boundry_[0][2] = '#';
@@ -54,7 +28,22 @@ public:
 		boundry_[0][16] = '#';
 		boundry_[0][17] = '#';
 		boundry_[0][18] = '#';
-		
+		boundry_[0][19] = '#';
+		boundry_[0][20] = '#';
+		boundry_[0][21] = '#';
+		boundry_[0][22] = '#';
+		boundry_[0][23] = '#';
+		boundry_[0][24] = '#';
+		boundry_[0][25] = '#';
+		boundry_[0][26] = '#';
+		boundry_[0][27] = '#';
+		boundry_[0][28] = '#';
+		boundry_[0][29] = '#';
+		boundry_[0][30] = '#';
+		boundry_[0][31] = '#';
+		boundry_[0][32] = '#';
+		boundry_[0][33] = '#';
+
 
 		boundry_[1][0] = '#';
 		boundry_[1][1] = '#';
@@ -75,7 +64,21 @@ public:
 		boundry_[1][16] = '#';
 		boundry_[1][17] = '#';
 		boundry_[1][18] = '#';
-		
+		boundry_[1][19] = '#';
+		boundry_[1][20] = '#';
+		boundry_[1][21] = '#';
+		boundry_[1][22] = '#';
+		boundry_[1][23] = '#';
+		boundry_[1][24] = '#';
+		boundry_[1][25] = '#';
+		boundry_[1][26] = '#';
+		boundry_[1][27] = '#';
+		boundry_[1][28] = '#';
+		boundry_[1][29] = '#';
+		boundry_[1][30] = '#';
+		boundry_[1][31] = '#';
+		boundry_[1][32] = '#';
+		boundry_[1][33] = '#';
 
 		boundry_[2][0] = '#';
 		boundry_[2][1] = '#';
@@ -96,7 +99,22 @@ public:
 		boundry_[2][16] = '#';
 		boundry_[2][17] = '#';
 		boundry_[2][18] = '#';
-		
+		boundry_[2][19] = '#';
+		boundry_[2][20] = '#';
+		boundry_[2][21] = '#';
+		boundry_[2][22] = '#';
+		boundry_[2][23] = '#';
+		boundry_[2][24] = '#';
+		boundry_[2][25] = '#';
+		boundry_[2][26] = '#';
+		boundry_[2][27] = '#';
+		boundry_[2][28] = '#';
+		boundry_[2][29] = '#';
+		boundry_[2][30] = '#';
+		boundry_[2][31] = '#';
+		boundry_[2][32] = '#';
+		boundry_[2][33] = '#';
+
 
 		boundry_[3][0] = '#';
 		boundry_[3][1] = '#';
@@ -117,7 +135,21 @@ public:
 		boundry_[3][16] = '#';
 		boundry_[3][17] = '#';
 		boundry_[3][18] = '#';
-		
+		boundry_[3][19] = '#';
+		boundry_[3][20] = '#';
+		boundry_[3][21] = '#';
+		boundry_[3][22] = '#';
+		boundry_[3][23] = '#';
+		boundry_[3][24] = '#';
+		boundry_[3][25] = '#';
+		boundry_[3][26] = '#';
+		boundry_[3][27] = '#';
+		boundry_[3][28] = '#';
+		boundry_[3][29] = '#';
+		boundry_[3][30] = '#';
+		boundry_[3][31] = '#';
+		boundry_[3][32] = '#';
+		boundry_[3][33] = '#';
 
 		boundry_[4][0] = '#';
 		boundry_[4][1] = '#';
@@ -138,7 +170,22 @@ public:
 		boundry_[4][16] = '#';
 		boundry_[4][17] = '#';
 		boundry_[4][18] = '#';
-		
+		boundry_[4][19] = '#';
+		boundry_[4][20] = '#';
+		boundry_[4][21] = '#';
+		boundry_[4][22] = '#';
+		boundry_[4][23] = '#';
+		boundry_[4][24] = '#';
+		boundry_[4][25] = '#';
+		boundry_[4][26] = '#';
+		boundry_[4][27] = '#';
+		boundry_[4][28] = '#';
+		boundry_[4][29] = '#';
+		boundry_[4][30] = '#';
+		boundry_[4][31] = '#';
+		boundry_[4][32] = '#';
+		boundry_[4][33] = '#';
+
 
 		boundry_[5][0] = '#';
 		boundry_[5][1] = '#';
@@ -159,7 +206,21 @@ public:
 		boundry_[5][16] = '#';
 		boundry_[5][17] = '#';
 		boundry_[5][18] = '#';
-		
+		boundry_[5][19] = '#';
+		boundry_[5][20] = '#';
+		boundry_[5][21] = '#';
+		boundry_[5][22] = '#';
+		boundry_[5][23] = '#';
+		boundry_[5][24] = '#';
+		boundry_[5][25] = '#';
+		boundry_[5][26] = '#';
+		boundry_[5][27] = '#';
+		boundry_[5][28] = '#';
+		boundry_[5][29] = '#';
+		boundry_[5][30] = '#';
+		boundry_[5][31] = '#';
+		boundry_[5][32] = '#';
+		boundry_[5][33] = '#';
 
 		boundry_[6][0] = '#';
 		boundry_[6][1] = '#';
@@ -180,7 +241,22 @@ public:
 		boundry_[6][16] = '#';
 		boundry_[6][17] = '#';
 		boundry_[6][18] = '#';
-		
+		boundry_[6][19] = '#';
+		boundry_[6][20] = '#';
+		boundry_[6][21] = '#';
+		boundry_[6][22] = '#';
+		boundry_[6][23] = '#';
+		boundry_[6][24] = '#';
+		boundry_[6][25] = '#';
+		boundry_[6][26] = '#';
+		boundry_[6][27] = '#';
+		boundry_[6][28] = '#';
+		boundry_[6][29] = '#';
+		boundry_[6][30] = '#';
+		boundry_[6][31] = '#';
+		boundry_[6][32] = '#';
+		boundry_[6][33] = '#';
+
 
 		boundry_[7][0] = '#';
 		boundry_[7][1] = '#';
@@ -201,7 +277,22 @@ public:
 		boundry_[7][16] = '#';
 		boundry_[7][17] = '#';
 		boundry_[7][18] = '#';
-		
+		boundry_[7][19] = '#';
+		boundry_[7][20] = '#';
+		boundry_[7][21] = '#';
+		boundry_[7][22] = '#';
+		boundry_[7][23] = '#';
+		boundry_[7][24] = '#';
+		boundry_[7][25] = '#';
+		boundry_[7][26] = '#';
+		boundry_[7][27] = '#';
+		boundry_[7][28] = '#';
+		boundry_[7][29] = '#';
+		boundry_[7][30] = '#';
+		boundry_[7][31] = '#';
+		boundry_[7][32] = '#';
+		boundry_[7][33] = '#';
+
 		boundry_[8][0] = '#';
 		boundry_[8][1] = '#';
 		boundry_[8][2] = '#';
@@ -221,7 +312,22 @@ public:
 		boundry_[8][16] = '#';
 		boundry_[8][17] = '#';
 		boundry_[8][18] = '#';
-		
+		boundry_[8][19] = '#';
+		boundry_[8][20] = '#';
+		boundry_[8][21] = '#';
+		boundry_[8][22] = '#';
+		boundry_[8][23] = '#';
+		boundry_[8][24] = '#';
+		boundry_[8][25] = '#';
+		boundry_[8][26] = '#';
+		boundry_[8][27] = '#';
+		boundry_[8][28] = '#';
+		boundry_[8][29] = '#';
+		boundry_[8][30] = '#';
+		boundry_[8][31] = '#';
+		boundry_[8][32] = '#';
+		boundry_[8][33] = '#';
+
 
 		boundry_[9][0] = '#';
 		boundry_[9][1] = '#';
@@ -242,7 +348,21 @@ public:
 		boundry_[9][16] = '#';
 		boundry_[9][17] = '#';
 		boundry_[9][18] = '#';
-		
+		boundry_[9][19] = '#';
+		boundry_[9][20] = '#';
+		boundry_[9][21] = '#';
+		boundry_[9][22] = '#';
+		boundry_[9][23] = '#';
+		boundry_[9][24] = '#';
+		boundry_[9][25] = '#';
+		boundry_[9][26] = '#';
+		boundry_[9][27] = '#';
+		boundry_[9][28] = '#';
+		boundry_[9][29] = '#';
+		boundry_[9][30] = '#';
+		boundry_[9][31] = '#';
+		boundry_[9][32] = '#';
+		boundry_[9][33] = '#';
 
 		boundry_[10][0] = '#';
 		boundry_[10][1] = '#';
@@ -253,7 +373,7 @@ public:
 		boundry_[10][6] = '#';
 		boundry_[10][7] = '#';
 		boundry_[10][8] = '#';
-		boundry_[10][9] = 'U';
+		boundry_[10][9] = '#';
 		boundry_[10][10] = '#';
 		boundry_[10][11] = '#';
 		boundry_[10][12] = '#';
@@ -263,7 +383,22 @@ public:
 		boundry_[10][16] = '#';
 		boundry_[10][17] = '#';
 		boundry_[10][18] = '#';
-		
+		boundry_[10][19] = '#';
+		boundry_[10][20] = '#';
+		boundry_[10][21] = '#';
+		boundry_[10][22] = '#';
+		boundry_[10][23] = '#';
+		boundry_[10][24] = '#';
+		boundry_[10][25] = '#';
+		boundry_[10][26] = '#';
+		boundry_[10][27] = '#';
+		boundry_[10][28] = '#';
+		boundry_[10][29] = '#';
+		boundry_[10][30] = '#';
+		boundry_[10][31] = '#';
+		boundry_[10][32] = '#';
+		boundry_[10][33] = '#';
+
 
 		boundry_[11][0] = '#';
 		boundry_[11][1] = '#';
@@ -284,7 +419,21 @@ public:
 		boundry_[11][16] = '#';
 		boundry_[11][17] = '#';
 		boundry_[11][18] = '#';
-		
+		boundry_[11][19] = '#';
+		boundry_[11][20] = '#';
+		boundry_[11][21] = '#';
+		boundry_[11][22] = '#';
+		boundry_[11][23] = '#';
+		boundry_[11][24] = '#';
+		boundry_[11][25] = '#';
+		boundry_[11][26] = '#';
+		boundry_[11][27] = '#';
+		boundry_[11][28] = '#';
+		boundry_[11][29] = '#';
+		boundry_[11][30] = '#';
+		boundry_[11][31] = '#';
+		boundry_[11][32] = '#';
+		boundry_[11][33] = '#';
 
 		boundry_[12][0] = '#';
 		boundry_[12][1] = '#';
@@ -305,7 +454,22 @@ public:
 		boundry_[12][16] = '#';
 		boundry_[12][17] = '#';
 		boundry_[12][18] = '#';
-		
+		boundry_[12][19] = '#';
+		boundry_[12][20] = '#';
+		boundry_[12][21] = '#';
+		boundry_[12][22] = '#';
+		boundry_[12][23] = '#';
+		boundry_[12][24] = '#';
+		boundry_[12][25] = '#';
+		boundry_[12][26] = '#';
+		boundry_[12][27] = '#';
+		boundry_[12][28] = '#';
+		boundry_[12][29] = '#';
+		boundry_[12][30] = '#';
+		boundry_[12][31] = '#';
+		boundry_[12][32] = '#';
+		boundry_[12][33] = '#';
+
 
 		boundry_[13][0] = '#';
 		boundry_[13][1] = '#';
@@ -326,7 +490,21 @@ public:
 		boundry_[13][16] = '#';
 		boundry_[13][17] = '#';
 		boundry_[13][18] = '#';
-		
+		boundry_[13][19] = '#';
+		boundry_[13][20] = '#';
+		boundry_[13][21] = '#';
+		boundry_[13][22] = '#';
+		boundry_[13][23] = '#';
+		boundry_[13][24] = '#';
+		boundry_[13][25] = '#';
+		boundry_[13][26] = '#';
+		boundry_[13][27] = '#';
+		boundry_[13][28] = '#';
+		boundry_[13][29] = '#';
+		boundry_[13][30] = '#';
+		boundry_[13][31] = '#';
+		boundry_[13][32] = '#';
+		boundry_[13][33] = '#';
 
 		boundry_[14][0] = '#';
 		boundry_[14][1] = '#';
@@ -347,7 +525,22 @@ public:
 		boundry_[14][16] = '#';
 		boundry_[14][17] = '#';
 		boundry_[14][18] = '#';
-		
+		boundry_[14][19] = '#';
+		boundry_[14][20] = '#';
+		boundry_[14][21] = '#';
+		boundry_[14][22] = '#';
+		boundry_[14][23] = '#';
+		boundry_[14][24] = '#';
+		boundry_[14][25] = '#';
+		boundry_[14][26] = '#';
+		boundry_[14][27] = '#';
+		boundry_[14][28] = '#';
+		boundry_[14][29] = '#';
+		boundry_[14][30] = '#';
+		boundry_[14][31] = '#';
+		boundry_[14][32] = '#';
+		boundry_[14][33] = '#';
+
 
 		boundry_[15][0] = '#';
 		boundry_[15][1] = '#';
@@ -368,7 +561,21 @@ public:
 		boundry_[15][16] = '#';
 		boundry_[15][17] = '#';
 		boundry_[15][18] = '#';
-		
+		boundry_[15][19] = '#';
+		boundry_[15][20] = '#';
+		boundry_[15][21] = '#';
+		boundry_[15][22] = '#';
+		boundry_[15][23] = '#';
+		boundry_[15][24] = '#';
+		boundry_[15][25] = '#';
+		boundry_[15][26] = '#';
+		boundry_[15][27] = '#';
+		boundry_[15][28] = '#';
+		boundry_[15][29] = '#';
+		boundry_[15][30] = '#';
+		boundry_[15][31] = '#';
+		boundry_[15][32] = '#';
+		boundry_[15][33] = '#';
 
 		boundry_[16][0] = '#';
 		boundry_[16][1] = '#';
@@ -389,7 +596,22 @@ public:
 		boundry_[16][16] = '#';
 		boundry_[16][17] = '#';
 		boundry_[16][18] = '#';
-		
+		boundry_[16][19] = '#';
+		boundry_[16][20] = '#';
+		boundry_[16][21] = '#';
+		boundry_[16][22] = '#';
+		boundry_[16][23] = '#';
+		boundry_[16][24] = '#';
+		boundry_[16][25] = '#';
+		boundry_[16][26] = '#';
+		boundry_[16][27] = '#';
+		boundry_[16][28] = '#';
+		boundry_[16][29] = '#';
+		boundry_[16][30] = '#';
+		boundry_[16][31] = '#';
+		boundry_[16][32] = '#';
+		boundry_[16][33] = '#';
+
 
 		boundry_[17][0] = '#';
 		boundry_[17][1] = '#';
@@ -410,7 +632,21 @@ public:
 		boundry_[17][16] = '#';
 		boundry_[17][17] = '#';
 		boundry_[17][18] = '#';
-		
+		boundry_[17][19] = '#';
+		boundry_[17][20] = '#';
+		boundry_[17][21] = '#';
+		boundry_[17][22] = '#';
+		boundry_[17][23] = '#';
+		boundry_[17][24] = '#';
+		boundry_[17][25] = '#';
+		boundry_[17][26] = '#';
+		boundry_[17][27] = '#';
+		boundry_[17][28] = '#';
+		boundry_[17][29] = '#';
+		boundry_[17][30] = '#';
+		boundry_[17][31] = '#';
+		boundry_[17][32] = '#';
+		boundry_[17][33] = '#';
 
 		boundry_[18][0] = '#';
 		boundry_[18][1] = '#';
@@ -431,6 +667,562 @@ public:
 		boundry_[18][16] = '#';
 		boundry_[18][17] = '#';
 		boundry_[18][18] = '#';
+		boundry_[18][19] = '#';
+		boundry_[18][20] = '#';
+		boundry_[18][21] = '#';
+		boundry_[18][22] = '#';
+		boundry_[18][23] = '#';
+		boundry_[18][24] = '#';
+		boundry_[18][25] = '#';
+		boundry_[18][26] = '#';
+		boundry_[18][27] = '#';
+		boundry_[18][28] = '#';
+		boundry_[18][29] = '#';
+		boundry_[18][30] = '#';
+		boundry_[18][31] = '#';
+		boundry_[18][32] = '#';
+		boundry_[18][33] = '#';
+
+
+		boundry_[19][0] = '#';
+		boundry_[19][1] = '#';
+		boundry_[19][2] = '#';
+		boundry_[19][3] = '#';
+		boundry_[19][4] = '#';
+		boundry_[19][5] = '#';
+		boundry_[19][6] = '#';
+		boundry_[19][7] = '#';
+		boundry_[19][8] = '#';
+		boundry_[19][9] = '#';
+		boundry_[19][10] = '#';
+		boundry_[19][11] = '#';
+		boundry_[19][12] = '#';
+		boundry_[19][13] = '#';
+		boundry_[19][14] = '#';
+		boundry_[19][15] = '#';
+		boundry_[19][16] = '#';
+		boundry_[19][17] = '#';
+		boundry_[19][18] = '#';
+		boundry_[19][19] = '#';
+		boundry_[19][20] = '#';
+		boundry_[19][21] = '#';
+		boundry_[19][22] = '#';
+		boundry_[19][23] = '#';
+		boundry_[19][24] = '#';
+		boundry_[19][25] = '#';
+		boundry_[19][26] = '#';
+		boundry_[19][27] = '#';
+		boundry_[19][28] = '#';
+		boundry_[19][29] = '#';
+		boundry_[19][30] = '#';
+		boundry_[19][31] = '#';
+		boundry_[19][32] = '#';
+		boundry_[19][33] = '#';
+
+		boundry_[20][0] = '#';
+		boundry_[20][1] = '#';
+		boundry_[20][2] = '#';
+		boundry_[20][3] = '#';
+		boundry_[20][4] = '#';
+		boundry_[20][5] = '#';
+		boundry_[20][6] = '#';
+		boundry_[20][7] = '#';
+		boundry_[20][8] = '#';
+		boundry_[20][9] = '#';
+		boundry_[20][10] = '#';
+		boundry_[20][11] = '#';
+		boundry_[20][12] = '#';
+		boundry_[20][13] = '#';
+		boundry_[20][14] = '#';
+		boundry_[20][15] = '#';
+		boundry_[20][16] = '#';
+		boundry_[20][17] = '#';
+		boundry_[20][18] = '#';
+		boundry_[20][19] = '#';
+		boundry_[20][20] = '#';
+		boundry_[20][21] = '#';
+		boundry_[20][22] = '#';
+		boundry_[20][23] = '#';
+		boundry_[20][24] = '#';
+		boundry_[20][25] = '#';
+		boundry_[20][26] = '#';
+		boundry_[20][27] = '#';
+		boundry_[20][28] = '#';
+		boundry_[20][29] = '#';
+		boundry_[20][30] = '#';
+		boundry_[20][31] = '#';
+		boundry_[20][32] = '#';
+		boundry_[20][33] = '#';
+
+
+		boundry_[1][0] = '#';
+		boundry_[1][1] = '#';
+		boundry_[1][2] = '#';
+		boundry_[1][3] = '#';
+		boundry_[1][4] = '#';
+		boundry_[1][5] = '#';
+		boundry_[1][6] = '#';
+		boundry_[1][7] = '#';
+		boundry_[1][8] = '#';
+		boundry_[1][9] = '#';
+		boundry_[1][10] = '#';
+		boundry_[1][11] = '#';
+		boundry_[1][12] = '#';
+		boundry_[1][13] = '#';
+		boundry_[1][14] = '#';
+		boundry_[1][15] = '#';
+		boundry_[1][16] = '#';
+		boundry_[1][17] = '#';
+		boundry_[1][18] = '#';
+		boundry_[1][19] = '#';
+		boundry_[1][20] = '#';
+		boundry_[1][21] = '#';
+		boundry_[1][22] = '#';
+		boundry_[1][23] = '#';
+		boundry_[1][24] = '#';
+		boundry_[1][25] = '#';
+		boundry_[1][26] = '#';
+		boundry_[1][27] = '#';
+		boundry_[1][28] = '#';
+		boundry_[1][29] = '#';
+		boundry_[1][30] = '#';
+		boundry_[1][31] = '#';
+		boundry_[1][32] = '#';
+		boundry_[1][33] = '#';
+
+		boundry_[0][0] = '#';
+		boundry_[0][1] = '#';
+		boundry_[0][2] = '#';
+		boundry_[0][3] = '#';
+		boundry_[0][4] = '#';
+		boundry_[0][5] = '#';
+		boundry_[0][6] = '#';
+		boundry_[0][7] = '#';
+		boundry_[0][8] = '#';
+		boundry_[0][9] = '#';
+		boundry_[0][10] = '#';
+		boundry_[0][11] = '#';
+		boundry_[0][12] = '#';
+		boundry_[0][13] = '#';
+		boundry_[0][14] = '#';
+		boundry_[0][15] = '#';
+		boundry_[0][16] = '#';
+		boundry_[0][17] = '#';
+		boundry_[0][18] = '#';
+		boundry_[0][19] = '#';
+		boundry_[0][20] = '#';
+		boundry_[0][21] = '#';
+		boundry_[0][22] = '#';
+		boundry_[0][23] = '#';
+		boundry_[0][24] = '#';
+		boundry_[0][25] = '#';
+		boundry_[0][26] = '#';
+		boundry_[0][27] = '#';
+		boundry_[0][28] = '#';
+		boundry_[0][29] = '#';
+		boundry_[0][30] = '#';
+		boundry_[0][31] = '#';
+		boundry_[0][32] = '#';
+		boundry_[0][33] = '#';
+
+
+		boundry_[1][0] = '#';
+		boundry_[1][1] = '#';
+		boundry_[1][2] = '#';
+		boundry_[1][3] = '#';
+		boundry_[1][4] = '#';
+		boundry_[1][5] = '#';
+		boundry_[1][6] = '#';
+		boundry_[1][7] = '#';
+		boundry_[1][8] = '#';
+		boundry_[1][9] = '#';
+		boundry_[1][10] = '#';
+		boundry_[1][11] = '#';
+		boundry_[1][12] = '#';
+		boundry_[1][13] = '#';
+		boundry_[1][14] = '#';
+		boundry_[1][15] = '#';
+		boundry_[1][16] = '#';
+		boundry_[1][17] = '#';
+		boundry_[1][18] = '#';
+		boundry_[1][19] = '#';
+		boundry_[1][20] = '#';
+		boundry_[1][21] = '#';
+		boundry_[1][22] = '#';
+		boundry_[1][23] = '#';
+		boundry_[1][24] = '#';
+		boundry_[1][25] = '#';
+		boundry_[1][26] = '#';
+		boundry_[1][27] = '#';
+		boundry_[1][28] = '#';
+		boundry_[1][29] = '#';
+		boundry_[1][30] = '#';
+		boundry_[1][31] = '#';
+		boundry_[1][32] = '#';
+		boundry_[1][33] = '#';
+
+		boundry_[0][0] = '#';
+		boundry_[0][1] = '#';
+		boundry_[0][2] = '#';
+		boundry_[0][3] = '#';
+		boundry_[0][4] = '#';
+		boundry_[0][5] = '#';
+		boundry_[0][6] = '#';
+		boundry_[0][7] = '#';
+		boundry_[0][8] = '#';
+		boundry_[0][9] = '#';
+		boundry_[0][10] = '#';
+		boundry_[0][11] = '#';
+		boundry_[0][12] = '#';
+		boundry_[0][13] = '#';
+		boundry_[0][14] = '#';
+		boundry_[0][15] = '#';
+		boundry_[0][16] = '#';
+		boundry_[0][17] = '#';
+		boundry_[0][18] = '#';
+		boundry_[0][19] = '#';
+		boundry_[0][20] = '#';
+		boundry_[0][21] = '#';
+		boundry_[0][22] = '#';
+		boundry_[0][23] = '#';
+		boundry_[0][24] = '#';
+		boundry_[0][25] = '#';
+		boundry_[0][26] = '#';
+		boundry_[0][27] = '#';
+		boundry_[0][28] = '#';
+		boundry_[0][29] = '#';
+		boundry_[0][30] = '#';
+		boundry_[0][31] = '#';
+		boundry_[0][32] = '#';
+		boundry_[0][33] = '#';
+
+
+		boundry_[1][0] = '#';
+		boundry_[1][1] = '#';
+		boundry_[1][2] = '#';
+		boundry_[1][3] = '#';
+		boundry_[1][4] = '#';
+		boundry_[1][5] = '#';
+		boundry_[1][6] = '#';
+		boundry_[1][7] = '#';
+		boundry_[1][8] = '#';
+		boundry_[1][9] = '#';
+		boundry_[1][10] = '#';
+		boundry_[1][11] = '#';
+		boundry_[1][12] = '#';
+		boundry_[1][13] = '#';
+		boundry_[1][14] = '#';
+		boundry_[1][15] = '#';
+		boundry_[1][16] = '#';
+		boundry_[1][17] = '#';
+		boundry_[1][18] = '#';
+		boundry_[1][19] = '#';
+		boundry_[1][20] = '#';
+		boundry_[1][21] = '#';
+		boundry_[1][22] = '#';
+		boundry_[1][23] = '#';
+		boundry_[1][24] = '#';
+		boundry_[1][25] = '#';
+		boundry_[1][26] = '#';
+		boundry_[1][27] = '#';
+		boundry_[1][28] = '#';
+		boundry_[1][29] = '#';
+		boundry_[1][30] = '#';
+		boundry_[1][31] = '#';
+		boundry_[1][32] = '#';
+		boundry_[1][33] = '#';
+
+		boundry_[0][0] = '#';
+		boundry_[0][1] = '#';
+		boundry_[0][2] = '#';
+		boundry_[0][3] = '#';
+		boundry_[0][4] = '#';
+		boundry_[0][5] = '#';
+		boundry_[0][6] = '#';
+		boundry_[0][7] = '#';
+		boundry_[0][8] = '#';
+		boundry_[0][9] = '#';
+		boundry_[0][10] = '#';
+		boundry_[0][11] = '#';
+		boundry_[0][12] = '#';
+		boundry_[0][13] = '#';
+		boundry_[0][14] = '#';
+		boundry_[0][15] = '#';
+		boundry_[0][16] = '#';
+		boundry_[0][17] = '#';
+		boundry_[0][18] = '#';
+		boundry_[0][19] = '#';
+		boundry_[0][20] = '#';
+		boundry_[0][21] = '#';
+		boundry_[0][22] = '#';
+		boundry_[0][23] = '#';
+		boundry_[0][24] = '#';
+		boundry_[0][25] = '#';
+		boundry_[0][26] = '#';
+		boundry_[0][27] = '#';
+		boundry_[0][28] = '#';
+		boundry_[0][29] = '#';
+		boundry_[0][30] = '#';
+		boundry_[0][31] = '#';
+		boundry_[0][32] = '#';
+		boundry_[0][33] = '#';
+
+
+		boundry_[1][0] = '#';
+		boundry_[1][1] = '#';
+		boundry_[1][2] = '#';
+		boundry_[1][3] = '#';
+		boundry_[1][4] = '#';
+		boundry_[1][5] = '#';
+		boundry_[1][6] = '#';
+		boundry_[1][7] = '#';
+		boundry_[1][8] = '#';
+		boundry_[1][9] = '#';
+		boundry_[1][10] = '#';
+		boundry_[1][11] = '#';
+		boundry_[1][12] = '#';
+		boundry_[1][13] = '#';
+		boundry_[1][14] = '#';
+		boundry_[1][15] = '#';
+		boundry_[1][16] = '#';
+		boundry_[1][17] = '#';
+		boundry_[1][18] = '#';
+		boundry_[1][19] = '#';
+		boundry_[1][20] = '#';
+		boundry_[1][21] = '#';
+		boundry_[1][22] = '#';
+		boundry_[1][23] = '#';
+		boundry_[1][24] = '#';
+		boundry_[1][25] = '#';
+		boundry_[1][26] = '#';
+		boundry_[1][27] = '#';
+		boundry_[1][28] = '#';
+		boundry_[1][29] = '#';
+		boundry_[1][30] = '#';
+		boundry_[1][31] = '#';
+		boundry_[1][32] = '#';
+		boundry_[1][33] = '#';
+
+		boundry_[0][0] = '#';
+		boundry_[0][1] = '#';
+		boundry_[0][2] = '#';
+		boundry_[0][3] = '#';
+		boundry_[0][4] = '#';
+		boundry_[0][5] = '#';
+		boundry_[0][6] = '#';
+		boundry_[0][7] = '#';
+		boundry_[0][8] = '#';
+		boundry_[0][9] = '#';
+		boundry_[0][10] = '#';
+		boundry_[0][11] = '#';
+		boundry_[0][12] = '#';
+		boundry_[0][13] = '#';
+		boundry_[0][14] = '#';
+		boundry_[0][15] = '#';
+		boundry_[0][16] = '#';
+		boundry_[0][17] = '#';
+		boundry_[0][18] = '#';
+		boundry_[0][19] = '#';
+		boundry_[0][20] = '#';
+		boundry_[0][21] = '#';
+		boundry_[0][22] = '#';
+		boundry_[0][23] = '#';
+		boundry_[0][24] = '#';
+		boundry_[0][25] = '#';
+		boundry_[0][26] = '#';
+		boundry_[0][27] = '#';
+		boundry_[0][28] = '#';
+		boundry_[0][29] = '#';
+		boundry_[0][30] = '#';
+		boundry_[0][31] = '#';
+		boundry_[0][32] = '#';
+		boundry_[0][33] = '#';
+
+
+		boundry_[1][0] = '#';
+		boundry_[1][1] = '#';
+		boundry_[1][2] = '#';
+		boundry_[1][3] = '#';
+		boundry_[1][4] = '#';
+		boundry_[1][5] = '#';
+		boundry_[1][6] = '#';
+		boundry_[1][7] = '#';
+		boundry_[1][8] = '#';
+		boundry_[1][9] = '#';
+		boundry_[1][10] = '#';
+		boundry_[1][11] = '#';
+		boundry_[1][12] = '#';
+		boundry_[1][13] = '#';
+		boundry_[1][14] = '#';
+		boundry_[1][15] = '#';
+		boundry_[1][16] = '#';
+		boundry_[1][17] = '#';
+		boundry_[1][18] = '#';
+		boundry_[1][19] = '#';
+		boundry_[1][20] = '#';
+		boundry_[1][21] = '#';
+		boundry_[1][22] = '#';
+		boundry_[1][23] = '#';
+		boundry_[1][24] = '#';
+		boundry_[1][25] = '#';
+		boundry_[1][26] = '#';
+		boundry_[1][27] = '#';
+		boundry_[1][28] = '#';
+		boundry_[1][29] = '#';
+		boundry_[1][30] = '#';
+		boundry_[1][31] = '#';
+		boundry_[1][32] = '#';
+		boundry_[1][33] = '#';
+
+		boundry_[0][0] = '#';
+		boundry_[0][1] = '#';
+		boundry_[0][2] = '#';
+		boundry_[0][3] = '#';
+		boundry_[0][4] = '#';
+		boundry_[0][5] = '#';
+		boundry_[0][6] = '#';
+		boundry_[0][7] = '#';
+		boundry_[0][8] = '#';
+		boundry_[0][9] = '#';
+		boundry_[0][10] = '#';
+		boundry_[0][11] = '#';
+		boundry_[0][12] = '#';
+		boundry_[0][13] = '#';
+		boundry_[0][14] = '#';
+		boundry_[0][15] = '#';
+		boundry_[0][16] = '#';
+		boundry_[0][17] = '#';
+		boundry_[0][18] = '#';
+		boundry_[0][19] = '#';
+		boundry_[0][20] = '#';
+		boundry_[0][21] = '#';
+		boundry_[0][22] = '#';
+		boundry_[0][23] = '#';
+		boundry_[0][24] = '#';
+		boundry_[0][25] = '#';
+		boundry_[0][26] = '#';
+		boundry_[0][27] = '#';
+		boundry_[0][28] = '#';
+		boundry_[0][29] = '#';
+		boundry_[0][30] = '#';
+		boundry_[0][31] = '#';
+		boundry_[0][32] = '#';
+		boundry_[0][33] = '#';
+
+
+		boundry_[1][0] = '#';
+		boundry_[1][1] = '#';
+		boundry_[1][2] = '#';
+		boundry_[1][3] = '#';
+		boundry_[1][4] = '#';
+		boundry_[1][5] = '#';
+		boundry_[1][6] = '#';
+		boundry_[1][7] = '#';
+		boundry_[1][8] = '#';
+		boundry_[1][9] = '#';
+		boundry_[1][10] = '#';
+		boundry_[1][11] = '#';
+		boundry_[1][12] = '#';
+		boundry_[1][13] = '#';
+		boundry_[1][14] = '#';
+		boundry_[1][15] = '#';
+		boundry_[1][16] = '#';
+		boundry_[1][17] = '#';
+		boundry_[1][18] = '#';
+		boundry_[1][19] = '#';
+		boundry_[1][20] = '#';
+		boundry_[1][21] = '#';
+		boundry_[1][22] = '#';
+		boundry_[1][23] = '#';
+		boundry_[1][24] = '#';
+		boundry_[1][25] = '#';
+		boundry_[1][26] = '#';
+		boundry_[1][27] = '#';
+		boundry_[1][28] = '#';
+		boundry_[1][29] = '#';
+		boundry_[1][30] = '#';
+		boundry_[1][31] = '#';
+		boundry_[1][32] = '#';
+		boundry_[1][33] = '#';
+
+		boundry_[0][0] = '#';
+		boundry_[0][1] = '#';
+		boundry_[0][2] = '#';
+		boundry_[0][3] = '#';
+		boundry_[0][4] = '#';
+		boundry_[0][5] = '#';
+		boundry_[0][6] = '#';
+		boundry_[0][7] = '#';
+		boundry_[0][8] = '#';
+		boundry_[0][9] = '#';
+		boundry_[0][10] = '#';
+		boundry_[0][11] = '#';
+		boundry_[0][12] = '#';
+		boundry_[0][13] = '#';
+		boundry_[0][14] = '#';
+		boundry_[0][15] = '#';
+		boundry_[0][16] = '#';
+		boundry_[0][17] = '#';
+		boundry_[0][18] = '#';
+		boundry_[0][19] = '#';
+		boundry_[0][20] = '#';
+		boundry_[0][21] = '#';
+		boundry_[0][22] = '#';
+		boundry_[0][23] = '#';
+		boundry_[0][24] = '#';
+		boundry_[0][25] = '#';
+		boundry_[0][26] = '#';
+		boundry_[0][27] = '#';
+		boundry_[0][28] = '#';
+		boundry_[0][29] = '#';
+		boundry_[0][30] = '#';
+		boundry_[0][31] = '#';
+		boundry_[0][32] = '#';
+		boundry_[0][33] = '#';
+
+
+		boundry_[1][0] = '#';
+		boundry_[1][1] = '#';
+		boundry_[1][2] = '#';
+		boundry_[1][3] = '#';
+		boundry_[1][4] = '#';
+		boundry_[1][5] = '#';
+		boundry_[1][6] = '#';
+		boundry_[1][7] = '#';
+		boundry_[1][8] = '#';
+		boundry_[1][9] = '#';
+		boundry_[1][10] = '#';
+		boundry_[1][11] = '#';
+		boundry_[1][12] = '#';
+		boundry_[1][13] = '#';
+		boundry_[1][14] = '#';
+		boundry_[1][15] = '#';
+		boundry_[1][16] = '#';
+		boundry_[1][17] = '#';
+		boundry_[1][18] = '#';
+		boundry_[1][19] = '#';
+		boundry_[1][20] = '#';
+		boundry_[1][21] = '#';
+		boundry_[1][22] = '#';
+		boundry_[1][23] = '#';
+		boundry_[1][24] = '#';
+		boundry_[1][25] = '#';
+		boundry_[1][26] = '#';
+		boundry_[1][27] = '#';
+		boundry_[1][28] = '#';
+		boundry_[1][29] = '#';
+		boundry_[1][30] = '#';
+		boundry_[1][31] = '#';
+		boundry_[1][32] = '#';
+		boundry_[1][33] = '#';
+
+		
+
+
+
+
+		
+
 		
 
 		

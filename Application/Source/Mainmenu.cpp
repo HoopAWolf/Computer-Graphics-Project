@@ -138,6 +138,9 @@ void Mainmenu::Init()
 	meshList[GEO_QUIT2]->textureID = LoadTGA("Image//quit2.tga");
 	meshList[GEO_TITLE] = MeshBuilder::GenerateOBJ("", "OBJ//title.obj");
 	meshList[GEO_TITLE]->textureID = LoadTGA("Image//title.tga");
+
+	meshList[GEO_MOUSE] = MeshBuilder::GenerateOBJ("", "OBJ//play1.obj");
+	meshList[GEO_MOUSE]->textureID = LoadTGA("Image//gay_mouse.tga");
 	//------------------------------------------------------------------------------------------
 	//light
 	light[0].type = Light::LIGHT_DIRECTIONAL;
@@ -202,7 +205,7 @@ static float SCALE_LIMIT = 5.f;
 void Mainmenu::Update(double dt)
 {
 	SceneManager::getSceneManger()->getmycursor();
-	ShowCursor(true);
+	ShowCursor(false);
 	Application::elapsed_timer_ += dt;
 	float LSPEED = 10.f;
 
@@ -385,6 +388,7 @@ void Mainmenu::Render()
 	else if (mq)
 		RenderMeshOnScreen(meshList[GEO_QUIT2], 40, 9, 30, 30, 90);
 	
+	RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx/10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy)/10, 15, 15, 90);
 }
 
 

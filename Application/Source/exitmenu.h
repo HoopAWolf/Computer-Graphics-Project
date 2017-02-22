@@ -37,6 +37,8 @@ class exitmenu : public Scene
 		GEO_QUIT1,
 		GEO_QUIT2,
 		GEO_TITLE,
+		GEO_MOUSE,
+
 		//skybox
 		GEO_LEFT,
 		GEO_RIGHT,
