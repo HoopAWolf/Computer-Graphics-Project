@@ -104,10 +104,22 @@ public:
 
 		if (attacking == true)
 		{
-			rotateleftArm -= (float)(80 * 0.017);
+			rotateleftArm += (float)(80 * dt);
 			if (rotateleftArm <= -90)
 			{
-				attacking = false;
+				limit = true;
+			}
+			if (rotateleftArm >= 0)
+			{
+				limit = false;
+			}
+			if (limit == true)
+			{
+				dt = 0.017;
+			}
+			if (limit == false)
+			{
+				dt = -0.017;
 			}
 		}
 
@@ -135,12 +147,16 @@ public:
 
 		if (attacking == false)
 		{
-			if (rotateleftArm < 0)
+			if (rotateleftArm <= 0)
 			{
 				rotateleftArm++;
 			}
 		}
+		//=====================================================================
 
+
+
+		//================================================================
 		std::cout << getrotateleftArm() << std::endl;
 		std::cout << getrotaterightLeg() << std::endl;
 		std::cout << getrotateleftLeg() << std::endl;

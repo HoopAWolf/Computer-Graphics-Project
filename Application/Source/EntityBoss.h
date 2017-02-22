@@ -33,6 +33,8 @@ protected:
 	BOSS_STATE boss_state_;
 	unsigned armor_;
 
+	float dt = -0.017;
+	float dt1 = 0;
 	float rotateleftLeg = 0.0f;
 	float rotaterightLeg = 0.0f;
 	float rotateleftArm = 0.0f;
@@ -43,6 +45,7 @@ protected:
 	bool leftlegBackward = true;
 	bool walking = false;
 	bool attacking = false;
+	bool limit = false;
 
 
 public:
