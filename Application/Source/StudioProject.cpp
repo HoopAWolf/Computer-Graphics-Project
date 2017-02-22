@@ -555,24 +555,30 @@ void StudioProject::Render()
 			DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().z);
 
 		modelStack.PushMatrix();
+		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
 		RenderMesh(RenderingBase::instance()->getBossEntityMesh(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID(), 1), true);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
-		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftArm(), 1, 0, 0);
+		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
+		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftArmZ(), 0, 0, 1);
+		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftArmX(), 1, 0, 0);
 		RenderMesh(RenderingBase::instance()->getBossEntityMesh(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID(), 2), true);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
+		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
 		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotaterightLeg(), 1, 0, 0);
 		RenderMesh(RenderingBase::instance()->getBossEntityMesh(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID(), 3), true);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
+		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
 		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftLeg(), 1, 0, 0);
 		RenderMesh(RenderingBase::instance()->getBossEntityMesh(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID(), 4), true);
 		modelStack.PopMatrix();
 		
+		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
 		RenderMesh(RenderingBase::instance()->getBossEntityMesh(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID(), 0), true);
 		modelStack.PopMatrix();
 	}

@@ -33,12 +33,16 @@ protected:
 	BOSS_STATE boss_state_;
 	unsigned armor_;
 
+	int count = 0;
+
 	float dt = -0.017;
-	float dt1 = 0;
+	float dt1 = 0.017;
+	float dt2 = 0;
 	float rotateleftLeg = 0.0f;
 	float rotaterightLeg = 0.0f;
 	float rotateleftArmX = 0.0f;
 	float rotateleftArmZ = 0.0f;
+	float spin = 0.0f;
 
 	bool rightlegForward = true;
 	bool rightlegBackward = false;
@@ -47,6 +51,12 @@ protected:
 	bool walking = false;
 	bool attacking = false;
 	bool limit = false;
+	bool limit1 = false;
+	bool limit2 = false;
+	bool limit3 = false;
+	bool limit4 = false;
+	bool limit5 = false;
+	bool limit6 = false;
 
 
 public:
@@ -82,9 +92,17 @@ public:
 		return rotaterightLeg;
 	}
 
-	virtual float getrotateleftArm()
+	virtual float getrotateleftArmX()
 	{
 		return rotateleftArmX;
+	}
+	virtual float getrotateleftArmZ()
+	{
+		return rotateleftArmZ;
+	}
+	virtual float getspin()
+	{
+		return spin;
 	}
 
 };

@@ -49,7 +49,7 @@ public:
 	{
 		if (boss_state_ == IDLE)
 		{
-			boss_state_ = SKILL_1;
+			boss_state_ = FINAL_ATTACK;
 		}
 
 		if (boss_state_ == WALKING)
@@ -99,13 +99,8 @@ public:
 
 		if (boss_state_ == BASIC_ATTACK)
 		{
-			attacking = true;
-		}
-
-		if (attacking == true)
-		{
 			rotateleftArmX += (float)(80 * dt);
-			if (rotateleftArmX <= -90)
+			if (rotateleftArmX <= -90);
 			{
 				limit = true;
 			}
@@ -153,13 +148,95 @@ public:
 			}
 		}
 		//=====================================================================
+		if (boss_state_ == SKILL_1)
+		{
+			rotateleftArmZ += (float)(80 * dt1);
+			spin += (float)(80 * dt2);
+			if (rotateleftArmZ >= 90)
+			{
+				limit1 = true;
+			}
+			if (limit1 == true)
+			{
+				dt1 = 0;
+				dt2 = 0.05;
+			}
+			if (spin >= 1800)
+			{
+				limit2 = true;
+			}
+			if (limit2 == true)
+			{
+				spin = 0;
+				dt1 = 0.017;
+				dt2 = 0;
+			}
+		}
+		//======================================================================
+		if (boss_state_ == SKILL_2)
+		{
+			rotateleftArmX += (float)(80 * dt);
+			if (rotateleftArmX <= -90)
+			{
+				limit = true;
+			}
+			if (rotateleftArmX >= 135)
+			{
+				limit = false;
+			}
+			if (limit3 == true)
+			{
+				dt = 0.3;
+			}
+			if (limit3 == false)
+			{
+				dt = -0.017;
+			}
+		}
+		//=======================================================================
+		if (boss_state_ == FINAL_ATTACK)
+		{
+			rotateleftArmX += (float)(80 * dt);
+			if (rotateleftArmX <= -90)
+			{
+				limit4 = true;
+				count++;	
+			}
+			if (rotateleftArmX >= 135)
+			{
+				
+				limit4 = false;
+				
+			}
+			if (limit4 == true && limit5 == false)
+			{
+				dt = 0.3;
+			}
+			if (limit4 == false && limit5 == false)
+			{
+				dt = -0.3;
+			}
+			if (count == 5)
+			{
+				limit5 = true;
+			}
+			if (limit5 == true)
+			{
+				dt = 0;
+			}
+		}
+		//======================================================================
+		if (boss_state_ == DEATH)
+		{
 
-
+		}
 
 		//=====================================================================
-		std::cout << getrotateleftArm() << std::endl;
-		std::cout << getrotaterightLeg() << std::endl;
-		std::cout << getrotateleftLeg() << std::endl;
+		std::cout << count << std::endl;
+		//std::cout << getrotateleftArmZ() << std::endl;
+		//std::cout << getrotateleftArmX() << std::endl;
+		//std::cout << getrotaterightLeg() << std::endl;
+		//std::cout << getrotateleftLeg() << std::endl;
 	}
 
 	void setPosition(Vector3 position)
