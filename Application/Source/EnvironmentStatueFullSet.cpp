@@ -54,8 +54,6 @@ public:
 		boundry_[0][16] = '#';
 		boundry_[0][17] = '#';
 		boundry_[0][18] = '#';
-		boundry_[0][19] = '#';
-		boundry_[0][20] = '#';
 		
 
 		boundry_[1][0] = '#';
@@ -77,8 +75,6 @@ public:
 		boundry_[1][16] = '#';
 		boundry_[1][17] = '#';
 		boundry_[1][18] = '#';
-		boundry_[1][19] = '#';
-		boundry_[1][20] = '#';
 		
 
 		boundry_[2][0] = '#';
@@ -100,8 +96,6 @@ public:
 		boundry_[2][16] = '#';
 		boundry_[2][17] = '#';
 		boundry_[2][18] = '#';
-		boundry_[2][19] = '#';
-		boundry_[2][20] = '#';
 		
 
 		boundry_[3][0] = '#';
@@ -123,8 +117,7 @@ public:
 		boundry_[3][16] = '#';
 		boundry_[3][17] = '#';
 		boundry_[3][18] = '#';
-		boundry_[3][19] = '#';
-		boundry_[3][20] = '#';
+		
 
 		boundry_[4][0] = '#';
 		boundry_[4][1] = '#';
@@ -145,8 +138,7 @@ public:
 		boundry_[4][16] = '#';
 		boundry_[4][17] = '#';
 		boundry_[4][18] = '#';
-		boundry_[4][19] = '#';
-		boundry_[4][20] = '#';
+		
 
 		boundry_[5][0] = '#';
 		boundry_[5][1] = '#';
@@ -167,8 +159,7 @@ public:
 		boundry_[5][16] = '#';
 		boundry_[5][17] = '#';
 		boundry_[5][18] = '#';
-		boundry_[5][19] = '#';
-		boundry_[5][20] = '#';
+		
 
 		boundry_[6][0] = '#';
 		boundry_[6][1] = '#';
@@ -189,8 +180,7 @@ public:
 		boundry_[6][16] = '#';
 		boundry_[6][17] = '#';
 		boundry_[6][18] = '#';
-		boundry_[6][19] = '#';
-		boundry_[6][20] = '#';
+		
 
 		boundry_[7][0] = '#';
 		boundry_[7][1] = '#';
@@ -211,9 +201,7 @@ public:
 		boundry_[7][16] = '#';
 		boundry_[7][17] = '#';
 		boundry_[7][18] = '#';
-		boundry_[7][19] = '#';
-		boundry_[7][20] = '#';
-
+		
 		boundry_[8][0] = '#';
 		boundry_[8][1] = '#';
 		boundry_[8][2] = '#';
@@ -233,8 +221,7 @@ public:
 		boundry_[8][16] = '#';
 		boundry_[8][17] = '#';
 		boundry_[8][18] = '#';
-		boundry_[8][19] = '#';
-		boundry_[8][20] = '#';
+		
 
 		boundry_[9][0] = '#';
 		boundry_[9][1] = '#';
@@ -255,8 +242,7 @@ public:
 		boundry_[9][16] = '#';
 		boundry_[9][17] = '#';
 		boundry_[9][18] = '#';
-		boundry_[9][19] = '#';
-		boundry_[9][20] = '#';
+		
 
 		boundry_[10][0] = '#';
 		boundry_[10][1] = '#';
@@ -267,7 +253,7 @@ public:
 		boundry_[10][6] = '#';
 		boundry_[10][7] = '#';
 		boundry_[10][8] = '#';
-		boundry_[10][9] = '#';
+		boundry_[10][9] = 'U';
 		boundry_[10][10] = '#';
 		boundry_[10][11] = '#';
 		boundry_[10][12] = '#';
@@ -277,8 +263,7 @@ public:
 		boundry_[10][16] = '#';
 		boundry_[10][17] = '#';
 		boundry_[10][18] = '#';
-		boundry_[10][19] = '#';
-		boundry_[10][20] = '#';
+		
 
 		boundry_[11][0] = '#';
 		boundry_[11][1] = '#';
@@ -290,7 +275,7 @@ public:
 		boundry_[11][7] = '#';
 		boundry_[11][8] = '#';
 		boundry_[11][9] = '#';
-		boundry_[11][10] = 'U';
+		boundry_[11][10] = '#';
 		boundry_[11][11] = '#';
 		boundry_[11][12] = '#';
 		boundry_[11][13] = '#';
@@ -299,8 +284,7 @@ public:
 		boundry_[11][16] = '#';
 		boundry_[11][17] = '#';
 		boundry_[11][18] = '#';
-		boundry_[11][19] = '#';
-		boundry_[11][20] = '#';
+		
 
 		boundry_[12][0] = '#';
 		boundry_[12][1] = '#';
@@ -321,8 +305,7 @@ public:
 		boundry_[12][16] = '#';
 		boundry_[12][17] = '#';
 		boundry_[12][18] = '#';
-		boundry_[12][19] = '#';
-		boundry_[12][20] = '#';
+		
 
 		boundry_[13][0] = '#';
 		boundry_[13][1] = '#';
@@ -343,8 +326,7 @@ public:
 		boundry_[13][16] = '#';
 		boundry_[13][17] = '#';
 		boundry_[13][18] = '#';
-		boundry_[13][19] = '#';
-		boundry_[13][20] = '#';
+		
 
 		boundry_[14][0] = '#';
 		boundry_[14][1] = '#';
@@ -365,8 +347,7 @@ public:
 		boundry_[14][16] = '#';
 		boundry_[14][17] = '#';
 		boundry_[14][18] = '#';
-		boundry_[14][19] = '#';
-		boundry_[14][20] = '#';
+		
 
 		boundry_[15][0] = '#';
 		boundry_[15][1] = '#';
@@ -387,8 +368,7 @@ public:
 		boundry_[15][16] = '#';
 		boundry_[15][17] = '#';
 		boundry_[15][18] = '#';
-		boundry_[15][19] = '#';
-		boundry_[15][20] = '#';
+		
 
 		boundry_[16][0] = '#';
 		boundry_[16][1] = '#';
@@ -409,8 +389,7 @@ public:
 		boundry_[16][16] = '#';
 		boundry_[16][17] = '#';
 		boundry_[16][18] = '#';
-		boundry_[16][19] = '#';
-		boundry_[16][20] = '#';
+		
 
 		boundry_[17][0] = '#';
 		boundry_[17][1] = '#';
@@ -431,8 +410,7 @@ public:
 		boundry_[17][16] = '#';
 		boundry_[17][17] = '#';
 		boundry_[17][18] = '#';
-		boundry_[17][19] = '#';
-		boundry_[17][20] = '#';
+		
 
 		boundry_[18][0] = '#';
 		boundry_[18][1] = '#';
@@ -453,52 +431,9 @@ public:
 		boundry_[18][16] = '#';
 		boundry_[18][17] = '#';
 		boundry_[18][18] = '#';
-		boundry_[18][19] = '#';
-		boundry_[18][20] = '#';
+		
 
-		boundry_[19][0] = '#';
-		boundry_[19][1] = '#';
-		boundry_[19][2] = '#';
-		boundry_[19][3] = '#';
-		boundry_[19][4] = '#';
-		boundry_[19][5] = '#';
-		boundry_[19][6] = '#';
-		boundry_[19][7] = '#';
-		boundry_[19][8] = '#';
-		boundry_[19][9] = '#';
-		boundry_[19][10] = '#';
-		boundry_[19][11] = '#';
-		boundry_[19][12] = '#';
-		boundry_[19][13] = '#';
-		boundry_[19][14] = '#';
-		boundry_[19][15] = '#';
-		boundry_[19][16] = '#';
-		boundry_[19][17] = '#';
-		boundry_[19][18] = '#';
-		boundry_[19][19] = '#';
-		boundry_[19][20] = '#';
-
-		boundry_[20][0] = '#';
-		boundry_[20][1] = '#';
-		boundry_[20][2] = '#';
-		boundry_[20][3] = '#';
-		boundry_[20][4] = '#';
-		boundry_[20][5] = '#';
-		boundry_[20][6] = '#';
-		boundry_[20][7] = '#';
-		boundry_[20][8] = '#';
-		boundry_[20][9] = '#';
-		boundry_[20][10] = '#';
-		boundry_[20][11] = '#';
-		boundry_[20][12] = '#';
-		boundry_[20][13] = '#';
-		boundry_[20][14] = '#';
-		boundry_[20][15] = '#';
-		boundry_[20][16] = '#';
-		boundry_[20][17] = '#';
-		boundry_[20][18] = '#';
-		boundry_[20][19] = '#';
-		boundry_[20][20] = '#';
+		
 		
 
 		

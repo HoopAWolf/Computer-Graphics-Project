@@ -16,7 +16,7 @@ protected:
 	unsigned environmentID_;
 	char environment_symbol_;
 	Vector3 size_;
-	char boundry_[40][40];
+	char boundry_[20][20];
 
 public:
 	virtual ~EnvironmentBase(){}
