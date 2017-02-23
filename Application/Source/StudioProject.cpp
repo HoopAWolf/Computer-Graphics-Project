@@ -214,6 +214,43 @@ void StudioProject::Init()
 	meshList[GEO_MOUSE]->textureID = LoadTGA("Image//gay_mouse.tga");
 
 	//------------------------------------------------------------------------------------------
+	//NPC for this scene only
+	//Its gonna be funny seeing all of dem walk huehuehue
+
+
+	meshList[GEO_GIRL] = MeshBuilder::GenerateOBJ("Girl", "OBJ//girlwithboobs_.obj");
+	meshList[GEO_GIRL]->textureID = LoadTGA("Image//girl_.tga");
+
+	meshList[GEO_NEGAN] = MeshBuilder::GenerateOBJ("Negan", "OBJ//negan_.obj");
+	meshList[GEO_NEGAN]->textureID = LoadTGA("Image//negan_.tga");
+
+	meshList[GEO_EMOKIDNPC] = MeshBuilder::GenerateOBJ("EmoKid", "OBJ//emokid_.obj");
+	meshList[GEO_EMOKIDNPC]->textureID = LoadTGA("Image//emokid_.tga");
+
+	meshList[GEO_ELENPC] = MeshBuilder::GenerateOBJ("Elephant", "OBJ//elephant_.obj");
+	meshList[GEO_ELENPC]->textureID = LoadTGA("Image//elephant_.tga");
+
+	meshList[GEO_LADY] = MeshBuilder::GenerateOBJ("Lady", "OBJ//lady_.obj");
+	meshList[GEO_LADY]->textureID = LoadTGA("Image//lady_.tga");
+
+	meshList[GEO_SCIENTISTNPC] = MeshBuilder::GenerateOBJ("Scientist", "OBJ//scientist_.obj");
+	meshList[GEO_SCIENTISTNPC]->textureID = LoadTGA("Image//scientist_.tga");
+
+	meshList[GEO_BOYNPC] = MeshBuilder::GenerateOBJ("BoyNPC", "OBJ//boy_.obj");
+	meshList[GEO_BOYNPC]->textureID = LoadTGA("Image//boy_.tga");
+
+	//their actions
+	walk = 0.0f;
+
+
+
+
+
+
+
+
+
+	//-------------------------------------------------------------------------------------------
 	//light
 	light[0].type = Light::LIGHT_DIRECTIONAL;
 	light[0].LightPosition.Set(0, 1, 0);
@@ -458,6 +495,14 @@ void StudioProject::Update(double dt)
 	}
 
 
+
+	//------------------------------NPC Actions---------------------------------------------
+
+	static float translateDirection = 1;
+
+
+	
+
 }
 
 void StudioProject::Render()
@@ -600,10 +645,23 @@ void StudioProject::Render()
 			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().y + 5,
 			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().z);
 
-		for (int j = 0; j < 5; j++)
-		{
-			RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), j), true);
-		}
+		modelStack.PushMatrix();
+		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 1), true);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 2), true);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 3), true);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 4), true);
+		modelStack.PopMatrix();
+
+		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0), true);
 		modelStack.PopMatrix();
 	}
 
@@ -647,13 +705,14 @@ void StudioProject::Render()
 		modelStack.PopMatrix();
 	}
 
+
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(4, DIMENSIONID); i++)
 	{
 		modelStack.PushMatrix();
 		modelStack.Translate(DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->getPosition().x,
 			DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->getPosition().y,
 			DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->getPosition().z);
-		modelStack.Scale(.5, .5, .5);
+		modelStack.Rotate(Application::elapsed_timer_ * 50, 1, 1, 1);
 		RenderMesh(RenderingBase::instance()->getProjectileMesh((dynamic_cast<EntityProjectile*>(DataBase::instance()->getEntityProjectile(DIMENSIONID, i)))->getProjectileID()), false);
 		modelStack.PopMatrix();
 	}
@@ -747,6 +806,55 @@ void StudioProject::Render()
 	{
 		RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx / 10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy) / 10, 15, 15, 90);
 	}
+
+
+	//---------------------------------------------------NPC------------------------------------------------------
+	//Do not touch these people, #NPCLIVESMATTER
+
+	modelStack.PushMatrix();
+	modelStack.Translate(132, 0, 126);
+	RenderMesh(meshList[GEO_GIRL], true);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(22, 0, 98);
+	RenderMesh(meshList[GEO_NEGAN], true);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(28, 0, 98);
+	RenderMesh(meshList[GEO_EMOKIDNPC], true);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(126, 0, 26);
+	modelStack.Rotate(70, 0, 1, 0);
+	RenderMesh(meshList[GEO_ELENPC], true);
+	modelStack.PopMatrix();
+
+
+	modelStack.PushMatrix();
+	modelStack.Translate(307, 0, 24);
+	modelStack.Rotate(-70, 0, 1, 0);
+	RenderMesh(meshList[GEO_LADY], true);
+	modelStack.PopMatrix();
+
+
+	modelStack.PushMatrix();
+	modelStack.Translate(288, 0, 149);
+	modelStack.Rotate(-90, 0, 1, 0);
+	RenderMesh(meshList[GEO_BOYNPC], true);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(203, 0, 205);
+	modelStack.Rotate(-180, 0, 1, 0);
+	RenderMesh(meshList[GEO_SCIENTISTNPC], true);
+	modelStack.PopMatrix();
+
+	//------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------
+
 
 }
 

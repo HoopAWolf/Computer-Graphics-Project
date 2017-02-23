@@ -145,6 +145,42 @@ public:
 				rotateleftArmX++;
 			}
 		}
+		//=============================================================================================
+		if (boss_state_ == SKILL_1)
+		{
+			rotateleftArmX += (float)(80 * dt);
+			if (rotateleftArmX <= -90)
+			{
+				limit = true;
+			}
+			if (rotateleftArmX >= 135)
+			{
+				limit = false;
+			}
+			if (limit3 == true)
+			{
+				dt = 0.3;
+			}
+			if (limit3 == false)
+			{
+				dt = -0.017;
+			}
+		}
+		//==============================================================================================
+		if (boss_state_ == SKILL_2)
+		{
+			//shoot laser from eye?
+		}
+		//===========================================================================================
+		if (boss_state_ == SKILL_3)
+		{
+			//shoot bomb??
+		}
+		//=============================================================================================
+		if (boss_state_ == FINAL_ATTACK)
+		{
+			//super explosion
+		}
 	}
 
 	void setPosition(Vector3 position)

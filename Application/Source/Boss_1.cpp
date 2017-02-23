@@ -49,7 +49,7 @@ public:
 	{
 		if (boss_state_ == IDLE)
 		{
-			boss_state_ = FINAL_ATTACK;
+			boss_state_ = IDLE;
 		}
 
 		if (boss_state_ == WALKING)
@@ -175,28 +175,28 @@ public:
 		//======================================================================
 		if (boss_state_ == SKILL_2)
 		{
-			rotateleftArmX += (float)(80 * dt);
+			rotateleftArmX += (float)(80 * dt3);
 			if (rotateleftArmX <= -90)
 			{
-				limit = true;
+				limit3 = true;
 			}
 			if (rotateleftArmX >= 135)
 			{
-				limit = false;
+				limit3 = false;
 			}
 			if (limit3 == true)
 			{
-				dt = 0.3;
+				dt3 = 0.3;
 			}
 			if (limit3 == false)
 			{
-				dt = -0.017;
+				dt3 = -0.017;
 			}
 		}
 		//=======================================================================
 		if (boss_state_ == FINAL_ATTACK)
 		{
-			rotateleftArmX += (float)(80 * dt);
+			rotateleftArmX += (float)(80 * dt4);
 			if (rotateleftArmX <= -90)
 			{
 				limit4 = true;
@@ -210,11 +210,11 @@ public:
 			}
 			if (limit4 == true && limit5 == false)
 			{
-				dt = 0.3;
+				dt4 = 0.3;
 			}
 			if (limit4 == false && limit5 == false)
 			{
-				dt = -0.3;
+				dt4 = -0.3;
 			}
 			if (count == 5)
 			{
@@ -222,7 +222,7 @@ public:
 			}
 			if (limit5 == true)
 			{
-				dt = 0;
+				dt4 = 0;
 			}
 		}
 		//======================================================================

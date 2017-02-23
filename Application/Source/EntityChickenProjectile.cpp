@@ -1,18 +1,18 @@
-#ifndef _ENTITY_FIRE_BALL_H_
-#define _ENTITY_FIRE_BALL_H_
+#ifndef _ENTITY_CHICKEN_PROJECTILE_H_
+#define _ENTITY_CHICKEN_PROJECTILE_H_
 
 #include "EntityProjectile.h"
 #include "MapBase.h"
 
-class EntityFireBall : public EntityProjectile
+class EntityChickenProjectile : public EntityProjectile
 {
 	float timer_;
 
 public:
-	EntityFireBall(Vector3 position, Vector3 forward, unsigned damage, float timer)
+	EntityChickenProjectile(Vector3 position, Vector3 forward, unsigned damage, float timer)
 	{
-		texture_string_ = "fireball";
-		projectileID_ = 0;
+		texture_string_ = "chicken_";
+		projectileID_ = 2;
 		health_ = 1;
 		position_ = position;
 		forward_ = forward;
@@ -28,7 +28,7 @@ public:
 
 	void onDeath()
 	{
-		
+
 	}
 
 	bool isEntityDead()
@@ -46,7 +46,7 @@ public:
 
 	void updateAI(float timer, unsigned dimensionID)
 	{
-		unsigned MOVING_SPEED = 200;
+		unsigned MOVING_SPEED = 50;
 
 		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
 			((int)(position_.x + (forward_.x * (MOVING_SPEED * 0.017)))),
@@ -57,6 +57,11 @@ public:
 		else
 		{
 			health_ = 0;
+		}
+
+		if (position_.y > 0)
+		{
+			position_.y -= .02;
 		}
 
 		if (timer > timer_ + 5)

@@ -5,7 +5,7 @@
 
 class ItemMinigun : public ItemWeapon
 {
-	unsigned timer_ = 0;
+	float timer_;
 
 public:
 	ItemMinigun()
@@ -18,7 +18,8 @@ public:
 		weapon_type_ = RANGE_AUTO;
 		durability_ = 250;
 		damage_ = 10;
-		attack_speed_ = 6;
+		attack_speed_ = .01;
+		timer_ = 0;
 
 		rarity_ = LEGENDARY;
 	}
@@ -28,10 +29,11 @@ public:
 	//------------------USES------------------
 	EntityProjectile* onItemAttackProjectile(float timer)
 	{
-		if (timer > timer_ + (timer * ((10. - attack_speed_) / 100.)))
+		if (timer > timer_ + ((attack_speed_ / 100.) * timer_))
 		{
-			EntityFireBall* fireball = new EntityFireBall(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer);
-			return fireball;
+			EntityBullet* bullet = new EntityBullet(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer);
+			timer_ = timer;
+			return bullet;
 		}
 		
 		return nullptr;

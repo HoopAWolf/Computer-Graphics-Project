@@ -3,6 +3,8 @@
 
 #include "ItemBase.h"
 #include "EntityFireBall.cpp"
+#include "EntityBullet.cpp"
+#include "EntityChickenProjectile.cpp"
 #include "Camera3.h"
 
 class ItemWeapon abstract  : public ItemBase
@@ -23,7 +25,7 @@ protected:
 
 	int durability_;
 	unsigned damage_;
-	unsigned attack_speed_;
+	float attack_speed_;
 
 	WEAPON_TYPE weapon_type_;
 
@@ -46,7 +48,7 @@ public:
 		return damage_;
 	}
 
-	virtual unsigned getWeaponAttackSpeed()
+	virtual float getWeaponAttackSpeed()
 	{
 		return attack_speed_;
 	}
