@@ -568,10 +568,23 @@ void StudioProject::Render()
 			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().y + 5,
 			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().z);
 
-		for (int j = 0; j < 5; j++)
-		{
-			RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), j), true);
-		}
+		modelStack.PushMatrix();
+		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 1), true);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 2), true);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 3), true);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 4), true);
+		modelStack.PopMatrix();
+
+		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0), true);
 		modelStack.PopMatrix();
 	}
 
@@ -614,6 +627,7 @@ void StudioProject::Render()
 		RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 0), true);
 		modelStack.PopMatrix();
 	}
+
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(4, DIMENSIONID); i++)
 	{
