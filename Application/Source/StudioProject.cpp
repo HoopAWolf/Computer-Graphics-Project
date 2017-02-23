@@ -502,8 +502,7 @@ void StudioProject::Update(double dt)
 
 	//------------------------------NPC Actions---------------------------------------------
 
-	static float translateDirection = 1;
-
+	
 
 	
 
