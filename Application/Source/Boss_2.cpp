@@ -47,7 +47,10 @@ public:
 
 	void updateAI(float timer, unsigned dimensionID)
 	{
-		boss_state_ = SKILL_1;
+		if (boss_state_ == IDLE)
+		{
+			boss_state_ = SKILL_2;
+		}
 		if (boss_state_ == WALKING)
 		{
 			walking = true;
@@ -99,12 +102,12 @@ public:
 		}
 		if (attacking == true)
 		{
-			rotateleftArmX += (float)(80 * dt);
-			if (rotateleftArmX <= -90);
+			rotaterightArmX += (float)(80 * dt);
+			if (rotaterightArmX <= -90);
 			{
 				limit = true;
 			}
-			if (rotateleftArmX >= 0)
+			if (rotaterightArmX >= 0)
 			{
 				limit = false;
 			}
@@ -149,7 +152,7 @@ public:
 		//==========================================================================================
 		if (boss_state_ == SKILL_1)
 		{
-			rotateleftArmX += (float)(80 * dt);
+			rotaterightArmX += (float)(80 * dt);
 			if (rotaterightArmX <= -90)
 			{
 				limit = true;
@@ -158,11 +161,11 @@ public:
 			{
 				limit = false;
 			}
-			if (limit3 == true)
+			if (limit == true)
 			{
 				dt = 0.3;
 			}
-			if (limit3 == false)
+			if (limit == false)
 			{
 				dt = -0.017;
 			}
@@ -181,11 +184,15 @@ public:
 			}
 			if (limit == true)
 			{
-				dt = 0.017;
+				dt = 0;
+			}
+			if (limit == false)
+			{
+				dt = -0.017;
 			}
 			if (count >= 200)
 			{
-				dt = -0.017;
+				dt = 0.017;
 			}
 		}
 		//===========================================================================================

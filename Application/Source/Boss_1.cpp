@@ -49,7 +49,7 @@ public:
 	{
 		if (boss_state_ == IDLE)
 		{
-			boss_state_ = FINAL_ATTACK;
+			boss_state_ = IDLE;
 		}
 
 		if (boss_state_ == WALKING)
