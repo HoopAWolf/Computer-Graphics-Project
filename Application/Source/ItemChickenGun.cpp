@@ -5,6 +5,9 @@
 
 class ItemChickenGun : public ItemWeapon
 {
+
+	float timer_;
+
 public:
 	ItemChickenGun()
 	{
@@ -16,7 +19,8 @@ public:
 		weapon_type_ = RANGE_AUTO;
 		durability_ = 280;
 		damage_ = 300;
-		attack_speed_ = 2;
+		attack_speed_ = 4;
+		timer_ = 0;
 
 		rarity_ = LEGENDARY;
 
@@ -30,9 +34,14 @@ public:
 
 	EntityProjectile* onItemAttackProjectile(float timer)
 	{
+		if (timer > timer_ + ((attack_speed_ / 100.) * timer_))
+		{
+			EntityChickenProjectile* chicken = new EntityChickenProjectile(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer);
+			timer_ = timer;
+			return chicken;
+		}
 
 		return nullptr;
-
 	}
 };
 

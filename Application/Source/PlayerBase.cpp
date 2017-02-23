@@ -32,6 +32,8 @@ void PlayerBase::startPlayer()
 	}
 
 	addIntoPlayerInventory(17);
+	addIntoPlayerInventory(11);
+	addIntoPlayerInventory(16);
 }
 
 void PlayerBase::playerUpdate(float timer)
@@ -42,11 +44,12 @@ void PlayerBase::playerUpdate(float timer)
 		{
 			if (getCurrentHeldItem()->getItemID() <= DataBase::instance()->getItemStarting())
 			{
-				if (((ItemWeapon *)getCurrentHeldItem())->getWeaponType() == 3)
+				if ((dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponType() == 3)
 				{
-					if (((ItemWeapon *)getCurrentHeldItem())->onItemAttackProjectile(timer) != nullptr)
+					EntityProjectile* tempObj = (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->onItemAttackProjectile(timer);
+					if (tempObj != nullptr)
 					{
-						DataBase::instance()->setEntity(dimension_, (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->onItemAttackProjectile(timer));
+						DataBase::instance()->setEntity(dimension_, tempObj);
 					}
 					player_state_ = IDLE;
 				}
@@ -330,4 +333,9 @@ void PlayerBase::moveCurrItem(bool forward)
 		if (current_held_item_ < 0)
 			current_held_item_ = 3;
 	}
+}
+
+void PlayerBase::increaseSkillPoint(unsigned skill_slot)
+{
+	skills_[skill_slot].x++;
 }

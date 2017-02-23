@@ -16,10 +16,11 @@ public:
 		item_name_ = "M4A4";
 
 
-		weapon_type_ = RANGE_AUTO;
+		weapon_type_ = RANGE_AUTO; 
 		durability_ = 43;
 		damage_ = 5;
-		attack_speed_ = 3;
+		attack_speed_ = .2;
+		timer_ = 0;
 
 		rarity_ = UNCOMMON;
 
@@ -30,10 +31,11 @@ public:
 	//------------------USES------------------
 	EntityProjectile* onItemAttackProjectile(float timer)
 	{
-		if (timer > timer_ + (timer * ((10 - attack_speed_) / 100.)))
+		if (timer > timer_ + ((attack_speed_ / 100.) * timer_))
 		{
-			EntityFireBall* fireball = new EntityFireBall(Camera::position, Camera::forward, damage_, timer);
-			return fireball;
+			EntityBullet* bullet = new EntityBullet(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer);
+			timer_ = timer;
+			return bullet;
 		}
 
 		return nullptr;

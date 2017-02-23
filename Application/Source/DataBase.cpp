@@ -251,6 +251,14 @@ void DataBase::registerEntityProjectiles()
 	temp_obj = new EntityFireBall(Vector3(0, 0, 0), Vector3(0, 0, 0), 0, 0);
 	projectile_data_base[(dynamic_cast<EntityProjectile*>(temp_obj))->getProjectileID()] = new EntityFireBall(Vector3(0, 0, 0), Vector3(0, 0, 0), 0, 0);
 	delete temp_obj;
+
+	temp_obj = new EntityBullet(Vector3(0, 0, 0), Vector3(0, 0, 0), 0, 0);
+	projectile_data_base[(dynamic_cast<EntityProjectile*>(temp_obj))->getProjectileID()] = new EntityBullet(Vector3(0, 0, 0), Vector3(0, 0, 0), 0, 0);
+	delete temp_obj;
+
+	temp_obj = new EntityChickenProjectile(Vector3(0, 0, 0), Vector3(0, 0, 0), 0, 0);
+	projectile_data_base[(dynamic_cast<EntityProjectile*>(temp_obj))->getProjectileID()] = new EntityChickenProjectile(Vector3(0, 0, 0), Vector3(0, 0, 0), 0, 0);
+	delete temp_obj;
 }
 
 ItemBase* DataBase::getItem(unsigned itemID)
