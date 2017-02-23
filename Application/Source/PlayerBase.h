@@ -33,7 +33,7 @@ private:
 	static PlayerBase *s_instance;
 	int player_health_, current_held_item_;
 	int current_skill_active_[2];
-	unsigned damage_, attack_speed_, moving_speed_, ammo_, attribute_points_, resistance_, dimension_ , 
+	unsigned damage_, attack_speed_, moving_speed_, ammo_, attribute_points_ , resistance_, dimension_ , 
 		level_, experience_, level_cap_;
 	Vector3 size_;
 

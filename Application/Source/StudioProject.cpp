@@ -315,6 +315,7 @@ void StudioProject::Update(double dt)
 		PlayerBase::instance()->setPlayerDimension(DIMENSIONID);
 
 	SceneManager::getSceneManger()->getmycursor();
+
 	ShowCursor(false);
 	if (!inattrib)
 	{
@@ -476,12 +477,45 @@ void StudioProject::Update(double dt)
 			attrib = true;
 			inattrib = true;
 			timer = Application::elapsed_timer_;
+	
 		}
 		else if (Application::IsKeyPressed('K') && attrib)
 		{
 			attrib = false;
 			inattrib = false;
 			timer = Application::elapsed_timer_;
+			
+		}
+
+		if (Application::IsKeyPressed(VK_LBUTTON) && !s && attrib)
+		{
+			std::cout <<"ap"<< PlayerBase::instance()->getAttributePoint() << std::endl;
+			if (PlayerBase::instance()->getAttributePoint()!=0)
+			{
+				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>138 && SceneManager::getSceneManger()->cy < 190)
+				{
+					PlayerBase::instance()->increaseSkillPoint(0);
+				}
+				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>232 && SceneManager::getSceneManger()->cy < 285)
+				{
+					PlayerBase::instance()->increaseSkillPoint(1);
+				}
+				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>363 && SceneManager::getSceneManger()->cy < 416)
+				{
+					PlayerBase::instance()->increaseSkillPoint(2);
+				}
+				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>458 && SceneManager::getSceneManger()->cy < 511)
+				{
+					PlayerBase::instance()->increaseSkillPoint(3);
+				}
+			}
+			s = true;
+			timer = Application::elapsed_timer_;
+
+		}
+		else
+		{
+			s = false;
 		}
 	}
 
@@ -500,7 +534,11 @@ void StudioProject::Update(double dt)
 
 	static float translateDirection = 1;
 
-
+	//X 482 537
+	//F 139  189
+	//W233  284
+	//L364 415
+	//E459 510
 	
 
 }
@@ -794,13 +832,12 @@ void StudioProject::Render()
 
 	if (attrib)
 	{
-		RenderMeshOnScreen(meshList[GEO_ATTRIBUTES], 40, 27.5, 40, 40, 90);
+		RenderMeshOnScreen(meshList[GEO_ATTRIBUTES], 40, 27.5, 40, 40, 90); 
 
 		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(0)), Color(1, 1, 1), 1.8, 24,24.4 );
 		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(1)), Color(1, 1, 1), 1.8, 24, 19.1);
 		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(2)), Color(1, 1, 1), 1.8, 24, 12);
 		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(3)), Color(1, 1, 1), 1.8, 24, 6.7);
-
 	}
 	if (mouse)
 	{

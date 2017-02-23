@@ -289,7 +289,11 @@ void PlayerBase::increaseExperience(unsigned ammount)
 		{
 			experience_ -= level_cap_;
 			level_cap_ = getPlayerLevelCap() + (int)((double)getPlayerLevelCap() * (8. / 100.));
-			level_ += 1;	
+			level_ += 1;
+			if (level_ % 5 == 0)
+			{
+				attribute_points_++;
+			}
 		}
 	}
 }
@@ -338,4 +342,5 @@ void PlayerBase::moveCurrItem(bool forward)
 void PlayerBase::increaseSkillPoint(unsigned skill_slot)
 {
 	skills_[skill_slot].x++;
+	attribute_points_--;
 }

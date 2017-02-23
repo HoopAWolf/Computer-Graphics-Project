@@ -167,7 +167,7 @@ public:
 	bool attrib = false;
 	bool inattrib = false;
 	bool mouse = false;
-
+	bool s=false;
 
 
 	bool walk = false;
