@@ -235,6 +235,11 @@ void DataBase::registerEntityMinion()
 	delete temp_obj;
 }
 
+void DataBase::registerEntityNPC()
+{
+
+}
+
 void DataBase::registerEntityBoss()
 {
 	EntityBase *temp_obj;
@@ -308,6 +313,16 @@ EntityBase* DataBase::getBossEntityBase(unsigned bossID)
 	if (bossID < boss_data_base.size())  //CHECK IF BOSSID IS IN THE BOSS BASE
 	{
 		return boss_data_base[bossID];  //RETURN ENTITYBASE FROM BOSS BASE VIA BOSSID
+	}
+
+	return nullptr;  //RETURN NULL IF THERE IS NO ITME
+}
+
+EntityBase* DataBase::getNPCEntityBase(unsigned npcID)
+{
+	if (npcID < npc_data_base.size())  //CHECK IF BOSSID IS IN THE BOSS BASE
+	{
+		return npc_data_base[npcID];  //RETURN ENTITYBASE FROM BOSS BASE VIA BOSSID
 	}
 
 	return nullptr;  //RETURN NULL IF THERE IS NO ITME
@@ -416,6 +431,13 @@ EntityBase* DataBase::getEntityMinion(unsigned dimensionID, int positionInVector
 	return nullptr;
 }
 
+EntityBase* DataBase::getEntityNPC(unsigned dimensionID, int positionInVector)
+{
+	if (positionInVector < npc_base[dimensionID].size())
+		return npc_base[dimensionID][positionInVector];
+	return nullptr;
+}
+
 EntityBase* DataBase::getEntityBoss(unsigned dimensionID, int positionInVector)
 {
 	if (positionInVector < boss_base_[dimensionID].size())
@@ -430,13 +452,16 @@ EntityBase* DataBase::getEntityProjectile(unsigned dimensionID, int positionInVe
 	return nullptr;
 }
 
-void DataBase::setEntity(bool isBoss, bool isMinion, unsigned dimensionID, EntityBase* entity)
+void DataBase::setEntity(bool isBoss, bool isMinion, bool isNPC, unsigned dimensionID, EntityBase* entity)
 {
 	if (isBoss)
 		boss_base_[dimensionID].push_back(entity);
 
 	else if (isMinion)
 		minion_base_[dimensionID].push_back(entity);
+
+	else if (isNPC)
+		npc_base[dimensionID].push_back(entity);
 }
 
 void DataBase::setEntity(unsigned dimensionID, EntityDrop* entity)
@@ -455,7 +480,7 @@ void DataBase::setEnvironment(unsigned dimensionID, EnvironmentBase* environment
 }
 
 
-//0 - ITEM BASE, 1 - ENVIRONMENT BASE, 2 - MINION BASE, 3 - BOSS BASE, 4 - PROJECTILE BASE
+//0 - ITEM BASE, 1 - ENVIRONMENT BASE, 2 - MINION BASE, 3 - BOSS BASE, 4 - PROJECTILE BASE, 5- NPC BASE
 int DataBase::sizeOfDataBase(unsigned base)
 {
 	switch (base)
@@ -470,12 +495,14 @@ int DataBase::sizeOfDataBase(unsigned base)
 		return boss_data_base.size();
 	case 4:
 		return projectile_data_base.size();
+	case 5:
+		return npc_data_base.size();
 	default:
 		return 0;
 	};
 }
 
-//0 - DROP BASE, 1 - BUILDING BASE, 2 - ENTITY MINION BASE, 3 - ENTITY BOSS BASE, 4 - PROJECTILE BOSS BASE
+//0 - DROP BASE, 1 - BUILDING BASE, 2 - ENTITY MINION BASE, 3 - ENTITY BOSS BASE, 4 - PROJECTILE BOSS BASEm 5 - NPC BASE
 int DataBase::sizeOfDimensionObjBase(unsigned base, unsigned dimensionID)
 {
 
@@ -491,6 +518,8 @@ int DataBase::sizeOfDimensionObjBase(unsigned base, unsigned dimensionID)
 		return boss_base_[dimensionID].size();
 	case 4:
 		return projectile_base_[dimensionID].size();
+	case 5:
+		return npc_base[dimensionID].size();
 	default:
 		return 0;
 	};
@@ -523,4 +552,10 @@ void DataBase::destroyEntityProjectile(unsigned dimensionID, int positionInVecto
 {
 	delete projectile_base_[dimensionID][positionInVector];
 	projectile_base_[dimensionID].erase(projectile_base_[dimensionID].begin() + positionInVector);
+}
+
+void DataBase::destroyEntityNPC(unsigned dimensionID, int positionInVector)
+{
+	delete npc_base[dimensionID][positionInVector];
+	npc_base[dimensionID].erase(npc_base[dimensionID].begin() + positionInVector);
 }

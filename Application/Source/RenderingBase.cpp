@@ -30,6 +30,11 @@ void RenderingBase::registerAllRenderingData()
 		projectile_mesh[i] = MeshBuilder::GenerateOBJ(DataBase::instance()->getProjectileEntityBase(i)->getTextureString(), "OBJ//" + DataBase::instance()->getProjectileEntityBase(i)->getTextureString() + ".obj");
 	}
 
+	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(5); i++)
+	{
+		npc_mesh[i] = MeshBuilder::GenerateOBJ(DataBase::instance()->getNPCEntityBase(i)->getTextureString(), "OBJ//" + DataBase::instance()->getNPCEntityBase(i)->getTextureString() + ".obj");
+	}
+
 }
 
 Mesh* RenderingBase::getItemMesh(unsigned itemID)

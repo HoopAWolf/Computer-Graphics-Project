@@ -263,6 +263,9 @@
     <ClCompile Include="Source\MeleeMinion_2.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\NPCGirlwithBoobs.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -371,6 +374,9 @@
       <Filter>Header Files\DataBase</Filter>
     </ClInclude>
     <ClInclude Include="Source\EntityProjectile.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityNPC.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>

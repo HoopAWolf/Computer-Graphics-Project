@@ -145,6 +145,7 @@
     <ClCompile Include="Source\MeleeMinion_2.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
+    <ClCompile Include="Source\NPCGirlwithBoobs.cpp" />
     <ClCompile Include="Source\PlayerBase.cpp" />
     <ClCompile Include="Source\RangedMinion_1.cpp" />
     <ClCompile Include="Source\RangedMinion_2.cpp" />
@@ -161,6 +162,7 @@
   <ItemGroup>
     <ClInclude Include="Source\AABB.h" />
     <ClInclude Include="Source\Application.h" />
+    <ClInclude Include="Source\EntityNPC.h" />
     <ClInclude Include="Source\EntityProjectile.h" />
     <ClInclude Include="Source\EnvironmentBase.h" />
     <ClInclude Include="Source\Camera.h" />
