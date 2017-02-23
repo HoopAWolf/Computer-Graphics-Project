@@ -38,6 +38,8 @@ protected:
 	float dt = -0.017;
 	float dt1 = 0.017;
 	float dt2 = 0;
+	float dt3 = -0.017;
+	float dt4 = -0.017;
 	float rotateleftLeg = 0.0f;
 	float rotaterightLeg = 0.0f;
 	float rotateleftArmX = 0.0f;
@@ -60,7 +62,6 @@ protected:
 	bool limit3 = false;
 	bool limit4 = false;
 	bool limit5 = false;
-	bool limit6 = false;
 
 
 public:
@@ -100,26 +101,32 @@ public:
 	{
 		return rotateleftArmX;
 	}
+
 	virtual float getrotateleftArmY()
 	{
 		return rotateleftArmY;
 	}
+
 	virtual float getrotateleftArmZ()
 	{
 		return rotateleftArmZ;
 	}
+
 	virtual float getrotaterightArmX()
 	{
 		return rotaterightArmX;
 	}
+
 	virtual float getrotaterightArmY()
 	{
 		return rotaterightArmY;
 	}
+
 	virtual float getrotaterightArmZ()
 	{
 		return rotaterightArmZ;
 	}
+
 	virtual float getspin()
 	{
 		return spin;

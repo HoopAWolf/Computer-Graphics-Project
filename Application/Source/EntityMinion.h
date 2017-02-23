@@ -24,6 +24,20 @@ protected:
 	unsigned minionID_;
 	string minion_name_;
 
+	float minionrotateleftLeg = 0.0f;
+	float minionrotaterightLeg = 0.0f;
+	float rotateminionArm = 0.0f;
+	float rotateminionBody = 0.0f;
+	float dt = -0.017;
+	float dt1 = 0.034;
+
+	bool minionrightlegBackward = 0.0f;
+	bool minionrightlegForward = 0.0f;
+	bool minionleftlegBackward = 0.0f;
+	bool minionleftlegForward = 0.0f;
+	bool Minionlimit = false;
+	bool minionwalking = false;
+
 public:
 	virtual ~EntityMinion(){};
 
