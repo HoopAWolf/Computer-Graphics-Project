@@ -17,6 +17,7 @@ public:
 		durability_ = 25;
 		damage_ = 10;
 		attack_speed_ = 4;
+		bulletcount_ = 10;
 
 		rarity_ = COMMON;
 	}

@@ -25,6 +25,7 @@ protected:
 
 	int durability_;
 	unsigned damage_;
+	unsigned bulletcount_;
 	float attack_speed_;
 
 	WEAPON_TYPE weapon_type_;
@@ -51,6 +52,11 @@ public:
 	virtual float getWeaponAttackSpeed()
 	{
 		return attack_speed_;
+	}
+
+	virtual unsigned getBulletCount()
+	{
+		return bulletcount_;
 	}
 
 	//------------------USES------------------

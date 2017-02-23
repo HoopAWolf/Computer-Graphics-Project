@@ -21,6 +21,7 @@ public:
 		damage_ = 300;
 		attack_speed_ = 4;
 		timer_ = 0;
+		bulletcount_ = 30;
 
 		rarity_ = LEGENDARY;
 

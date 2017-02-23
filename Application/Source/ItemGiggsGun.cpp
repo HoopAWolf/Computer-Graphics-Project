@@ -17,6 +17,7 @@ public:
 		durability_ = 45;
 		damage_ = 20;
 		attack_speed_ = 3;
+		bulletcount_ = 3;
 
 		rarity_ = LEGENDARY;
 

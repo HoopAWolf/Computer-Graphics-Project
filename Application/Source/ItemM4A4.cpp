@@ -21,6 +21,7 @@ public:
 		damage_ = 5;
 		attack_speed_ = .2;
 		timer_ = 0;
+		bulletcount_ = 10;
 
 		rarity_ = UNCOMMON;
 

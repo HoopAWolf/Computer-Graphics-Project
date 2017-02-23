@@ -9,7 +9,7 @@ void PlayerBase::startPlayer()
 	damage_ = 1;
 	attack_speed_ = 1;
 	moving_speed_ = 1;
-	ammo_ = 20;
+	ammo_ = 300;
 	attribute_points_ = 0;
 	resistance_ = 1;
 	level_ = 1;
@@ -18,6 +18,7 @@ void PlayerBase::startPlayer()
 	player_state_ = IDLE;
 	current_held_item_ = 0;
 	size_ = Vector3(2, 3, 2);
+	isRecharging = false;
 	current_skill_active_[0] = 0;
 	current_skill_active_[1] = 1;
 
@@ -38,30 +39,58 @@ void PlayerBase::startPlayer()
 
 void PlayerBase::playerUpdate(float timer, float dt)
 {
-	if (player_state_ == LEFT_CLICK)
-	{
-		if (getCurrentHeldItem() != nullptr)
-		{
-			if (getCurrentHeldItem()->getItemID() <= DataBase::instance()->getItemStarting())
-			{
-				if ((dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponType() == 3)
-				{
-					EntityProjectile* tempObj = (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->onItemAttackProjectile(timer, dt);
-					if (tempObj != nullptr)
-					{
-						DataBase::instance()->setEntity(dimension_, tempObj);
-					}
-					player_state_ = IDLE;
-				}
-				else
-				{
+	std::cout << getPlayerAmmo() << std::endl;
 
-					player_state_ = IDLE;
+	if (getPlayerAmmo() > 0 && !isRecharging)
+	{
+		if (player_state_ == LEFT_CLICK)
+		{
+			if (getCurrentHeldItem() != nullptr)
+			{
+				if (getCurrentHeldItem()->getItemID() <= DataBase::instance()->getItemStarting())
+				{
+					if ((dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponType() == 3)
+					{
+						EntityProjectile* tempObj = (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->onItemAttackProjectile(timer, dt);
+						if (tempObj != nullptr)
+						{
+							DataBase::instance()->setEntity(dimension_, tempObj);
+							ammo_ -= (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getBulletCount();
+							if (getPlayerAmmo() <= 0)
+							{
+								ammo_ = 0;
+								rechargingTimer = timer;
+								isRecharging = true;
+							}
+						}
+						player_state_ = IDLE;
+					}
+					else
+					{
+
+						player_state_ = IDLE;
+					}
 				}
 			}
+			else
+				player_state_ = IDLE;
 		}
-		else
-			player_state_ = IDLE;
+	}
+
+	if (isRecharging == true)
+	{
+		if (timer > rechargingTimer + 1)
+		{
+			if (ammo_ >= 300)
+			{
+				isRecharging = false;
+			}
+			else
+			{
+				ammo_ += 30;
+				rechargingTimer = timer;
+			}
+		}
 	}
 
 	//RESET COOLDOWN
@@ -194,7 +223,7 @@ AABB PlayerBase::getBoundingBox()
 	return bounding.getBoundryAtCoord(Camera::position);
 }
 
-unsigned PlayerBase::getPlayerAmmo()
+int PlayerBase::getPlayerAmmo()
 {
 	return ammo_;
 }
