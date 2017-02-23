@@ -21,15 +21,16 @@ public:
 		damage_ = 5;
 		attack_speed_ = .2;
 		timer_ = 0;
+		bulletcount_ = 10;
 
 		rarity_ = UNCOMMON;
 
 	}
 
-	void onItemUse(float timer){}
+	void onItemUse(float timer, float dt){}
 
 	//------------------USES------------------
-	EntityProjectile* onItemAttackProjectile(float timer)
+	EntityProjectile* onItemAttackProjectile(float timer, float dt)
 	{
 		if (timer > timer_ + ((attack_speed_ / 100.) * timer_))
 		{

@@ -98,10 +98,21 @@ void StudioProject::Init()
 		DataBase::instance()->setEntity(1, new EntityDrop(i, Vector3(1 + i * 20, 0, 80), Application::elapsed_timer_));
 	}
 
-	DataBase::instance()->setEntity(true, false, 1, new Boss_1(Vector3(10 + 0 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(true, false, 1, new Boss_2(Vector3(10 + 5 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(true, false, 1, new Boss_3(Vector3(10 + 10 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(true, false, 1, new Boss_4(Vector3(10 + 15 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(true, false, false, 1, new Boss_1(Vector3(10 + 0 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(true, false, false, 1, new Boss_2(Vector3(10 + 5 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(true, false, false, 1, new Boss_3(Vector3(10 + 10 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(true, false, false, 1, new Boss_4(Vector3(10 + 15 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+
+	DataBase::instance()->setEntity(false, true, false, 1, new MeleeMinion_1(Vector3(10 + 0 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, false, 1, new RangedMinion_1(Vector3(10 + 5 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, false, 1, new RangedMinion_2(Vector3(10 + 10 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+
+	/*DataBase::instance()->setEntity(false, false, true, 1, new MeleeMinion_1(Vector3(10 + 0 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new RangedMinion_1(Vector3(10 + 5 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new RangedMinion_2(Vector3(10 + 10 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));*/
+
+
+
 	//--------------------------------------------------------^REMOVE ONCE DONE^--------------------------------------------------------
 
 	// Set background color to dark blue
@@ -340,11 +351,11 @@ void StudioProject::Update(double dt)
 		}
 	}
 
-	PlayerBase::instance()->playerUpdate(Application::elapsed_timer_);
+	PlayerBase::instance()->playerUpdate(Application::elapsed_timer_, dt);
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(0, DIMENSIONID); i++)
 	{
-		DataBase::instance()->getEntityDrop(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		DataBase::instance()->getEntityDrop(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID, dt);
 		if (DataBase::instance()->getEntityDrop(DIMENSIONID, i)->isEntityDead())
 		{
 			DataBase::instance()->destroyEntityDrop(DIMENSIONID, i);
@@ -354,7 +365,7 @@ void StudioProject::Update(double dt)
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(2, DIMENSIONID); i++)
 	{
-		DataBase::instance()->getEntityMinion(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		DataBase::instance()->getEntityMinion(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID, dt);
 		if (DataBase::instance()->getEntityMinion(DIMENSIONID, i)->isEntityDead())
 		{
 			DataBase::instance()->destroyEntityMinion(DIMENSIONID, i);
@@ -364,7 +375,7 @@ void StudioProject::Update(double dt)
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(3, DIMENSIONID); i++)
 	{
-		DataBase::instance()->getEntityBoss(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		DataBase::instance()->getEntityBoss(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID, dt);
 		if (DataBase::instance()->getEntityBoss(DIMENSIONID, i)->isEntityDead())
 		{
 			DataBase::instance()->destroyEntityBoss(DIMENSIONID, i);
@@ -374,10 +385,20 @@ void StudioProject::Update(double dt)
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(4, DIMENSIONID); i++)
 	{
-		DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID, dt);
 		if (DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->isEntityDead())
 		{
 			DataBase::instance()->destroyEntityProjectile(DIMENSIONID, i);
+			--i;
+		}
+	}
+
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(5, DIMENSIONID); i++)
+	{
+		DataBase::instance()->getEntityNPC(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID, dt);
+		if (DataBase::instance()->getEntityNPC(DIMENSIONID, i)->isEntityDead())
+		{
+			DataBase::instance()->destroyEntityNPC(DIMENSIONID, i);
 			--i;
 		}
 	}
@@ -527,19 +548,6 @@ void StudioProject::Update(double dt)
 	{
 		PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
 	}
-
-
-
-	//------------------------------NPC Actions---------------------------------------------
-
-	static float translateDirection = 1;
-
-	//X 482 537
-	//F 139  189
-	//W233  284
-	//L364 415
-	//E459 510
-	
 
 }
 
@@ -755,6 +763,16 @@ void StudioProject::Render()
 		modelStack.PopMatrix();
 	}
 
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(5, DIMENSIONID); i++)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().x,
+			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().y,
+			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().z);
+		RenderMesh(RenderingBase::instance()->getNPCMesh((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getNPCID()), false);
+		modelStack.PopMatrix();
+	}
+
 	if (PlayerBase::instance()->getCurrentHeldItem() != nullptr)
 	{
 		modelStack.PushMatrix();
@@ -843,54 +861,6 @@ void StudioProject::Render()
 	{
 		RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx / 10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy) / 10, 15, 15, 90);
 	}
-
-
-	//---------------------------------------------------NPC------------------------------------------------------
-	//Do not touch these people, #NPCLIVESMATTER
-
-	modelStack.PushMatrix();
-	modelStack.Translate(132, 0, 126);
-	RenderMesh(meshList[GEO_GIRL], true);
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-	modelStack.Translate(22, 0, 98);
-	RenderMesh(meshList[GEO_NEGAN], true);
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-	modelStack.Translate(28, 0, 98);
-	RenderMesh(meshList[GEO_EMOKIDNPC], true);
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-	modelStack.Translate(126, 0, 26);
-	modelStack.Rotate(70, 0, 1, 0);
-	RenderMesh(meshList[GEO_ELENPC], true);
-	modelStack.PopMatrix();
-
-
-	modelStack.PushMatrix();
-	modelStack.Translate(307, 0, 24);
-	modelStack.Rotate(-70, 0, 1, 0);
-	RenderMesh(meshList[GEO_LADY], true);
-	modelStack.PopMatrix();
-
-
-	modelStack.PushMatrix();
-	modelStack.Translate(288, 0, 149);
-	modelStack.Rotate(-90, 0, 1, 0);
-	RenderMesh(meshList[GEO_BOYNPC], true);
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-	modelStack.Translate(203, 0, 205);
-	modelStack.Rotate(-180, 0, 1, 0);
-	RenderMesh(meshList[GEO_SCIENTISTNPC], true);
-	modelStack.PopMatrix();
-
-	//------------------------------------------------------------------------------------------------
-	//------------------------------------------------------------------------------------------------
 
 
 }

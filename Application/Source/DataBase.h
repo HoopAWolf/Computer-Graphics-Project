@@ -59,6 +59,12 @@
 #include "Boss_3.cpp"
 #include "Boss_4.cpp"
 
+#include "MeleeMinion_1.cpp"
+#include "RangedMinion_1.cpp"
+#include "RangedMinion_2.cpp"
+
+#include "NPCGirlWithBoobs.cpp"
+
 #include <vector>
 #include <map>
 #include <string>
@@ -144,12 +150,14 @@ private:
 	map<unsigned, ItemBase *> item_base_;  //STORES ALL THE ITEMS INTO THE DATABASE
 	map<unsigned, EnvironmentBase *> environment_data_base;  //STORES ALL ENVIRONMENT DATA
 	map<unsigned, EntityBase *> minion_data_base;  //STORES ALL ENVIRONMENT DATA
+	map<unsigned, EntityBase *> npc_data_base;  //STORES ALL ENVIRONMENT DATA
 	map<unsigned, EntityBase *> boss_data_base;  //STORES ALL ENVIRONMENT DATA
 	map<unsigned, EntityBase *> projectile_data_base;  //STORES ALL PROJECTILE DATA
 
 	map<unsigned, vector<EntityDrop *>> drop_base_;  //STORES ALL ENTITY DROPS IN THE WORLD
 	map<unsigned, vector<EnvironmentBase *>> enviornment_base_;  //STORES ALL BUILDINGS IN THE WORLD
 	map<unsigned, vector<EntityBase *>> minion_base_;  //STORES ALL ENTITY MINION IN THE WORLD
+	map<unsigned, vector<EntityBase *>> npc_base;  //STORES ALL ENTITY MINION IN THE WORLD
 	map<unsigned, vector<EntityBase *>> boss_base_;  //STORES ALL ENTITY BOSS IN THE WORLD
 	map<unsigned, vector<EntityBase*>> projectile_base_;  //STORES ALL PROJECTILES IN THE WORLD
 	Color rarity_color_[4];
@@ -166,11 +174,13 @@ public:
 	void registerItems();  //REGISTER ALL ITEMS ONLY ONCE
 	void registerEnvironments();  //REGISTER ALL ENVIRONMENT ONLY ONCE
 	void registerEntityMinion();  //REGISTER ALL MINIONS ONLY ONCE
+	void registerEntityNPC();  //REGISTER ALL NPCS ONLY ONCE
 	void registerEntityBoss();  //REGISTER ALL BOSS ONLY ONCE
 	void registerEntityProjectiles();  //REGISTER ALL PROJECTILES ONLY ONCE
 	ItemBase* getItem(unsigned itemID);  //RETURN ITEM THROUGH ITEMID
 	EnvironmentBase* getEnvironmentBase(unsigned environmentID);  //RETURN ENVIONMENT OBJ THROUGH ENVIONRMENT ID
 	EntityBase* getMinionEntityBase(unsigned minionID);  //RETURN MINION ENTITY THROUGH ENTITY ID
+	EntityBase* getNPCEntityBase(unsigned npcID);  //RETURN NPC ENTITY THROUGH ENTITY ID
 	EntityBase* getBossEntityBase(unsigned bossID);  //RETURN BOSS THROUGH BOSS ID
 	EntityBase* getProjectileEntityBase(unsigned projectileID);  //RETURN PROJECTILE THROUGH PROJECTILE ID
 
@@ -180,12 +190,13 @@ public:
 	EnvironmentBase* getEnvironment(unsigned dimensionID, int positionInVector);
 	EntityDrop* getEntityDrop(unsigned dimensionID, int positionInVector);
 	EntityBase* getEntityMinion(unsigned dimensionID, int positionInVector);
+	EntityBase* getEntityNPC(unsigned dimensionID, int positionInVector);
 	EntityBase* getEntityBoss(unsigned dimensionID, int positionInVector);
 	EntityBase* getEntityProjectile(unsigned dimensionID, int positionInVector);
 
 	int sizeOfDataBase(unsigned base);
 	int sizeOfDimensionObjBase(unsigned base, unsigned dimensionID);
-	void setEntity(bool isBoss, bool isMinion, unsigned dimensionID, EntityBase* entity);
+	void setEntity(bool isBoss, bool isMinion, bool isNPC, unsigned dimensionID, EntityBase* entity);
 	void setEntity(unsigned dimensionID, EntityDrop* entity);
 	void setEntity(unsigned dimensionID, EntityProjectile* entity);
 	void setEnvironment(unsigned dimensionID, EnvironmentBase* environment);
@@ -204,6 +215,7 @@ public:
 	void destroyEntityDrop(unsigned dimensionID, int positionInVector);
 	void destroyEntityMinion(unsigned dimensionID, int positionInVector);
 	void destroyEntityBoss(unsigned dimensionID, int positionInVector);
+	void destroyEntityNPC(unsigned dimensionID, int positionInVector);
 	void destroyEntityProjectile(unsigned dimensionID, int positionInVector);
 	
 };

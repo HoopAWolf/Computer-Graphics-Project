@@ -95,7 +95,7 @@ public:
 	virtual bool isEntityDead() = 0;
 
 	virtual void setPosition(Vector3 position) = 0;
-	virtual void updateAI(float timer, unsigned dimensionID) = 0;
+	virtual void updateAI(float timer, unsigned dimensionID, float dt) = 0;
 
 };
 

@@ -21,18 +21,19 @@ public:
 		damage_ = 300;
 		attack_speed_ = 4;
 		timer_ = 0;
+		bulletcount_ = 30;
 
 		rarity_ = LEGENDARY;
 
 	}
 
 	//------------------USES------------------
-	void onItemUse(float timer)
+	void onItemUse(float timer, float dt)
 	{
 		;
 	}
 
-	EntityProjectile* onItemAttackProjectile(float timer)
+	EntityProjectile* onItemAttackProjectile(float timer, float dt)
 	{
 		if (timer > timer_ + ((attack_speed_ / 100.) * timer_))
 		{

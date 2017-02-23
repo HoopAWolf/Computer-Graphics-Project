@@ -44,24 +44,24 @@ public:
 		position_ = position;
 	}
 
-	void updateAI(float timer, unsigned dimensionID)
+	void updateAI(float timer, unsigned dimensionID, float dt)
 	{
 		unsigned MOVING_SPEED = 50;
 
 		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
-			((int)(position_.x + (forward_.x * (MOVING_SPEED * 0.017)))),
-			((int)(position_.z + (forward_.z * (MOVING_SPEED * 0.017))))) != '#')
+			((int)(position_.x + (forward_.x * (MOVING_SPEED * dt)))),
+			((int)(position_.z + (forward_.z * (MOVING_SPEED * dt))))) != '#')
 		{
-			position_ += (forward_ * (MOVING_SPEED * 0.017));
+			position_ += (forward_ * (MOVING_SPEED * dt));
 		}
 		else
 		{
 			health_ = 0;
 		}
 
-		if (position_.y > 0)
+		if (forward_.y > -20)
 		{
-			position_.y -= .02;
+			forward_.y -= .008;
 		}
 
 		if (timer > timer_ + 5)

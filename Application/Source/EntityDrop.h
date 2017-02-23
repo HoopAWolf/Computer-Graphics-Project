@@ -44,7 +44,7 @@ public:
 	}
 
 
-	void updateAI(float timer, unsigned dimensionID)
+	void updateAI(float timer, unsigned dimensionID, float dt)
 	{
 		rotation_Y_ = timer * 15;
 		if (getBoundingBox().isAABBInsideAABB(PlayerBase::instance()->getBoundingBox()) && !PlayerBase::instance()->isInventoryFull())

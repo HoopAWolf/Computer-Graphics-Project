@@ -3,6 +3,7 @@
 class Environmentstatuehalfset : public EnvironmentBase
 {
 public:
+
 	Environmentstatuehalfset()
 	{
 		texture_string_ = "StatueBase_halfset";

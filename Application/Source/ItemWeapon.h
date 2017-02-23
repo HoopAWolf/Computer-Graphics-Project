@@ -25,6 +25,7 @@ protected:
 
 	int durability_;
 	unsigned damage_;
+	unsigned bulletcount_;
 	float attack_speed_;
 
 	WEAPON_TYPE weapon_type_;
@@ -53,8 +54,13 @@ public:
 		return attack_speed_;
 	}
 
+	virtual unsigned getBulletCount()
+	{
+		return bulletcount_;
+	}
+
 	//------------------USES------------------
-	virtual EntityProjectile* onItemAttackProjectile(float timer) = 0;
+	virtual EntityProjectile* onItemAttackProjectile(float timer, float dt) = 0;
 };
 
 #endif

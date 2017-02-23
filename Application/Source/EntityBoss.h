@@ -35,11 +35,11 @@ protected:
 
 	int count = 0;
 
-	float dt = -0.017;
-	float dt1 = 0.017;
+	float dt = -dt;
+	float dt1 = dt;
 	float dt2 = 0;
-	float dt3 = -0.017;
-	float dt4 = -0.017;
+	float dt3 = -dt;
+	float dt4 = -dt;
 	float rotateleftLeg = 0.0f;
 	float rotaterightLeg = 0.0f;
 	float rotateleftArmX = 0.0f;

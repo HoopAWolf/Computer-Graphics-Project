@@ -17,17 +17,18 @@ public:
 		durability_ = 25;
 		damage_ = 10;
 		attack_speed_ = 4;
+		bulletcount_ = 10;
 
 		rarity_ = COMMON;
 	}
 
 	//------------------USES------------------
-	void onItemUse(float timer)
+	void onItemUse(float timer, float dt)
 	{
 		;
 	}
 
-	EntityProjectile* onItemAttackProjectile(float timer)
+	EntityProjectile* onItemAttackProjectile(float timer, float dt)
 	{
 
 		return nullptr;

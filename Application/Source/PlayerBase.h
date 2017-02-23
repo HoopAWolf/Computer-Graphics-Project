@@ -31,10 +31,13 @@ private:
 
 	PlayerBase(){};
 	static PlayerBase *s_instance;
-	int player_health_, current_held_item_;
+	int player_health_, current_held_item_, ammo_;
 	int current_skill_active_[2];
-	unsigned damage_, attack_speed_, moving_speed_, ammo_, attribute_points_ , resistance_, dimension_ , 
+
+	unsigned damage_, attack_speed_, moving_speed_,attribute_points_ , resistance_, dimension_ , 
 		level_, experience_, level_cap_;
+	bool isRecharging;
+	float rechargingTimer;
 	Vector3 size_;
 
 	vector<ItemBase *> inventory_data_;
@@ -53,7 +56,7 @@ public:
 	}
 
 	void startPlayer();
-	void playerUpdate(float timer);
+	void playerUpdate(float timer, float dt);
 
 	ItemBase* getItemFromInventory(int slot);
 	ItemBase* getCurrentHeldItem();
@@ -67,6 +70,7 @@ public:
 	unsigned getPlayerLevel();
 	unsigned getPlayerExperience();
 	unsigned getPlayerLevelCap();
+	int getPlayerAmmo();
 	unsigned getCurrentSkillPoint(unsigned skill_slot);
 	unsigned getCurrentSkillDamage(unsigned skill_slot);
 	unsigned getCurrentSkillCoolDown(unsigned skill_slot);
