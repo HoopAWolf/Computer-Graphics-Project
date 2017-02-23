@@ -207,6 +207,43 @@ void StudioProject::Init()
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 	//------------------------------------------------------------------------------------------
+	//NPC for this scene only
+	//Its gonna be funny seeing all of dem walk huehuehue
+
+
+	meshList[GEO_GIRL] = MeshBuilder::GenerateOBJ("Girl", "OBJ//girlwithboobs_.obj");
+	meshList[GEO_GIRL]->textureID = LoadTGA("Image//girl_.tga");
+
+	meshList[GEO_NEGAN] = MeshBuilder::GenerateOBJ("Negan", "OBJ//negan_.obj");
+	meshList[GEO_NEGAN]->textureID = LoadTGA("Image//negan_.tga");
+
+	meshList[GEO_EMOKIDNPC] = MeshBuilder::GenerateOBJ("EmoKid", "OBJ//emokid_.obj");
+	meshList[GEO_EMOKIDNPC]->textureID = LoadTGA("Image//emokid_.tga");
+
+	meshList[GEO_ELENPC] = MeshBuilder::GenerateOBJ("Elephant", "OBJ//elephant_.obj");
+	meshList[GEO_ELENPC]->textureID = LoadTGA("Image//elephant_.tga");
+
+	meshList[GEO_LADY] = MeshBuilder::GenerateOBJ("Lady", "OBJ//lady_.obj");
+	meshList[GEO_LADY]->textureID = LoadTGA("Image//lady_.tga");
+
+	meshList[GEO_SCIENTISTNPC] = MeshBuilder::GenerateOBJ("Scientist", "OBJ//scientist_.obj");
+	meshList[GEO_SCIENTISTNPC]->textureID = LoadTGA("Image//scientist_.tga");
+
+	meshList[GEO_BOYNPC] = MeshBuilder::GenerateOBJ("BoyNPC", "OBJ//boy_.obj");
+	meshList[GEO_BOYNPC]->textureID = LoadTGA("Image//boy_.tga");
+
+	//their actions
+	walk = 0.0f;
+
+
+
+
+
+
+
+
+
+	//-------------------------------------------------------------------------------------------
 	//light
 	light[0].type = Light::LIGHT_DIRECTIONAL;
 	light[0].LightPosition.Set(0, 1, 0);
@@ -426,6 +463,14 @@ void StudioProject::Update(double dt)
 	{
 		PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
 	}
+
+
+	//------------------------------NPC Actions---------------------------------------------
+
+	static float translateDirection = 1;
+
+
+	
 }
 
 void StudioProject::Render()
@@ -714,6 +759,55 @@ void StudioProject::Render()
 			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(i + 1) + " : " + PlayerBase::instance()->getSkillName(PlayerBase::instance()->getCurrentEquippedSkill(i)), Color(.4, .4, .4), 1.8, 32, 31 - (i + 1));
 		}
 	}
+
+
+	//---------------------------------------------------NPC------------------------------------------------------
+	//Do not touch these people, #NPCLIVESMATTER
+
+	modelStack.PushMatrix();
+	modelStack.Translate(132, 0, 126);
+	RenderMesh(meshList[GEO_GIRL], true);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(22, 0, 98);
+	RenderMesh(meshList[GEO_NEGAN], true);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(28, 0, 98);
+	RenderMesh(meshList[GEO_EMOKIDNPC], true);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(126, 0, 26);
+	modelStack.Rotate(70, 0, 1, 0);
+	RenderMesh(meshList[GEO_ELENPC], true);
+	modelStack.PopMatrix();
+
+
+	modelStack.PushMatrix();
+	modelStack.Translate(307, 0, 24);
+	modelStack.Rotate(-70, 0, 1, 0);
+	RenderMesh(meshList[GEO_LADY], true);
+	modelStack.PopMatrix();
+
+
+	modelStack.PushMatrix();
+	modelStack.Translate(288, 0, 149);
+	modelStack.Rotate(-90, 0, 1, 0);
+	RenderMesh(meshList[GEO_BOYNPC], true);
+	modelStack.PopMatrix();
+
+	modelStack.PushMatrix();
+	modelStack.Translate(203, 0, 205);
+	modelStack.Rotate(-180, 0, 1, 0);
+	RenderMesh(meshList[GEO_SCIENTISTNPC], true);
+	modelStack.PopMatrix();
+
+	//------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------
+
 }
 
 

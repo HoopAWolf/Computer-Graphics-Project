@@ -161,6 +161,9 @@ public:
 	bool walking = false;
 	bool attacking = false;
 	bool pause=false;
+
+
+	bool walk = false;
 private:
 
 	unsigned m_vertexArrayID;
