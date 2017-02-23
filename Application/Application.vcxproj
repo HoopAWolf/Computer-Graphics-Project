@@ -141,9 +141,12 @@
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Mainmenu.cpp" />
     <ClCompile Include="Source\MapBase.cpp" />
+    <ClCompile Include="Source\MeleeMinion_1.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
     <ClCompile Include="Source\PlayerBase.cpp" />
+    <ClCompile Include="Source\RangedMinion_1.cpp" />
+    <ClCompile Include="Source\RangedMinion_2.cpp" />
     <ClCompile Include="Source\RenderingBase.cpp" />
     <ClCompile Include="Source\SceneBossH.cpp" />
     <ClCompile Include="Source\SceneBossL.cpp" />
