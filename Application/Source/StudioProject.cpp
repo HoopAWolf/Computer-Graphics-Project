@@ -206,6 +206,13 @@ void StudioProject::Init()
 
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
+
+	meshList[GEO_ATTRIBUTES] = MeshBuilder::GenerateOBJ("", "OBJ//attribute.obj");
+	meshList[GEO_ATTRIBUTES]->textureID = LoadTGA("Image//attribute.tga");
+
+	meshList[GEO_MOUSE] = MeshBuilder::GenerateOBJ("", "OBJ//play1.obj");
+	meshList[GEO_MOUSE]->textureID = LoadTGA("Image//gay_mouse.tga");
+
 	//------------------------------------------------------------------------------------------
 	//light
 	light[0].type = Light::LIGHT_DIRECTIONAL;
@@ -270,8 +277,18 @@ void StudioProject::Update(double dt)
 	if (PlayerBase::instance()->getDimension() != DIMENSIONID)
 		PlayerBase::instance()->setPlayerDimension(DIMENSIONID);
 
-	camera.Update(dt);
+	SceneManager::getSceneManger()->getmycursor();
 	ShowCursor(false);
+	if (!inattrib)
+	{
+		camera.Update(dt);
+		mouse = false;
+	}
+	else if (attrib)
+	{
+		mouse = true;
+	}
+	
 
 	SceneManager::getSceneManger()->frameRate = ((int)(1 / dt));
 
@@ -416,6 +433,19 @@ void StudioProject::Update(double dt)
 			PlayerBase::instance()->moveCurrItem(true);
 			timer = Application::elapsed_timer_;
 		}
+
+		if (Application::IsKeyPressed('K') && !attrib)
+		{
+			attrib = true;
+			inattrib = true;
+			timer = Application::elapsed_timer_;
+		}
+		else if (Application::IsKeyPressed('K') && attrib)
+		{
+			attrib = false;
+			inattrib = false;
+			timer = Application::elapsed_timer_;
+		}
 	}
 
 	if (Application::IsKeyPressed(VK_LSHIFT))
@@ -426,6 +456,8 @@ void StudioProject::Update(double dt)
 	{
 		PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
 	}
+
+
 }
 
 void StudioProject::Render()
@@ -700,6 +732,22 @@ void StudioProject::Render()
 			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(i + 1) + " : " + PlayerBase::instance()->getSkillName(PlayerBase::instance()->getCurrentEquippedSkill(i)), Color(.4, .4, .4), 1.8, 32, 31 - (i + 1));
 		}
 	}
+
+	if (attrib)
+	{
+		RenderMeshOnScreen(meshList[GEO_ATTRIBUTES], 40, 27.5, 40, 40, 90);
+
+		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(0)), Color(1, 1, 1), 1.8, 24,24.4 );
+		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(1)), Color(1, 1, 1), 1.8, 24, 19.1);
+		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(2)), Color(1, 1, 1), 1.8, 24, 12);
+		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(3)), Color(1, 1, 1), 1.8, 24, 6.7);
+
+	}
+	if (mouse)
+	{
+		RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx / 10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy) / 10, 15, 15, 90);
+	}
+
 }
 
 
@@ -902,6 +950,30 @@ void StudioProject::RenderUI(Mesh* mesh, Color color, float size, float x, float
 
 	glEnable(GL_DEPTH_TEST);
 }
+
+void StudioProject::RenderMeshOnScreen(Mesh* mesh, float x, float y, int sizex, int sizey, int rotate)
+{
+	glDisable(GL_DEPTH_TEST);
+	Mtx44 ortho;
+	ortho.SetToOrtho(0, 80, 0, 60, -10, 10); //size of screen UI
+	projectionStack.PushMatrix();
+	projectionStack.LoadMatrix(ortho);
+	viewStack.PushMatrix();
+	viewStack.LoadIdentity(); //No need camera for ortho mode
+	modelStack.PushMatrix();
+	modelStack.LoadIdentity();
+	modelStack.Translate(x, y, 0);
+	modelStack.Rotate(rotate, 0, 0, 1);
+	modelStack.Rotate(rotate, 1, 0, 0);
+	modelStack.Rotate(rotate, 0, -1, 0);
+	modelStack.Scale(sizex, sizey, sizey);
+	RenderMesh(mesh, false); //UI should not have light
+	projectionStack.PopMatrix();
+	viewStack.PopMatrix();
+	modelStack.PopMatrix();
+	glEnable(GL_DEPTH_TEST);
+}
+
 //=================================================================================================
 
 void StudioProject::RenderSkybox()

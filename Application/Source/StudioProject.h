@@ -89,6 +89,8 @@ class StudioProject : public Scene
 		GEO_GIRL,    
  		GEO_LADY,    
 		GEO_NEGAN,
+		GEO_ATTRIBUTES,
+		GEO_MOUSE,
 
 		NUM_GEOMETRY,
 	};
@@ -161,6 +163,9 @@ public:
 	bool walking = false;
 	bool attacking = false;
 	bool pause=false;
+	bool attrib = false;
+	bool inattrib = false;
+	bool mouse = false;
 private:
 
 	unsigned m_vertexArrayID;
@@ -177,7 +182,7 @@ private:
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void RenderUI(Mesh* mesh, Color color, float size, float x, float y, bool enableLight);
-
+	void RenderMeshOnScreen(Mesh* mesh, float x, float y, int sizex, int sizey, int rotate);
 	void RenderSkybox();
 
 	char mapArray[2000][2000];
