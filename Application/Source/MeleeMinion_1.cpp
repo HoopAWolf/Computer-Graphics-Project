@@ -5,6 +5,8 @@
 
 class MeleeMinion_1 : public EntityMinion
 {
+	float tempDT;
+
 public:
 	MeleeMinion_1(Vector3 position, Vector3 up, Vector3 forward, Vector3 right, Vector3 target)
 	{
@@ -46,7 +48,7 @@ public:
 
 	void updateAI(float timer, unsigned dimensionID, float dt)
 	{
-		float tempDT = dt;
+		tempDT = dt;
 		if (minion_state_ == IDLE)
 		{
 			minion_state_ = IDLE;
