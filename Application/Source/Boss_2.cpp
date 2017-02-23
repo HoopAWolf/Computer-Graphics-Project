@@ -47,7 +47,10 @@ public:
 
 	void updateAI(float timer, unsigned dimensionID)
 	{
-		boss_state_ = SKILL_1;
+		if (boss_state_ == IDLE)
+		{
+			boss_state_ = SKILL_2;
+		}
 		if (boss_state_ == WALKING)
 		{
 			walking = true;
@@ -99,12 +102,12 @@ public:
 		}
 		if (attacking == true)
 		{
-			rotateleftArmX += (float)(80 * dt);
-			if (rotateleftArmX <= -90);
+			rotaterightArmX += (float)(80 * dt);
+			if (rotaterightArmX <= -90);
 			{
 				limit = true;
 			}
-			if (rotateleftArmX >= 0)
+			if (rotaterightArmX >= 0)
 			{
 				limit = false;
 			}
@@ -149,7 +152,7 @@ public:
 		//==========================================================================================
 		if (boss_state_ == SKILL_1)
 		{
-			rotateleftArmX += (float)(80 * dt);
+			rotaterightArmX += (float)(80 * dt);
 			if (rotaterightArmX <= -90)
 			{
 				limit = true;
@@ -158,11 +161,11 @@ public:
 			{
 				limit = false;
 			}
-			if (limit3 == true)
+			if (limit == true)
 			{
 				dt = 0.3;
 			}
-			if (limit3 == false)
+			if (limit == false)
 			{
 				dt = -0.017;
 			}
@@ -170,25 +173,69 @@ public:
 		//===========================================================================================
 		if (boss_state_ == SKILL_2)
 		{
-			rotateleftArmY += (float)(80 * dt);
-			if (rotateleftArmY <= -90);
+			rotateleftArmY += (float)(80 * dt4);
+			std::cout << rotateleftArmY << std::endl;
+			std::cout << count << std::endl;
+			if (rotateleftArmY <= -90)
 			{
-				limit = true;
+				limit4 = true;
 			}
-			if (rotateleftArmY >= 0)
+			if (limit4 == true)
 			{
+				dt4 = 0;
 				count++;
 			}
-			if (limit == true)
+			else if (limit4 == false)
 			{
-				dt = 0.017;
+				dt4 = -0.017;
 			}
 			if (count >= 200)
 			{
-				dt = -0.017;
+				dt4 = 0.017;
+				if (rotateleftArmY >= 0)
+				{
+					dt4 = 0;
+				}
 			}
 		}
 		//===========================================================================================
+		if (boss_state_ == SKILL_3)
+		{
+			//shield bash?
+		}
+		//=============================================================================================
+		if (boss_state_ == FINAL_ATTACK)
+		{
+			rotaterightArmX += (float)(80 * dt4);
+			if (rotaterightArmX <= -90)
+			{
+				limit4 = true;
+				count++;
+			}
+			if (rotaterightArmX >= 135)
+			{
+
+				limit4 = false;
+
+			}
+			if (limit4 == true && limit5 == false)
+			{
+				dt4 = 0.3;
+			}
+			if (limit4 == false && limit5 == false)
+			{
+				dt4 = -0.3;
+			}
+			if (count == 5)
+			{
+				limit5 = true;
+			}
+			if (limit5 == true)
+			{
+				dt4 = 0;
+			}
+		}
+		//==============================================================================================
 	}
 
 	
