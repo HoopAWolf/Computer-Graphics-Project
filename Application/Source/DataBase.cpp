@@ -237,7 +237,11 @@ void DataBase::registerEntityMinion()
 
 void DataBase::registerEntityNPC()
 {
+	EntityBase *temp_obj;
 
+	temp_obj = new NPCGirlwithBoobs(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	npc_data_base[(dynamic_cast<EntityNPC*>(temp_obj))->getNPCID()] = new NPCGirlwithBoobs(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
 }
 
 void DataBase::registerEntityBoss()

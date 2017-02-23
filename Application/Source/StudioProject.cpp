@@ -106,6 +106,13 @@ void StudioProject::Init()
 	DataBase::instance()->setEntity(false, true, false, 1, new MeleeMinion_1(Vector3(10 + 0 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, true, false, 1, new RangedMinion_1(Vector3(10 + 5 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, true, false, 1, new RangedMinion_2(Vector3(10 + 10 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+
+	/*DataBase::instance()->setEntity(false, false, true, 1, new MeleeMinion_1(Vector3(10 + 0 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new RangedMinion_1(Vector3(10 + 5 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new RangedMinion_2(Vector3(10 + 10 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));*/
+
+
+
 	//--------------------------------------------------------^REMOVE ONCE DONE^--------------------------------------------------------
 
 	// Set background color to dark blue
