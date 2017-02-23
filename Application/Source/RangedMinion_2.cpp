@@ -3,10 +3,10 @@
 
 #include "EntityMinion.h"
 
-class MeleeMinion_1 : public EntityMinion
+class RangedMinion_2 : public EntityMinion
 {
 public:
-	MeleeMinion_1(Vector3 position, Vector3 up, Vector3 forward, Vector3 right, Vector3 target)
+	RangedMinion_2(Vector3 position, Vector3 up, Vector3 forward, Vector3 right, Vector3 target)
 	{
 		multiple_texture_string_[0] = "ranged_minion_2_body";
 		multiple_texture_string_[1] = "ranged_minion_2_arm_1";
@@ -44,7 +44,7 @@ public:
 		return drop_ID_;
 	}
 
-	void updateAI(float timer, unsigned dimensionID)
+	void updateAI(float timer, unsigned dimensionID, float dt)
 	{
 		if (minion_state_ == IDLE)
 		{
@@ -64,11 +64,11 @@ public:
 			}
 			if (Minionlimit == true)
 			{
-				dt = 0.017;
+				dt = dt;
 			}
 			if (Minionlimit == false)
 			{
-				dt = -0.017;
+				dt = -dt;
 			}
 		}
 		if (minion_state_ == WALKING)
@@ -76,7 +76,7 @@ public:
 			minionwalking = true;
 			if (minionrotateleftLeg < 20 && minionleftlegForward == true)
 			{
-				minionrotateleftLeg += (float)(80 * 0.017);
+				minionrotateleftLeg += (float)(80 * dt);
 			}
 			else
 			{
@@ -85,7 +85,7 @@ public:
 			}
 			if (minionrotateleftLeg > -20 && minionleftlegBackward == true)
 			{
-				minionrotateleftLeg -= (float)(80 * 0.017);
+				minionrotateleftLeg -= (float)(80 * dt);
 			}
 			else
 			{
@@ -94,7 +94,7 @@ public:
 			}
 			if (minionrotaterightLeg < 20 && minionrightlegForward == true)
 			{
-				minionrotaterightLeg += (float)(80 * 0.017);
+				minionrotaterightLeg += (float)(80 * dt);
 			}
 			else
 			{
@@ -103,7 +103,7 @@ public:
 			}
 			if (minionrotaterightLeg > -20 && minionrightlegBackward == true)
 			{
-				minionrotaterightLeg -= (float)(80 * 0.017);
+				minionrotaterightLeg -= (float)(80 * dt);
 			}
 			else
 			{

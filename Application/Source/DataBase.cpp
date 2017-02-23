@@ -220,7 +220,19 @@ void DataBase::registerEnvironments()
 
 void DataBase::registerEntityMinion()
 {
+	EntityBase *temp_obj;
 
+	temp_obj = new MeleeMinion_1(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	minion_data_base[(dynamic_cast<EntityMinion*>(temp_obj))->getMinionID()] = new MeleeMinion_1(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
+	temp_obj = new RangedMinion_1(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	minion_data_base[(dynamic_cast<EntityMinion*>(temp_obj))->getMinionID()] = new RangedMinion_1(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
+	temp_obj = new RangedMinion_2(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	minion_data_base[(dynamic_cast<EntityMinion*>(temp_obj))->getMinionID()] = new RangedMinion_2(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
 }
 
 void DataBase::registerEntityBoss()

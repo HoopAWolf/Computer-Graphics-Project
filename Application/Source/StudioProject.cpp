@@ -102,6 +102,10 @@ void StudioProject::Init()
 	DataBase::instance()->setEntity(true, false, 1, new Boss_2(Vector3(10 + 5 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(true, false, 1, new Boss_3(Vector3(10 + 10 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(true, false, 1, new Boss_4(Vector3(10 + 15 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+
+	DataBase::instance()->setEntity(false, true, 1, new MeleeMinion_1(Vector3(10 + 0 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, 1, new RangedMinion_1(Vector3(10 + 5 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, 1, new RangedMinion_2(Vector3(10 + 10 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	//--------------------------------------------------------^REMOVE ONCE DONE^--------------------------------------------------------
 
 	// Set background color to dark blue
@@ -339,11 +343,11 @@ void StudioProject::Update(double dt)
 		}
 	}
 
-	PlayerBase::instance()->playerUpdate(Application::elapsed_timer_);
+	PlayerBase::instance()->playerUpdate(Application::elapsed_timer_, dt);
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(0, DIMENSIONID); i++)
 	{
-		DataBase::instance()->getEntityDrop(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		DataBase::instance()->getEntityDrop(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID, dt);
 		if (DataBase::instance()->getEntityDrop(DIMENSIONID, i)->isEntityDead())
 		{
 			DataBase::instance()->destroyEntityDrop(DIMENSIONID, i);
@@ -353,7 +357,7 @@ void StudioProject::Update(double dt)
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(2, DIMENSIONID); i++)
 	{
-		DataBase::instance()->getEntityMinion(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		DataBase::instance()->getEntityMinion(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID, dt);
 		if (DataBase::instance()->getEntityMinion(DIMENSIONID, i)->isEntityDead())
 		{
 			DataBase::instance()->destroyEntityMinion(DIMENSIONID, i);
@@ -363,7 +367,7 @@ void StudioProject::Update(double dt)
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(3, DIMENSIONID); i++)
 	{
-		DataBase::instance()->getEntityBoss(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		DataBase::instance()->getEntityBoss(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID, dt);
 		if (DataBase::instance()->getEntityBoss(DIMENSIONID, i)->isEntityDead())
 		{
 			DataBase::instance()->destroyEntityBoss(DIMENSIONID, i);
@@ -373,7 +377,7 @@ void StudioProject::Update(double dt)
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(4, DIMENSIONID); i++)
 	{
-		DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID, dt);
 		if (DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->isEntityDead())
 		{
 			DataBase::instance()->destroyEntityProjectile(DIMENSIONID, i);

@@ -201,11 +201,11 @@ void SceneBossH::Update(double dt)
 
 	Application::elapsed_timer_ += dt;
 
-	PlayerBase::instance()->playerUpdate(dt);
+	PlayerBase::instance()->playerUpdate(Application::elapsed_timer_, dt);
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(0, DIMENSIONID); i++)
 	{
-		DataBase::instance()->getEntityDrop(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		DataBase::instance()->getEntityDrop(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID, dt);
 		if (DataBase::instance()->getEntityDrop(DIMENSIONID, i)->isEntityDead())
 		{
 			DataBase::instance()->destroyEntityDrop(DIMENSIONID, i);
@@ -215,7 +215,7 @@ void SceneBossH::Update(double dt)
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(2, DIMENSIONID); i++)
 	{
-		DataBase::instance()->getEntityMinion(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		DataBase::instance()->getEntityMinion(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID, dt);
 		if (DataBase::instance()->getEntityMinion(DIMENSIONID, i)->isEntityDead())
 		{
 			DataBase::instance()->destroyEntityMinion(DIMENSIONID, i);
@@ -225,7 +225,7 @@ void SceneBossH::Update(double dt)
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(3, DIMENSIONID); i++)
 	{
-		DataBase::instance()->getEntityBoss(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID);
+		DataBase::instance()->getEntityBoss(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID, dt);
 		if (DataBase::instance()->getEntityBoss(DIMENSIONID, i)->isEntityDead())
 		{
 			DataBase::instance()->destroyEntityBoss(DIMENSIONID, i);

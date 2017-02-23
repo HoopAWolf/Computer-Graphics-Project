@@ -59,6 +59,10 @@
 #include "Boss_3.cpp"
 #include "Boss_4.cpp"
 
+#include "MeleeMinion_1.cpp"
+#include "RangedMinion_1.cpp"
+#include "RangedMinion_2.cpp"
+
 #include <vector>
 #include <map>
 #include <string>

@@ -44,15 +44,15 @@ public:
 		position_ = position;
 	}
 
-	void updateAI(float timer, unsigned dimensionID)
+	void updateAI(float timer, unsigned dimensionID, float dt)
 	{
 		unsigned MOVING_SPEED = 1000;
 
 		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
-			((int)(position_.x + (forward_.x * (MOVING_SPEED * 0.017)))),
-			((int)(position_.z + (forward_.z * (MOVING_SPEED * 0.017))))) != '#')
+			((int)(position_.x + (forward_.x * (MOVING_SPEED * dt)))),
+			((int)(position_.z + (forward_.z * (MOVING_SPEED * dt))))) != '#')
 		{
-			position_ += (forward_ * (MOVING_SPEED * 0.017));
+			position_ += (forward_ * (MOVING_SPEED * dt));
 		}
 		else
 		{

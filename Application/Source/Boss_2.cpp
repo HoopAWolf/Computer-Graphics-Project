@@ -45,7 +45,7 @@ public:
 		return drop_ID_;
 	}
 
-	void updateAI(float timer, unsigned dimensionID)
+	void updateAI(float timer, unsigned dimensionID, float dt)
 	{
 		if (boss_state_ == IDLE)
 		{
@@ -56,7 +56,7 @@ public:
 			walking = true;
 			if (rotateleftLeg < 20 && leftlegForward == true)
 			{
-				rotateleftLeg += (float)(80 * 0.017);
+				rotateleftLeg += (float)(80 * dt);
 			}
 			else
 			{
@@ -65,7 +65,7 @@ public:
 			}
 			if (rotateleftLeg > -20 && leftlegBackward == true)
 			{
-				rotateleftLeg -= (float)(80 * 0.017);
+				rotateleftLeg -= (float)(80 * dt);
 			}
 			else
 			{
@@ -74,7 +74,7 @@ public:
 			}
 			if (rotaterightLeg < 20 && rightlegForward == true)
 			{
-				rotaterightLeg += (float)(80 * 0.017);
+				rotaterightLeg += (float)(80 * dt);
 			}
 			else
 			{
@@ -83,7 +83,7 @@ public:
 			}
 			if (rotaterightLeg > -20 && rightlegBackward == true)
 			{
-				rotaterightLeg -= (float)(80 * 0.017);
+				rotaterightLeg -= (float)(80 * dt);
 			}
 			else
 			{
@@ -113,11 +113,11 @@ public:
 			}
 			if (limit == true)
 			{
-				dt = 0.017;
+				dt = dt;
 			}
 			if (limit == false)
 			{
-				dt = -0.017;
+				dt = -dt;
 			}
 		}
 
@@ -167,7 +167,7 @@ public:
 			}
 			if (limit == false)
 			{
-				dt = -0.017;
+				dt = -dt;
 			}
 		}
 		//===========================================================================================
@@ -187,11 +187,11 @@ public:
 			}
 			else if (limit4 == false)
 			{
-				dt4 = -0.017;
+				dt4 = -dt;
 			}
 			if (count >= 200)
 			{
-				dt4 = 0.017;
+				dt4 = dt;
 				if (rotateleftArmY >= 0)
 				{
 					dt4 = 0;

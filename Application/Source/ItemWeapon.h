@@ -54,7 +54,7 @@ public:
 	}
 
 	//------------------USES------------------
-	virtual EntityProjectile* onItemAttackProjectile(float timer) = 0;
+	virtual EntityProjectile* onItemAttackProjectile(float timer, float dt) = 0;
 };
 
 #endif

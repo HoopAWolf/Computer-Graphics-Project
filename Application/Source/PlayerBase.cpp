@@ -36,7 +36,7 @@ void PlayerBase::startPlayer()
 	addIntoPlayerInventory(16);
 }
 
-void PlayerBase::playerUpdate(float timer)
+void PlayerBase::playerUpdate(float timer, float dt)
 {
 	if (player_state_ == LEFT_CLICK)
 	{
@@ -46,7 +46,7 @@ void PlayerBase::playerUpdate(float timer)
 			{
 				if ((dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponType() == 3)
 				{
-					EntityProjectile* tempObj = (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->onItemAttackProjectile(timer);
+					EntityProjectile* tempObj = (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->onItemAttackProjectile(timer, dt);
 					if (tempObj != nullptr)
 					{
 						DataBase::instance()->setEntity(dimension_, tempObj);
@@ -192,6 +192,11 @@ AABB PlayerBase::getBoundingBox()
 	bounding.setBoundry(-size_, size_);
 
 	return bounding.getBoundryAtCoord(Camera::position);
+}
+
+unsigned PlayerBase::getPlayerAmmo()
+{
+	return ammo_;
 }
 
 string PlayerBase::getSkillName(unsigned skillID)

@@ -26,10 +26,10 @@ public:
 
 	}
 
-	void onItemUse(float timer){}
+	void onItemUse(float timer, float dt){}
 
 	//------------------USES------------------
-	EntityProjectile* onItemAttackProjectile(float timer)
+	EntityProjectile* onItemAttackProjectile(float timer, float dt)
 	{
 		if (timer > timer_ + ((attack_speed_ / 100.) * timer_))
 		{

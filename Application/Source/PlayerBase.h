@@ -53,7 +53,7 @@ public:
 	}
 
 	void startPlayer();
-	void playerUpdate(float timer);
+	void playerUpdate(float timer, float dt);
 
 	ItemBase* getItemFromInventory(int slot);
 	ItemBase* getCurrentHeldItem();
@@ -67,6 +67,7 @@ public:
 	unsigned getPlayerLevel();
 	unsigned getPlayerExperience();
 	unsigned getPlayerLevelCap();
+	unsigned getPlayerAmmo();
 	unsigned getCurrentSkillPoint(unsigned skill_slot);
 	unsigned getCurrentSkillDamage(unsigned skill_slot);
 	unsigned getCurrentSkillCoolDown(unsigned skill_slot);
