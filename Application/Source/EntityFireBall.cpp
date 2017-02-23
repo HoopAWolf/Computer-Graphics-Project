@@ -46,7 +46,7 @@ public:
 
 	void updateAI(float timer, unsigned dimensionID)
 	{
-		unsigned MOVING_SPEED = 300;
+		unsigned MOVING_SPEED = 200;
 
 		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
 			((int)(position_.x + (forward_.x * (MOVING_SPEED * 0.017)))),

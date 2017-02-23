@@ -621,7 +621,7 @@ void StudioProject::Render()
 		modelStack.Translate(DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->getPosition().x,
 			DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->getPosition().y,
 			DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->getPosition().z);
-		modelStack.Scale(.5, .5, .5);
+		modelStack.Rotate(Application::elapsed_timer_ * 50, 1, 1, 1);
 		RenderMesh(RenderingBase::instance()->getProjectileMesh((dynamic_cast<EntityProjectile*>(DataBase::instance()->getEntityProjectile(DIMENSIONID, i)))->getProjectileID()), false);
 		modelStack.PopMatrix();
 	}

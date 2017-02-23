@@ -23,7 +23,8 @@ public:
 		LEFT_CLICK,
 		RIGHT_CLICK, 
 
-		USE_SKILLS
+		USE_SKILLS,
+		IN_UI
 	};
 
 private:
@@ -87,6 +88,7 @@ public:
 	void setPlayerDimension(unsigned dimensionID);
 	void addIntoPlayerInventory(unsigned itemID);
 	void increaseExperience(unsigned ammount);
+	void increaseSkillPoint(unsigned skill_slot);
 
 	bool isInventoryFull();
 	void moveCurrItem(bool forward);
