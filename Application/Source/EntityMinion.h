@@ -56,6 +56,22 @@ public:
 		return minionID_;
 	}
 
+	virtual float getMinionrotateArm()
+	{
+		return rotateminionArm;
+	}
+
+	virtual float getMinionrotateleftLeg()
+	{
+		return minionrotateleftLeg;
+	}
+
+	virtual float getMinionrotaterightLeg()
+	{
+		return minionrotaterightLeg;
+	}
+
+
 };
 
 #endif
