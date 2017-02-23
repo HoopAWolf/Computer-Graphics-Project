@@ -605,6 +605,7 @@ void SceneBossR::RenderSkybox()
 {
 	modelStack.PushMatrix();//push ground
 	modelStack.Translate(camera.position.x, 0, camera.position.z);
+
 	modelStack.PushMatrix();//push ground
 	modelStack.Translate(0, -900, 0);
 
@@ -653,11 +654,13 @@ void SceneBossR::RenderSkybox()
 	modelStack.PopMatrix();//end right
 
 	modelStack.PopMatrix();//end speration
+	modelStack.PopMatrix();//end ground
+	modelStack.PopMatrix();//end ground
 
-	modelStack.Translate(0, 900, 0);
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0, 0);
 	modelStack.Scale(2000, 1, 2000);
 	RenderMesh(meshList[GEO_BOTTOM], true);
-	modelStack.PopMatrix();//end ground
 	modelStack.PopMatrix();//end ground
 }
 

@@ -649,12 +649,14 @@ void SceneBossH::RenderSkybox()
 	modelStack.PopMatrix();//end right
 
 	modelStack.PopMatrix();//end speration
+	modelStack.PopMatrix();
+	modelStack.PopMatrix();
 
-	modelStack.Translate(0, 900, 0);
+	modelStack.PushMatrix();
+	modelStack.Translate(0, 0, 0);
 	modelStack.Scale(2000, 1, 2000);
 	RenderMesh(meshList[GEO_BOTTOM], true);
 	modelStack.PopMatrix();//end ground
-	modelStack.PopMatrix();
 }
 
 
