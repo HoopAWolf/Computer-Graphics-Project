@@ -1,5 +1,5 @@
-#ifndef MELEEMINION_1
-#define MELEEMINION_1
+#ifndef MELEEMINION_2
+#define MELEEMINION_2
 
 #include "EntityMinion.h"
 
