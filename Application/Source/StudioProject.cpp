@@ -18,6 +18,7 @@ float timer = 0.0f;
 DataBase *DataBase::s_instance = nullptr;
 MapBase *MapBase::s_instance = nullptr;
 RenderingBase *RenderingBase::s_instance = nullptr;
+ShopBase *ShopBase::s_instance = nullptr;
 Vector3 Camera::position = 0;
 Vector3 Camera::target = 0;
 Vector3 Camera::up = 0;
@@ -896,23 +897,7 @@ void StudioProject::Render()
 	{
 		RenderMeshOnScreen(meshList[GEO_SHOP], 40, 27.5, 40, 40, 90);
 
-		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(0)), Color(1, 1, 1), 1.8, 24, 24.4);
-		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(1)), Color(1, 1, 1), 1.8, 24, 19.1);
-		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(2)), Color(1, 1, 1), 1.8, 24, 12);
-		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(3)), Color(1, 1, 1), 1.8, 24, 6.7);
 
-
-
-		for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(4, DIMENSIONID); i++)
-		{
-			modelStack.PushMatrix();
-			modelStack.Translate(DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->getPosition().x,
-				DataBase::instance()->getItem(DIMENSIONID, i)->getPosition().y,
-				DataBase::instance()->getItem(DIMENSIONID, i)->getPosition().z);
-			modelStack.Rotate(Application::elapsed_timer_ * 50, 1, 1, 1);
-			RenderMesh(RenderingBase::instance()->getItemMesh(PlayerBase::instance()->getCurrentHeldItem()->getItemID()), true);
-			modelStack.PopMatrix();
-		}
 	}
 	if (mouse)
 	{
