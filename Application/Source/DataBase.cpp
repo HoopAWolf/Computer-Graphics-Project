@@ -372,7 +372,6 @@ EntityBase* DataBase::getProjectileEntityBase(unsigned projectileID)
 ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned rarity)
 {
 	unsigned randNumber;
-	srand(time(nullptr));
 
 	if (normal_item)
 	{
@@ -390,7 +389,7 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 		{
 			while (1)
 			{
-				randNumber = rand() % rarity;
+				randNumber = rand() % 8;
 
 				if (randNumber < item_base_.size())
 				{
@@ -405,7 +404,7 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 		{
 			while (1)
 			{
-				randNumber = rand() % rarity;
+				randNumber = (rand() % 4) + 8;
 
 				if (randNumber < item_base_.size())
 				{
@@ -420,7 +419,7 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 		{
 			while (1)
 			{
-				randNumber = rand() % rarity;
+				randNumber = (rand() % 3) + 12;
 
 				if (randNumber < item_base_.size())
 				{
@@ -435,7 +434,7 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 		{
 			while (1)
 			{
-				randNumber = rand() % rarity;
+				randNumber = (rand() % 3) + 15;
 
 				if (randNumber < item_base_.size())
 				{
