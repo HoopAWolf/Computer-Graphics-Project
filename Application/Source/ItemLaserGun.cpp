@@ -34,7 +34,7 @@ public:
 
 	EntityProjectile* onItemAttackProjectile(float timer, float dt)
 	{
-		if (timer > timer_ + ((attack_speed_ / 100.) * timer_))
+		if (timer > timer_ + ((attack_speed_ / 100.) * 100))
 		{
 			EntityFireBall* bullet = new EntityFireBall(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer);
 			timer_ = timer;

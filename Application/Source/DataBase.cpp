@@ -392,9 +392,12 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 			{
 				randNumber = rand() % rarity;
 
-				if (getItem(randNumber)->getRarity() == 0)
+				if (randNumber < item_base_.size())
 				{
-					return getItem(randNumber);
+					if (getItem(randNumber)->getRarity() == 0)
+					{
+						return getItem(randNumber);
+					}
 				}
 			}
 		}
@@ -404,9 +407,12 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 			{
 				randNumber = rand() % rarity;
 
-				if (getItem(randNumber)->getRarity() == 1)
+				if (randNumber < item_base_.size())
 				{
-					return getItem(randNumber);
+					if (getItem(randNumber)->getRarity() == 1)
+					{
+						return getItem(randNumber);
+					}
 				}
 			}
 		}
@@ -416,9 +422,12 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 			{
 				randNumber = rand() % rarity;
 
-				if (getItem(randNumber)->getRarity() == 2)
+				if (randNumber < item_base_.size())
 				{
-					return getItem(randNumber);
+					if (getItem(randNumber)->getRarity() == 2)
+					{
+						return getItem(randNumber);
+					}
 				}
 			}
 		}
@@ -428,9 +437,12 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 			{
 				randNumber = rand() % rarity;
 
-				if (getItem(randNumber)->getRarity() == 3)
+				if (randNumber < item_base_.size())
 				{
-					return getItem(randNumber);
+					if (getItem(randNumber)->getRarity() == 3)
+					{
+						return getItem(randNumber);
+					}
 				}
 			}
 		}
