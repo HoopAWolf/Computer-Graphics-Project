@@ -61,6 +61,7 @@ void Camera3::Update(double dt)
 			view = rotation * view;
 			target = position + view;
 			limitRotation = view.y;
+			rotationZ = view.y * 20;
 		}
 		else if (limitRotation > -.6 && p.y > mousePosYAnchor)
 		{
@@ -70,6 +71,7 @@ void Camera3::Update(double dt)
 			view = rotation * view;
 			target = position + view;
 			limitRotation = view.y;
+			rotationZ = view.y * 20;
 		}
 
 		if (p.x < mousePosXAnchor)
@@ -176,4 +178,9 @@ void Camera3::Update(double dt)
 double Camera3::getRotationY()
 {
 	return rotationY;
+}
+
+double Camera3::getRotationZ()
+{
+	return rotationZ;
 }

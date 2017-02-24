@@ -27,6 +27,8 @@ protected:
 	unsigned damage_;
 	unsigned bulletcount_;
 	float attack_speed_;
+	float recoil_;
+	int price_;
 
 	WEAPON_TYPE weapon_type_;
 
@@ -44,6 +46,11 @@ public:
 		return durability_;
 	}
 
+	virtual float getRecoil()
+	{
+		return recoil_;
+	}
+
 	virtual unsigned getWeaponDamage()
 	{
 		return damage_;
@@ -52,6 +59,11 @@ public:
 	virtual float getWeaponAttackSpeed()
 	{
 		return attack_speed_;
+	}
+
+	virtual int getPriceOfWeapon()
+	{
+		return price_;
 	}
 
 	virtual unsigned getBulletCount()

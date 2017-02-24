@@ -13,7 +13,7 @@ public:
 	Vector3 right;
 
 	short mousePosYAnchor, mousePosXAnchor;
-	double limitRotation, rotationY = 0;
+	double limitRotation, rotationY = 0, rotationZ = 0;
 
 	Camera3();
 	~Camera3();
@@ -21,6 +21,7 @@ public:
 	virtual void Init(const Vector3& pos, const Vector3& target, const Vector3& up);
 	virtual void Update(double dt);
 	double getRotationY();
+	double getRotationZ();
 
 };
 
