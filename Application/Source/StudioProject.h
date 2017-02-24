@@ -90,6 +90,7 @@ class StudioProject : public Scene
  		GEO_LADY,    
 		GEO_NEGAN,
 		GEO_ATTRIBUTES,
+		GEO_SHOP,
 		GEO_MOUSE,
 
 		NUM_GEOMETRY,
@@ -167,7 +168,9 @@ public:
 	bool attrib = false;
 	bool inattrib = false;
 	bool mouse = false;
-	bool s=false;
+	bool s = false;
+	bool f = false;
+	bool shop = false;
 
 
 	

@@ -491,7 +491,8 @@ void StudioProject::Update(double dt)
 
 		if (Application::IsKeyPressed(VK_LBUTTON) && !s && attrib)
 		{
-			std::cout <<"ap"<< PlayerBase::instance()->getAttributePoint() << std::endl;
+			std::cout << SceneManager::getSceneManger()->cx << 'x' << std::endl;
+			std::cout << SceneManager::getSceneManger()->cx << 'x' << std::endl;
 			if (PlayerBase::instance()->getAttributePoint()!=0)
 			{
 				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>138 && SceneManager::getSceneManger()->cy < 190)
@@ -518,6 +519,36 @@ void StudioProject::Update(double dt)
 		else
 		{
 			s = false;
+		}
+
+		if (Application::IsKeyPressed(VK_LBUTTON) && !f && shop)
+		{
+			if (PlayerBase::instance()->getAttributePoint() != 0)
+			{
+				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>138 && SceneManager::getSceneManger()->cy < 190)
+				{
+					PlayerBase::instance()->increaseSkillPoint(0);
+				}
+				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>232 && SceneManager::getSceneManger()->cy < 285)
+				{
+					PlayerBase::instance()->increaseSkillPoint(1);
+				}
+				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>363 && SceneManager::getSceneManger()->cy < 416)
+				{
+					PlayerBase::instance()->increaseSkillPoint(2);
+				}
+				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>458 && SceneManager::getSceneManger()->cy < 511)
+				{
+					PlayerBase::instance()->increaseSkillPoint(3);
+				}
+			}
+			f = true;
+			timer = Application::elapsed_timer_;
+
+		}
+		else
+		{
+			f = false;
 		}
 	}
 
@@ -843,6 +874,48 @@ void StudioProject::Render()
 		RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx / 10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy) / 10, 15, 15, 90);
 	}
 
+	//-----------------------------------------------------SHOP-----------------------------------------------------
+	for (int i = 0; i < 2; i++)
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT], "Skills ", Color(0, 1, 1), 1.8, 32, 32);
+
+		if (PlayerBase::instance()->getCurrentSkillPoint(PlayerBase::instance()->getCurrentEquippedSkill(i)) > 0
+			&& PlayerBase::instance()->getCurrentSkillCoolDown(PlayerBase::instance()->getCurrentEquippedSkill(i)) <= 0)
+		{
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(i + 1) + " : " + PlayerBase::instance()->getSkillName(PlayerBase::instance()->getCurrentEquippedSkill(i)), Color(0, 1, 0), 1.8, 32, 31 - (i + 1));
+		}
+		else
+		{
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(i + 1) + " : " + PlayerBase::instance()->getSkillName(PlayerBase::instance()->getCurrentEquippedSkill(i)), Color(.4, .4, .4), 1.8, 32, 31 - (i + 1));
+		}
+	}
+
+	if (shop)
+	{
+		RenderMeshOnScreen(meshList[GEO_SHOP], 40, 27.5, 40, 40, 90);
+
+		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(0)), Color(1, 1, 1), 1.8, 24, 24.4);
+		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(1)), Color(1, 1, 1), 1.8, 24, 19.1);
+		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(2)), Color(1, 1, 1), 1.8, 24, 12);
+		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(3)), Color(1, 1, 1), 1.8, 24, 6.7);
+
+
+
+		for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(4, DIMENSIONID); i++)
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->getPosition().x,
+				DataBase::instance()->getItem(DIMENSIONID, i)->getPosition().y,
+				DataBase::instance()->getItem(DIMENSIONID, i)->getPosition().z);
+			modelStack.Rotate(Application::elapsed_timer_ * 50, 1, 1, 1);
+			RenderMesh(RenderingBase::instance()->getItemMesh(PlayerBase::instance()->getCurrentHeldItem()->getItemID()), true);
+			modelStack.PopMatrix();
+		}
+	}
+	if (mouse)
+	{
+		RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx / 10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy) / 10, 15, 15, 90);
+	}
 
 }
 
