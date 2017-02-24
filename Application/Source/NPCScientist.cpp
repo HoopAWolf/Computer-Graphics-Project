@@ -3,8 +3,8 @@
 
 
 #include "EntityNPC.h"
-
-
+#include "MapBase.h"
+#include "Mtx44.h"
 class NPCScientist : public EntityNPC
 {
 public:
@@ -18,6 +18,7 @@ public:
 		walking_speed_ = 5;
 		position_ = position;
 		size_ = Vector3(2, 4, 2);
+		rotation_Y_ = 90;
 		up_ = up;
 		forward_ = forward;
 		right_ = right;
@@ -25,9 +26,10 @@ public:
 		drop_ID_ = 0;
 		NPC_state_ = IDLE;
 		NPCID_ = 2;
-		NPC_name_ = "Hi I am a Scientist";
+		NPC_name_ = "Hi  I am a Scientist";
 
 	}
+
 
 	void onDeath(){}
 
@@ -62,6 +64,27 @@ public:
 		{
 			NPCWALKING = false;
 		}
+
+	
+		Mtx44 rotation;
+
+
+		//Walking 
+
+
+		float yaw = (80. * dt);
+
+		rotation.SetToRotation(yaw, up_.x, up_.y, up_.z);
+		forward_ = rotation * forward_;  //ROTATING SPEED
+
+		position_= position_ + (forward_ * 10 * dt);  //MOVING SPEED
+		rotation_Y_ += yaw;
+		
+
+
+			
+	
+
 
 	}
 
