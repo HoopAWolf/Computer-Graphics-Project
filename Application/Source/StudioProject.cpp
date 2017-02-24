@@ -41,6 +41,7 @@ void StudioProject::Init()
 	DataBase::instance()->registerEntityProjectiles();  //RUN ONCE
 	DataBase::instance()->registerEntityNPC();  //RUN ONCE
 	PlayerBase::instance()->startPlayer();  //RUN ONCE
+	ShopBase::instance()->startShop();  //RUN ONCE
 
 	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
 	MapBase::instance()->generateMap(DIMENSIONID, "Town.txt");  //RUN ONCE FOR EACH SCENE
@@ -120,8 +121,8 @@ void StudioProject::Init()
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCScientist(Vector3(10 + 10 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCElephant(Vector3(10 + 15 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCNegan(Vector3(10 + 20 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new NPCEmoKid(Vector3(10 + 25 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new NPCLady(Vector3(10 + 30 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCEmoKid(Vector3(10 + 20 * 20, 0, 50), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCLady(Vector3(10 + 20 * 20, 0, 60), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 
 
 
@@ -790,6 +791,7 @@ void StudioProject::Render()
 		modelStack.PushMatrix();
 		modelStack.Translate(camera.target.x, camera.position.y - 1, camera.target.z);
 		modelStack.Rotate(camera.getRotationY() - 155, 0, 1, 0);
+		modelStack.Rotate(-camera.getRotationZ(), 1, 0, 0);
 		modelStack.Scale(.5, .5, .5);
 		RenderMesh(RenderingBase::instance()->getItemMesh(PlayerBase::instance()->getCurrentHeldItem()->getItemID()), true);
 

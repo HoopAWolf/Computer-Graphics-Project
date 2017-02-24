@@ -23,6 +23,7 @@ public:
 
 		rarity_ = UNCOMMON;
 
+		price_ = 120;
 	}
 
 	//------------------USES------------------

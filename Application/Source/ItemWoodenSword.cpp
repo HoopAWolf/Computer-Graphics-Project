@@ -18,6 +18,7 @@ public:
 		attack_speed_ = 1;
 
 		rarity_ = COMMON;
+		price_ = 1;
 	}
 
 	//------------------USES------------------

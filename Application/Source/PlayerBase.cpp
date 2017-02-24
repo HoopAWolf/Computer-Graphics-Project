@@ -32,14 +32,13 @@ void PlayerBase::startPlayer()
 		skills_[i] = Vector3(0, 0, 0);
 	}
 
-	addIntoPlayerInventory(17);
-	addIntoPlayerInventory(11);
-	addIntoPlayerInventory(16);
+	addIntoPlayerInventory(15);
+	addIntoPlayerInventory(10);
+	addIntoPlayerInventory(3);
 }
 
 void PlayerBase::playerUpdate(float timer, float dt)
 {
-	std::cout << getPlayerAmmo() << std::endl;
 
 	if (getPlayerAmmo() > 0 && !isRecharging)
 	{

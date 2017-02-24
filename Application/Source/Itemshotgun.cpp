@@ -25,7 +25,7 @@ public:
 		timer_ = 0;
 
 		rarity_ = COMMON;
-
+		price_ = 40;
 	}
 
 	//------------------USES------------------

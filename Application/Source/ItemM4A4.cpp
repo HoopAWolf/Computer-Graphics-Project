@@ -24,7 +24,7 @@ public:
 		bulletcount_ = 10;
 
 		rarity_ = UNCOMMON;
-
+		price_ = 500;
 	}
 
 	void onItemUse(float timer, float dt){}

@@ -20,6 +20,7 @@ public:
 		bulletcount_ = 10;
 
 		rarity_ = COMMON;
+		price_ = 10;
 	}
 
 	//------------------USES------------------
