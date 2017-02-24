@@ -237,6 +237,9 @@ void StudioProject::Init()
 	meshList[GEO_MOUSE] = MeshBuilder::GenerateOBJ("", "OBJ//play1.obj");
 	meshList[GEO_MOUSE]->textureID = LoadTGA("Image//gay_mouse.tga");
 
+	meshList[GEO_SHOP] = MeshBuilder::GenerateOBJ("", "OBJ//shop.obj");
+	meshList[GEO_SHOP]->textureID = LoadTGA("Image//shopui.tga");
+
 	//------------------------------------------------------------------------------------------
 	//NPC for this scene only
 	//Its gonna be funny seeing all of dem walk huehuehue
@@ -308,15 +311,17 @@ void StudioProject::Update(double dt)
 	SceneManager::getSceneManger()->getmycursor();
 
 	ShowCursor(false);
-	if (!inattrib)
+	if (!inattrib && !inshop)
 	{
 		camera.Update(dt);
 		mouse = false;
 	}
-	else if (attrib)
+	else if (attrib || shop)
 	{
 		mouse = true;
 	}
+
+
 	
 
 	SceneManager::getSceneManger()->frameRate = ((int)(1 / dt));
@@ -486,6 +491,18 @@ void StudioProject::Update(double dt)
 			inattrib = false;
 			timer = Application::elapsed_timer_;
 			
+		}
+		if (Application::IsKeyPressed('L') && !shop)
+			{
+			shop = true;
+			inshop = true;
+			timer = Application::elapsed_timer_;
+			}
+		else if (Application::IsKeyPressed('L') && shop)
+			 {
+			shop = false;
+			inshop = false;
+			timer = Application::elapsed_timer_;
 		}
 
 		if (Application::IsKeyPressed(VK_LBUTTON) && !s && attrib)
@@ -875,6 +892,7 @@ void StudioProject::Render()
 	}
 
 	//-----------------------------------------------------SHOP-----------------------------------------------------
+	
 	for (int i = 0; i < 2; i++)
 	{
 		RenderTextOnScreen(meshList[GEO_TEXT], "Skills ", Color(0, 1, 1), 1.8, 32, 32);
@@ -892,9 +910,17 @@ void StudioProject::Render()
 
 	if (shop)
 	{
+		Color tempColor;
 		RenderMeshOnScreen(meshList[GEO_SHOP], 40, 27.5, 40, 40, 90);
 
-
+		for (int i = 0; i < ShopBase::instance()->getShopItemSize(); i++)
+		{
+			tempColor = DataBase::instance()->getRarityColor(DataBase::instance()->getItem(ShopBase::instance()->getItemInShop(i)->getItemID())->getRarity());
+			RenderTextOnScreen(meshList[GEO_TEXT], ShopBase::instance()->getItemInShop(i)->getItemName(), tempColor, 1.8, 27, 24.6 - (3.565 * i));
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(0))->getWeaponDamage()), tempColor, 1.8, 11, 9.5);
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(0))->getWeaponDurability()), tempColor, 1.8, 10, 9.3);
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(0))->getWeaponAttackSpeed()), tempColor, 1.8, 9, 9);
+		}
 	}
 	if (mouse)
 	{

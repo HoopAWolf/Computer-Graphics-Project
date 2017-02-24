@@ -171,6 +171,7 @@ public:
 	bool s = false;
 	bool f = false;
 	bool shop = false;
+	bool inshop = false;
 
 
 	

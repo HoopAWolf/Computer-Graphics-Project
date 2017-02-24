@@ -447,7 +447,7 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 		}
 	}
 
-	return nullptr;
+	return getItem(1);
 }
 
 EnvironmentBase* DataBase::getEnvironment(unsigned dimensionID, int positionInVector)
