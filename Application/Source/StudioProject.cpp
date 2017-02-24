@@ -120,9 +120,9 @@ void StudioProject::Init()
 
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCGirlwithBoobs(Vector3(10 + 0 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCBoy(Vector3(10 + 5 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new NPCScientist(Vector3(10 + 10 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCScientist(Vector3(1 + 10 * 20, 0, 195), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCElephant(Vector3(10 + 15 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new NPCNegan(Vector3(10 + 20 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCNegan(Vector3(10 + 20 * 10, 0, 120), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCEmoKid(Vector3(10 + 20 * 20, 0, 50), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCLady(Vector3(10 + 20 * 20, 0, 60), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 
@@ -797,8 +797,10 @@ void StudioProject::Render()
 		modelStack.Translate(DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().x,
 			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().y,
 			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().z);
+		modelStack.Rotate(DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
 		RenderMesh(RenderingBase::instance()->getNPCMesh((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getNPCID()), false);
 		modelStack.PopMatrix();
+		std::cout << DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getRotationY() << std::endl;
 	}
 
 	if (PlayerBase::instance()->getCurrentHeldItem() != nullptr)
