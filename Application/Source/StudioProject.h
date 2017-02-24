@@ -91,6 +91,7 @@ class StudioProject : public Scene
 		GEO_NEGAN,
 		GEO_ATTRIBUTES,
 		GEO_MOUSE,
+		GEO_INVENTORY,
 
 		NUM_GEOMETRY,
 	};
@@ -168,6 +169,9 @@ public:
 	bool inattrib = false;
 	bool mouse = false;
 	bool s=false;
+	bool inv = false;
+	bool ininv = false;
+	bool i = false;
 
 
 	bool walk = false;

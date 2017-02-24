@@ -221,6 +221,9 @@ void StudioProject::Init()
 	meshList[GEO_ATTRIBUTES] = MeshBuilder::GenerateOBJ("", "OBJ//attribute.obj");
 	meshList[GEO_ATTRIBUTES]->textureID = LoadTGA("Image//attribute.tga");
 
+	meshList[GEO_INVENTORY] = MeshBuilder::GenerateOBJ("", "OBJ//inventory.obj");
+	meshList[GEO_INVENTORY]->textureID = LoadTGA("Image//inventoryui.tga");
+
 	meshList[GEO_MOUSE] = MeshBuilder::GenerateOBJ("", "OBJ//play1.obj");
 	meshList[GEO_MOUSE]->textureID = LoadTGA("Image//gay_mouse.tga");
 
@@ -328,15 +331,16 @@ void StudioProject::Update(double dt)
 	SceneManager::getSceneManger()->getmycursor();
 
 	ShowCursor(false);
-	if (!inattrib)
+	if (!inattrib&&!ininv)
 	{
-		camera.Update(dt);
-		mouse = false;
+			camera.Update(dt);
+			mouse = false;
 	}
-	else if (attrib)
+	else if (attrib||inv)
 	{
-		mouse = true;
+			mouse = true;
 	}
+
 	
 
 	SceneManager::getSceneManger()->frameRate = ((int)(1 / dt));
@@ -443,14 +447,14 @@ void StudioProject::Update(double dt)
 			SceneManager::getSceneManger()->setNextScene(5);
 		}
 	//light_controls---------------------------------------------------------------
-	if (Application::IsKeyPressed('I'))
-	{
-		light[1].LightPosition.z -= (float)(LSPEED * dt);
-	}
-	if (Application::IsKeyPressed('K'))
-	{
-		light[1].LightPosition.z += (float)(LSPEED * dt);
-	}
+	//if (Application::IsKeyPressed('I'))
+	//{
+	//	light[1].LightPosition.z -= (float)(LSPEED * dt);
+	//}
+	//if (Application::IsKeyPressed('K'))
+	//{
+	//	light[1].LightPosition.z += (float)(LSPEED * dt);
+	//}
 	if (Application::IsKeyPressed('J'))
 		light[1].LightPosition.x -= (float)(LSPEED * dt);
 	if (Application::IsKeyPressed('L'))
@@ -498,7 +502,6 @@ void StudioProject::Update(double dt)
 			attrib = true;
 			inattrib = true;
 			timer = Application::elapsed_timer_;
-	
 		}
 		else if (Application::IsKeyPressed('K') && attrib)
 		{
@@ -507,10 +510,23 @@ void StudioProject::Update(double dt)
 			timer = Application::elapsed_timer_;
 			
 		}
+		if (Application::IsKeyPressed('I') && !inv)
+		{
+			inv = true;
+			ininv = true;
+			timer = Application::elapsed_timer_;
+
+		}
+		else if (Application::IsKeyPressed('I') && inv)
+		{
+			inv = false;
+			ininv = false;
+			timer = Application::elapsed_timer_;
+
+		}
 
 		if (Application::IsKeyPressed(VK_LBUTTON) && !s && attrib)
 		{
-			std::cout <<"ap"<< PlayerBase::instance()->getAttributePoint() << std::endl;
 			if (PlayerBase::instance()->getAttributePoint()!=0)
 			{
 				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>138 && SceneManager::getSceneManger()->cy < 190)
@@ -537,6 +553,37 @@ void StudioProject::Update(double dt)
 		else
 		{
 			s = false;
+		}
+		std::cout << "X : " << SceneManager::getSceneManger()->cx << std::endl;
+		std::cout << "Y : " << SceneManager::getSceneManger()->cx << std::endl;
+		if (Application::IsKeyPressed(VK_LBUTTON) && !i && inv)
+		{
+			
+			
+				/*if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>138 && SceneManager::getSceneManger()->cy < 190)
+				{
+					PlayerBase::instance()->increaseSkillPoint(0);
+				}
+				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>232 && SceneManager::getSceneManger()->cy < 285)
+				{
+					PlayerBase::instance()->increaseSkillPoint(1);
+				}
+				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>363 && SceneManager::getSceneManger()->cy < 416)
+				{
+					PlayerBase::instance()->increaseSkillPoint(2);
+				}
+				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>458 && SceneManager::getSceneManger()->cy < 511)
+				{
+					PlayerBase::instance()->increaseSkillPoint(3);
+				}*/
+			
+			i = true;
+			timer = Application::elapsed_timer_;
+
+		}
+		else
+		{
+			i = false;
 		}
 	}
 
@@ -856,6 +903,10 @@ void StudioProject::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(1)), Color(1, 1, 1), 1.8, 24, 19.1);
 		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(2)), Color(1, 1, 1), 1.8, 24, 12);
 		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(3)), Color(1, 1, 1), 1.8, 24, 6.7);
+	}
+	if (inv)
+	{
+		RenderMeshOnScreen(meshList[GEO_INVENTORY], 40, 27.5, 40, 40, 90);
 	}
 	if (mouse)
 	{
