@@ -494,7 +494,7 @@ void StudioProject::Update(double dt)
 			attrib = false;
 			inattrib = false;
 			timer = Application::elapsed_timer_;
-			
+
 		}
 		if (Application::IsKeyPressed('I') && !inv)
 		{
@@ -510,13 +510,13 @@ void StudioProject::Update(double dt)
 			timer = Application::elapsed_timer_;
 		}
 		if (Application::IsKeyPressed('L') && !shop)
-			{
+		{
 			shop = true;
 			inshop = true;
 			timer = Application::elapsed_timer_;
-			}
+		}
 		else if (Application::IsKeyPressed('L') && shop)
-			 {
+		{
 			shop = false;
 			inshop = false;
 			timer = Application::elapsed_timer_;
@@ -526,7 +526,7 @@ void StudioProject::Update(double dt)
 		if (Application::IsKeyPressed(VK_LBUTTON) && !s && attrib)
 		{
 
-			if (PlayerBase::instance()->getAttributePoint()!=0)
+			if (PlayerBase::instance()->getAttributePoint() != 0)
 			{
 				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>138 && SceneManager::getSceneManger()->cy < 190)
 				{
@@ -553,41 +553,243 @@ void StudioProject::Update(double dt)
 		{
 			s = false;
 		}
-
-		std::cout << "X : " << SceneManager::getSceneManger()->cx << std::endl;
-		std::cout << "Y : " << SceneManager::getSceneManger()->cx << std::endl;
 		if (Application::IsKeyPressed(VK_LBUTTON) && !i && inv)
 		{
 			
 			
-				/*if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>138 && SceneManager::getSceneManger()->cy < 190)
-
-
-		if (Application::IsKeyPressed(VK_LBUTTON) && !f && shop)
-		{
-			if (PlayerBase::instance()->getAttributePoint() != 0)
+			if (itemOne == 27)
 			{
-				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>138 && SceneManager::getSceneManger()->cy < 190)
+				//set itemOne to slot
+				//col1 row1
+				if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				{
+					itemOne = 0;
+				}
+				//col1 row2
+				if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				{
+					itemOne = 5;
+				}
+				//col1 row3
+				if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				{
+					itemOne = 10;
+				}
+				//col1 row4
+				if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				{
+					itemOne = 15;
+				}
 
-				{
-					PlayerBase::instance()->increaseSkillPoint(0);
-				}
-				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>232 && SceneManager::getSceneManger()->cy < 285)
-				{
-					PlayerBase::instance()->increaseSkillPoint(1);
-				}
-				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>363 && SceneManager::getSceneManger()->cy < 416)
-				{
-					PlayerBase::instance()->increaseSkillPoint(2);
-				}
-				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>458 && SceneManager::getSceneManger()->cy < 511)
-				{
-					PlayerBase::instance()->increaseSkillPoint(3);
 
-				}*/
-			
-			
-			
+				//col2 row1
+				if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				{
+					itemOne = 1;
+				}
+				//col2 row2
+				if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				{
+					itemOne = 6;
+				}
+				//col2 row3
+				if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				{
+					itemOne = 11;
+				}
+				//col2 row4
+				if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				{
+					itemOne = 16;
+				}
+
+
+				//col3 row1
+				if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				{
+					itemOne = 2;
+				}
+				//col3 row2
+				if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				{
+					itemOne = 7;
+				}
+				//col3 row3
+				if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				{
+					itemOne = 12;
+				}
+				//col3 row4
+				if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				{
+					itemOne = 17;
+				}
+
+
+				//col4 row1
+				if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				{
+					itemOne = 3;
+				}
+				//col4 row2
+				if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				{
+					itemOne = 8;
+				}
+				//col4 row3
+				if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				{
+					itemOne = 13;
+				}
+				//col4 row4
+				if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				{
+					itemOne = 18;
+				}
+
+
+				//col5 row1
+				if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				{
+					itemOne = 4;
+				}
+				//col5 row2
+				if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				{
+					itemOne = 9;
+				}
+				//col5 row3
+				if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				{
+					itemOne = 14;
+				}
+				//col5 row4
+				if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				{
+					itemOne = 19;
+				}
+			}
+
+
+			else if (itemOne != 27 && itemTwo == 27)
+			{
+				//same for itemTwo
+				//col1 row1
+				if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				{
+					itemTwo = 0;
+				}
+				//col1 row2
+				if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				{
+					itemTwo = 5;
+				}
+				//col1 row3
+				if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				{
+					itemTwo = 10;
+				}
+				//col1 row4
+				if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				{
+					itemTwo = 15;
+				}
+
+
+				//col2 row1
+				if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				{
+					itemTwo = 1;
+				}
+				//col2 row2
+				if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				{
+					itemTwo = 6;
+				}
+				//col2 row3
+				if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				{
+					itemTwo = 11;
+				}
+				//col2 row4
+				if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				{
+					itemTwo = 16;
+				}
+
+
+				//col3 row1
+				if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				{
+					itemTwo = 2;
+				}
+				//col3 row2
+				if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				{
+					itemTwo = 7;
+				}
+				//col3 row3
+				if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				{
+					itemTwo = 12;
+				}
+				//col3 row4
+				if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				{
+					itemTwo = 17;
+				}
+
+
+				//col4 row1
+				if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				{
+					itemTwo = 3;
+				}
+				//col4 row2
+				if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				{
+					itemTwo = 8;
+				}
+				//col4 row3
+				if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				{
+					itemTwo = 13;
+				}
+				//col4 row4
+				if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				{
+					itemTwo = 18;
+				}
+
+
+				//col5 row1
+				if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				{
+					itemTwo = 4;
+				}
+				//col5 row2
+				if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				{
+					itemTwo = 9;
+				}
+				//col5 row3
+				if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				{
+					itemTwo = 14;
+				}
+				//col5 row4
+				if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				{
+					itemTwo = 19;
+				}
+			}
+
+			else if (itemOne != 27 && itemTwo != 27)
+			{
+				PlayerBase::instance()->swapItemInInventory(itemOne,itemTwo);
+				itemOne = itemTwo = 27;
+			}
+	
 			i = true;
 			timer = Application::elapsed_timer_;
 		}
@@ -596,7 +798,6 @@ void StudioProject::Update(double dt)
 			i = false;
 		}
 	}
-
 	if (Application::IsKeyPressed(VK_LSHIFT))
 	{
 		PlayerBase::instance()->setPlayerState(PlayerBase::instance()->SPRINTING);

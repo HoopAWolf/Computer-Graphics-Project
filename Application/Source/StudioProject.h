@@ -174,12 +174,10 @@ public:
 	bool inv = false;
 	bool ininv = false;
 	bool i = false;
-
-	bool s = false;
 	bool f = false;
 	bool shop = false;
-
-
+	int itemOne = 27;
+	int itemTwo = 27;
 	bool inshop = false;
 
 
