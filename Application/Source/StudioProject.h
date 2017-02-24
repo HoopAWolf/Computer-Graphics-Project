@@ -170,7 +170,7 @@ public:
 	bool s=false;
 
 
-	bool walk = false;
+	
 
 private:
 

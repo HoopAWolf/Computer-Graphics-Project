@@ -64,6 +64,14 @@
 #include "RangedMinion_2.cpp"
 
 #include "NPCGirlWithBoobs.cpp"
+#include "NPCBoy.cpp"
+#include "NPCScientist.cpp"
+#include "NPCElephant.cpp"
+#include "NPCNegan.cpp"
+#include "NPCEmoKid.cpp"
+#include "NPCLady.cpp"
+
+
 
 #include <vector>
 #include <map>

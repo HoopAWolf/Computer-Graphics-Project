@@ -39,6 +39,7 @@ void StudioProject::Init()
 	DataBase::instance()->registerEntityMinion();  //RUN ONCE
 	DataBase::instance()->registerEntityBoss();  //RUN ONCE
 	DataBase::instance()->registerEntityProjectiles();  //RUN ONCE
+	DataBase::instance()->registerEntityNPC();  //RUN ONCE
 	PlayerBase::instance()->startPlayer();  //RUN ONCE
 
 	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
@@ -87,6 +88,13 @@ void StudioProject::Init()
 		RenderingBase::instance()->getProjectileMesh(i)->textureID = LoadTGA(tempString.c_str());
 	}
 
+	//RUN ONCE
+	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(5); i++)
+	{
+		string tempString = "Image//" + DataBase::instance()->getNPCEntityBase(i)->getTextureString() + ".tga";
+		RenderingBase::instance()->getNPCMesh(i)->textureID = LoadTGA(tempString.c_str());
+	}
+
 	//-------------------------------------------------------TESTING PURPOSES-----------------------------------------------------------
 	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(0); i++)
 	{
@@ -107,9 +115,15 @@ void StudioProject::Init()
 	DataBase::instance()->setEntity(false, true, false, 1, new RangedMinion_1(Vector3(10 + 5 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, true, false, 1, new RangedMinion_2(Vector3(10 + 10 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 
-	/*DataBase::instance()->setEntity(false, false, true, 1, new MeleeMinion_1(Vector3(10 + 0 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new RangedMinion_1(Vector3(10 + 5 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new RangedMinion_2(Vector3(10 + 10 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));*/
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCGirlwithBoobs(Vector3(10 + 0 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCBoy(Vector3(10 + 5 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCScientist(Vector3(10 + 10 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCElephant(Vector3(10 + 15 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCNegan(Vector3(10 + 20 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCEmoKid(Vector3(10 + 25 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCLady(Vector3(10 + 30 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+
+
 
 
 
@@ -227,40 +241,7 @@ void StudioProject::Init()
 	//------------------------------------------------------------------------------------------
 	//NPC for this scene only
 	//Its gonna be funny seeing all of dem walk huehuehue
-
-
-	meshList[GEO_GIRL] = MeshBuilder::GenerateOBJ("Girl", "OBJ//girlwithboobs_.obj");
-	meshList[GEO_GIRL]->textureID = LoadTGA("Image//girl_.tga");
-
-	meshList[GEO_NEGAN] = MeshBuilder::GenerateOBJ("Negan", "OBJ//negan_.obj");
-	meshList[GEO_NEGAN]->textureID = LoadTGA("Image//negan_.tga");
-
-	meshList[GEO_EMOKIDNPC] = MeshBuilder::GenerateOBJ("EmoKid", "OBJ//emokid_.obj");
-	meshList[GEO_EMOKIDNPC]->textureID = LoadTGA("Image//emokid_.tga");
-
-	meshList[GEO_ELENPC] = MeshBuilder::GenerateOBJ("Elephant", "OBJ//elephant_.obj");
-	meshList[GEO_ELENPC]->textureID = LoadTGA("Image//elephant_.tga");
-
-	meshList[GEO_LADY] = MeshBuilder::GenerateOBJ("Lady", "OBJ//lady_.obj");
-	meshList[GEO_LADY]->textureID = LoadTGA("Image//lady_.tga");
-
-	meshList[GEO_SCIENTISTNPC] = MeshBuilder::GenerateOBJ("Scientist", "OBJ//scientist_.obj");
-	meshList[GEO_SCIENTISTNPC]->textureID = LoadTGA("Image//scientist_.tga");
-
-	meshList[GEO_BOYNPC] = MeshBuilder::GenerateOBJ("BoyNPC", "OBJ//boy_.obj");
-	meshList[GEO_BOYNPC]->textureID = LoadTGA("Image//boy_.tga");
-
-	//their actions
-	walk = 0.0f;
-
-
-
-
-
-
-
-
-
+	//Just Kidding,you got pranked there aint no time for hard codings 
 	//-------------------------------------------------------------------------------------------
 	//light
 	light[0].type = Light::LIGHT_DIRECTIONAL;

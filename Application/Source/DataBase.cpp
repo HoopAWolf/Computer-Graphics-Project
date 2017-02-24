@@ -242,6 +242,31 @@ void DataBase::registerEntityNPC()
 	temp_obj = new NPCGirlwithBoobs(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
 	npc_data_base[(dynamic_cast<EntityNPC*>(temp_obj))->getNPCID()] = new NPCGirlwithBoobs(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
 	delete temp_obj;
+
+	temp_obj = new NPCBoy(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	npc_data_base[(dynamic_cast<EntityNPC*>(temp_obj))->getNPCID()] = new NPCBoy(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
+	temp_obj = new NPCScientist(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	npc_data_base[(dynamic_cast<EntityNPC*>(temp_obj))->getNPCID()] = new NPCScientist(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
+	temp_obj = new NPCElephant(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	npc_data_base[(dynamic_cast<EntityNPC*>(temp_obj))->getNPCID()] = new NPCElephant(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
+	temp_obj = new NPCNegan(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	npc_data_base[(dynamic_cast<EntityNPC*>(temp_obj))->getNPCID()] = new NPCNegan(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
+	temp_obj = new NPCEmoKid(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	npc_data_base[(dynamic_cast<EntityNPC*>(temp_obj))->getNPCID()] = new NPCEmoKid(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
+	temp_obj = new NPCLady(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	npc_data_base[(dynamic_cast<EntityNPC*>(temp_obj))->getNPCID()] = new NPCLady(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
 }
 
 void DataBase::registerEntityBoss()
