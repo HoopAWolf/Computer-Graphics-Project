@@ -33,7 +33,7 @@ void PlayerBase::startPlayer()
 	}
 
 	addIntoPlayerInventory(15);
-	addIntoPlayerInventory(10);
+	addIntoPlayerInventory(16);
 	addIntoPlayerInventory(3);
 }
 
@@ -360,6 +360,17 @@ void PlayerBase::addIntoPlayerInventory(unsigned itemID)
 		}
 	}
 }
+
+void PlayerBase::swapItemInInventory(int itemOne, int itemTwo)
+{
+	if (inventory_data_[itemOne] != nullptr && inventory_data_[itemTwo] != nullptr)
+	{
+		ItemBase *tempObj = inventory_data_[itemOne];
+		inventory_data_[itemOne] = inventory_data_[itemTwo];
+		inventory_data_[itemTwo] = tempObj;
+	}
+}
+
 
 bool PlayerBase::isInventoryFull()
 {

@@ -96,6 +96,7 @@ public:
 	void increaseSkillPoint(unsigned skill_slot);
 	void increaseCurrency(unsigned currency);
 	void decreaseCurrency(unsigned currency);
+	void swapItemInInventory(int itemOne, int itemTwo);
 
 	bool isInventoryFull();
 	void moveCurrItem(bool forward);
