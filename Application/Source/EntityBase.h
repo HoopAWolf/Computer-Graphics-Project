@@ -21,7 +21,8 @@ protected:
 	string texture_string_;
 	string multiple_texture_string_[5];
 	ELEMENTAL_TYPE elemental_type_;
-	int health_, rotation_Y_;
+	int health_;
+	float rotation_Y_;
 	unsigned damage_;
 	unsigned attack_speed_;
 	unsigned walking_speed_;
@@ -43,7 +44,7 @@ public:
 		return health_;
 	}
 
-	virtual int getRotationY()
+	virtual float getRotationY()
 	{
 		return rotation_Y_;
 	}

@@ -42,6 +42,7 @@ void StudioProject::Init()
 	DataBase::instance()->registerEntityProjectiles();  //RUN ONCE
 	DataBase::instance()->registerEntityNPC();  //RUN ONCE
 	PlayerBase::instance()->startPlayer();  //RUN ONCE
+	srand(time(nullptr));
 	ShopBase::instance()->startShop();  //RUN ONCE
 
 	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
@@ -119,15 +120,11 @@ void StudioProject::Init()
 
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCGirlwithBoobs(Vector3(10 + 0 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCBoy(Vector3(10 + 5 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new NPCScientist(Vector3(10 + 10 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCScientist(Vector3(1 + 10 * 20, 0, 195), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCElephant(Vector3(10 + 15 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new NPCNegan(Vector3(10 + 20 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCNegan(Vector3(10 + 20 * 10, 0, 120), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCEmoKid(Vector3(10 + 20 * 20, 0, 50), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCLady(Vector3(10 + 20 * 20, 0, 60), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-
-
-
-
 
 	//--------------------------------------------------------^REMOVE ONCE DONE^--------------------------------------------------------
 
@@ -243,6 +240,9 @@ void StudioProject::Init()
 	meshList[GEO_MOUSE] = MeshBuilder::GenerateOBJ("", "OBJ//play1.obj");
 	meshList[GEO_MOUSE]->textureID = LoadTGA("Image//gay_mouse.tga");
 
+	meshList[GEO_SHOP] = MeshBuilder::GenerateOBJ("", "OBJ//shop.obj");
+	meshList[GEO_SHOP]->textureID = LoadTGA("Image//shopui.tga");
+
 	//------------------------------------------------------------------------------------------
 	//NPC for this scene only
 	//Its gonna be funny seeing all of dem walk huehuehue
@@ -314,16 +314,28 @@ void StudioProject::Update(double dt)
 	SceneManager::getSceneManger()->getmycursor();
 
 	ShowCursor(false);
+<<<<<<< HEAD
 	if (!inattrib&&!ininv)
+=======
+	if (!inattrib && !inshop)
+>>>>>>> d096293853f3bfd29c2ae4be04933985225dedfc
 	{
 			camera.Update(dt);
 			mouse = false;
 	}
+<<<<<<< HEAD
 	else if (attrib||inv)
+=======
+	else if (attrib || shop)
+>>>>>>> d096293853f3bfd29c2ae4be04933985225dedfc
 	{
 			mouse = true;
 	}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d096293853f3bfd29c2ae4be04933985225dedfc
 	
 
 	SceneManager::getSceneManger()->frameRate = ((int)(1 / dt));
@@ -493,6 +505,7 @@ void StudioProject::Update(double dt)
 			timer = Application::elapsed_timer_;
 			
 		}
+<<<<<<< HEAD
 		if (Application::IsKeyPressed('I') && !inv)
 		{
 			inv = true;
@@ -506,6 +519,19 @@ void StudioProject::Update(double dt)
 			ininv = false;
 			timer = Application::elapsed_timer_;
 
+=======
+		if (Application::IsKeyPressed('L') && !shop)
+			{
+			shop = true;
+			inshop = true;
+			timer = Application::elapsed_timer_;
+			}
+		else if (Application::IsKeyPressed('L') && shop)
+			 {
+			shop = false;
+			inshop = false;
+			timer = Application::elapsed_timer_;
+>>>>>>> d096293853f3bfd29c2ae4be04933985225dedfc
 		}
 
 		if (Application::IsKeyPressed(VK_LBUTTON) && !s && attrib)
@@ -823,8 +849,10 @@ void StudioProject::Render()
 		modelStack.Translate(DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().x,
 			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().y,
 			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().z);
+		modelStack.Rotate(DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
 		RenderMesh(RenderingBase::instance()->getNPCMesh((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getNPCID()), false);
 		modelStack.PopMatrix();
+		std::cout << DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getRotationY() << std::endl;
 	}
 
 	if (PlayerBase::instance()->getCurrentHeldItem() != nullptr)
@@ -922,6 +950,7 @@ void StudioProject::Render()
 	}
 
 	//-----------------------------------------------------SHOP-----------------------------------------------------
+	
 	for (int i = 0; i < 2; i++)
 	{
 		RenderTextOnScreen(meshList[GEO_TEXT], "Skills ", Color(0, 1, 1), 1.8, 32, 32);
@@ -939,9 +968,17 @@ void StudioProject::Render()
 
 	if (shop)
 	{
+		Color tempColor;
 		RenderMeshOnScreen(meshList[GEO_SHOP], 40, 27.5, 40, 40, 90);
 
-
+		for (int i = 0; i < ShopBase::instance()->getShopItemSize(); i++)
+		{
+			tempColor = DataBase::instance()->getRarityColor(DataBase::instance()->getItem(ShopBase::instance()->getItemInShop(i)->getItemID())->getRarity());
+			RenderTextOnScreen(meshList[GEO_TEXT], ShopBase::instance()->getItemInShop(i)->getItemName(), tempColor, 1.8, 27, 24.6 - (3.565 * i));
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(0))->getWeaponDamage()), tempColor, 1.8, 11, 9.5);
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(0))->getWeaponDurability()), tempColor, 1.8, 10, 9.3);
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(0))->getWeaponAttackSpeed()), tempColor, 1.8, 9, 9);
+		}
 	}
 	if (mouse)
 	{

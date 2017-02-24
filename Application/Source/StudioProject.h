@@ -178,7 +178,11 @@ public:
 	bool s = false;
 	bool f = false;
 	bool shop = false;
+<<<<<<< HEAD
 >>>>>>> df737592e45b402cc424d8e51675a089a0b4d602
+=======
+	bool inshop = false;
+>>>>>>> d096293853f3bfd29c2ae4be04933985225dedfc
 
 
 	
