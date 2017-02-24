@@ -18,12 +18,13 @@ public:
 		weapon_type_ = RANGE_AUTO;
 		durability_ = 45;
 		damage_ = 20;
-		attack_speed_ = 2;
+		attack_speed_ = .5;
 		bulletcount_ = 3;
 		timer_ = 0;
 
 		rarity_ = LEGENDARY;
 
+		price_ = 1420;
 	}
 
 	//------------------USES------------------

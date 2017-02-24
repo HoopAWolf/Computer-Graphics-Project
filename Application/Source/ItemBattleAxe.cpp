@@ -18,6 +18,7 @@ public:
 		damage_ = 20;
 		attack_speed_ = 3;
 		rarity_ = UNCOMMON;
+		price_ = 50;
 
 	}
 

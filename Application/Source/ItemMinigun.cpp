@@ -23,6 +23,7 @@ public:
 		bulletcount_ = 1;
 
 		rarity_ = LEGENDARY;
+		price_ = 1670;
 	}
 
 	void onItemUse(float timer, float dt){}

@@ -25,6 +25,8 @@ public:
 
 		rarity_ = LEGENDARY;
 
+		price_ = 1500;
+
 	}
 
 	//------------------USES------------------
