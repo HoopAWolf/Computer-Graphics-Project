@@ -314,28 +314,19 @@ void StudioProject::Update(double dt)
 	SceneManager::getSceneManger()->getmycursor();
 
 	ShowCursor(false);
-<<<<<<< HEAD
-	if (!inattrib&&!ininv)
-=======
-	if (!inattrib && !inshop)
->>>>>>> d096293853f3bfd29c2ae4be04933985225dedfc
+
+	if (!inattrib&&!ininv&& !inshop)
 	{
 			camera.Update(dt);
 			mouse = false;
 	}
-<<<<<<< HEAD
-	else if (attrib||inv)
-=======
-	else if (attrib || shop)
->>>>>>> d096293853f3bfd29c2ae4be04933985225dedfc
+
+	else if (attrib || shop || inv)
 	{
 			mouse = true;
 	}
 
-<<<<<<< HEAD
-=======
 
->>>>>>> d096293853f3bfd29c2ae4be04933985225dedfc
 	
 
 	SceneManager::getSceneManger()->frameRate = ((int)(1 / dt));
@@ -505,7 +496,6 @@ void StudioProject::Update(double dt)
 			timer = Application::elapsed_timer_;
 			
 		}
-<<<<<<< HEAD
 		if (Application::IsKeyPressed('I') && !inv)
 		{
 			inv = true;
@@ -518,8 +508,7 @@ void StudioProject::Update(double dt)
 			inv = false;
 			ininv = false;
 			timer = Application::elapsed_timer_;
-
-=======
+		}
 		if (Application::IsKeyPressed('L') && !shop)
 			{
 			shop = true;
@@ -531,16 +520,12 @@ void StudioProject::Update(double dt)
 			shop = false;
 			inshop = false;
 			timer = Application::elapsed_timer_;
->>>>>>> d096293853f3bfd29c2ae4be04933985225dedfc
+
 		}
 
 		if (Application::IsKeyPressed(VK_LBUTTON) && !s && attrib)
 		{
-<<<<<<< HEAD
-=======
-			std::cout << SceneManager::getSceneManger()->cx << 'x' << std::endl;
-			std::cout << SceneManager::getSceneManger()->cx << 'x' << std::endl;
->>>>>>> df737592e45b402cc424d8e51675a089a0b4d602
+
 			if (PlayerBase::instance()->getAttributePoint()!=0)
 			{
 				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>138 && SceneManager::getSceneManger()->cy < 190)
@@ -568,7 +553,7 @@ void StudioProject::Update(double dt)
 		{
 			s = false;
 		}
-<<<<<<< HEAD
+
 		std::cout << "X : " << SceneManager::getSceneManger()->cx << std::endl;
 		std::cout << "Y : " << SceneManager::getSceneManger()->cx << std::endl;
 		if (Application::IsKeyPressed(VK_LBUTTON) && !i && inv)
@@ -576,14 +561,14 @@ void StudioProject::Update(double dt)
 			
 			
 				/*if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>138 && SceneManager::getSceneManger()->cy < 190)
-=======
+
 
 		if (Application::IsKeyPressed(VK_LBUTTON) && !f && shop)
 		{
 			if (PlayerBase::instance()->getAttributePoint() != 0)
 			{
 				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>138 && SceneManager::getSceneManger()->cy < 190)
->>>>>>> df737592e45b402cc424d8e51675a089a0b4d602
+
 				{
 					PlayerBase::instance()->increaseSkillPoint(0);
 				}
@@ -598,25 +583,17 @@ void StudioProject::Update(double dt)
 				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>458 && SceneManager::getSceneManger()->cy < 511)
 				{
 					PlayerBase::instance()->increaseSkillPoint(3);
-<<<<<<< HEAD
+
 				}*/
 			
+			
+			
 			i = true;
-=======
-				}
-			}
-			f = true;
->>>>>>> df737592e45b402cc424d8e51675a089a0b4d602
 			timer = Application::elapsed_timer_;
-
 		}
 		else
 		{
-<<<<<<< HEAD
 			i = false;
-=======
-			f = false;
->>>>>>> df737592e45b402cc424d8e51675a089a0b4d602
 		}
 	}
 
