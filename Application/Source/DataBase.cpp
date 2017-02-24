@@ -242,6 +242,31 @@ void DataBase::registerEntityNPC()
 	temp_obj = new NPCGirlwithBoobs(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
 	npc_data_base[(dynamic_cast<EntityNPC*>(temp_obj))->getNPCID()] = new NPCGirlwithBoobs(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
 	delete temp_obj;
+
+	temp_obj = new NPCBoy(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	npc_data_base[(dynamic_cast<EntityNPC*>(temp_obj))->getNPCID()] = new NPCBoy(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
+	temp_obj = new NPCScientist(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	npc_data_base[(dynamic_cast<EntityNPC*>(temp_obj))->getNPCID()] = new NPCScientist(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
+	temp_obj = new NPCElephant(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	npc_data_base[(dynamic_cast<EntityNPC*>(temp_obj))->getNPCID()] = new NPCElephant(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
+	temp_obj = new NPCNegan(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	npc_data_base[(dynamic_cast<EntityNPC*>(temp_obj))->getNPCID()] = new NPCNegan(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
+	temp_obj = new NPCEmoKid(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	npc_data_base[(dynamic_cast<EntityNPC*>(temp_obj))->getNPCID()] = new NPCEmoKid(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
+	temp_obj = new NPCLady(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	npc_data_base[(dynamic_cast<EntityNPC*>(temp_obj))->getNPCID()] = new NPCLady(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
 }
 
 void DataBase::registerEntityBoss()
@@ -367,9 +392,12 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 			{
 				randNumber = rand() % rarity;
 
-				if (getItem(randNumber)->getRarity() == 0)
+				if (randNumber < item_base_.size())
 				{
-					return getItem(randNumber);
+					if (getItem(randNumber)->getRarity() == 0)
+					{
+						return getItem(randNumber);
+					}
 				}
 			}
 		}
@@ -379,9 +407,12 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 			{
 				randNumber = rand() % rarity;
 
-				if (getItem(randNumber)->getRarity() == 1)
+				if (randNumber < item_base_.size())
 				{
-					return getItem(randNumber);
+					if (getItem(randNumber)->getRarity() == 1)
+					{
+						return getItem(randNumber);
+					}
 				}
 			}
 		}
@@ -391,9 +422,12 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 			{
 				randNumber = rand() % rarity;
 
-				if (getItem(randNumber)->getRarity() == 2)
+				if (randNumber < item_base_.size())
 				{
-					return getItem(randNumber);
+					if (getItem(randNumber)->getRarity() == 2)
+					{
+						return getItem(randNumber);
+					}
 				}
 			}
 		}
@@ -403,9 +437,12 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 			{
 				randNumber = rand() % rarity;
 
-				if (getItem(randNumber)->getRarity() == 3)
+				if (randNumber < item_base_.size())
 				{
-					return getItem(randNumber);
+					if (getItem(randNumber)->getRarity() == 3)
+					{
+						return getItem(randNumber);
+					}
 				}
 			}
 		}

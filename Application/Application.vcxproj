@@ -145,7 +145,13 @@
     <ClCompile Include="Source\MeleeMinion_2.cpp" />
     <ClCompile Include="Source\Mesh.cpp" />
     <ClCompile Include="Source\MeshBuilder.cpp" />
+    <ClCompile Include="Source\NPCBoy.cpp" />
+    <ClCompile Include="Source\NPCElephant.cpp" />
+    <ClCompile Include="Source\NPCEmoKid.cpp" />
     <ClCompile Include="Source\NPCGirlwithBoobs.cpp" />
+    <ClCompile Include="Source\NPCLady.cpp" />
+    <ClCompile Include="Source\NPCNegan.cpp" />
+    <ClCompile Include="Source\NPCScientist.cpp" />
     <ClCompile Include="Source\PlayerBase.cpp" />
     <ClCompile Include="Source\RangedMinion_1.cpp" />
     <ClCompile Include="Source\RangedMinion_2.cpp" />
@@ -156,6 +162,7 @@
     <ClCompile Include="Source\SceneBossR.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\shader.cpp" />
+    <ClCompile Include="Source\ShopBase.cpp" />
     <ClCompile Include="Source\StudioProject.cpp" />
     <ClCompile Include="Source\Utility.cpp" />
   </ItemGroup>
@@ -194,6 +201,7 @@
     <ClInclude Include="Source\SceneBossR.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\shader.hpp" />
+    <ClInclude Include="Source\ShopBase.h" />
     <ClInclude Include="Source\StudioProject.h" />
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\Vertex.h" />

@@ -266,6 +266,27 @@
     <ClCompile Include="Source\NPCGirlwithBoobs.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\NPCBoy.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPCScientist.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPCElephant.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPCNegan.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPCEmoKid.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NPCLady.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ShopBase.cpp">
+      <Filter>Source Files\DataBase</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">
@@ -378,6 +399,9 @@
     </ClInclude>
     <ClInclude Include="Source\EntityNPC.h">
       <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ShopBase.h">
+      <Filter>Header Files\DataBase</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

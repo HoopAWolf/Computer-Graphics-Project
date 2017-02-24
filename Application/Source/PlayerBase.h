@@ -31,7 +31,7 @@ private:
 
 	PlayerBase(){};
 	static PlayerBase *s_instance;
-	int player_health_, current_held_item_, ammo_;
+	int player_health_, current_held_item_, ammo_, currency_;
 	int current_skill_active_[2];
 
 	unsigned damage_, attack_speed_, moving_speed_,attribute_points_ , resistance_, dimension_ , 
@@ -70,6 +70,7 @@ public:
 	unsigned getPlayerLevel();
 	unsigned getPlayerExperience();
 	unsigned getPlayerLevelCap();
+	int getPlayerCurrency();
 	int getPlayerAmmo();
 	unsigned getCurrentSkillPoint(unsigned skill_slot);
 	unsigned getCurrentSkillDamage(unsigned skill_slot);
@@ -93,6 +94,9 @@ public:
 	void addIntoPlayerInventory(unsigned itemID);
 	void increaseExperience(unsigned ammount);
 	void increaseSkillPoint(unsigned skill_slot);
+	void increaseCurrency(unsigned currency);
+	void decreaseCurrency(unsigned currency);
+	void swapItemInInventory(int itemOne, int itemTwo);
 
 	bool isInventoryFull();
 	void moveCurrItem(bool forward);

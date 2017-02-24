@@ -24,7 +24,7 @@ public:
 		bulletcount_ = 10;
 
 		rarity_ = UNCOMMON;
-
+		price_ = 500;
 	}
 
 	void onItemUse(float timer, float dt){}
@@ -32,7 +32,7 @@ public:
 	//------------------USES------------------
 	EntityProjectile* onItemAttackProjectile(float timer, float dt)
 	{
-		if (timer > timer_ + ((attack_speed_ / 100.) * timer_))
+		if (timer > timer_ + ((attack_speed_ / 100.) * 100))
 		{
 			EntityBullet* bullet = new EntityBullet(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer);
 			timer_ = timer;

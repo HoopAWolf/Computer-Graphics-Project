@@ -5,6 +5,8 @@
 
 class Itemshotgun : public ItemWeapon
 {
+	float timer_;
+
 public:
 	Itemshotgun()
 	{
@@ -18,11 +20,12 @@ public:
 		weapon_type_ = RANGE_AUTO;
 		durability_ = 43;
 		damage_ = 20;
-		attack_speed_ = 1;
+		attack_speed_ = 3;
 		bulletcount_ = 20;
+		timer_ = 0;
 
 		rarity_ = COMMON;
-
+		price_ = 40;
 	}
 
 	//------------------USES------------------
@@ -33,6 +36,12 @@ public:
 
 	EntityProjectile* onItemAttackProjectile(float timer, float dt)
 	{
+		if (timer > timer_ + ((attack_speed_ / 100.) * 100))
+		{
+			EntityBullet* bullet = new EntityBullet(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer);
+			timer_ = timer;
+			return bullet;
+		}
 
 		return nullptr;
 

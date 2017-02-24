@@ -174,8 +174,6 @@ public:
 		if (boss_state_ == SKILL_2)
 		{
 			rotateleftArmY += (float)(80 * dt4);
-			std::cout << rotateleftArmY << std::endl;
-			std::cout << count << std::endl;
 			if (rotateleftArmY <= -90)
 			{
 				limit4 = true;

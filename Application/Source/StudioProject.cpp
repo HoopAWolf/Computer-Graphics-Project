@@ -18,6 +18,7 @@ float timer = 0.0f;
 DataBase *DataBase::s_instance = nullptr;
 MapBase *MapBase::s_instance = nullptr;
 RenderingBase *RenderingBase::s_instance = nullptr;
+ShopBase *ShopBase::s_instance = nullptr;
 Vector3 Camera::position = 0;
 Vector3 Camera::target = 0;
 Vector3 Camera::up = 0;
@@ -39,7 +40,9 @@ void StudioProject::Init()
 	DataBase::instance()->registerEntityMinion();  //RUN ONCE
 	DataBase::instance()->registerEntityBoss();  //RUN ONCE
 	DataBase::instance()->registerEntityProjectiles();  //RUN ONCE
+	DataBase::instance()->registerEntityNPC();  //RUN ONCE
 	PlayerBase::instance()->startPlayer();  //RUN ONCE
+	ShopBase::instance()->startShop();  //RUN ONCE
 
 	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
 	MapBase::instance()->generateMap(DIMENSIONID, "Town.txt");  //RUN ONCE FOR EACH SCENE
@@ -87,6 +90,13 @@ void StudioProject::Init()
 		RenderingBase::instance()->getProjectileMesh(i)->textureID = LoadTGA(tempString.c_str());
 	}
 
+	//RUN ONCE
+	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(5); i++)
+	{
+		string tempString = "Image//" + DataBase::instance()->getNPCEntityBase(i)->getTextureString() + ".tga";
+		RenderingBase::instance()->getNPCMesh(i)->textureID = LoadTGA(tempString.c_str());
+	}
+
 	//-------------------------------------------------------TESTING PURPOSES-----------------------------------------------------------
 	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(0); i++)
 	{
@@ -107,9 +117,15 @@ void StudioProject::Init()
 	DataBase::instance()->setEntity(false, true, false, 1, new RangedMinion_1(Vector3(10 + 5 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, true, false, 1, new RangedMinion_2(Vector3(10 + 10 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 
-	/*DataBase::instance()->setEntity(false, false, true, 1, new MeleeMinion_1(Vector3(10 + 0 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new RangedMinion_1(Vector3(10 + 5 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new RangedMinion_2(Vector3(10 + 10 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));*/
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCGirlwithBoobs(Vector3(10 + 0 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCBoy(Vector3(10 + 5 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCScientist(Vector3(10 + 10 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCElephant(Vector3(10 + 15 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCNegan(Vector3(10 + 20 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCEmoKid(Vector3(10 + 20 * 20, 0, 50), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCLady(Vector3(10 + 20 * 20, 0, 60), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+
+
 
 
 
@@ -230,40 +246,7 @@ void StudioProject::Init()
 	//------------------------------------------------------------------------------------------
 	//NPC for this scene only
 	//Its gonna be funny seeing all of dem walk huehuehue
-
-
-	meshList[GEO_GIRL] = MeshBuilder::GenerateOBJ("Girl", "OBJ//girlwithboobs_.obj");
-	meshList[GEO_GIRL]->textureID = LoadTGA("Image//girl_.tga");
-
-	meshList[GEO_NEGAN] = MeshBuilder::GenerateOBJ("Negan", "OBJ//negan_.obj");
-	meshList[GEO_NEGAN]->textureID = LoadTGA("Image//negan_.tga");
-
-	meshList[GEO_EMOKIDNPC] = MeshBuilder::GenerateOBJ("EmoKid", "OBJ//emokid_.obj");
-	meshList[GEO_EMOKIDNPC]->textureID = LoadTGA("Image//emokid_.tga");
-
-	meshList[GEO_ELENPC] = MeshBuilder::GenerateOBJ("Elephant", "OBJ//elephant_.obj");
-	meshList[GEO_ELENPC]->textureID = LoadTGA("Image//elephant_.tga");
-
-	meshList[GEO_LADY] = MeshBuilder::GenerateOBJ("Lady", "OBJ//lady_.obj");
-	meshList[GEO_LADY]->textureID = LoadTGA("Image//lady_.tga");
-
-	meshList[GEO_SCIENTISTNPC] = MeshBuilder::GenerateOBJ("Scientist", "OBJ//scientist_.obj");
-	meshList[GEO_SCIENTISTNPC]->textureID = LoadTGA("Image//scientist_.tga");
-
-	meshList[GEO_BOYNPC] = MeshBuilder::GenerateOBJ("BoyNPC", "OBJ//boy_.obj");
-	meshList[GEO_BOYNPC]->textureID = LoadTGA("Image//boy_.tga");
-
-	//their actions
-	walk = 0.0f;
-
-
-
-
-
-
-
-
-
+	//Just Kidding,you got pranked there aint no time for hard codings 
 	//-------------------------------------------------------------------------------------------
 	//light
 	light[0].type = Light::LIGHT_DIRECTIONAL;
@@ -527,6 +510,11 @@ void StudioProject::Update(double dt)
 
 		if (Application::IsKeyPressed(VK_LBUTTON) && !s && attrib)
 		{
+<<<<<<< HEAD
+=======
+			std::cout << SceneManager::getSceneManger()->cx << 'x' << std::endl;
+			std::cout << SceneManager::getSceneManger()->cx << 'x' << std::endl;
+>>>>>>> df737592e45b402cc424d8e51675a089a0b4d602
 			if (PlayerBase::instance()->getAttributePoint()!=0)
 			{
 				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>138 && SceneManager::getSceneManger()->cy < 190)
@@ -554,6 +542,7 @@ void StudioProject::Update(double dt)
 		{
 			s = false;
 		}
+<<<<<<< HEAD
 		std::cout << "X : " << SceneManager::getSceneManger()->cx << std::endl;
 		std::cout << "Y : " << SceneManager::getSceneManger()->cx << std::endl;
 		if (Application::IsKeyPressed(VK_LBUTTON) && !i && inv)
@@ -561,6 +550,14 @@ void StudioProject::Update(double dt)
 			
 			
 				/*if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>138 && SceneManager::getSceneManger()->cy < 190)
+=======
+
+		if (Application::IsKeyPressed(VK_LBUTTON) && !f && shop)
+		{
+			if (PlayerBase::instance()->getAttributePoint() != 0)
+			{
+				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>138 && SceneManager::getSceneManger()->cy < 190)
+>>>>>>> df737592e45b402cc424d8e51675a089a0b4d602
 				{
 					PlayerBase::instance()->increaseSkillPoint(0);
 				}
@@ -575,15 +572,25 @@ void StudioProject::Update(double dt)
 				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>458 && SceneManager::getSceneManger()->cy < 511)
 				{
 					PlayerBase::instance()->increaseSkillPoint(3);
+<<<<<<< HEAD
 				}*/
 			
 			i = true;
+=======
+				}
+			}
+			f = true;
+>>>>>>> df737592e45b402cc424d8e51675a089a0b4d602
 			timer = Application::elapsed_timer_;
 
 		}
 		else
 		{
+<<<<<<< HEAD
 			i = false;
+=======
+			f = false;
+>>>>>>> df737592e45b402cc424d8e51675a089a0b4d602
 		}
 	}
 
@@ -825,6 +832,7 @@ void StudioProject::Render()
 		modelStack.PushMatrix();
 		modelStack.Translate(camera.target.x, camera.position.y - 1, camera.target.z);
 		modelStack.Rotate(camera.getRotationY() - 155, 0, 1, 0);
+		modelStack.Rotate(-camera.getRotationZ(), 1, 0, 0);
 		modelStack.Scale(.5, .5, .5);
 		RenderMesh(RenderingBase::instance()->getItemMesh(PlayerBase::instance()->getCurrentHeldItem()->getItemID()), true);
 
@@ -913,6 +921,32 @@ void StudioProject::Render()
 		RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx / 10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy) / 10, 15, 15, 90);
 	}
 
+	//-----------------------------------------------------SHOP-----------------------------------------------------
+	for (int i = 0; i < 2; i++)
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT], "Skills ", Color(0, 1, 1), 1.8, 32, 32);
+
+		if (PlayerBase::instance()->getCurrentSkillPoint(PlayerBase::instance()->getCurrentEquippedSkill(i)) > 0
+			&& PlayerBase::instance()->getCurrentSkillCoolDown(PlayerBase::instance()->getCurrentEquippedSkill(i)) <= 0)
+		{
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(i + 1) + " : " + PlayerBase::instance()->getSkillName(PlayerBase::instance()->getCurrentEquippedSkill(i)), Color(0, 1, 0), 1.8, 32, 31 - (i + 1));
+		}
+		else
+		{
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(i + 1) + " : " + PlayerBase::instance()->getSkillName(PlayerBase::instance()->getCurrentEquippedSkill(i)), Color(.4, .4, .4), 1.8, 32, 31 - (i + 1));
+		}
+	}
+
+	if (shop)
+	{
+		RenderMeshOnScreen(meshList[GEO_SHOP], 40, 27.5, 40, 40, 90);
+
+
+	}
+	if (mouse)
+	{
+		RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx / 10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy) / 10, 15, 15, 90);
+	}
 
 }
 

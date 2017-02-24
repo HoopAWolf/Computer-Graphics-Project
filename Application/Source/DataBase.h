@@ -64,6 +64,14 @@
 #include "RangedMinion_2.cpp"
 
 #include "NPCGirlWithBoobs.cpp"
+#include "NPCBoy.cpp"
+#include "NPCScientist.cpp"
+#include "NPCElephant.cpp"
+#include "NPCNegan.cpp"
+#include "NPCEmoKid.cpp"
+#include "NPCLady.cpp"
+
+
 
 #include <vector>
 #include <map>
@@ -113,6 +121,16 @@ private:
 			delete boss_data_base[i];
 		}
 
+		for (int i = 0; i < projectile_data_base.size(); i++)
+		{
+			delete projectile_data_base[i];
+		}
+
+		for (int i = 0; i < npc_data_base.size(); i++)
+		{
+			delete npc_data_base[i];
+		}
+
 		for (int i = 0; i < drop_base_.size(); i++)
 		{
 			for (int j = 0; j < drop_base_[i].size(); j++)
@@ -142,6 +160,22 @@ private:
 			for (int j = 0; j < boss_base_[i].size(); j++)
 			{
 				delete boss_base_[i][j];
+			}
+		}
+
+		for (int i = 0; i < npc_base.size(); i++)
+		{
+			for (int j = 0; j < npc_base[i].size(); j++)
+			{
+				delete npc_base[i][j];
+			}
+		}
+
+		for (int i = 0; i < projectile_base_.size(); i++)
+		{
+			for (int j = 0; j < projectile_base_[i].size(); j++)
+			{
+				delete projectile_base_[i][j];
 			}
 		}
 	}

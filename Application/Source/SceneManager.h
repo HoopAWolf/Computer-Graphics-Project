@@ -5,6 +5,7 @@
 #include <map>
 #include "PlayerBase.h"
 #include "MapBase.h"
+#include "ShopBase.h"
 #include "RenderingBase.h"
 
 using std::map;

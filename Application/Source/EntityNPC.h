@@ -11,7 +11,7 @@ class EntityNPC abstract : public EntityBase
 protected:
 	enum NPC_STATE
 	{
-	 WALK,
+	 WALKING,
 	 IDLE,
 
 	};
@@ -20,6 +20,8 @@ protected:
 	NPC_STATE NPC_state_;
 	unsigned NPCID_;
 	string NPC_name_;
+	bool NPCWALKING = false;
+
 
 public:
 

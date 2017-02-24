@@ -1,16 +1,16 @@
-#ifndef NPC_GIRL_WITH_BOOBS
-#define NPC_GIRL_WITH_BOOBS
+#ifndef NPC_BOY
+#define NPC_BOY
 
 
 #include "EntityNPC.h"
 
 
-class NPCGirlwithBoobs : public EntityNPC
+class NPCBoy : public EntityNPC
 {
 public:
-	NPCGirlwithBoobs(Vector3 position, Vector3 up, Vector3 forward, Vector3 right, Vector3 target)
+	NPCBoy(Vector3 position, Vector3 up, Vector3 forward, Vector3 right, Vector3 target)
 	{
-		texture_string_ = "girlwithboobs_";
+		texture_string_ = "boy_";
 		elemental_type_ = NONE;
 		health_ = 10;
 		damage_ = 1;
@@ -24,8 +24,8 @@ public:
 		target_ = target;
 		drop_ID_ = 0;
 		NPC_state_ = IDLE;
-		NPCID_ = 0;
-		NPC_name_ = "Hi I am a Basic Bitch";
+		NPCID_ = 1;
+		NPC_name_ = "Hi I am a Douche";
 
 	}
 
@@ -71,42 +71,5 @@ public:
 	}
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #endif

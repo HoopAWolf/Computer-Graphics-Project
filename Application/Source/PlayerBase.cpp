@@ -32,14 +32,13 @@ void PlayerBase::startPlayer()
 		skills_[i] = Vector3(0, 0, 0);
 	}
 
-	addIntoPlayerInventory(17);
-	addIntoPlayerInventory(11);
+	addIntoPlayerInventory(15);
 	addIntoPlayerInventory(16);
+	addIntoPlayerInventory(3);
 }
 
 void PlayerBase::playerUpdate(float timer, float dt)
 {
-	std::cout << getPlayerAmmo() << std::endl;
 
 	if (getPlayerAmmo() > 0 && !isRecharging)
 	{
@@ -215,6 +214,24 @@ unsigned PlayerBase::getPlayerLevelCap()
 	return level_cap_;
 }
 
+int PlayerBase::getPlayerCurrency()
+{
+	return currency_;
+}
+
+void PlayerBase::increaseCurrency(unsigned currency)
+{
+	currency_ += currency;
+}
+
+void PlayerBase::decreaseCurrency(unsigned currency)
+{
+	if (currency > currency_)
+		currency_ = 0;
+	else
+		currency_ -= currency;
+}
+
 AABB PlayerBase::getBoundingBox()
 {
 	AABB bounding;
@@ -343,6 +360,17 @@ void PlayerBase::addIntoPlayerInventory(unsigned itemID)
 		}
 	}
 }
+
+void PlayerBase::swapItemInInventory(int itemOne, int itemTwo)
+{
+	if (inventory_data_[itemOne] != nullptr && inventory_data_[itemTwo] != nullptr)
+	{
+		ItemBase *tempObj = inventory_data_[itemOne];
+		inventory_data_[itemOne] = inventory_data_[itemTwo];
+		inventory_data_[itemTwo] = tempObj;
+	}
+}
+
 
 bool PlayerBase::isInventoryFull()
 {
