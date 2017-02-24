@@ -5,6 +5,8 @@
 
 class ItemGiggsGun : public ItemWeapon
 {
+	float timer_;
+
 public:
 	ItemGiggsGun()
 	{
@@ -16,8 +18,9 @@ public:
 		weapon_type_ = RANGE_AUTO;
 		durability_ = 45;
 		damage_ = 20;
-		attack_speed_ = 3;
+		attack_speed_ = 2;
 		bulletcount_ = 3;
+		timer_ = 0;
 
 		rarity_ = LEGENDARY;
 
@@ -31,9 +34,14 @@ public:
 
 	EntityProjectile* onItemAttackProjectile(float timer, float dt)
 	{
+		if (timer > timer_ + ((attack_speed_ / 100.) * timer_))
+		{
+			EntityBullet* bullet = new EntityBullet(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer);
+			timer_ = timer;
+			return bullet;
+		}
 
 		return nullptr;
-
 	}
 };
 

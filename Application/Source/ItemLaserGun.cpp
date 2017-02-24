@@ -5,6 +5,8 @@
 
 class ItemLaserGun : public ItemWeapon
 {
+	float timer_;
+
 public:
 	ItemLaserGun()
 	{
@@ -17,6 +19,7 @@ public:
 		damage_ = 5;
 		attack_speed_ = 3;
 		bulletcount_ = 10;
+		timer_ = 0;
 
 		rarity_ = UNCOMMON;
 
@@ -30,6 +33,12 @@ public:
 
 	EntityProjectile* onItemAttackProjectile(float timer, float dt)
 	{
+		if (timer > timer_ + ((attack_speed_ / 100.) * timer_))
+		{
+			EntityFireBall* bullet = new EntityFireBall(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer);
+			timer_ = timer;
+			return bullet;
+		}
 
 		return nullptr;
 

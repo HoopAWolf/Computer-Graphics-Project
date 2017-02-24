@@ -215,6 +215,24 @@ unsigned PlayerBase::getPlayerLevelCap()
 	return level_cap_;
 }
 
+int PlayerBase::getPlayerCurrency()
+{
+	return currency_;
+}
+
+void PlayerBase::increaseCurrency(unsigned currency)
+{
+	currency_ += currency;
+}
+
+void PlayerBase::decreaseCurrency(unsigned currency)
+{
+	if (currency > currency_)
+		currency_ = 0;
+	else
+		currency_ -= currency;
+}
+
 AABB PlayerBase::getBoundingBox()
 {
 	AABB bounding;
