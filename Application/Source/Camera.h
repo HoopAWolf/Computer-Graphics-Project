@@ -9,14 +9,13 @@ public:
 	static Vector3 position;
 	static Vector3 target;
 	static Vector3 up;
-	static Vector3 forward;
+	static Vector3 playerRight;
 
 	int anchorX, anchorY;
 	int WindowX, WindowY;
 
 	Vector3 back;
 	Vector3 playerLeft;
-	Vector3 playerRight;
 
 	Camera();
 	~Camera();

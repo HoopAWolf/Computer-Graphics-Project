@@ -34,9 +34,10 @@ void PlayerBase::startPlayer()
 		skills_[i] = Vector3(0, 0, 0);
 	}
 
-	addIntoPlayerInventory(15);
-	addIntoPlayerInventory(16);
-	addIntoPlayerInventory(3);
+	addIntoPlayerInventory(6);
+	addIntoPlayerInventory(5);
+	addIntoPlayerInventory(9);
+	addIntoPlayerInventory(13);
 }
 
 void PlayerBase::playerUpdate(float timer, float dt)
@@ -70,14 +71,31 @@ void PlayerBase::playerUpdate(float timer, float dt)
 				}
 				else
 				{
-					if (rotationX <= 90 && !hit)
+					if (rotationX <= 80 && !hit)
 					{
 						rotationX += (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponAttackSpeed();
 					}
 					else
 					{
 						if (!hit)
+						{
+							for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(2, dimension_); i++)
+							{
+								if (DataBase::instance()->getEntityMinion(dimension_, i)->getBoundingBox().isPointInsideAABB(Camera::position, Camera::playerRight.Cross(Camera::up)))
+								{
+									dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(dimension_, i))->
+										onAttacked((dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponDamage());
+
+								/*	std::cout << "ENEMY HEALTH LEFT: " + 
+										std::to_string(dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(dimension_, i))->getHealth()) 
+										<< std::endl;*/
+									break;
+								}
+							}
+
 							hit = true;
+						}
+
 						rotationX -= (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponAttackSpeed();
 
 						if (rotationX <= 0)

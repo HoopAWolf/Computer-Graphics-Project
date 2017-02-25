@@ -98,6 +98,11 @@ public:
 	virtual void setPosition(Vector3 position) = 0;
 	virtual void updateAI(float timer, unsigned dimensionID, float dt) = 0;
 
+	virtual void onAttacked(unsigned damage)
+	{
+		health_ -= damage;
+	}
+
 };
 
 #endif

@@ -29,9 +29,21 @@ struct AABB
 	bool isPointInsideAABB(Vector3 position, Vector3 view) {
 		Vector3 viewRange = position;
 
-		for (int i = 0; i < 3; i++)
+		/*std::cout << "/////////////////////////////////////////" << std::endl;
+		std::cout << view << std::endl;
+		std::cout << position << std::endl;*/
+
+		Vector3 newView = (position - (position + view)).Normalized();
+
+	/*	std::cout << newView << std::endl;
+		std::cout << "/////////////////////////////////////////" << std::endl;*/
+		for (int i = 0; i < 8; i++)
 		{
-			viewRange += view;
+			viewRange.x += ((newView.x < 0) ? -.5 : .5);
+			viewRange.z += ((newView.z < 0) ? -.5 : .5);
+
+			//std::cout << viewRange << std::endl;
+
 			if ((viewRange.x >= min.x && viewRange.x <= max.x) &&
 				(viewRange.y >= min.y && viewRange.y <= max.y) &&
 				(viewRange.z >= min.z && viewRange.z <= max.z))

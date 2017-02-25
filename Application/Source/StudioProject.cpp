@@ -22,7 +22,7 @@ ShopBase *ShopBase::s_instance = nullptr;
 Vector3 Camera::position = 0;
 Vector3 Camera::target = 0;
 Vector3 Camera::up = 0;
-Vector3 Camera::forward = 0;
+Vector3 Camera::playerRight = 0;
 
 StudioProject::StudioProject()
 {

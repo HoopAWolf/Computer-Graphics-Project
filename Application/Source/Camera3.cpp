@@ -55,7 +55,7 @@ void Camera3::Update(double dt)
 
 		if (limitRotation < .6 && p.y < mousePosYAnchor)
 		{
-			float pitch = (float)(CAMERA_SPEED * (mousePosYAnchor - p.y)) * .017f;
+			float pitch = (float)(CAMERA_SPEED * (mousePosYAnchor - p.y)) * dt;
 			Mtx44 rotation;
 			rotation.SetToRotation(pitch, right.x, right.y, right.z);
 			view = rotation * view;
@@ -69,7 +69,7 @@ void Camera3::Update(double dt)
 		}
 		else if (limitRotation > -.6 && p.y > mousePosYAnchor)
 		{
-			float pitch = (float)(-CAMERA_SPEED * (p.y - mousePosYAnchor)) * .017f;
+			float pitch = (float)(-CAMERA_SPEED * (p.y - mousePosYAnchor)) * dt;
 			Mtx44 rotation;
 			rotation.SetToRotation(pitch, right.x, right.y, right.z);
 			view = rotation * view;
@@ -84,7 +84,7 @@ void Camera3::Update(double dt)
 
 		if (p.x < mousePosXAnchor)
 		{
-			float yaw = (float)(CAMERA_SPEED * (mousePosXAnchor - p.x)) * .017f;
+			float yaw = (float)(CAMERA_SPEED * (mousePosXAnchor - p.x)) * dt;
 			Mtx44 rotation;
 			rotation.SetToRotation(yaw, up.x, up.y, up.z);
 			view = rotation * view;
@@ -93,7 +93,7 @@ void Camera3::Update(double dt)
 		}
 		else if (p.x > mousePosXAnchor)
 		{
-			float yaw = (float)(-CAMERA_SPEED * (p.x - mousePosXAnchor)) * .017f;
+			float yaw = (float)(-CAMERA_SPEED * (p.x - mousePosXAnchor)) * dt;
 			Mtx44 rotation;
 			rotation.SetToRotation(yaw, up.x, up.y, up.z);
 			view = rotation * view;
@@ -177,6 +177,9 @@ void Camera3::Update(double dt)
 
 			target = position + view;
 		}
+
+		playerRight = view.Cross(up);
+		this->up = up;
 
 		mousePosXAnchor = (windowX / 2);
 		mousePosYAnchor = (windowY / 2);
