@@ -46,7 +46,7 @@ void StudioProject::Init()
 	ShopBase::instance()->startShop();  //RUN ONCE
 
 	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
-	MapBase::instance()->generateMap(DIMENSIONID, "Town.txt");  //RUN ONCE FOR EACH SCENE
+	//MapBase::instance()->generateMap(DIMENSIONID, "Town.txt");  //RUN ONCE FOR EACH SCENE
 
 	RenderingBase::instance()->registerAllRenderingData();  //RUN ONCE
 
@@ -115,6 +115,7 @@ void StudioProject::Init()
 	DataBase::instance()->setEntity(true, false, false, 1, new Boss_4(Vector3(10 + 15 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 
 	DataBase::instance()->setEntity(false, true, false, 1, new MeleeMinion_1(Vector3(10 + 0 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, false, 1, new MeleeMinion_2(Vector3(10 + 0 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, true, false, 1, new RangedMinion_1(Vector3(10 + 5 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, true, false, 1, new RangedMinion_2(Vector3(10 + 10 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 
@@ -556,7 +557,6 @@ void StudioProject::Update(double dt)
 		if (Application::IsKeyPressed(VK_LBUTTON) && !i && inv)
 		{
 			
-			
 			if (itemOne == 27)
 			{
 				//set itemOne to slot
@@ -566,105 +566,105 @@ void StudioProject::Update(double dt)
 					itemOne = 0;
 				}
 				//col1 row2
-				if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				else if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
 				{
 					itemOne = 5;
 				}
 				//col1 row3
-				if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				else if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
 				{
 					itemOne = 10;
 				}
 				//col1 row4
-				if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				else if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
 				{
 					itemOne = 15;
 				}
 
 
 				//col2 row1
-				if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				else if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
 				{
 					itemOne = 1;
 				}
 				//col2 row2
-				if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				else if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
 				{
 					itemOne = 6;
 				}
 				//col2 row3
-				if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				else if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
 				{
 					itemOne = 11;
 				}
 				//col2 row4
-				if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				else if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
 				{
 					itemOne = 16;
 				}
 
 
 				//col3 row1
-				if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
 				{
 					itemOne = 2;
 				}
 				//col3 row2
-				if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
 				{
 					itemOne = 7;
 				}
 				//col3 row3
-				if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
 				{
 					itemOne = 12;
 				}
 				//col3 row4
-				if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
 				{
 					itemOne = 17;
 				}
 
 
 				//col4 row1
-				if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
 				{
 					itemOne = 3;
 				}
 				//col4 row2
-				if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
 				{
 					itemOne = 8;
 				}
 				//col4 row3
-				if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
 				{
 					itemOne = 13;
 				}
 				//col4 row4
-				if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
 				{
 					itemOne = 18;
 				}
 
 
 				//col5 row1
-				if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
 				{
 					itemOne = 4;
 				}
 				//col5 row2
-				if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
 				{
 					itemOne = 9;
 				}
 				//col5 row3
-				if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
 				{
 					itemOne = 14;
 				}
 				//col5 row4
-				if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
 				{
 					itemOne = 19;
 				}
@@ -680,113 +680,113 @@ void StudioProject::Update(double dt)
 					itemTwo = 0;
 				}
 				//col1 row2
-				if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				else if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
 				{
 					itemTwo = 5;
 				}
 				//col1 row3
-				if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				else if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
 				{
 					itemTwo = 10;
 				}
 				//col1 row4
-				if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				else if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
 				{
 					itemTwo = 15;
 				}
 
 
 				//col2 row1
-				if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				else if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
 				{
 					itemTwo = 1;
 				}
 				//col2 row2
-				if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				else if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
 				{
 					itemTwo = 6;
 				}
 				//col2 row3
-				if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				else if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
 				{
 					itemTwo = 11;
 				}
 				//col2 row4
-				if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				else if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
 				{
 					itemTwo = 16;
 				}
 
 
 				//col3 row1
-				if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
 				{
 					itemTwo = 2;
 				}
 				//col3 row2
-				if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
 				{
 					itemTwo = 7;
 				}
 				//col3 row3
-				if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
 				{
 					itemTwo = 12;
 				}
 				//col3 row4
-				if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
 				{
 					itemTwo = 17;
 				}
 
 
 				//col4 row1
-				if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
 				{
 					itemTwo = 3;
 				}
 				//col4 row2
-				if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
 				{
 					itemTwo = 8;
 				}
 				//col4 row3
-				if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
 				{
 					itemTwo = 13;
 				}
 				//col4 row4
-				if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
 				{
 					itemTwo = 18;
 				}
 
 
 				//col5 row1
-				if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>158 && SceneManager::getSceneManger()->cy < 223)
 				{
 					itemTwo = 4;
 				}
 				//col5 row2
-				if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>226 && SceneManager::getSceneManger()->cy < 289)
 				{
 					itemTwo = 9;
 				}
 				//col5 row3
-				if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>294 && SceneManager::getSceneManger()->cy < 357)
 				{
 					itemTwo = 14;
 				}
 				//col5 row4
-				if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>361 && SceneManager::getSceneManger()->cy < 425)
 				{
 					itemTwo = 19;
 				}
 			}
 
-			else if (itemOne != 27 && itemTwo != 27)
+			if (itemOne != 27 && itemTwo != 27)
 			{
-				PlayerBase::instance()->swapItemInInventory(itemOne,itemTwo);
+				PlayerBase::instance()->swapItemInInventory(itemOne, itemTwo);
 				itemOne = itemTwo = 27;
 			}
 	
@@ -890,6 +890,7 @@ void StudioProject::Render()
 	RenderMesh(meshList[GEO_LIGHTBALL], false);
 	modelStack.PopMatrix();
 	//===================================================================================================
+	//--------------------------------------------------DROPS--------------------------------------------------
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(0, DIMENSIONID); i++)
 	{
 		Color tempColor;
@@ -931,6 +932,7 @@ void StudioProject::Render()
 		modelStack.PopMatrix();
 	}
 
+	//--------------------------------------------------ENVIRONMENT--------------------------------------------------
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(1, DIMENSIONID); i++)
 	{
 		modelStack.PushMatrix();
@@ -942,11 +944,12 @@ void StudioProject::Render()
 		modelStack.PopMatrix();
 	}
 
+	//--------------------------------------------------MINION--------------------------------------------------
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(2, DIMENSIONID); i++)
 	{
 		modelStack.PushMatrix();
 		modelStack.Translate(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().x,
-			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().y + 5,
+			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().y,
 			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().z);
 
 		modelStack.PushMatrix();
@@ -969,6 +972,7 @@ void StudioProject::Render()
 		modelStack.PopMatrix();
 	}
 
+	//--------------------------------------------------BOSS--------------------------------------------------
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(3, DIMENSIONID); i++)
 	{
 		modelStack.PushMatrix();
@@ -1009,7 +1013,7 @@ void StudioProject::Render()
 		modelStack.PopMatrix();
 	}
 
-
+	//--------------------------------------------------PROJECTILE--------------------------------------------------
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(4, DIMENSIONID); i++)
 	{
 		modelStack.PushMatrix();
@@ -1021,6 +1025,7 @@ void StudioProject::Render()
 		modelStack.PopMatrix();
 	}
 
+	//--------------------------------------------------NPC--------------------------------------------------
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(5, DIMENSIONID); i++)
 	{
 		modelStack.PushMatrix();
@@ -1030,9 +1035,9 @@ void StudioProject::Render()
 		modelStack.Rotate(DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
 		RenderMesh(RenderingBase::instance()->getNPCMesh((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getNPCID()), false);
 		modelStack.PopMatrix();
-		std::cout << DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getRotationY() << std::endl;
 	}
 
+	//--------------------------------------------------HELD ITEMS--------------------------------------------------
 	if (PlayerBase::instance()->getCurrentHeldItem() != nullptr)
 	{
 		modelStack.PushMatrix();
@@ -1045,9 +1050,10 @@ void StudioProject::Render()
 		modelStack.PopMatrix();
 	}
 
-
+	//--------------------------------------------------FPS--------------------------------------------------
 	RenderTextOnScreen(meshList[GEO_TEXT], "FPS: " + std::to_string(SceneManager::getSceneManger()->frameRate), Color(0, 1, 0), 1.8, 1, 32);
 
+	//--------------------------------------------------MAIN INVENTORY(4 SLOTS)--------------------------------------------------
 	for (int i = 0; i < 4; i++)
 	{
 		if (PlayerBase::instance()->getItemFromInventory(i) != nullptr)
@@ -1089,6 +1095,7 @@ void StudioProject::Render()
 	RenderTextOnScreen(meshList[GEO_TEXT], healthBar, Color(1, 0, 0), 2, 12, 1);
 	modelStack.PopMatrix();
 
+	//--------------------------------------------------POSITION--------------------------------------------------
 	RenderTextOnScreen(meshList[GEO_TEXT], "X:  " + std::to_string((int)camera.position.x), Color(1, 0, 0), 1.8, 1, 30);
 	RenderTextOnScreen(meshList[GEO_TEXT], "Y:  " + std::to_string((int)camera.position.y), Color(0, 1, 0), 1.8, 1, 28);
 	RenderTextOnScreen(meshList[GEO_TEXT], "Z:  " + std::to_string((int)camera.position.z), Color(0, 0, 1), 1.8, 1, 26);
@@ -1109,6 +1116,8 @@ void StudioProject::Render()
 		}
 	}
 
+	//-----------------------------------------------------ATTRIBUTE-----------------------------------------------------
+
 	if (attrib)
 	{
 		RenderMeshOnScreen(meshList[GEO_ATTRIBUTES], 40, 27.5, 40, 40, 90); 
@@ -1118,32 +1127,8 @@ void StudioProject::Render()
 		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(2)), Color(1, 1, 1), 1.8, 24, 12);
 		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(3)), Color(1, 1, 1), 1.8, 24, 6.7);
 	}
-	if (inv)
-	{
-		RenderMeshOnScreen(meshList[GEO_INVENTORY], 40, 27.5, 40, 40, 90);
-	}
-	if (mouse)
-	{
-		RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx / 10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy) / 10, 15, 15, 90);
-	}
 
 	//-----------------------------------------------------SHOP-----------------------------------------------------
-	
-	for (int i = 0; i < 2; i++)
-	{
-		RenderTextOnScreen(meshList[GEO_TEXT], "Skills ", Color(0, 1, 1), 1.8, 32, 32);
-
-		if (PlayerBase::instance()->getCurrentSkillPoint(PlayerBase::instance()->getCurrentEquippedSkill(i)) > 0
-			&& PlayerBase::instance()->getCurrentSkillCoolDown(PlayerBase::instance()->getCurrentEquippedSkill(i)) <= 0)
-		{
-			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(i + 1) + " : " + PlayerBase::instance()->getSkillName(PlayerBase::instance()->getCurrentEquippedSkill(i)), Color(0, 1, 0), 1.8, 32, 31 - (i + 1));
-		}
-		else
-		{
-			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(i + 1) + " : " + PlayerBase::instance()->getSkillName(PlayerBase::instance()->getCurrentEquippedSkill(i)), Color(.4, .4, .4), 1.8, 32, 31 - (i + 1));
-		}
-	}
-
 	if (shop)
 	{
 		Color tempColor;
@@ -1151,13 +1136,48 @@ void StudioProject::Render()
 
 		for (int i = 0; i < ShopBase::instance()->getShopItemSize(); i++)
 		{
-			tempColor = DataBase::instance()->getRarityColor(DataBase::instance()->getItem(ShopBase::instance()->getItemInShop(i)->getItemID())->getRarity());
-			RenderTextOnScreen(meshList[GEO_TEXT], ShopBase::instance()->getItemInShop(i)->getItemName(), tempColor, 1.8, 27, 24.6 - (3.565 * i));
-			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(0))->getWeaponDamage()), tempColor, 1.8, 11, 9.5);
-			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(0))->getWeaponDurability()), tempColor, 1.8, 10, 9.3);
-			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(0))->getWeaponAttackSpeed()), tempColor, 1.8, 9, 9);
+			if (ShopBase::instance()->getItemInShop(i) != nullptr)
+			{
+				tempColor = DataBase::instance()->getRarityColor(DataBase::instance()->getItem(ShopBase::instance()->getItemInShop(i)->getItemID())->getRarity());
+				RenderTextOnScreen(meshList[GEO_TEXT], ShopBase::instance()->getItemInShop(i)->getItemName(), tempColor, 1.8, 27, 24.6 - (3.565 * i));
+			}
+		}
+
+		if (ShopBase::instance()->getItemInShop(0) != nullptr)
+		{
+			RenderMeshOnScreen(RenderingBase::instance()->getItemMesh(ShopBase::instance()->getItemInShop(0)->getItemID()),
+				28, 33, 3, 3, 217);
+
+			tempColor = DataBase::instance()->getRarityColor(DataBase::instance()->getItem(ShopBase::instance()->getItemInShop(0)->getItemID())->getRarity());
+			RenderTextOnScreen(meshList[GEO_TEXT], ShopBase::instance()->getItemInShop(0)->getItemName(), tempColor, 1.8, 8, 23.5);
+
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(0))->getWeaponDamage()), Color(1, 1, 1), 1.8, 13, 9.8);
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(0))->getWeaponDurability()), Color(1, 1, 1), 1.8, 13, 8.2);
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(0))->getWeaponAttackSpeed()), Color(1, 1, 1), 1.8, 13, 6.5);
 		}
 	}
+
+	//-----------------------------------------------------INVENTORY-----------------------------------------------------
+	if (inv)
+	{
+		RenderMeshOnScreen(meshList[GEO_INVENTORY], 40, 27.5, 40, 40, 90);
+
+		int item = 0;
+		for (int i = 0; i < 5; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				if (PlayerBase::instance()->getItemFromInventory(item) != nullptr)
+				{
+					RenderMeshOnScreen(RenderingBase::instance()->getItemMesh(PlayerBase::instance()->getItemFromInventory(item)->getItemID()),
+						27 + (i * 8), 40 - (j * 8), 1, 1, 217);
+				}
+
+				item++;
+			}
+		}
+	}
+	//-----------------------------------------------------MOUSE-----------------------------------------------------
 	if (mouse)
 	{
 		RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx / 10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy) / 10, 15, 15, 90);

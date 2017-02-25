@@ -226,6 +226,10 @@ void DataBase::registerEntityMinion()
 	minion_data_base[(dynamic_cast<EntityMinion*>(temp_obj))->getMinionID()] = new MeleeMinion_1(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
 	delete temp_obj;
 
+	temp_obj = new MeleeMinion_2(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	minion_data_base[(dynamic_cast<EntityMinion*>(temp_obj))->getMinionID()] = new MeleeMinion_2(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
 	temp_obj = new RangedMinion_1(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
 	minion_data_base[(dynamic_cast<EntityMinion*>(temp_obj))->getMinionID()] = new RangedMinion_1(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
 	delete temp_obj;
@@ -542,7 +546,7 @@ int DataBase::sizeOfDataBase(unsigned base)
 	};
 }
 
-//0 - DROP BASE, 1 - BUILDING BASE, 2 - ENTITY MINION BASE, 3 - ENTITY BOSS BASE, 4 - PROJECTILE BOSS BASEm 5 - NPC BASE
+//0 - DROP BASE, 1 - BUILDING BASE, 2 - ENTITY MINION BASE, 3 - ENTITY BOSS BASE, 4 - PROJECTILE BOSS BASE 5 - NPC BASE
 int DataBase::sizeOfDimensionObjBase(unsigned base, unsigned dimensionID)
 {
 

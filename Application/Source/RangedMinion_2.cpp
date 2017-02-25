@@ -26,7 +26,7 @@ public:
 		target_ = target;
 		drop_ID_ = 0;
 		minion_name_ = "hi i am ranged minion 2";
-		minionID_ = 0;
+		minionID_ = 3;
 		minion_state_ = IDLE;
 	}
 	void onDeath(){}

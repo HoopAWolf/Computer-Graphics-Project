@@ -3,13 +3,13 @@
 
 #include "EntityMinion.h"
 
-class MeleeMinion_1 : public EntityMinion
+class MeleeMinion_2 : public EntityMinion
 {
 
 	float tempDT;
 
 public:
-	MeleeMinion_1(Vector3 position, Vector3 up, Vector3 forward, Vector3 right, Vector3 target)
+	MeleeMinion_2(Vector3 position, Vector3 up, Vector3 forward, Vector3 right, Vector3 target)
 	{
 		multiple_texture_string_[0] = "melee_minion_2_body";
 		multiple_texture_string_[1] = "melee_minion_2_arm_1";
@@ -29,7 +29,7 @@ public:
 		target_ = target;
 		drop_ID_ = 0;
 		minion_name_ = "hi i am melee minion 2";
-		minionID_ = 0;
+		minionID_ = 1;
 		minion_state_ = IDLE;
 	}
 	void onDeath(){}
