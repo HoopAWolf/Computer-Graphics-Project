@@ -1,5 +1,8 @@
 #include "MapBase.h"
 #include "DataBase.h"
+#include <stack>
+
+using std::stack;
 
 void MapBase::setMapSize(unsigned dimensionID, int x, int z)
 {
@@ -17,26 +20,181 @@ void MapBase::setMapSize(unsigned dimensionID, int x, int z)
 
 void MapBase::generateMap(unsigned dimensionID)
 {
+	const int size = 21;
+	ArrayData map[size][size];
+	int posX = 0;
+	int posY = 0;
+	int goalX = 0;
+	int goalY = 0;
+	bool game_over = false;
 	char currChar;
-	int minPosX, minPosZ, maxPosX, maxPosZ;
-	for (int x = 0; x < map_data_[dimensionID].size_.x; x++)
-	{
-		for (int z = 0; z < map_data_[dimensionID].size_.z; z++)
-		{
-			if (rand() % 100 < 5)
-			{
-				*(*(getMapData(dimensionID).mapArray_ + x) + z) = 'C';
-				for (int i = 0; i < DataBase::instance()->sizeOfDataBase(1); i++)
-				{
-					if (DataBase::instance()->getEnvironmentBase(i)->getEnvironmentSymbol() == *(*(getMapData(dimensionID).mapArray_ + x) + z))
-					{
-						EnvironmentBase *tempObj = DataBase::instance()->getEnvironmentBase(i);
-						tempObj->setPosition(Vector3(x, 0, z));
 
-						DataBase::instance()->setEnvironment(dimensionID, tempObj);
-					}
+	int minPosX, minPosZ, maxPosX, maxPosZ;
+	
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			map[i][j].display = '#';
+			map[i][j].visited = false;
+			map[i][j].top_wall = true;
+			map[i][j].bot_wall = true;
+			map[i][j].left_wall = true;
+			map[i][j].right_wall = true;
+		}
+	}
+	for (int i = 1; i < size - 1; i++)
+	{
+		for (int j = 1; j < size - 1; j++)
+		{
+			map[1][j].top_wall = false;
+			map[21 - 2][j].bot_wall = false;
+			map[i][1].left_wall = false;
+			map[i][21 - 2].right_wall = false;
+		}
+	}
+
+	srand((unsigned)time(NULL));                                                                         
+	int random = 0;
+	int randomX = ((2 * rand()) + 1) % (21 - 1);                                         
+	int randomY = ((2 * rand()) + 1) % (21 - 1);                                         
+	posX = randomX;                                                                
+	posY = randomY;                                                              
+	int visitedCells = 1;
+	int totalCells = ((size - 1) / 2)*((size - 1) / 2);
+	int percent = 0;
+	stack<int> back_trackX, back_trackY;                                         
+
+	map[randomY][randomX].display = 'S';                                        
+	map[randomY][randomX].visited = true;                                     
+
+	while (visitedCells < totalCells)
+	{
+		if (((map[randomY - 2][randomX].visited == false) && (map[randomY][randomX].top_wall == true && map[randomY - 2][randomX].bot_wall == true)) ||
+			((map[randomY + 2][randomX].visited == false) && (map[randomY][randomX].bot_wall == true && map[randomY + 2][randomX].top_wall == true)) ||
+			((map[randomY][randomX - 2].visited == false) && (map[randomY][randomX].left_wall == true && map[randomY][randomX - 2].right_wall == true)) ||
+			((map[randomY][randomX + 2].visited == false) && (map[randomY][randomX].right_wall == true && map[randomY][randomX + 2].left_wall == true)))
+		{
+			random = (rand() % 4) + 1;             
+
+			// GO UP
+			if ((random == 1) && (randomY > 1)) 
+			{
+				if (map[randomY - 2][randomX].visited == false) 
+				{     
+					map[randomY - 1][randomX].display = ' ';      
+					map[randomY - 1][randomX].visited = true;     
+					map[randomY][randomX].top_wall = false;      
+
+					back_trackX.push(randomX);                     
+					back_trackY.push(randomY);                    
+
+					randomY -= 2;                               
+					map[randomY][randomX].visited = true;        
+					map[randomY][randomX].display = ' ';          
+					map[randomY][randomX].bot_wall = false;       
+					visitedCells++;                               
 				}
+				else
+					continue;
 			}
+
+			// GO DOWN
+			else if ((random == 2) && (randomY < size - 2))
+			{
+				if (map[randomY + 2][randomX].visited == false)
+				{       
+					map[randomY + 1][randomX].display = ' ';    
+					map[randomY + 1][randomX].visited = true;      
+					map[randomY][randomX].bot_wall = false;     
+
+					back_trackX.push(randomX);                    
+					back_trackY.push(randomY);                      
+
+					randomY += 2;                                 
+					map[randomY][randomX].visited = true;        
+					map[randomY][randomX].display = ' ';         
+					map[randomY][randomX].top_wall = false;      
+					visitedCells++;                                 
+				}
+				else
+					continue;
+			}
+
+			// GO LEFT
+			else if ((random == 3) && (randomX > 1)) 
+			{
+				if (map[randomY][randomX - 2].visited == false) 
+				{      
+					map[randomY][randomX - 1].display = ' ';    
+					map[randomY][randomX - 1].visited = true;     
+					map[randomY][randomX].left_wall = false;     
+
+					back_trackX.push(randomX);                    
+					back_trackY.push(randomY);                      
+
+					randomX -= 2;                               
+					map[randomY][randomX].visited = true;        
+					map[randomY][randomX].display = ' ';         
+					map[randomY][randomX].right_wall = false;   
+					visitedCells++;                              
+				}
+				else
+					continue;
+			}
+
+			// GO RIGHT
+			else if ((random == 4) && (randomX < size - 2))
+			{
+				if (map[randomY][randomX + 2].visited == false) 
+				{       
+					map[randomY][randomX + 1].display = ' ';    
+					map[randomY][randomX + 1].visited = true;    
+					map[randomY][randomX].right_wall = false;  
+
+					back_trackX.push(randomX);                      
+					back_trackY.push(randomY);                  
+
+					randomX += 2;                                  
+					map[randomY][randomX].visited = true;        
+					map[randomY][randomX].display = ' ';        
+					map[randomY][randomX].left_wall = false;     
+					visitedCells++;                               
+				}
+				else
+					continue;
+			}
+
+		}
+		else 
+		{
+			randomX = back_trackX.top();
+			back_trackX.pop();
+
+			randomY = back_trackY.top();
+			back_trackY.pop();
+		}
+	}
+
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < size; j++)
+		{
+			*(*(getMapData(dimensionID).mapArray_ + i) + j) = map[i][j].display;
+		}
+	}
+
+	goalX = randomX;
+	goalY = randomY;
+	
+	for (int i = goalX -2; i <= goalX + 2; i++)
+	{
+		for (int j = goalY -2; j <= goalY + 2; j++)
+		{
+			if (i == goalX && j == goalY)
+				*(*(getMapData(dimensionID).mapArray_ + i) + j) = 'P';
+			else
+				*(*(getMapData(dimensionID).mapArray_ + i) + j) = ' ';
 		}
 	}
 
@@ -52,9 +210,9 @@ void MapBase::generateMap(unsigned dimensionID)
 				{
 					if (DataBase::instance()->getEnvironmentBase(i)->getEnvironmentSymbol() == currChar)
 					{
-						for (int a = 0; a < 5; a++)
+						for (int a = 0; a < 40; a++)
 						{
-							for (int b = 0; b < 5; b++)
+							for (int b = 0; b < 40; b++)
 							{
 								if (DataBase::instance()->getEnvironmentBase(i)->getBoundryChar(a, b) == currChar)
 								{
@@ -105,14 +263,14 @@ void MapBase::generateMap(unsigned dimensionID)
 		}
 	}
 
-	/*for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
+	for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
 	{
 		for (int z = 0; z < getMapData(dimensionID).size_.z; z++)
 		{
 			std::cout << checkingMapDataByCoord(dimensionID, x, z);
 		}
 		std::cout << std::endl;
-	}*/
+	}
 }
 
 void MapBase::generateMap(unsigned dimensionID, const std::string fileName)

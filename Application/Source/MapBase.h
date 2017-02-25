@@ -14,6 +14,13 @@ struct ArrayData
 {
 	char **mapArray_;
 	Vector3 size_;
+
+	bool visited;
+	bool top_wall;
+	bool bot_wall;
+	bool left_wall;
+	bool right_wall;
+	char display;
 };
 
 class MapBase

@@ -2,9 +2,9 @@
 #define _ITEM_WEAPON_H_
 
 #include "ItemBase.h"
-#include "EntityFireBall.cpp"
-#include "EntityBullet.cpp"
-#include "EntityChickenProjectile.cpp"
+#include "EntityFireBall.h"
+#include "EntityBullet.h"
+#include "EntityChickenProjectile.h"
 #include "Camera3.h"
 
 class ItemWeapon abstract  : public ItemBase

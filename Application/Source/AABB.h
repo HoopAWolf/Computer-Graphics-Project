@@ -14,6 +14,15 @@ struct AABB
 		return AABBatCoord;
 	}
 
+	AABB increaseBoundry(Vector3 minInput, Vector3 maxInput)
+	{
+		AABB AABBincrease;
+		AABBincrease.min = min - minInput;
+		AABBincrease.max = max + maxInput;
+
+		return AABBincrease;
+	}
+
 	void setBoundry(Vector3 minInput, Vector3 maxInput)
 	{
 		min = minInput;
@@ -37,10 +46,10 @@ struct AABB
 
 	/*	std::cout << newView << std::endl;
 		std::cout << "/////////////////////////////////////////" << std::endl;*/
-		for (int i = 0; i < 8; i++)
+		for (int i = 0; i < 20; i++)
 		{
-			viewRange.x += ((newView.x < 0) ? -.5 : .5);
-			viewRange.z += ((newView.z < 0) ? -.5 : .5);
+			viewRange.x += ((newView.x < 0) ? -.3 : .3);
+			viewRange.z += ((newView.z < 0) ? -.3 : .3);
 
 			//std::cout << viewRange << std::endl;
 

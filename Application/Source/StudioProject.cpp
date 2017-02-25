@@ -45,8 +45,11 @@ void StudioProject::Init()
 	srand(time(nullptr));
 	ShopBase::instance()->startShop();  //RUN ONCE
 
+	//MapBase::instance()->setMapSize(DIMENSIONID, 21, 21);  //RUN ONCE FOR EACH SCENE
+	//MapBase::instance()->generateMap(DIMENSIONID);  //RUN ONCE FOR EACH SCENE
+
 	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
-	//MapBase::instance()->generateMap(DIMENSIONID, "Town.txt");  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->generateMap(DIMENSIONID, "Town.txt");  //RUN ONCE FOR EACH SCENE
 
 	RenderingBase::instance()->registerAllRenderingData();  //RUN ONCE
 
@@ -1199,7 +1202,8 @@ void StudioProject::Render()
 				if (PlayerBase::instance()->getItemFromInventory(item) != nullptr)
 				{
 					RenderMeshOnScreen(RenderingBase::instance()->getItemMesh(PlayerBase::instance()->getItemFromInventory(item)->getItemID()),
-						27 + (i * 8), 40 - (j * 8), 1, 1, 217);
+						27 + (i * 8), 40 - (j * 8), 1, 1, 
+						217);
 				}
 
 				item++;
@@ -1356,8 +1360,8 @@ void StudioProject::RenderUI(Mesh* mesh, Color color, float size, float x, float
 	viewStack.LoadIdentity(); //No need camera for ortho mode
 	modelStack.PushMatrix();
 	modelStack.LoadIdentity(); //Reset modelStack
-	modelStack.Scale(size, size, size);
 	modelStack.Translate(x, y, 0);
+	modelStack.Scale(size, size, size);
 
 	Mtx44 MVP, modelView, modelView_inverse_transpose;
 

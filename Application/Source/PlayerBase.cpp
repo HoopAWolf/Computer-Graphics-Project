@@ -79,6 +79,21 @@ void PlayerBase::playerUpdate(float timer, float dt)
 					{
 						if (!hit)
 						{
+
+							for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(3, dimension_); i++)
+							{
+								if (DataBase::instance()->getEntityBoss(dimension_, i)->getBoundingBox().isPointInsideAABB(Camera::position, Camera::playerRight.Cross(Camera::up)))
+								{
+									dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(dimension_, i))->
+										onAttacked((dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponDamage());
+
+									/*std::cout << "BOSS HEALTH LEFT: " +
+									std::to_string(dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(dimension_, i))->getHealth())
+									<< std::endl;*/
+									goto here;
+								}
+							}
+
 							for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(2, dimension_); i++)
 							{
 								if (DataBase::instance()->getEntityMinion(dimension_, i)->getBoundingBox().isPointInsideAABB(Camera::position, Camera::playerRight.Cross(Camera::up)))
@@ -86,12 +101,14 @@ void PlayerBase::playerUpdate(float timer, float dt)
 									dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(dimension_, i))->
 										onAttacked((dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponDamage());
 
-								/*	std::cout << "ENEMY HEALTH LEFT: " + 
+									/*std::cout << "ENEMY HEALTH LEFT: " + 
 										std::to_string(dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(dimension_, i))->getHealth()) 
 										<< std::endl;*/
 									break;
 								}
 							}
+
+						here:
 
 							hit = true;
 						}
@@ -266,6 +283,11 @@ void PlayerBase::decreaseCurrency(unsigned currency)
 		currency_ = 0;
 	else
 		currency_ -= currency;
+}
+
+void PlayerBase::playerAttacked(int damage)
+{
+	player_health_ -= damage;
 }
 
 AABB PlayerBase::getBoundingBox()

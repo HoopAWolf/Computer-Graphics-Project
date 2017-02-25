@@ -39,7 +39,7 @@ public:
 	{
 		if (timer > timer_ + ((attack_speed_ / 100.) * 100))
 		{
-			EntityChickenProjectile* chicken = new EntityChickenProjectile(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer);
+			EntityChickenProjectile* chicken = new EntityChickenProjectile(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer, true);
 			timer_ = timer;
 			return chicken;
 		}

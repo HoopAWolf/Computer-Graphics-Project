@@ -2,8 +2,6 @@
 #define ITEM_M4A4
 
 #include "ItemWeapon.h"
-#include "EntityFireBall.cpp"
-#include "Camera3.h"
 
 class ItemM4A4 : public ItemWeapon
 {
@@ -34,7 +32,7 @@ public:
 	{
 		if (timer > timer_ + ((attack_speed_ / 100.) * 100))
 		{
-			EntityBullet* bullet = new EntityBullet(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer);
+			EntityBullet* bullet = new EntityBullet(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer, true);
 			timer_ = timer;
 			return bullet;
 		}
