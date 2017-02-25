@@ -48,16 +48,16 @@ void MapBase::generateMap(unsigned dimensionID)
 		for (int j = 1; j < size - 1; j++)
 		{
 			map[1][j].top_wall = false;
-			map[21 - 2][j].bot_wall = false;
+			map[size - 2][j].bot_wall = false;
 			map[i][1].left_wall = false;
-			map[i][21 - 2].right_wall = false;
+			map[i][size - 2].right_wall = false;
 		}
 	}
 
 	srand((unsigned)time(NULL));                                                                         
 	int random = 0;
-	int randomX = ((2 * rand()) + 1) % (21 - 1);                                         
-	int randomY = ((2 * rand()) + 1) % (21 - 1);                                         
+	int randomX = ((2 * rand()) + 1) % (size - 1);
+	int randomY = ((2 * rand()) + 1) % (size - 1);
 	posX = randomX;                                                                
 	posY = randomY;                                                              
 	int visitedCells = 1;
@@ -224,11 +224,11 @@ void MapBase::generateMap(unsigned dimensionID)
 						}
 
 					here:
-						for (int a = 0; a < 5; a++)
+						for (int a = 0; a < 40; a++)
 						{
 							if (x + minPosX > -1 && x + 5 < getMapData(dimensionID).size_.x)
 							{
-								for (int b = 0; b < 5; b++)
+								for (int b = 0; b < 40; b++)
 								{
 									if (z + minPosZ > -1 && z + 5 < getMapData(dimensionID).size_.z)
 									{
@@ -263,14 +263,14 @@ void MapBase::generateMap(unsigned dimensionID)
 		}
 	}
 
-	for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
+	/*for (int x = 0; x < getMapData(dimensionID).size_.x; x++)
 	{
 		for (int z = 0; z < getMapData(dimensionID).size_.z; z++)
 		{
 			std::cout << checkingMapDataByCoord(dimensionID, x, z);
 		}
 		std::cout << std::endl;
-	}
+	}*/
 }
 
 void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
@@ -455,9 +455,9 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 				{
 					if (DataBase::instance()->getEnvironmentBase(i)->getEnvironmentSymbol() == currChar)
 					{
-						for (int a = 0; a < 20; a++)
+						for (int a = 0; a < 40; a++)
 						{
-							for (int b = 0; b < 20; b++)
+							for (int b = 0; b < 40; b++)
 							{
 								if (DataBase::instance()->getEnvironmentBase(i)->getBoundryChar(a, b) == currChar)
 								{
@@ -469,11 +469,11 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 						}
 
 					here:
-						for (int a = 0; a < 20; a++)
+						for (int a = 0; a < 40; a++)
 						{
 							if (x + minPosX > -1 && x + 5 < getMapData(dimensionID).size_.x)
 							{
-								for (int b = 0; b < 20; b++)
+								for (int b = 0; b < 40; b++)
 								{
 									if (z + minPosZ > -1 && z + 5 < getMapData(dimensionID).size_.z)
 									{
