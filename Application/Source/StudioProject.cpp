@@ -45,11 +45,11 @@ void StudioProject::Init()
 	srand(time(nullptr));
 	ShopBase::instance()->startShop();  //RUN ONCE
 
-	//MapBase::instance()->setMapSize(DIMENSIONID, 21, 21);  //RUN ONCE FOR EACH SCENE
+	//MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
 	//MapBase::instance()->generateMap(DIMENSIONID);  //RUN ONCE FOR EACH SCENE
 
 	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
-	MapBase::instance()->generateMap(DIMENSIONID, "Town.txt");  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->generateMap(DIMENSIONID, "maze.txt");  //RUN ONCE FOR EACH SCENE
 
 	RenderingBase::instance()->registerAllRenderingData();  //RUN ONCE
 
