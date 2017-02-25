@@ -801,13 +801,6 @@ void StudioProject::Update(double dt)
 					itemTwo = 19;
 				}
 			}
-
-			if (itemOne != 27 && itemTwo != 27)
-			{
-				PlayerBase::instance()->swapItemInInventory(itemOne, itemTwo);
-				itemOne = itemTwo = 27;
-			}
-
 			i = true;
 			timer = Application::elapsed_timer_;
 		}
@@ -815,12 +808,51 @@ void StudioProject::Update(double dt)
 		{
 			i = false;
 		}
+		if (itemOne != 27 && itemTwo != 27)
+		{
+			PlayerBase::instance()->swapItemInInventory(itemOne, itemTwo);
+			itemOne = itemTwo = 27;
+		}
 
-		 if (itemOne != 27 && itemTwo != 27)
+		if (Application::IsKeyPressed(VK_LBUTTON) && !s && shop)
+		{
+			if (PlayerBase::instance()->getPlayerCurrency() != 0 && !PlayerBase::instance()->isInventoryFull())
 			{
-				PlayerBase::instance()->swapItemInInventory(itemOne, itemTwo);
-				itemOne = itemTwo = 27;
+				if ( SceneManager::getSceneManger()->cx > 694 && SceneManager::getSceneManger()->cx < 738)
+				{
+					if (SceneManager::getSceneManger()->cy > 141 && SceneManager::getSceneManger()->cy < 172)
+					{
+						PlayerBase::instance()->addIntoPlayerInventory(ShopBase::instance()->getItemInShop(0)->getItemID());
+					}
+					else if (SceneManager::getSceneManger()->cy > 204 && SceneManager::getSceneManger()->cy < 234)
+					{
+						PlayerBase::instance()->addIntoPlayerInventory(ShopBase::instance()->getItemInShop(1)->getItemID());
+					}
+					else if (SceneManager::getSceneManger()->cy > 267 && SceneManager::getSceneManger()->cy < 298)
+					{
+						PlayerBase::instance()->addIntoPlayerInventory(ShopBase::instance()->getItemInShop(2)->getItemID());
+					}
+					else if (SceneManager::getSceneManger()->cy > 331 && SceneManager::getSceneManger()->cy < 361)
+					{
+						PlayerBase::instance()->addIntoPlayerInventory(ShopBase::instance()->getItemInShop(3)->getItemID());
+					}
+					else if (SceneManager::getSceneManger()->cy > 396 && SceneManager::getSceneManger()->cy < 427)
+					{
+						PlayerBase::instance()->addIntoPlayerInventory(ShopBase::instance()->getItemInShop(4)->getItemID());
+					}
+					else if (SceneManager::getSceneManger()->cy > 458 && SceneManager::getSceneManger()->cy < 489)
+					{
+						PlayerBase::instance()->addIntoPlayerInventory(ShopBase::instance()->getItemInShop(5)->getItemID());
+					}
+				}
 			}
+			s = true;
+			timer = Application::elapsed_timer_;
+		}
+		else 
+		{
+			s = false;
+		}
 	}
 
 	if (Application::IsKeyPressed(VK_LSHIFT))
@@ -832,6 +864,33 @@ void StudioProject::Update(double dt)
 		PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
 	}
 
+	if (SceneManager::getSceneManger()->cx > 447 && SceneManager::getSceneManger()->cx < 738)
+	{
+		if (SceneManager::getSceneManger()->cy > 141 && SceneManager::getSceneManger()->cy < 172)
+		{
+			itemhover = 0;
+		}
+		else if (SceneManager::getSceneManger()->cy > 204 && SceneManager::getSceneManger()->cy < 234)
+		{
+			itemhover = 1;
+		}
+		else if (SceneManager::getSceneManger()->cy > 267 && SceneManager::getSceneManger()->cy < 298)
+		{
+			itemhover = 2;
+		}
+		else if (SceneManager::getSceneManger()->cy > 331 && SceneManager::getSceneManger()->cy < 361)
+		{
+			itemhover = 3;
+		}
+		else if (SceneManager::getSceneManger()->cy > 396 && SceneManager::getSceneManger()->cy < 427)
+		{
+			itemhover = 4;
+		}
+		else if (SceneManager::getSceneManger()->cy > 458 && SceneManager::getSceneManger()->cy < 489)
+		{
+			itemhover = 5;
+		}
+	}
 }
 
 void StudioProject::Render()
@@ -1172,17 +1231,17 @@ void StudioProject::Render()
 			}
 		}
 
-		if (ShopBase::instance()->getItemInShop(0) != nullptr)
+		if (ShopBase::instance()->getItemInShop(itemhover) != nullptr)
 		{
-			RenderMeshOnScreen(RenderingBase::instance()->getItemMesh(ShopBase::instance()->getItemInShop(0)->getItemID()),
+			RenderMeshOnScreen(RenderingBase::instance()->getItemMesh(ShopBase::instance()->getItemInShop(itemhover)->getItemID()),
 				28, 33, 3, 3, 217);
 
-			tempColor = DataBase::instance()->getRarityColor(DataBase::instance()->getItem(ShopBase::instance()->getItemInShop(0)->getItemID())->getRarity());
-			RenderTextOnScreen(meshList[GEO_TEXT], ShopBase::instance()->getItemInShop(0)->getItemName(), tempColor, 1.8, 8, 23.5);
+			tempColor = DataBase::instance()->getRarityColor(DataBase::instance()->getItem(ShopBase::instance()->getItemInShop(itemhover)->getItemID())->getRarity());
+			RenderTextOnScreen(meshList[GEO_TEXT], ShopBase::instance()->getItemInShop(itemhover)->getItemName(), tempColor, 1.8, 8, 23.5);
 
-			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(0))->getWeaponDamage()), Color(1, 1, 1), 1.8, 13, 9.8);
-			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(0))->getWeaponDurability()), Color(1, 1, 1), 1.8, 13, 8.2);
-			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(0))->getWeaponAttackSpeed()), Color(1, 1, 1), 1.8, 13, 6.5);
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(itemhover))->getWeaponDamage()), Color(1, 1, 1), 1.8, 13, 9.8);
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(itemhover))->getWeaponDurability()), Color(1, 1, 1), 1.8, 13, 8.2);
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(itemhover))->getWeaponAttackSpeed()), Color(1, 1, 1), 1.8, 13, 6.5);
 		}
 	}
 

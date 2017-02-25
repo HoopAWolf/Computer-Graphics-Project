@@ -179,7 +179,7 @@ public:
 	int itemOne = 27;
 	int itemTwo = 27;
 	bool inshop = false;
-
+	int itemhover = 0;
 
 
 	
