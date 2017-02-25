@@ -59,6 +59,10 @@ void Camera3::Update(double dt)
 			Mtx44 rotation;
 			rotation.SetToRotation(pitch, right.x, right.y, right.z);
 			view = rotation * view;
+
+			if (view.y > .6)
+				view.y = .6;
+
 			target = position + view;
 			limitRotation = view.y;
 			rotationZ = view.y * 20;
@@ -69,6 +73,10 @@ void Camera3::Update(double dt)
 			Mtx44 rotation;
 			rotation.SetToRotation(pitch, right.x, right.y, right.z);
 			view = rotation * view;
+
+			if (view.y < -.6)
+				view.y = -.6;
+
 			target = position + view;
 			limitRotation = view.y;
 			rotationZ = view.y * 20;

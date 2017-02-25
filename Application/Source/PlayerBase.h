@@ -36,8 +36,8 @@ private:
 
 	unsigned damage_, attack_speed_, moving_speed_,attribute_points_ , resistance_, dimension_ , 
 		level_, experience_, level_cap_;
-	bool isRecharging;
-	float rechargingTimer;
+	bool isRecharging, hit;
+	float rechargingTimer, rotationX;
 	Vector3 size_;
 
 	vector<ItemBase *> inventory_data_;
@@ -77,6 +77,7 @@ public:
 	unsigned getCurrentSkillCoolDown(unsigned skill_slot);
 	int getPlayerHealth();
 	unsigned getCurrentEquippedSkill(unsigned slotNum);
+	float getRotationX();
 	void playerAttack(float timer);
 
 	PLAYER_STATE getPlayerState()

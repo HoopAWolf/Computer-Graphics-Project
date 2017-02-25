@@ -316,7 +316,7 @@ void StudioProject::Update(double dt)
 
 	ShowCursor(false);
 
-	if (!inattrib&&!ininv&& !inshop)
+	if (!inattrib && !ininv && !inshop)
 	{
 			camera.Update(dt);
 			mouse = false;
@@ -471,6 +471,7 @@ void StudioProject::Update(double dt)
 	{
 		timer = Application::elapsed_timer_;
 	}
+
 	if (Application::elapsed_timer_ > timer + .2 && PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->IDLE)
 	{
 		if (Application::IsKeyPressed('Q'))
@@ -489,39 +490,52 @@ void StudioProject::Update(double dt)
 			attrib = true;
 			inattrib = true;
 			timer = Application::elapsed_timer_;
+			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IN_UI);
 		}
-		else if (Application::IsKeyPressed('K') && attrib)
-		{
-			attrib = false;
-			inattrib = false;
-			timer = Application::elapsed_timer_;
-
-		}
+		
 		if (Application::IsKeyPressed('I') && !inv)
 		{
 			inv = true;
 			ininv = true;
 			timer = Application::elapsed_timer_;
+			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IN_UI);
 
 		}
-		else if (Application::IsKeyPressed('I') && inv)
-		{
-			inv = false;
-			ininv = false;
-			timer = Application::elapsed_timer_;
-		}
+		
 		if (Application::IsKeyPressed('L') && !shop)
 		{
 			shop = true;
 			inshop = true;
 			timer = Application::elapsed_timer_;
+			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IN_UI);
+			std::cout << std::to_string(PlayerBase::instance()->getPlayerState()) << std::endl;
 		}
-		else if (Application::IsKeyPressed('L') && shop)
+	}
+
+	else if (Application::elapsed_timer_ > timer + .2 && PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->IN_UI)
+	{
+		if (Application::IsKeyPressed('K') && attrib)
+		{
+			attrib = false;
+			inattrib = false;
+			timer = Application::elapsed_timer_;
+			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
+		}
+
+		if (Application::IsKeyPressed('I') && inv)
+		{
+			inv = false;
+			ininv = false;
+			timer = Application::elapsed_timer_;
+			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
+		}
+
+		if (Application::IsKeyPressed('L') && shop)
 		{
 			shop = false;
 			inshop = false;
 			timer = Application::elapsed_timer_;
-
+			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
 		}
 
 		if (Application::IsKeyPressed(VK_LBUTTON) && !s && attrib)
@@ -554,9 +568,10 @@ void StudioProject::Update(double dt)
 		{
 			s = false;
 		}
+
 		if (Application::IsKeyPressed(VK_LBUTTON) && !i && inv)
 		{
-			
+
 			if (itemOne == 27)
 			{
 				//set itemOne to slot
@@ -789,7 +804,7 @@ void StudioProject::Update(double dt)
 				PlayerBase::instance()->swapItemInInventory(itemOne, itemTwo);
 				itemOne = itemTwo = 27;
 			}
-	
+
 			i = true;
 			timer = Application::elapsed_timer_;
 		}
@@ -798,11 +813,12 @@ void StudioProject::Update(double dt)
 			i = false;
 		}
 	}
+
 	if (Application::IsKeyPressed(VK_LSHIFT))
 	{
 		PlayerBase::instance()->setPlayerState(PlayerBase::instance()->SPRINTING);
 	}
-	else
+	else if (PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->SPRINTING)
 	{
 		PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
 	}
@@ -1045,7 +1061,11 @@ void StudioProject::Render()
 		modelStack.Rotate(camera.getRotationY() - 155, 0, 1, 0);
 		modelStack.Rotate(-camera.getRotationZ(), 1, 0, 0);
 		modelStack.Scale(.5, .5, .5);
+
+		modelStack.PushMatrix();
+		modelStack.Rotate(PlayerBase::instance()->getRotationX(), 1, 0, 0);
 		RenderMesh(RenderingBase::instance()->getItemMesh(PlayerBase::instance()->getCurrentHeldItem()->getItemID()), true);
+		modelStack.PopMatrix();
 
 		modelStack.PopMatrix();
 	}

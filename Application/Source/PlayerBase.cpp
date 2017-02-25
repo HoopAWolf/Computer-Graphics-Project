@@ -21,6 +21,8 @@ void PlayerBase::startPlayer()
 	isRecharging = false;
 	current_skill_active_[0] = 0;
 	current_skill_active_[1] = 1;
+	rotationX = 0;
+	hit = false;
 
 	for (int i = 0; i < 20; i++)
 	{
@@ -40,15 +42,15 @@ void PlayerBase::startPlayer()
 void PlayerBase::playerUpdate(float timer, float dt)
 {
 
-	if (getPlayerAmmo() > 0 && !isRecharging)
+	if (player_state_ == LEFT_CLICK)
 	{
-		if (player_state_ == LEFT_CLICK)
+		if (getCurrentHeldItem() != nullptr)
 		{
-			if (getCurrentHeldItem() != nullptr)
+			if (getCurrentHeldItem()->getItemID() <= DataBase::instance()->getItemStarting())
 			{
-				if (getCurrentHeldItem()->getItemID() <= DataBase::instance()->getItemStarting())
+				if ((dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponType() == 3)
 				{
-					if ((dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponType() == 3)
+					if (getPlayerAmmo() > 0 && !isRecharging)
 					{
 						EntityProjectile* tempObj = (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->onItemAttackProjectile(timer, dt);
 						if (tempObj != nullptr)
@@ -62,19 +64,35 @@ void PlayerBase::playerUpdate(float timer, float dt)
 								isRecharging = true;
 							}
 						}
-						player_state_ = IDLE;
+					}
+
+					player_state_ = IDLE;
+				}
+				else
+				{
+					if (rotationX <= 90 && !hit)
+					{
+						rotationX += (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponAttackSpeed();
 					}
 					else
 					{
+						if (!hit)
+							hit = true;
+						rotationX -= (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponAttackSpeed();
 
-						player_state_ = IDLE;
+						if (rotationX <= 0)
+						{
+							hit = false;
+							player_state_ = IDLE;
+						}
 					}
 				}
 			}
-			else
-				player_state_ = IDLE;
 		}
+		else
+			player_state_ = IDLE;
 	}
+	
 
 	if (isRecharging == true)
 	{
@@ -261,6 +279,11 @@ string PlayerBase::getSkillName(unsigned skillID)
 	default:
 		return "Dafug";
 	}
+}
+
+float PlayerBase::getRotationX()
+{
+	return rotationX;
 }
 
 bool PlayerBase::isPlayerDead()
