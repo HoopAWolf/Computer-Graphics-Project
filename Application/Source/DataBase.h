@@ -24,7 +24,7 @@
 #include "ItemShuriken.cpp"
 #include "ItemSpear.cpp"
 #include "ItemSword.cpp"
-#include "itemWoodenSword.cpp"
+#include "ItemWoodenSword.cpp"
 
 
 

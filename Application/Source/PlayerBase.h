@@ -78,7 +78,7 @@ public:
 	int getPlayerHealth();
 	unsigned getCurrentEquippedSkill(unsigned slotNum);
 	float getRotationX();
-	void playerAttack(float timer);
+	void playerAttacked(int damage);
 
 	PLAYER_STATE getPlayerState()
 	{

@@ -1,73 +1,61 @@
-#ifndef _ENTITY_CHICKEN_PROJECTILE_H_
-#define _ENTITY_CHICKEN_PROJECTILE_H_
+#include "EntityChickenProjectile.h"
+#include "DataBase.h"
+#include "PlayerBase.h"
 
-#include "EntityProjectile.h"
-#include "MapBase.h"
-
-class EntityChickenProjectile : public EntityProjectile
+void EntityChickenProjectile::updateAI(float timer, unsigned dimensionID, float dt)
 {
-	float timer_;
+	unsigned MOVING_SPEED = 50;
 
-public:
-	EntityChickenProjectile(Vector3 position, Vector3 forward, unsigned damage, float timer)
+	if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
+		((int)(position_.x + (forward_.x * (MOVING_SPEED * dt)))),
+		((int)(position_.z + (forward_.z * (MOVING_SPEED * dt))))) != '#')
 	{
-		texture_string_ = "chicken_";
-		projectileID_ = 2;
-		health_ = 1;
-		position_ = position;
-		forward_ = forward;
-		damage_ = damage;
-		size_ = Vector3(1, 1, 1);
-		timer_ = timer;
+		position_ += (forward_ * (MOVING_SPEED * dt));
+	}
+	else
+	{
+		health_ = 0;
 	}
 
-	unsigned getItemDrop()
+	if (forward_.y > -20)
 	{
-		return 0;
+		forward_.y -= .008;
 	}
 
-	void onDeath()
+	if (timer > timer_ + 5)
+		health_ = 0;
+
+	if (is_player_shot_)
 	{
-
-	}
-
-	bool isEntityDead()
-	{
-		if (health_ <= 0)
-			return true;
-		else
-			return false;
-	}
-
-	void setPosition(Vector3 position)
-	{
-		position_ = position;
-	}
-
-	void updateAI(float timer, unsigned dimensionID, float dt)
-	{
-		unsigned MOVING_SPEED = 50;
-
-		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
-			((int)(position_.x + (forward_.x * (MOVING_SPEED * dt)))),
-			((int)(position_.z + (forward_.z * (MOVING_SPEED * dt))))) != '#')
+		for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(3, dimensionID); i++)
 		{
-			position_ += (forward_ * (MOVING_SPEED * dt));
+			if (getBoundingBox().isAABBInsideAABB(DataBase::instance()->getEntityBoss(dimensionID, i)->getBoundingBox()))
+			{
+				DataBase::instance()->getEntityBoss(dimensionID, i)->onAttacked(damage_);
+				health_ = 0;
+				goto here;
+			}
 		}
-		else
+
+		for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(2, dimensionID); i++)
 		{
+			if (getBoundingBox().isAABBInsideAABB(DataBase::instance()->getEntityMinion(dimensionID, i)->getBoundingBox()))
+			{
+				DataBase::instance()->getEntityMinion(dimensionID, i)->onAttacked(damage_);
+				health_ = 0;
+				break;
+			}
+		}
+	here:
+		;
+	}
+	else
+	{
+		if (getBoundingBox().isAABBInsideAABB(PlayerBase::instance()->getBoundingBox()))
+		{
+			PlayerBase::instance()->playerAttacked(damage_);
 			health_ = 0;
 		}
-
-		if (forward_.y > -20)
-		{
-			forward_.y -= .008;
-		}
-
-		if (timer > timer_ + 5)
-			health_ = 0;
 	}
+}
 
-};
-
-#endif

@@ -7,6 +7,7 @@ class EntityProjectile abstract : public EntityBase
 {
 protected:
 	unsigned projectileID_;
+	bool is_player_shot_;
 
 public:
 	virtual ~EntityProjectile(){};

@@ -16,7 +16,7 @@ public:
 		weapon_type_ = MEDIUM;
 		durability_ = 27;
 		damage_ = 10;
-		attack_speed_ = 2;
+		attack_speed_ = 3;
 
 		rarity_ = COMMON;
 		price_ = 20;
