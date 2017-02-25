@@ -21,6 +21,8 @@ void PlayerBase::startPlayer()
 	isRecharging = false;
 	current_skill_active_[0] = 0;
 	current_skill_active_[1] = 1;
+	rotationX = 0;
+	hit = false;
 
 	for (int i = 0; i < 20; i++)
 	{
@@ -32,23 +34,24 @@ void PlayerBase::startPlayer()
 		skills_[i] = Vector3(0, 0, 0);
 	}
 
-	addIntoPlayerInventory(15);
-	addIntoPlayerInventory(16);
-	addIntoPlayerInventory(3);
+	addIntoPlayerInventory(6);
+	addIntoPlayerInventory(5);
+	addIntoPlayerInventory(9);
+	addIntoPlayerInventory(13);
 }
 
 void PlayerBase::playerUpdate(float timer, float dt)
 {
 
-	if (getPlayerAmmo() > 0 && !isRecharging)
+	if (player_state_ == LEFT_CLICK)
 	{
-		if (player_state_ == LEFT_CLICK)
+		if (getCurrentHeldItem() != nullptr)
 		{
-			if (getCurrentHeldItem() != nullptr)
+			if (getCurrentHeldItem()->getItemID() <= DataBase::instance()->getItemStarting())
 			{
-				if (getCurrentHeldItem()->getItemID() <= DataBase::instance()->getItemStarting())
+				if ((dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponType() == 3)
 				{
-					if ((dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponType() == 3)
+					if (getPlayerAmmo() > 0 && !isRecharging)
 					{
 						EntityProjectile* tempObj = (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->onItemAttackProjectile(timer, dt);
 						if (tempObj != nullptr)
@@ -62,19 +65,52 @@ void PlayerBase::playerUpdate(float timer, float dt)
 								isRecharging = true;
 							}
 						}
-						player_state_ = IDLE;
+					}
+
+					player_state_ = IDLE;
+				}
+				else
+				{
+					if (rotationX <= 80 && !hit)
+					{
+						rotationX += (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponAttackSpeed();
 					}
 					else
 					{
+						if (!hit)
+						{
+							for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(2, dimension_); i++)
+							{
+								if (DataBase::instance()->getEntityMinion(dimension_, i)->getBoundingBox().isPointInsideAABB(Camera::position, Camera::playerRight.Cross(Camera::up)))
+								{
+									dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(dimension_, i))->
+										onAttacked((dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponDamage());
 
-						player_state_ = IDLE;
+								/*	std::cout << "ENEMY HEALTH LEFT: " + 
+										std::to_string(dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(dimension_, i))->getHealth()) 
+										<< std::endl;*/
+									break;
+								}
+							}
+
+							hit = true;
+						}
+
+						rotationX -= (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponAttackSpeed();
+
+						if (rotationX <= 0)
+						{
+							hit = false;
+							player_state_ = IDLE;
+						}
 					}
 				}
 			}
-			else
-				player_state_ = IDLE;
 		}
+		else
+			player_state_ = IDLE;
 	}
+	
 
 	if (isRecharging == true)
 	{
@@ -261,6 +297,11 @@ string PlayerBase::getSkillName(unsigned skillID)
 	default:
 		return "Dafug";
 	}
+}
+
+float PlayerBase::getRotationX()
+{
+	return rotationX;
 }
 
 bool PlayerBase::isPlayerDead()

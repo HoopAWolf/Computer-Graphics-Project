@@ -16,7 +16,7 @@ public:
 		weapon_type_ = LIGHT;
 		durability_ = 5;
 		damage_ = 5;
-		attack_speed_ = 1;
+		attack_speed_ = 3;
 
 		rarity_ = COMMON;
 
