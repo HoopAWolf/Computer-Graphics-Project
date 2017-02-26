@@ -61,8 +61,8 @@
 
 #include "MeleeMinion_1.cpp"
 #include "MeleeMinion_2.cpp"
-#include "RangedMinion_1.cpp"
-#include "RangedMinion_2.cpp"
+#include "RangedMinion_1.h"
+#include "RangedMinion_2.h"
 
 #include "NPCGirlWithBoobs.cpp"
 #include "NPCBoy.cpp"

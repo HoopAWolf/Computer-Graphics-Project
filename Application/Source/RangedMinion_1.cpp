@@ -1,137 +1,211 @@
-#ifndef RANGEDMINION_1
-#define RANGEDMINION_1
+#include "RangedMinion_1.h"
+#include "DataBase.h"
 
-#include "EntityMinion.h"
-
-class RangedMinion_1 : public EntityMinion
+void RangedMinion_1::updateAI(float timer, unsigned dimensionID, float dt)
 {
-public:
-	RangedMinion_1(Vector3 position, Vector3 up, Vector3 forward, Vector3 right, Vector3 target)
+	tempDT = dt;
+	switch (minion_state_)
 	{
-		multiple_texture_string_[0] = "ranged_minion_1_body";
-		multiple_texture_string_[1] = "ranged_minion_1_arm_1";
-		multiple_texture_string_[2] = "ranged_minion_1_arm_2";
-		multiple_texture_string_[3] = "ranged_minion_1_leg_1";
-		multiple_texture_string_[4] = "ranged_minion_1_leg_2";
-		elemental_type_ = NONE;
-		health_ = 10;
-		damage_ = 1;
-		attack_speed_ = 1;
-		walking_speed_ = 5;
-		position_ = position;
-		size_ = Vector3(2, 4, 2);
-		up_ = up;
-		forward_ = forward;
-		right_ = right;
-		target_ = target;
-		drop_ID_ = 0;
-		minion_name_ = "hi i am ranged minion 1";
-		minionID_ = 2;
-		minion_state_ = IDLE;
-	}
-	void onDeath(){}
+	case IDLE:
+		newTarget = Vector3(Camera::position.x, position_.y, Camera::position.z);
 
-	bool isEntityDead()
-	{
-		if (health_ <= 0)
-			return true;
+		if ((newTarget - position_).Length() < 20)
+		{
+			minion_state_ = TARGET_PLAYER;
+			timer_ = timer;
+		}
 		else
-			return false;
-	}
+		{
+			if (rand() % 100 < 20)
+			{
+				minion_state_ = WALKING;
+				newTarget = Vector3(position_.x + ((rand() % 100 < 50) ? 10 : -10), position_.y, position_.z + ((rand() % 100 < 50) ? 10 : -10));
+				timer_ = timer;
+			}
+		}
+		break;
 
-	unsigned getItemDrop()
-	{
-		return drop_ID_;
-	}
+	case TAUNT:
+		break;
 
-	void updateAI(float timer, unsigned dimensionID, float dt)
-	{
-		if (minion_state_ == IDLE)
+	case TARGET_PLAYER:
+		if (minionrotateleftLeg < 20 && minionleftlegForward == true)
+		{
+			minionrotateleftLeg += (float)(80 * dt);
+		}
+		else
+		{
+			minionleftlegForward = false;
+			minionleftlegBackward = true;
+		}
+		if (minionrotateleftLeg > -20 && minionleftlegBackward == true)
+		{
+			minionrotateleftLeg -= (float)(80 * dt);
+		}
+		else
+		{
+			minionleftlegForward = true;
+			minionleftlegBackward = false;
+		}
+		if (minionrotaterightLeg < 20 && minionrightlegForward == true)
+		{
+			minionrotaterightLeg += (float)(80 * dt);
+		}
+		else
+		{
+			minionrightlegForward = false;
+			minionrightlegBackward = true;
+		}
+		if (minionrotaterightLeg > -20 && minionrightlegBackward == true)
+		{
+			minionrotaterightLeg -= (float)(80 * dt);
+		}
+		else
+		{
+			minionrightlegForward = true;
+			minionrightlegBackward = false;
+		}
+
+		newTarget = Vector3(Camera::position.x, position_.y, Camera::position.z);
+		forward_ = (newTarget - position_).Normalized();
+
+		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
+			((int)(position_.x + (forward_.x * 10 * dt))),
+			position_.z) != '#')
+		{
+			position_.x = position_.x + (forward_.x * 10 * dt);
+		}
+
+		if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
+			position_.x,
+			((int)(position_.z + (forward_.z * 10 * dt)))) != '#')
+		{
+			position_.z = position_.z + (forward_.z * 10 * dt);  //MOVING SPEED
+		}
+
+		rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
+
+		if ((newTarget - position_).Length() >= 40)
+		{
+			minion_state_ = IDLE;
+			timer_ = timer;
+		}
+		else if ((newTarget - position_).Length() <= 20)
+		{
+			minion_state_ = BASIC_ATTACK;
+			timer_ = timer;
+		}
+		else if (timer > timer_ + 10)
+		{
+			minion_state_ = IDLE;
+			timer_ = timer;
+		}
+
+		break;
+
+	case WALKING:
+		if (minionrotateleftLeg < 20 && minionleftlegForward == true)
+		{
+			minionrotateleftLeg += (float)(80 * dt);
+		}
+		else
+		{
+			minionleftlegForward = false;
+			minionleftlegBackward = true;
+		}
+		if (minionrotateleftLeg > -20 && minionleftlegBackward == true)
+		{
+			minionrotateleftLeg -= (float)(80 * dt);
+		}
+		else
+		{
+			minionleftlegForward = true;
+			minionleftlegBackward = false;
+		}
+		if (minionrotaterightLeg < 20 && minionrightlegForward == true)
+		{
+			minionrotaterightLeg += (float)(80 * dt);
+		}
+		else
+		{
+			minionrightlegForward = false;
+			minionrightlegBackward = true;
+		}
+		if (minionrotaterightLeg > -20 && minionrightlegBackward == true)
+		{
+			minionrotaterightLeg -= (float)(80 * dt);
+		}
+		else
+		{
+			minionrightlegForward = true;
+			minionrightlegBackward = false;
+		}
+
+		forward_ = (newTarget - position_).Normalized();
+
+		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
+			((int)(position_.x + (forward_.x * 5 * dt))),
+			position_.z) != '#')
+		{
+			position_.x = position_.x + (forward_.x * 5 * dt);
+		}
+
+		if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
+			position_.x,
+			((int)(position_.z + (forward_.z * 5 * dt)))) != '#')
+		{
+			position_.z = position_.z + (forward_.z * 5 * dt);  //MOVING SPEED
+		}
+
+		rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
+
+		if ((newTarget - position_).Length() < 4)
 		{
 			minion_state_ = IDLE;
 		}
-
-		if (minion_state_ == BASIC_ATTACK)
+		else if (((Vector3(Camera::position.x, position_.y, Camera::position.z)) - position_).Length() < 20)
 		{
-			rotateminionArm += (float)(80 * dt);
-			if (rotateminionArm <= -90);
-			{
-				Minionlimit = true;
-			}
-			if (rotateminionArm >= 0)
-			{
-				Minionlimit = false;
-			}
-			if (Minionlimit == true)
-			{
-				dt = dt;
-			}
-			if (Minionlimit == false)
-			{
-				dt = -dt;
-			}
+			minion_state_ = TARGET_PLAYER;
 		}
-		if (minion_state_ == WALKING)
+		else if (timer > timer_ + 10)
 		{
-			minionwalking = true;
-			if (minionrotateleftLeg < 20 && minionleftlegForward == true)
-			{
-				minionrotateleftLeg += (float)(80 * dt);
-			}
-			else
-			{
-				minionleftlegForward = false;
-				minionleftlegBackward = true;
-			}
-			if (minionrotateleftLeg > -20 && minionleftlegBackward == true)
-			{
-				minionrotateleftLeg -= (float)(80 * dt);
-			}
-			else
-			{
-				minionleftlegForward = true;
-				minionleftlegBackward = false;
-			}
-			if (minionrotaterightLeg < 20 && minionrightlegForward == true)
-			{
-				minionrotaterightLeg += (float)(80 * dt);
-			}
-			else
-			{
-				minionrightlegForward = false;
-				minionrightlegBackward = true;
-			}
-			if (minionrotaterightLeg > -20 && minionrightlegBackward == true)
-			{
-				minionrotaterightLeg -= (float)(80 * dt);
-			}
-			else
-			{
-				minionrightlegForward = true;
-				minionrightlegBackward = false;
-			}
-		}
-		else
-		{
-			minionwalking = false;
+			minion_state_ = IDLE;
+			timer_ = timer;
 		}
 
+		break;
 
-		//======================================================================
-		if (minion_state_ == DEATH)
+	case BASIC_ATTACK:
+		if (rotateminionArm >= 90 && !Minionlimit)
 		{
-			
+			forward_ = (newTarget - position_).Normalized();
+			EntityFireBall* bullet = new EntityFireBall(position_, forward_, damage_, timer, false);
+			DataBase::instance()->setEntity(dimensionID, bullet);
+			Minionlimit = true;
+		}
+		else if (rotateminionArm <= 0 && !Minionlimit)
+		{
+			Minionlimit = false;
+		}
+		else if (rotateminionArm <= 0 && Minionlimit)
+		{
+			Minionlimit = false;
+			minion_state_ = TARGET_PLAYER;
 		}
 
-		//=====================================================================
+		if (Minionlimit)
+		{
+			tempDT = -dt * 5;
+		}
+		if (!Minionlimit)
+		{
+			tempDT = dt * 5;
+		}
+
+		rotateminionArm += (float)(80 * tempDT);
+		break;
+
+	case DEATH:
+		break;
 	}
-
-	void setPosition(Vector3 position)
-	{
-		position_ = position;
-	}
-
-
-};
-
-#endif
+}

@@ -10,11 +10,11 @@ class ItemGiggsGun : public ItemWeapon
 public:
 	ItemGiggsGun()
 	{
-		itemID_ = 15;
+		itemID_ = 13;
 		texture_string_ = "giggs_gun";
 		item_name_ = "Giggs Gun";
 
-
+		recoil_ = .1;
 		weapon_type_ = RANGE_AUTO;
 		durability_ = 45;
 		damage_ = 20;

@@ -9,11 +9,11 @@ class ItemM4A4 : public ItemWeapon
 public:
 	ItemM4A4()
 	{
-		itemID_ = 11;
+		itemID_ = 9;
 		texture_string_ = "m4a4";
 		item_name_ = "M4A4";
 
-
+		recoil_ = .1;
 		weapon_type_ = RANGE_AUTO; 
 		durability_ = 43;
 		damage_ = 5;

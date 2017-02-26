@@ -2,10 +2,13 @@
 #define MELEEMINION_1
 
 #include "EntityMinion.h"
+#include "PlayerBase.h"
+#include "MapBase.h"
 
 class MeleeMinion_1 : public EntityMinion
 {
-	float tempDT;
+	float tempDT, timer_;
+	Vector3 newTarget;
 
 public:
 	MeleeMinion_1(Vector3 position, Vector3 up, Vector3 forward, Vector3 right, Vector3 target)
@@ -16,8 +19,8 @@ public:
 		multiple_texture_string_[3] = "melee_minion_1_leg_1";
 		multiple_texture_string_[4] = "melee_minion_1_leg_2";
 		elemental_type_ = NONE;
-		health_ = 10;
-		damage_ = 1;
+		health_ = 250 + PlayerBase::instance()->getPlayerLevel();
+		damage_ = 10;
 		attack_speed_ = 1;
 		walking_speed_ = 5;
 		position_ = position;
@@ -26,10 +29,13 @@ public:
 		forward_ = forward;
 		right_ = right;
 		target_ = target;
+		newTarget = target;
 		drop_ID_ = 0;
-		minion_name_ = "hi i am melee minion 1";
+		timer_ = 0;
+		minion_name_ = "Minion";
 		minionID_ = 0;
 		minion_state_ = IDLE;
+		rotation_Y_ = 90;
 	}
 	void onDeath(){}
 
@@ -49,34 +55,31 @@ public:
 	void updateAI(float timer, unsigned dimensionID, float dt)
 	{
 		tempDT = dt;
-		if (minion_state_ == IDLE)
+		switch (minion_state_)
 		{
-			minion_state_ = IDLE;
-		}
+		case IDLE:
+			newTarget = Vector3(Camera::position.x, position_.y, Camera::position.z);
 
-		if (minion_state_ == BASIC_ATTACK)
-		{
-			rotateminionArm += (float)(80 * dt);
-			if (rotateminionArm <= -90);
+			if ((newTarget - position_).Length() < 20)
 			{
-				Minionlimit = true;
+				minion_state_ = TARGET_PLAYER;
+				timer_ = timer;
 			}
-			if (rotateminionArm >= 0)
+			else
 			{
-				Minionlimit = false;
+				if (rand() % 100 < 20)
+				{
+					minion_state_ = WALKING;
+					newTarget = Vector3(position_.x + ((rand() % 100 < 50) ? 10 : -10), position_.y, position_.z + ((rand() % 100 < 50) ? 10 : -10));
+					timer_ = timer;
+				}
 			}
-			if (Minionlimit == true)
-			{
-				tempDT = dt;
-			}
-			if (Minionlimit == false)
-			{
-				tempDT = -dt;
-			}
-		}
-		if (minion_state_ == WALKING)
-		{
-			minionwalking = true;
+			break;
+
+		case TAUNT:
+			break;
+
+		case TARGET_PLAYER:
 			if (minionrotateleftLeg < 20 && minionleftlegForward == true)
 			{
 				minionrotateleftLeg += (float)(80 * dt);
@@ -113,20 +116,152 @@ public:
 				minionrightlegForward = true;
 				minionrightlegBackward = false;
 			}
-		}
-		else
-		{
-			minionwalking = false;
-		}
 
+			newTarget = Vector3(Camera::position.x, position_.y, Camera::position.z);
+			forward_ = (newTarget - position_).Normalized();
 
-		//======================================================================
-		if (minion_state_ == DEATH)
-		{
+			if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
+				((int)(position_.x + (forward_.x * 10 * dt))),
+				position_.z) != '#')
+			{
+				position_.x = position_.x + (forward_.x * 10 * dt);
+			}
+
+			if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
+				position_.x,
+				((int)(position_.z + (forward_.z * 10 * dt)))) != '#')
+			{
+				position_.z = position_.z + (forward_.z * 10 * dt);  //MOVING SPEED
+			}
+
+			rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
+
+			if ((newTarget - position_).Length() >= 40)
+			{
+				minion_state_ = IDLE;
+				timer_ = timer;
+			}
+			else if ((newTarget - position_).Length() <= 2)
+			{
+				minion_state_ = BASIC_ATTACK;
+				timer_ = timer;
+			}
+			else if (timer > timer_ + 10)
+			{
+				minion_state_ = IDLE;
+				timer_ = timer;
+			}
+
+			break;
+
+		case WALKING:
+			if (minionrotateleftLeg < 20 && minionleftlegForward == true)
+			{
+				minionrotateleftLeg += (float)(80 * dt);
+			}
+			else
+			{
+				minionleftlegForward = false;
+				minionleftlegBackward = true;
+			}
+			if (minionrotateleftLeg > -20 && minionleftlegBackward == true)
+			{
+				minionrotateleftLeg -= (float)(80 * dt);
+			}
+			else
+			{
+				minionleftlegForward = true;
+				minionleftlegBackward = false;
+			}
+			if (minionrotaterightLeg < 20 && minionrightlegForward == true)
+			{
+				minionrotaterightLeg += (float)(80 * dt);
+			}
+			else
+			{
+				minionrightlegForward = false;
+				minionrightlegBackward = true;
+			}
+			if (minionrotaterightLeg > -20 && minionrightlegBackward == true)
+			{
+				minionrotaterightLeg -= (float)(80 * dt);
+			}
+			else
+			{
+				minionrightlegForward = true;
+				minionrightlegBackward = false;
+			}
+
+			forward_ = (newTarget - position_).Normalized();
+
+			if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
+				((int)(position_.x + (forward_.x * 5 * dt))),
+				position_.z) != '#')
+			{
+				position_.x = position_.x + (forward_.x * 5 * dt);
+			}
+
+			if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
+				position_.x,
+				((int)(position_.z + (forward_.z * 5 * dt)))) != '#')
+			{
+				position_.z = position_.z + (forward_.z * 5 * dt);  //MOVING SPEED
+			}
+
+			rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
+
+			if ((newTarget - position_).Length() < 4)
+			{
+				minion_state_ = IDLE;
+			}
+			else if (((Vector3(Camera::position.x, position_.y, Camera::position.z)) - position_).Length() < 20)
+			{
+				minion_state_ = TARGET_PLAYER;
+			}
+			else if (timer > timer_ + 10)
+			{
+				minion_state_ = IDLE;
+				timer_ = timer;
+			}
 			
-		}
+			break;
 
-		//=====================================================================
+		case BASIC_ATTACK:
+			if (rotateminionArm <= -90 && !Minionlimit)
+			{
+				forward_ = (newTarget - position_).Normalized();
+
+				if (PlayerBase::instance()->getBoundingBox().isPointInsideAABB(position_, forward_))
+				{
+					PlayerBase::instance()->playerAttacked(damage_);
+				}
+				Minionlimit = true;
+			}
+			else if (rotateminionArm >= 0 && !Minionlimit)
+			{
+				Minionlimit = false;
+			}
+			else if (rotateminionArm >= 0 && Minionlimit)
+			{
+				Minionlimit = false;
+				minion_state_ = TARGET_PLAYER;
+			}
+
+			if (Minionlimit)
+			{
+				tempDT = dt * 10;
+			}
+			if (!Minionlimit)
+			{
+				tempDT = -dt * 10;
+			}
+
+			rotateminionArm += (float)(80 * tempDT);
+			break;
+
+		case DEATH:
+			break;
+		}
 	}
 
 	void setPosition(Vector3 position)

@@ -4,6 +4,7 @@
 #include "ItemBase.h"
 #include "Vector3.h"
 #include "AABB.h"
+#include "Mtx44.h"
 
 class EntityBase abstract
 {

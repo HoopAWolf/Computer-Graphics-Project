@@ -24,7 +24,7 @@ void EntityFireBall::updateAI(float timer, unsigned dimensionID, float dt)
 	{
 		for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(3, dimensionID); i++)
 		{
-			if (getBoundingBox().increaseBoundry(-5, 5).isAABBInsideAABB(DataBase::instance()->getEntityBoss(dimensionID, i)->getBoundingBox()))
+			if (getBoundingBox().increaseBoundry(5, 5).isAABBInsideAABB(DataBase::instance()->getEntityBoss(dimensionID, i)->getBoundingBox()))
 			{
 				DataBase::instance()->getEntityBoss(dimensionID, i)->onAttacked(damage_);
 				health_ = 0;
@@ -33,7 +33,7 @@ void EntityFireBall::updateAI(float timer, unsigned dimensionID, float dt)
 
 		for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(2, dimensionID); i++)
 		{
-			if (getBoundingBox().increaseBoundry(-5, 5).isAABBInsideAABB(DataBase::instance()->getEntityMinion(dimensionID, i)->getBoundingBox()))
+			if (getBoundingBox().increaseBoundry(5, 5).isAABBInsideAABB(DataBase::instance()->getEntityMinion(dimensionID, i)->getBoundingBox()))
 			{
 				DataBase::instance()->getEntityMinion(dimensionID, i)->onAttacked(damage_);
 				health_ = 0;

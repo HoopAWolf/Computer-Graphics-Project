@@ -23,6 +23,7 @@ Vector3 Camera::position = 0;
 Vector3 Camera::target = 0;
 Vector3 Camera::up = 0;
 Vector3 Camera::playerRight = 0;
+Vector3 Camera::view = 0;
 
 StudioProject::StudioProject()
 {
@@ -49,7 +50,7 @@ void StudioProject::Init()
 	//MapBase::instance()->generateMap(DIMENSIONID);  //RUN ONCE FOR EACH SCENE
 
 	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
-	MapBase::instance()->generateMap(DIMENSIONID, "maze.txt");  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->generateMap(DIMENSIONID, "Town21.txt");  //RUN ONCE FOR EACH SCENE
 
 	RenderingBase::instance()->registerAllRenderingData();  //RUN ONCE
 
@@ -118,17 +119,17 @@ void StudioProject::Init()
 	DataBase::instance()->setEntity(true, false, false, 1, new Boss_4(Vector3(10 + 15 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 
 	DataBase::instance()->setEntity(false, true, false, 1, new MeleeMinion_1(Vector3(10 + 0 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, true, false, 1, new MeleeMinion_2(Vector3(10 + 0 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, true, false, 1, new RangedMinion_1(Vector3(10 + 5 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, true, false, 1, new RangedMinion_2(Vector3(10 + 10 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, false, 1, new MeleeMinion_2(Vector3(10 + 5 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, false, 1, new RangedMinion_1(Vector3(10 + 10 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, false, 1, new RangedMinion_2(Vector3(10 + 15 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCGirlwithBoobs(Vector3(10 + 0 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCBoy(Vector3(10 + 5 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new NPCScientist(Vector3(1 + 10 * 20, 0, 195), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCScientist(Vector3(1 + 10 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCElephant(Vector3(10 + 15 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new NPCNegan(Vector3(10 + 20 * 10, 0, 120), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new NPCEmoKid(Vector3(10 + 20 * 20, 0, 50), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new NPCLady(Vector3(10 + 20 * 20, 0, 60), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCNegan(Vector3(10 + 20 * 10, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCEmoKid(Vector3(10 + 20 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, 1, new NPCLady(Vector3(10 + 20 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 
 	//--------------------------------------------------------^REMOVE ONCE DONE^--------------------------------------------------------
 
@@ -330,9 +331,6 @@ void StudioProject::Update(double dt)
 			mouse = true;
 	}
 
-
-	
-
 	SceneManager::getSceneManger()->frameRate = ((int)(1 / dt));
 
 	Application::elapsed_timer_ += dt;
@@ -362,6 +360,9 @@ void StudioProject::Update(double dt)
 		DataBase::instance()->getEntityMinion(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID, dt);
 		if (DataBase::instance()->getEntityMinion(DIMENSIONID, i)->isEntityDead())
 		{
+			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->onDeath();
+			EntityDrop* drop = new EntityDrop(DataBase::instance()->getRandomItem(false, true)->getItemID(), DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition(), Application::elapsed_timer_);
+			DataBase::instance()->setEntity(DIMENSIONID, drop);
 			DataBase::instance()->destroyEntityMinion(DIMENSIONID, i);
 			--i;
 		}
@@ -372,6 +373,19 @@ void StudioProject::Update(double dt)
 		DataBase::instance()->getEntityBoss(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID, dt);
 		if (DataBase::instance()->getEntityBoss(DIMENSIONID, i)->isEntityDead())
 		{
+			DataBase::instance()->getEntityBoss(DIMENSIONID, i)->onDeath();
+			for (int k = -1; k <= 1; k++)
+			{
+				for (int j = -1; j <= 1; j++)
+				{
+					EntityDrop* drop = new EntityDrop(DataBase::instance()->getRandomItem(false, true)->getItemID(), 
+						Vector3(DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().x + k,
+						DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().y,
+						DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().z + j),
+						Application::elapsed_timer_);
+					DataBase::instance()->setEntity(DIMENSIONID, drop);
+				}
+			}
 			DataBase::instance()->destroyEntityBoss(DIMENSIONID, i);
 			--i;
 		}
@@ -485,6 +499,23 @@ void StudioProject::Update(double dt)
 		else if (Application::IsKeyPressed('E'))
 		{
 			PlayerBase::instance()->moveCurrItem(true);
+			timer = Application::elapsed_timer_;
+		}
+
+		if (Application::IsKeyPressed(VK_LEFT))
+		{
+			PlayerBase::instance()->moveCurrSkill(false);
+			timer = Application::elapsed_timer_;
+		}
+		else if (Application::IsKeyPressed(VK_RIGHT))
+		{
+			PlayerBase::instance()->moveCurrSkill(true);
+			timer = Application::elapsed_timer_;
+		}
+
+		if (Application::IsKeyPressed(VK_SPACE))
+		{
+			PlayerBase::instance()->useSkills(Application::elapsed_timer_);
 			timer = Application::elapsed_timer_;
 		}
 
@@ -819,34 +850,31 @@ void StudioProject::Update(double dt)
 
 		if (Application::IsKeyPressed(VK_LBUTTON) && !s && shop)
 		{
-			if (PlayerBase::instance()->getPlayerCurrency() != 0 && !PlayerBase::instance()->isInventoryFull())
+			if (SceneManager::getSceneManger()->cx > 694 && SceneManager::getSceneManger()->cx < 738)
 			{
-				if ( SceneManager::getSceneManger()->cx > 694 && SceneManager::getSceneManger()->cx < 738)
+				if (SceneManager::getSceneManger()->cy > 141 && SceneManager::getSceneManger()->cy < 172)
 				{
-					if (SceneManager::getSceneManger()->cy > 141 && SceneManager::getSceneManger()->cy < 172)
-					{
-						PlayerBase::instance()->addIntoPlayerInventory(ShopBase::instance()->getItemInShop(0)->getItemID());
-					}
-					else if (SceneManager::getSceneManger()->cy > 204 && SceneManager::getSceneManger()->cy < 234)
-					{
-						PlayerBase::instance()->addIntoPlayerInventory(ShopBase::instance()->getItemInShop(1)->getItemID());
-					}
-					else if (SceneManager::getSceneManger()->cy > 267 && SceneManager::getSceneManger()->cy < 298)
-					{
-						PlayerBase::instance()->addIntoPlayerInventory(ShopBase::instance()->getItemInShop(2)->getItemID());
-					}
-					else if (SceneManager::getSceneManger()->cy > 331 && SceneManager::getSceneManger()->cy < 361)
-					{
-						PlayerBase::instance()->addIntoPlayerInventory(ShopBase::instance()->getItemInShop(3)->getItemID());
-					}
-					else if (SceneManager::getSceneManger()->cy > 396 && SceneManager::getSceneManger()->cy < 427)
-					{
-						PlayerBase::instance()->addIntoPlayerInventory(ShopBase::instance()->getItemInShop(4)->getItemID());
-					}
-					else if (SceneManager::getSceneManger()->cy > 458 && SceneManager::getSceneManger()->cy < 489)
-					{
-						PlayerBase::instance()->addIntoPlayerInventory(ShopBase::instance()->getItemInShop(5)->getItemID());
-					}
+					ShopBase::instance()->buyItem(0);
+				}
+				else if (SceneManager::getSceneManger()->cy > 204 && SceneManager::getSceneManger()->cy < 234)
+				{
+					ShopBase::instance()->buyItem(1);
+				}
+				else if (SceneManager::getSceneManger()->cy > 267 && SceneManager::getSceneManger()->cy < 298)
+				{
+					ShopBase::instance()->buyItem(2);
+				}
+				else if (SceneManager::getSceneManger()->cy > 331 && SceneManager::getSceneManger()->cy < 361)
+				{
+					ShopBase::instance()->buyItem(3);
+				}
+				else if (SceneManager::getSceneManger()->cy > 396 && SceneManager::getSceneManger()->cy < 427)
+				{
+					ShopBase::instance()->buyItem(4);
+				}
+				else if (SceneManager::getSceneManger()->cy > 458 && SceneManager::getSceneManger()->cy < 489)
+				{
+					ShopBase::instance()->buyItem(5);
 				}
 			}
 			s = true;
@@ -1038,20 +1066,26 @@ void StudioProject::Render()
 		modelStack.Translate(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().x,
 			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().y,
 			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().z);
+		modelStack.Rotate(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
 
 		modelStack.PushMatrix();
+		modelStack.Translate(.1, 1.9, 0);
 		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 1), true);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
+		modelStack.Translate(-.1, 1.9, 0);
+		modelStack.Rotate(-(dynamic_cast<EntityMinion*>((DataBase::instance()->getEntityMinion(DIMENSIONID, i))))->getMinionrotateArm(), 1, 0, 0);
 		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 2), true);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
+		modelStack.Rotate(-(dynamic_cast<EntityMinion*>((DataBase::instance()->getEntityMinion(DIMENSIONID, i))))->getMinionrotateleftLeg(), 1, 0, 0);
 		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 3), true);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
+		modelStack.Rotate((dynamic_cast<EntityMinion*>((DataBase::instance()->getEntityMinion(DIMENSIONID, i))))->getMinionrotaterightLeg(), 1, 0, 0);
 		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 4), true);
 		modelStack.PopMatrix();
 
@@ -1192,20 +1226,17 @@ void StudioProject::Render()
 	RenderTextOnScreen(meshList[GEO_TEXT], "Z:  " + std::to_string((int)camera.position.z), Color(0, 0, 1), 1.8, 1, 26);
 
 	//--------------------------------------------------SKILLS--------------------------------------------------
-	for (int i = 0; i < 2; i++)
-	{
-		RenderTextOnScreen(meshList[GEO_TEXT], "Skills ", Color(0, 1, 1), 1.8, 32, 32);
+		RenderTextOnScreen(meshList[GEO_TEXT], "Skill Active ", Color(0, 1, 1), 1.8, 32, 32);
 
-		if (PlayerBase::instance()->getCurrentSkillPoint(PlayerBase::instance()->getCurrentEquippedSkill(i)) > 0
-			&& PlayerBase::instance()->getCurrentSkillCoolDown(PlayerBase::instance()->getCurrentEquippedSkill(i)) <= 0)
+		if (PlayerBase::instance()->getCurrentSkillPoint(PlayerBase::instance()->getCurrentEquippedSkill()) > 0
+			&& PlayerBase::instance()->getCurrentSkillCoolDown(PlayerBase::instance()->getCurrentEquippedSkill()) <= 0)
 		{
-			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(i + 1) + " : " + PlayerBase::instance()->getSkillName(PlayerBase::instance()->getCurrentEquippedSkill(i)), Color(0, 1, 0), 1.8, 32, 31 - (i + 1));
+			RenderTextOnScreen(meshList[GEO_TEXT], "SPACE : " + PlayerBase::instance()->getSkillName(PlayerBase::instance()->getCurrentEquippedSkill()), Color(0, 1, 0), 1.8,28, 31);
 		}
 		else
 		{
-			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(i + 1) + " : " + PlayerBase::instance()->getSkillName(PlayerBase::instance()->getCurrentEquippedSkill(i)), Color(.4, .4, .4), 1.8, 32, 31 - (i + 1));
+			RenderTextOnScreen(meshList[GEO_TEXT], "SPACE : " + PlayerBase::instance()->getSkillName(PlayerBase::instance()->getCurrentEquippedSkill()), Color(.4, .4, .4), 1.8, 28, 31);
 		}
-	}
 
 	//-----------------------------------------------------ATTRIBUTE-----------------------------------------------------
 
@@ -1213,6 +1244,7 @@ void StudioProject::Render()
 	{
 		RenderMeshOnScreen(meshList[GEO_ATTRIBUTES], 40, 27.5, 40, 40, 90); 
 
+		RenderTextOnScreen(meshList[GEO_TEXT], "Attribute Points: " + std::to_string(PlayerBase::instance()->getAttributePoint()), Color(1, 1, 1), 1.8, 15, 27);
 		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(0)), Color(1, 1, 1), 1.8, 24,24.4 );
 		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(1)), Color(1, 1, 1), 1.8, 24, 19.1);
 		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(2)), Color(1, 1, 1), 1.8, 24, 12);
@@ -1223,7 +1255,10 @@ void StudioProject::Render()
 	if (shop)
 	{
 		Color tempColor;
+		string priceTag;
 		RenderMeshOnScreen(meshList[GEO_SHOP], 40, 27.5, 40, 40, 90);
+
+		RenderTextOnScreen(meshList[GEO_TEXT], "Currency: " + std::to_string(PlayerBase::instance()->getPlayerCurrency()), Color(1, .5, 0), 1.8, 26, 5);
 
 		for (int i = 0; i < ShopBase::instance()->getShopItemSize(); i++)
 		{
@@ -1231,6 +1266,8 @@ void StudioProject::Render()
 			{
 				tempColor = DataBase::instance()->getRarityColor(DataBase::instance()->getItem(ShopBase::instance()->getItemInShop(i)->getItemID())->getRarity());
 				RenderTextOnScreen(meshList[GEO_TEXT], ShopBase::instance()->getItemInShop(i)->getItemName(), tempColor, 1.8, 27, 24.6 - (3.565 * i));
+				priceTag = "[" + std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(i))->getPriceOfWeapon()) + "]";
+				RenderTextOnScreen(meshList[GEO_TEXT], priceTag, Color(1, .5, 0), 1.8, 40 - priceTag.size(), 24.6 - (3.565 * i));
 			}
 		}
 

@@ -8,15 +8,15 @@ void DataBase::registerItems()
 
 		//-----------------------------------COMMON-----------------------------------
 		//Shields
-		temp_obj = new ItemKiteShield;
-		item_base_[temp_obj->getItemID()] = new ItemKiteShield; //Register Weapon
-		delete temp_obj;
-		increaseItemStarting();
+		//temp_obj = new ItemKiteShield;
+		//item_base_[temp_obj->getItemID()] = new ItemKiteShield; //Register Weapon
+		//delete temp_obj;
+		//increaseItemStarting();
 
-		temp_obj = new ItemRoundShield;
-		item_base_[temp_obj->getItemID()] = new ItemRoundShield; //Register Weapon
-		delete temp_obj;
-		increaseItemStarting();
+		//temp_obj = new ItemRoundShield;
+		//item_base_[temp_obj->getItemID()] = new ItemRoundShield; //Register Weapon
+		//delete temp_obj;
+		//increaseItemStarting();
 
 		temp_obj = new ItemDagger;
 		item_base_[temp_obj->getItemID()] = new ItemDagger; //Register Weapon
@@ -393,7 +393,7 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 		{
 			while (1)
 			{
-				randNumber = rand() % 8;
+				randNumber = rand() % 6;
 
 				if (randNumber < item_base_.size())
 				{
@@ -408,7 +408,7 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 		{
 			while (1)
 			{
-				randNumber = (rand() % 4) + 8;
+				randNumber = (rand() % 4) + 6;
 
 				if (randNumber < item_base_.size())
 				{
@@ -423,7 +423,7 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 		{
 			while (1)
 			{
-				randNumber = (rand() % 3) + 12;
+				randNumber = (rand() % 3) + 10;
 
 				if (randNumber < item_base_.size())
 				{
@@ -438,7 +438,7 @@ ItemBase* DataBase::getRandomItem(bool normal_item, bool weapon_item, unsigned r
 		{
 			while (1)
 			{
-				randNumber = (rand() % 3) + 15;
+				randNumber = (rand() % 3) + 13;
 
 				if (randNumber < item_base_.size())
 				{

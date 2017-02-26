@@ -10,6 +10,7 @@ public:
 	static Vector3 target;
 	static Vector3 up;
 	static Vector3 playerRight;
+	static Vector3 view;
 
 	int anchorX, anchorY;
 	int WindowX, WindowY;

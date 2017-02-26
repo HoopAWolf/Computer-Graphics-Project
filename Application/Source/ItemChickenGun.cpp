@@ -11,11 +11,11 @@ class ItemChickenGun : public ItemWeapon
 public:
 	ItemChickenGun()
 	{
-		itemID_ = 16;
+		itemID_ = 14;
 		texture_string_ = "chicken_gun";
 		item_name_ = "Chicken Gun";
 
-
+		recoil_ = 1;
 		weapon_type_ = RANGE_AUTO;
 		durability_ = 280;
 		damage_ = 300;

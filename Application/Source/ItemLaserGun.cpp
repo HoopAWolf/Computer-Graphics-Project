@@ -10,15 +10,16 @@ class ItemLaserGun : public ItemWeapon
 public:
 	ItemLaserGun()
 	{
-		itemID_ = 10;
+		itemID_ = 8;
 		texture_string_ = "laser_gun";
 		item_name_ = "Laser Gun";
 
+		recoil_ = .3;
 		weapon_type_ = RANGE_AUTO;
 		durability_ = 10;
 		damage_ = 5;
 		attack_speed_ = 3;
-		bulletcount_ = 10;
+		bulletcount_ = 80;
 		timer_ = 0;
 
 		rarity_ = UNCOMMON;

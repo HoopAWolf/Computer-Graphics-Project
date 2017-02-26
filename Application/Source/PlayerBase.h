@@ -31,13 +31,12 @@ private:
 
 	PlayerBase(){};
 	static PlayerBase *s_instance;
-	int player_health_, current_held_item_, ammo_, currency_;
-	int current_skill_active_[2];
+	int player_health_, current_held_item_, ammo_, currency_, current_skill_;
 
-	unsigned damage_, attack_speed_, moving_speed_,attribute_points_ , resistance_, dimension_ , 
+	unsigned damage_, moving_speed_,attribute_points_ , resistance_, dimension_ , 
 		level_, experience_, level_cap_;
 	bool isRecharging, hit;
-	float rechargingTimer, rotationX;
+	float rechargingTimer, rotationX, health_regen_timer, attack_speed_;
 	Vector3 size_;
 
 	vector<ItemBase *> inventory_data_;
@@ -62,7 +61,7 @@ public:
 	ItemBase* getCurrentHeldItem();
 	unsigned getCurrentItemSlot();
 	unsigned getPlayerDamage();
-	unsigned getPlayerAttackSpeed();
+	float getPlayerAttackSpeed();
 	unsigned getPlayerMovingSpeed();
 	unsigned getPlayerResistance();
 	unsigned getAttributePoint();
@@ -76,7 +75,7 @@ public:
 	unsigned getCurrentSkillDamage(unsigned skill_slot);
 	unsigned getCurrentSkillCoolDown(unsigned skill_slot);
 	int getPlayerHealth();
-	unsigned getCurrentEquippedSkill(unsigned slotNum);
+	unsigned getCurrentEquippedSkill();
 	float getRotationX();
 	void playerAttacked(int damage);
 
@@ -88,7 +87,7 @@ public:
 
 	bool isPlayerDead();
 
-	void useSkills(unsigned skill_slot, float timer);
+	void useSkills(float timer);
 	void healPlayer(unsigned ammount);
 	void setPlayerState(PLAYER_STATE player_state);
 	void setPlayerDimension(unsigned dimensionID);
@@ -101,6 +100,7 @@ public:
 
 	bool isInventoryFull();
 	void moveCurrItem(bool forward);
+	void moveCurrSkill(bool forward);
 	string getSkillName(unsigned skillID);
 
 };

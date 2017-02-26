@@ -62,6 +62,26 @@ struct AABB
 		return false;
 	}
 
+	bool isPointInsideAABB(Vector3 position) {
+		Vector3 viewRange = position;
+
+		/*std::cout << "/////////////////////////////////////////" << std::endl;
+		std::cout << view << std::endl;
+		std::cout << position << std::endl;*/
+
+		/*	std::cout << newView << std::endl;
+		std::cout << "/////////////////////////////////////////" << std::endl;*/
+
+			//std::cout << viewRange << std::endl;
+
+			if ((viewRange.x >= min.x && viewRange.x <= max.x) &&
+				(viewRange.y >= min.y && viewRange.y <= max.y) &&
+				(viewRange.z >= min.z && viewRange.z <= max.z))
+				return true;
+
+		return false;
+	}
+
 
 	Vector3 min, max;
 };

@@ -8,7 +8,7 @@ class ItemDagger : public ItemWeapon
 public:
 	ItemDagger()
 	{
-		itemID_ = 2;
+		itemID_ = 0;
 		texture_string_ = "dagger";
 		item_name_ = "Dagger";
 

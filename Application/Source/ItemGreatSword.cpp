@@ -8,7 +8,7 @@ class ItemGreatSword : public ItemWeapon
 public:
 	ItemGreatSword()
 	{
-		itemID_ = 9;
+		itemID_ = 7;
 		texture_string_ = "great_sword";
 		item_name_ = "Great Sword";
 

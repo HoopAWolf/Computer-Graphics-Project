@@ -11,6 +11,7 @@ protected:
 	{
 		IDLE,
 		WALKING,
+		TARGET_PLAYER,
 		RETREAT,
 
 		TAUNT,

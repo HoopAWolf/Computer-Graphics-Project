@@ -7,9 +7,10 @@ void PlayerBase::startPlayer()
 {
 	player_health_ = 100;
 	damage_ = 1;
-	attack_speed_ = 1;
+	attack_speed_ = 0;
 	moving_speed_ = 1;
 	ammo_ = 300;
+	currency_ = 10;
 	attribute_points_ = 0;
 	resistance_ = 1;
 	level_ = 1;
@@ -17,10 +18,11 @@ void PlayerBase::startPlayer()
 	experience_ = 0;
 	player_state_ = IDLE;
 	current_held_item_ = 0;
-	size_ = Vector3(2, 3, 2);
+	size_ = Vector3(2, 4, 2);
 	isRecharging = false;
-	current_skill_active_[0] = 0;
-	current_skill_active_[1] = 1;
+	current_skill_ = 0;
+	health_regen_timer = 0;
+
 	rotationX = 0;
 	hit = false;
 
@@ -58,6 +60,9 @@ void PlayerBase::playerUpdate(float timer, float dt)
 						{
 							DataBase::instance()->setEntity(dimension_, tempObj);
 							ammo_ -= (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getBulletCount();
+							if (Camera::view.y < .5)
+								Camera::target.y += (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getRecoil();
+
 							if (getPlayerAmmo() <= 0)
 							{
 								ammo_ = 0;
@@ -73,7 +78,7 @@ void PlayerBase::playerUpdate(float timer, float dt)
 				{
 					if (rotationX <= 80 && !hit)
 					{
-						rotationX += (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponAttackSpeed();
+						rotationX += getPlayerAttackSpeed();
 					}
 					else
 					{
@@ -85,7 +90,7 @@ void PlayerBase::playerUpdate(float timer, float dt)
 								if (DataBase::instance()->getEntityBoss(dimension_, i)->getBoundingBox().isPointInsideAABB(Camera::position, Camera::playerRight.Cross(Camera::up)))
 								{
 									dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(dimension_, i))->
-										onAttacked((dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponDamage());
+										onAttacked(getPlayerDamage());
 
 									/*std::cout << "BOSS HEALTH LEFT: " +
 									std::to_string(dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(dimension_, i))->getHealth())
@@ -99,7 +104,7 @@ void PlayerBase::playerUpdate(float timer, float dt)
 								if (DataBase::instance()->getEntityMinion(dimension_, i)->getBoundingBox().isPointInsideAABB(Camera::position, Camera::playerRight.Cross(Camera::up)))
 								{
 									dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(dimension_, i))->
-										onAttacked((dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponDamage());
+										onAttacked(getPlayerDamage());
 
 									/*std::cout << "ENEMY HEALTH LEFT: " + 
 										std::to_string(dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(dimension_, i))->getHealth()) 
@@ -113,7 +118,7 @@ void PlayerBase::playerUpdate(float timer, float dt)
 							hit = true;
 						}
 
-						rotationX -= (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getWeaponAttackSpeed();
+						rotationX -= getPlayerAttackSpeed();
 
 						if (rotationX <= 0)
 						{
@@ -128,6 +133,14 @@ void PlayerBase::playerUpdate(float timer, float dt)
 			player_state_ = IDLE;
 	}
 	
+	if (player_health_ < 100)
+	{
+		if (timer > health_regen_timer + 4)
+		{
+			player_health_++;
+			health_regen_timer = timer;
+		}
+	}
 
 	if (isRecharging == true)
 	{
@@ -161,7 +174,7 @@ void PlayerBase::playerUpdate(float timer, float dt)
 				skills_[i].y = timer + 20;
 
 				if (i == 2)
-					attack_speed_ = 1;
+					attack_speed_ = 0;
 				else if (i == 3)
 					resistance_ = 1;
 			}
@@ -185,16 +198,9 @@ ItemBase* PlayerBase::getCurrentHeldItem()
 	return inventory_data_[current_held_item_];
 }
 
-unsigned PlayerBase::getCurrentEquippedSkill(unsigned slotNum)
+unsigned PlayerBase::getCurrentEquippedSkill()
 {
-	unsigned num = slotNum;
-
-	if (num < 0)
-		num = 0;
-	else if (num > 1)
-		num = 1;
-
-	return current_skill_active_[num];
+	return current_skill_;
 }
 
 unsigned PlayerBase::getPlayerDamage()
@@ -203,17 +209,15 @@ unsigned PlayerBase::getPlayerDamage()
 		return damage_ + ((ItemWeapon*)getCurrentHeldItem())->getWeaponDamage();
 	return damage_;
 }
-unsigned PlayerBase::getPlayerAttackSpeed()
+float PlayerBase::getPlayerAttackSpeed()
 {
 	if (getCurrentHeldItem()->getItemID() <= DataBase::instance()->getItemStarting())
-		return attack_speed_ * ((ItemWeapon*)getCurrentHeldItem())->getWeaponDamage();
+		return attack_speed_ + (((ItemWeapon*)getCurrentHeldItem())->getWeaponAttackSpeed());
 	return attack_speed_;
 }
 
 unsigned PlayerBase::getPlayerMovingSpeed()
 {
-	if (getCurrentHeldItem()->getItemID() <= DataBase::instance()->getItemStarting())
-		return moving_speed_ * ((ItemWeapon*)getCurrentHeldItem())->getWeaponAttackSpeed();
 	return moving_speed_;
 }
 
@@ -287,7 +291,7 @@ void PlayerBase::decreaseCurrency(unsigned currency)
 
 void PlayerBase::playerAttacked(int damage)
 {
-	player_health_ -= damage;
+	player_health_ -= (damage - ((resistance_ / 100) * 100));
 }
 
 AABB PlayerBase::getBoundingBox()
@@ -343,38 +347,42 @@ void PlayerBase::healPlayer(unsigned ammount)
 		player_health_ = 100;
 }
 
-void PlayerBase::useSkills(unsigned skill_slot, float timer)
+void PlayerBase::useSkills(float timer)
 {
-	if (skills_[skill_slot].x != 0)
+	if (skills_[current_skill_].x != 0)
 	{
-		switch (skill_slot)
+		switch (current_skill_)
 		{
 		case 0:
-			if (skills_[skill_slot].y <= 0)
-				//FIRE STUFF
+			if (skills_[current_skill_].y <= 0)
+			{
+				EntityFireBall* bullet = new EntityFireBall(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer, true);
+				DataBase::instance()->setEntity(dimension_, bullet);
+				skills_[current_skill_].y = timer + 10;
+			}
 			break;
 		case 1:
 
-			if (skills_[skill_slot].y <= 0)
+			if (skills_[current_skill_].y <= 0)
 			{
-				healPlayer((getPlayerHealth() * ((5 + skills_[skill_slot].x) / 100)));  //PLUS 5% OF CURRENT HEALTH WITH ADDITION OF 1% EVERY SKILL POINT
-				skills_[skill_slot].y = timer + 10;
+				healPlayer((getPlayerHealth() * ((5 + skills_[current_skill_].x) / 100)));  //PLUS 5% OF CURRENT HEALTH WITH ADDITION OF 1% EVERY SKILL POINT
+				skills_[current_skill_].y = timer + 10;
 			}
 			break;
 		case 2:
 
-			if (skills_[skill_slot].y <= 0)
+			if (skills_[current_skill_].y <= 0)
 			{
-				attack_speed_ = (attack_speed_ * 2);
-				skills_[skill_slot].z = timer + (2 + skills_[skill_slot].x);
+				attack_speed_ = 2;
+				skills_[current_skill_].z = timer + (2 + skills_[current_skill_].x);
 			}
 
 			break;
 		case 3:
-			if (skills_[skill_slot].y <= 0)
+			if (skills_[current_skill_].y <= 0)
 			{
 				resistance_ = (resistance_ * 2);
-				skills_[skill_slot].z = timer + (2 + skills_[skill_slot].x);
+				skills_[current_skill_].z = timer + (2 + skills_[current_skill_].x);
 			}
 
 			break;
@@ -461,6 +469,22 @@ void PlayerBase::moveCurrItem(bool forward)
 		--current_held_item_;
 		if (current_held_item_ < 0)
 			current_held_item_ = 3;
+	}
+}
+
+void PlayerBase::moveCurrSkill(bool forward)
+{
+	if (forward)
+	{
+		++current_skill_;
+		if (current_skill_ > 3)
+			current_skill_ = 0;
+	}
+	else
+	{
+		--current_skill_;
+		if (current_skill_ < 0)
+			current_skill_ = 3;
 	}
 }
 

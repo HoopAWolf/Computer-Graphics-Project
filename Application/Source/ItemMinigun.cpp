@@ -10,11 +10,11 @@ class ItemMinigun : public ItemWeapon
 public:
 	ItemMinigun()
 	{
-		itemID_ = 17;
+		itemID_ = 15;
 		texture_string_ = "mini_gun";
 		item_name_ = "Minigun";
 
-
+		recoil_ = .05;
 		weapon_type_ = RANGE_AUTO;
 		durability_ = 250;
 		damage_ = 10;

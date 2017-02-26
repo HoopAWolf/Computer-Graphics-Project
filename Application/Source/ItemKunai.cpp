@@ -8,7 +8,7 @@ class ItemKunai : public ItemWeapon
 public:
 	ItemKunai()
 	{
-		itemID_ = 13;
+		itemID_ = 11;
 		texture_string_ = "kunai";
 		item_name_ = "Kunai";
 
