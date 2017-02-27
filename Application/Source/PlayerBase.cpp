@@ -58,7 +58,7 @@ void PlayerBase::playerUpdate(float timer, float dt)
 							DataBase::instance()->setEntity(dimension_, tempObj);
 							ammo_ -= (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getBulletCount();
 							if (Camera::view.y < .5)
-								Camera::target.y += (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getRecoil();
+								Camera::target.y += (dynamic_cast<ItemWeapon *>(getCurrentHeldItem()))->getRecoil() * dt;
 
 							if (getPlayerAmmo() <= 0)
 							{
@@ -333,6 +333,12 @@ bool PlayerBase::isPlayerDead()
 		return true;
 
 	return false;
+}
+
+void PlayerBase::deaded()
+{
+	player_health_ = 100;
+	experience_ = 0;
 }
 
 void PlayerBase::healPlayer(unsigned ammount)

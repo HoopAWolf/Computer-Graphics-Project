@@ -86,6 +86,7 @@ public:
 	AABB getBoundingBox();
 
 	bool isPlayerDead();
+	void deaded();
 
 	void useSkills(float timer);
 	void healPlayer(unsigned ammount);

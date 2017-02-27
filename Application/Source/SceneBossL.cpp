@@ -281,7 +281,7 @@ void SceneBossL::Update(double dt)
 	if (Application::IsKeyPressed(VK_ESCAPE) && !pause)
 	{
 		currscene = SceneManager::getSceneManger()->getCurrentScene();
-		SceneManager::getSceneManger()->setNextScene(6);
+		SceneManager::getSceneManger()->setNextScene(4);
 		pause = true;
 	}
 	else
@@ -296,6 +296,12 @@ void SceneBossL::Update(double dt)
 	if (Application::IsKeyPressed(VK_F2))
 	{
 		SceneManager::getSceneManger()->setNextScene(1);
+	}
+
+	if ((PlayerBase::instance()->getPlayerHealth()) <= 0)
+	{
+		PlayerBase::instance()->deaded();
+		SceneManager::getSceneManger()->setNextScene(5);
 	}
 	if (Application::IsKeyPressed(VK_F3))
 	{
@@ -749,6 +755,7 @@ void SceneBossL::Update(double dt)
 		{
 			itemhover = 5;
 		}
+
 	}
 }
 
@@ -834,47 +841,6 @@ void SceneBossL::Render()
 	RenderMesh(meshList[GEO_LIGHTBALL], false);
 	modelStack.PopMatrix();
 	//===================================================================================================
-	//--------------------------------------------------DROPS--------------------------------------------------
-	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(0, DIMENSIONID); i++)
-	{
-		Color tempColor;
-		modelStack.PushMatrix();
-		modelStack.Translate(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().x,
-			DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().y,
-			DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().z);
-
-		AABB playerItemDetectionRange;
-		playerItemDetectionRange.setBoundry(Vector3(-12, -3, -12), Vector3(12, 3, 12));
-
-		modelStack.Rotate(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
-		RenderMesh(RenderingBase::instance()->getItemMesh(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getItemDrop()), true);
-
-		if (DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getBoundingBox().isAABBInsideAABB(playerItemDetectionRange.getBoundryAtCoord(camera.position)))
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				modelStack.PushMatrix();
-				modelStack.Translate(0, 4 - j, 0);
-
-				if (camera.getRotationY() != 0)
-					modelStack.Rotate((camera.getRotationY() + 750) - DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
-
-				if (j != 0)
-				{
-					modelStack.Scale(.25, .25, .25);
-					tempColor = Color(1, 1, 1);
-				}
-				else
-				{
-					modelStack.Scale(.4, .4, .4);
-					tempColor = DataBase::instance()->getRarityColor(DataBase::instance()->getItem(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getItemDrop())->getRarity());
-				}
-				RenderText(meshList[GEO_TEXT], DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getDropInfo(j), tempColor);
-				modelStack.PopMatrix();
-			}
-		}
-		modelStack.PopMatrix();
-	}
 
 	//--------------------------------------------------ENVIRONMENT--------------------------------------------------
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(1, DIMENSIONID); i++)
@@ -1007,6 +973,48 @@ void SceneBossL::Render()
 			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().z);
 		modelStack.Rotate(DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
 		RenderMesh(RenderingBase::instance()->getNPCMesh((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getNPCID()), false);
+		modelStack.PopMatrix();
+	}
+
+	//--------------------------------------------------DROPS--------------------------------------------------
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(0, DIMENSIONID); i++)
+	{
+		Color tempColor;
+		modelStack.PushMatrix();
+		modelStack.Translate(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().x,
+			DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().y,
+			DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().z);
+
+		AABB playerItemDetectionRange;
+		playerItemDetectionRange.setBoundry(Vector3(-12, -3, -12), Vector3(12, 3, 12));
+
+		modelStack.Rotate(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
+		RenderMesh(RenderingBase::instance()->getItemMesh(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getItemDrop()), true);
+
+		if (DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getBoundingBox().isAABBInsideAABB(playerItemDetectionRange.getBoundryAtCoord(camera.position)))
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				modelStack.PushMatrix();
+				modelStack.Translate(0, 4 - j, 0);
+
+				if (camera.getRotationY() != 0)
+					modelStack.Rotate((camera.getRotationY() + 750) - DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
+
+				if (j != 0)
+				{
+					modelStack.Scale(.25, .25, .25);
+					tempColor = Color(1, 1, 1);
+				}
+				else
+				{
+					modelStack.Scale(.4, .4, .4);
+					tempColor = DataBase::instance()->getRarityColor(DataBase::instance()->getItem(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getItemDrop())->getRarity());
+				}
+				RenderText(meshList[GEO_TEXT], DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getDropInfo(j), tempColor);
+				modelStack.PopMatrix();
+			}
+		}
 		modelStack.PopMatrix();
 	}
 

@@ -19,7 +19,7 @@ public:
 		multiple_texture_string_[3] = "melee_minion_2_leg_1";
 		multiple_texture_string_[4] = "melee_minion_2_leg_2";
 		elemental_type_ = NONE;
-		health_ = 120;
+		health_ = 20;
 		damage_ = 8;
 		attack_speed_ = 1;
 		walking_speed_ = 5;

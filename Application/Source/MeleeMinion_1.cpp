@@ -19,7 +19,7 @@ public:
 		multiple_texture_string_[3] = "melee_minion_1_leg_1";
 		multiple_texture_string_[4] = "melee_minion_1_leg_2";
 		elemental_type_ = NONE;
-		health_ = 100 + PlayerBase::instance()->getPlayerLevel();
+		health_ = 10 + PlayerBase::instance()->getPlayerLevel();
 		damage_ = 5;
 		attack_speed_ = 1;
 		walking_speed_ = 5;
