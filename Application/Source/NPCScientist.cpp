@@ -112,7 +112,8 @@ public:
 
 	string getInteractionString()
 	{
-		return "IM A BOY, IM A BOI";
+		return "Are you gallium yttrium ? because you'll be (Mg,Fe2+)2(Mg,Fe2+)5Si8O22(OH)2"; 
+	    
 	}
 
 	void setPosition(Vector3 position)

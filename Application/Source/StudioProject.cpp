@@ -1253,7 +1253,7 @@ void StudioProject::Render()
 		if ((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->isInteracting())
 		{
 			RenderTextOnScreen(meshList[GEO_TEXT], (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getInteractionString(), 
-				Color(1, 1, 0), 1.8, 20, 10);
+				Color(1, 1, 0), 1.8, -5, 10);
 		}
 	}
 	modelStack.PopMatrix();
