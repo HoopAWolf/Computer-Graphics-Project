@@ -14,7 +14,7 @@ public:
 		texture_string_ = "giggs_gun";
 		item_name_ = "Giggs Gun";
 
-		recoil_ = .1;
+		recoil_ = .05;
 		weapon_type_ = RANGE_AUTO;
 		durability_ = 45;
 		damage_ = 20;

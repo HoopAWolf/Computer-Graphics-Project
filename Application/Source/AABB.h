@@ -46,7 +46,7 @@ struct AABB
 
 	/*	std::cout << newView << std::endl;
 		std::cout << "/////////////////////////////////////////" << std::endl;*/
-		for (int i = 0; i < 20; i++)
+		for (int i = 0; i < 30; i++)
 		{
 			viewRange.x += ((newView.x < 0) ? -.3 : .3);
 			viewRange.z += ((newView.z < 0) ? -.3 : .3);

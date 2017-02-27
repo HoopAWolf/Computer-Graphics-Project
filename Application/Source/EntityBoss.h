@@ -13,24 +13,31 @@ protected:
 	{
 		IDLE,
 		WALKING,
+		TARGET_PLAYER,
 		RETREAT,
 		BLOCK,
 
 		TAUNT,
 
-		BASIC_ATTACK,
-
-		SKILL_1,
-		SKILL_2,
-		SKILL_3,
-
 		FINAL_ATTACK, 
 
 		DEATH
 	};
+
+	enum ATTACK_STATE
+	{
+		PASSIVE,
+		BASIC_ATTACK,
+
+		SKILL_1,
+		SKILL_2,
+		SKILL_3
+	};
+
 	string boss_name_;
 	unsigned bossID_;
 	BOSS_STATE boss_state_;
+	ATTACK_STATE boss_attack_state_;
 	unsigned armor_;
 
 	int count = 0;

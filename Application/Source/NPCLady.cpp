@@ -95,7 +95,20 @@ public:
 			}
 
 			break;
+		case INTERACTION:
+			newTarget = Camera::position;
+			rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
+			if (!(PlayerBase::instance()->getBoundingBox().isAABBInsideAABB(getBoundingBox().increaseBoundry(Vector3(10, 10, 10), Vector3(10, 10, 10)))))
+			{
+				NPC_state_ = IDLE;
+			}
+			break;
 		}
+	}
+
+	string getInteractionString()
+	{
+		return "IM A BOY, IM A BOI";
 	}
 
 	void setPosition(Vector3 position)

@@ -236,6 +236,15 @@ void StudioProject::Init()
 	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
 	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
 
+	meshList[GEO_HUD] = MeshBuilder::GenerateOBJ("hud", "OBJ//hud.obj");
+	meshList[GEO_HUD]->textureID = LoadTGA("Image//hud.tga");
+
+	meshList[GEO_HEALTH] = MeshBuilder::GenerateOBJ("health", "OBJ//health.obj");
+	meshList[GEO_HEALTH]->textureID = LoadTGA("Image//health.tga");
+
+	meshList[GEO_EXP] = MeshBuilder::GenerateOBJ("exp", "OBJ//exp.obj");
+	meshList[GEO_EXP]->textureID = LoadTGA("Image//exp.tga");
+
 	meshList[GEO_ATTRIBUTES] = MeshBuilder::GenerateOBJ("", "OBJ//attribute.obj");
 	meshList[GEO_ATTRIBUTES]->textureID = LoadTGA("Image//attribute.tga");
 
@@ -344,6 +353,7 @@ void StudioProject::Update(double dt)
 	}
 
 	PlayerBase::instance()->playerUpdate(Application::elapsed_timer_, dt);
+	srand(time(nullptr));
 
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(0, DIMENSIONID); i++)
 	{
@@ -491,6 +501,17 @@ void StudioProject::Update(double dt)
 
 	if (Application::elapsed_timer_ > timer + .2 && PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->IDLE)
 	{
+		if (Application::IsKeyPressed(VK_RBUTTON))
+		{
+			for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(5, DIMENSIONID); i++)
+			{
+				if (DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getBoundingBox().increaseBoundry(Vector3(10, 10, 10), Vector3(10, 10, 10)).isPointInsideAABB(Camera::position, Camera::view))
+				{
+					dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->setState(2);
+				}
+			}
+		}
+
 		if (Application::IsKeyPressed('Q'))
 		{
 			PlayerBase::instance()->moveCurrItem(false);
@@ -1098,10 +1119,13 @@ void StudioProject::Render()
 	{
 		modelStack.PushMatrix();
 		modelStack.Translate(DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().x,
-			DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().y + 5,
+			DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().y + 2,
 			DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().z);
 
+		modelStack.Rotate(DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
+
 		modelStack.PushMatrix();
+		modelStack.Translate(.1, 5, 0);
 		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
 		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotaterightArmZ(), 0, 0, 1);
 		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotaterightArmY(), 0, 1, 0);
@@ -1110,6 +1134,7 @@ void StudioProject::Render()
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
+		modelStack.Translate(.1, 5, 0);
 		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
 		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftArmZ(), 0, 0, 1);
 		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftArmY(), 0, 1, 0);
@@ -1189,35 +1214,30 @@ void StudioProject::Render()
 			RenderTextOnScreen(meshList[GEO_TEXT], "-", Color(1, 1, 1), 1.8, 1, 5 - i);
 	}
 
-	//--------------------------------------------------LEVEL--------------------------------------------------
-	modelStack.PushMatrix();
-	string experienceBar = "";
-	for (int i = 0; i < 20; i++)
-	{
-		if (i == 20/2)
-			RenderTextOnScreen(meshList[GEO_TEXT], "[" + std::to_string(PlayerBase::instance()->getPlayerLevel()) + "]", Color(1, 1, 0), 2.5, 15.1, 4);
-		if (i < ((double)((((double)PlayerBase::instance()->getPlayerExperience()) / ((double)PlayerBase::instance()->getPlayerLevelCap())) * 100) / 5))
-			experienceBar += "O";  
-		else
-			experienceBar += "-";
-	}
-	RenderTextOnScreen(meshList[GEO_TEXT], experienceBar, Color(1, 1, 0), 2, 12, 3);
-	modelStack.PopMatrix();
-
-	//--------------------------------------------------HEALTH--------------------------------------------------
+	//--------------------------------------------------HEALTH & LEVEL--------------------------------------------------
 	modelStack.PushMatrix();
 	string healthBar = "";
-	for (int i = 0; i < 20; i++)
-	{
-		if (i == 20 / 2)
-			RenderTextOnScreen(meshList[GEO_TEXT], "[" + std::to_string(PlayerBase::instance()->getPlayerHealth()) + "]", Color(1, 1, 0), 2, 18, 2);
-		if (i < ((double)((((double)PlayerBase::instance()->getPlayerHealth()) / 100) * 100) / 5))
-			healthBar += "#";
-		else
-			healthBar += "-";
-	}
+	RenderMeshOnScreen(meshList[GEO_HUD], 35, 8, 20, 20, 90);
 
-	RenderTextOnScreen(meshList[GEO_TEXT], healthBar, Color(1, 0, 0), 2, 12, 1);
+	RenderMeshOnScreen(meshList[GEO_HEALTH], 34.75, 8, ((float)(PlayerBase::instance()->getPlayerHealth() / 100.) * 20.), 20, 90);
+	RenderMeshOnScreen(meshList[GEO_EXP], 34.75, 8, ((float)(PlayerBase::instance()->getPlayerExperience() / 100.) * 20.), 20, 90);
+
+
+	RenderTextOnScreen(meshList[GEO_TEXT], "[" + std::to_string(PlayerBase::instance()->getPlayerLevel()) + "]", Color(1, 1, 0), 2.5, 15.1, 4);
+	RenderTextOnScreen(meshList[GEO_TEXT], "[" + std::to_string(PlayerBase::instance()->getPlayerHealth()) + "]", Color(1, 1, 0), 2, 18, 2);
+		
+	modelStack.PopMatrix();
+
+	//--------------------------------------------------SPEECH--------------------------------------------------
+	modelStack.PushMatrix();
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(5, DIMENSIONID); i++)
+	{
+		if ((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->isInteracting())
+		{
+			RenderTextOnScreen(meshList[GEO_TEXT], (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getInteractionString(), 
+				Color(1, 1, 0), 1.8, 20, 10);
+		}
+	}
 	modelStack.PopMatrix();
 
 	//--------------------------------------------------POSITION--------------------------------------------------

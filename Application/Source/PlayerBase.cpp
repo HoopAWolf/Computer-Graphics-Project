@@ -36,10 +36,7 @@ void PlayerBase::startPlayer()
 		skills_[i] = Vector3(0, 0, 0);
 	}
 
-	addIntoPlayerInventory(6);
 	addIntoPlayerInventory(5);
-	addIntoPlayerInventory(9);
-	addIntoPlayerInventory(13);
 }
 
 void PlayerBase::playerUpdate(float timer, float dt)
