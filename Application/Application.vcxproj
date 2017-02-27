@@ -97,6 +97,7 @@
     <ClCompile Include="Source\EntityBullet.cpp" />
     <ClCompile Include="Source\EntityChickenProjectile.cpp" />
     <ClCompile Include="Source\EntityFireBall.cpp" />
+    <ClCompile Include="Source\EntitySpawner.cpp" />
     <ClCompile Include="Source\EnviromentStatueHalfSet.cpp" />
     <ClCompile Include="Source\EnviromentTargetPractise.cpp" />
     <ClCompile Include="Source\EnvironmentAppleTree.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Source\EntityFireBall.h" />
     <ClInclude Include="Source\EntityNPC.h" />
     <ClInclude Include="Source\EntityProjectile.h" />
+    <ClInclude Include="Source\EntitySpawner.h" />
     <ClInclude Include="Source\EnvironmentBase.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\Camera2.h" />

@@ -287,8 +287,13 @@
     <ClCompile Include="Source\ShopBase.cpp">
       <Filter>Source Files\DataBase</Filter>
     </ClCompile>
+
     <ClCompile Include="Source\EnvironmentWall.cpp">
       <Filter>Source Files\Environment</Filter>
+
+    <ClCompile Include="Source\EntitySpawner.cpp">
+      <Filter>Source Files\Entities</Filter>
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -422,6 +427,9 @@
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Source\Boss_1.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntitySpawner.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>
