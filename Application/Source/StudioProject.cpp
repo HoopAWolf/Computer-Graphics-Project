@@ -1235,12 +1235,13 @@ void StudioProject::Render()
 	string healthBar = "";
 	RenderMeshOnScreen(meshList[GEO_HUD], 35, 8, 20, 20, 90);
 
-	RenderMeshOnScreen(meshList[GEO_HEALTH], 34.75, 8, ((float)(PlayerBase::instance()->getPlayerHealth() / 100.) * 20.), 20, 90);
-	RenderMeshOnScreen(meshList[GEO_EXP], 34.75, 8, ((float)(PlayerBase::instance()->getPlayerExperience() / 100.) * 20.), 20, 90);
+	RenderMeshOnScreen(meshList[GEO_HEALTH], 34.71, 8, ((float)((float)PlayerBase::instance()->getPlayerHealth() / 100.) * 20.), 20, 90);
+	RenderMeshOnScreen(meshList[GEO_EXP], 34.71, 8, ((float)((float)PlayerBase::instance()->getPlayerExperience() / (float)PlayerBase::instance()->getPlayerLevelCap()) * 20.), 
+		20, 90);
 
 
-	RenderTextOnScreen(meshList[GEO_TEXT], "[" + std::to_string(PlayerBase::instance()->getPlayerLevel()) + "]", Color(1, 1, 0), 2.5, 15.1, 4);
-	RenderTextOnScreen(meshList[GEO_TEXT], "[" + std::to_string(PlayerBase::instance()->getPlayerHealth()) + "]", Color(1, 1, 0), 2, 18, 2);
+	RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getPlayerLevel()), Color(1, 1, 0), 2.5, 20, 4);
+	RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getPlayerHealth()), Color(1, 1, 0), 2, 20, 2);
 		
 	modelStack.PopMatrix();
 

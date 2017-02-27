@@ -12,10 +12,10 @@ public:
 	EntitySpawner(Vector3 position, Vector3 up, Vector3 forward, Vector3 right, Vector3 target)
 	{
 		multiple_texture_string_[0] = "spawner";
-		multiple_texture_string_[0] = "spawner";
-		multiple_texture_string_[0] = "spawner";
-		multiple_texture_string_[0] = "spawner";
-		multiple_texture_string_[0] = "spawner";
+		multiple_texture_string_[1] = "spawner";
+		multiple_texture_string_[2] = "spawner";
+		multiple_texture_string_[3] = "spawner";
+		multiple_texture_string_[4] = "spawner";
 
 		elemental_type_ = NONE;
 		health_ = 1;
