@@ -47,6 +47,7 @@ class StudioProject : public Scene
 		GEO_SHOP,
 		GEO_MOUSE,
 		GEO_INVENTORY,
+		GEO_AIM,
 
 		NUM_GEOMETRY,
 	};
