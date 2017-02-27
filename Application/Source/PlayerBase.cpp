@@ -435,6 +435,11 @@ void PlayerBase::addIntoPlayerInventory(unsigned itemID)
 	}
 }
 
+void PlayerBase::removeItemInInventory(unsigned position)
+{
+	inventory_data_[position] = nullptr;
+}
+
 void PlayerBase::swapItemInInventory(int itemOne, int itemTwo)
 {
 	if (inventory_data_[itemOne] != nullptr && inventory_data_[itemTwo] != nullptr)

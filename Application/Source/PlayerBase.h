@@ -98,6 +98,7 @@ public:
 	void increaseCurrency(unsigned currency);
 	void decreaseCurrency(unsigned currency);
 	void swapItemInInventory(int itemOne, int itemTwo);
+	void removeItemInInventory(unsigned position);
 
 	bool isInventoryFull();
 	void moveCurrItem(bool forward);

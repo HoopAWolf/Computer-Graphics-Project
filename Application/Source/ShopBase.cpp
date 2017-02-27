@@ -30,7 +30,11 @@ void ShopBase::buyItem(int position)
 	}
 }
 
-void ShopBase::sellItem()
+void ShopBase::sellItem(int position)
 {
-
+	if (PlayerBase::instance()->getItemFromInventory(position) != nullptr)
+	{
+		PlayerBase::instance()->increaseCurrency((dynamic_cast<ItemWeapon*>(PlayerBase::instance()->getItemFromInventory(position))->getPriceOfWeapon()));
+		PlayerBase::instance()->removeItemInInventory(position);
+	}
 }

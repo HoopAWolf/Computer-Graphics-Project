@@ -24,7 +24,7 @@ public:
 	ItemBase* getItemInShop(int position);
 	int getShopItemSize();
 	void buyItem(int position);
-	void sellItem();
+	void sellItem(int position);
 };
 
 #endif

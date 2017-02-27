@@ -851,6 +851,130 @@ void StudioProject::Update(double dt)
 			i = true;
 			timer = Application::elapsed_timer_;
 		}
+		else if (Application::IsKeyPressed(VK_RBUTTON) && !i && inv)
+		{
+			int sellPosition = 27;
+			if (sellPosition == 27)
+			{
+				//set itemOne to slot
+				//col1 row1
+				if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>179 && SceneManager::getSceneManger()->cy < 251)
+				{
+
+					sellPosition = 0;
+				}
+				//col1 row2
+				else if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>256 && SceneManager::getSceneManger()->cy < 329)
+				{
+
+					sellPosition = 1;
+				}
+				//col1 row3
+				else if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>334 && SceneManager::getSceneManger()->cy < 406)
+				{
+
+					sellPosition = 2;
+				}
+				//col1 row4
+				else if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>411 && SceneManager::getSceneManger()->cy < 481)
+				{
+
+					sellPosition = 3;
+				}
+
+
+				//col2 row1
+				else if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>179 && SceneManager::getSceneManger()->cy < 251)
+				{
+					sellPosition = 4;
+				}
+				//col2 row2
+				else if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>256 && SceneManager::getSceneManger()->cy < 329)
+				{
+					sellPosition = 5;
+				}
+				//col2 row3
+				else if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>334 && SceneManager::getSceneManger()->cy < 406)
+				{
+					sellPosition = 6;
+				}
+				//col2 row4
+				else if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>411 && SceneManager::getSceneManger()->cy < 481)
+				{
+					sellPosition = 7;
+				}
+
+
+				//col3 row1
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>179 && SceneManager::getSceneManger()->cy < 251)
+				{
+					sellPosition = 8;
+				}
+				//col3 row2
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>256 && SceneManager::getSceneManger()->cy < 329)
+				{
+					sellPosition = 9;
+				}
+				//col3 row3
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>334 && SceneManager::getSceneManger()->cy < 406)
+				{
+					sellPosition = 10;
+				}
+				//col3 row4
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>411 && SceneManager::getSceneManger()->cy < 481)
+				{
+					sellPosition = 11;
+				}
+
+
+				//col4 row1
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>179 && SceneManager::getSceneManger()->cy < 251)
+				{
+					sellPosition = 12;
+				}
+				//col4 row2
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>256 && SceneManager::getSceneManger()->cy < 329)
+				{
+					sellPosition = 13;
+				}
+				//col4 row3
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>334 && SceneManager::getSceneManger()->cy < 406)
+				{
+					sellPosition = 14;
+				}
+				//col4 row4
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>411 && SceneManager::getSceneManger()->cy <481)
+				{
+					sellPosition = 15;
+				}
+
+
+				//col5 row1
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>179 && SceneManager::getSceneManger()->cy < 251)
+				{
+					sellPosition = 16;
+				}
+				//col5 row2
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>256 && SceneManager::getSceneManger()->cy < 329)
+				{
+					sellPosition = 17;
+				}
+				//col5 row3
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>334 && SceneManager::getSceneManger()->cy < 406)
+				{
+					sellPosition = 18;
+				}
+				//col5 row4
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>411 && SceneManager::getSceneManger()->cy < 481)
+				{
+					sellPosition = 19;
+				}
+
+			}
+			i = true;
+			timer = Application::elapsed_timer_;
+			ShopBase::instance()->sellItem(sellPosition);
+		}
 		else
 		{
 			i = false;
@@ -1043,6 +1167,23 @@ void StudioProject::Render()
 		modelStack.Translate(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().x,
 			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().y,
 			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().z);
+
+		/*modelStack.PushMatrix();
+		modelStack.Translate(0, 3, 0);
+		if (camera.getRotationY() != 0)
+			modelStack.Rotate((camera.getRotationY() + 750), 0, 1, 0);
+		modelStack.Scale(((float)((float)DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getHealth() / 100.) * 20.), 1, 1);
+		RenderMesh(meshList[GEO_HEALTH], false);
+		modelStack.PopMatrix();*/
+
+		modelStack.PushMatrix();
+		modelStack.Translate(0, 4, 0);
+		if (camera.getRotationY() != 0)
+			modelStack.Rotate((camera.getRotationY() + 750), 0, 1, 0);
+
+		RenderText(meshList[GEO_TEXT], std::to_string(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getHealth()), Color(1, 0, 0));
+		modelStack.PopMatrix();
+
 		modelStack.Rotate(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
 
 		modelStack.PushMatrix();
@@ -1089,8 +1230,15 @@ void StudioProject::Render()
 	//--------------------------------------------------BOSS--------------------------------------------------
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(3, DIMENSIONID); i++)
 	{
+
+		modelStack.PushMatrix();
+		RenderMeshOnScreen(meshList[GEO_HUD], 35, 40, 20, 20, 90);
+		RenderMeshOnScreen(meshList[GEO_HEALTH], 34.71, 40, ((float)((float)DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getHealth() / 100.) * 20.), 20, 90);
+		modelStack.PopMatrix();
+
 		if (!((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->isInvisible())
 		{
+
 			modelStack.PushMatrix();
 			modelStack.Translate(DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().x,
 				DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().y + ((((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID() == 3) ? 0 : 2),

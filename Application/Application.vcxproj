@@ -94,6 +94,7 @@
     <ClCompile Include="Source\Camera2.cpp" />
     <ClCompile Include="Source\Camera3.cpp" />
     <ClCompile Include="Source\DataBase.cpp" />
+    <ClCompile Include="Source\dead.cpp" />
     <ClCompile Include="Source\EntityBullet.cpp" />
     <ClCompile Include="Source\EntityChickenProjectile.cpp" />
     <ClCompile Include="Source\EntityFireBall.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Source\Application.h" />
     <ClInclude Include="Source\Boss_1.h" />
     <ClInclude Include="Source\Boss_4.h" />
+    <ClInclude Include="Source\dead.h" />
     <ClInclude Include="Source\EntityBullet.h" />
     <ClInclude Include="Source\EntityChickenProjectile.h" />
     <ClInclude Include="Source\EntityFireBall.h" />

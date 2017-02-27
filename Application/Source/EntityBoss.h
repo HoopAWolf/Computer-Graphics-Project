@@ -147,6 +147,11 @@ public:
 		return is_invisible_;
 	}
 
+	virtual void onAttacked(unsigned damage)
+	{
+		health_ -= (damage - (((float)armor_ / 100.) * damage));
+	}
+
 };
 
 #endif

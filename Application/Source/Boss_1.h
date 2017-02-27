@@ -19,8 +19,8 @@ public:
 		multiple_texture_string_[2] = "boss_1_arm_2";
 		multiple_texture_string_[3] = "boss_1_leg_1";
 		multiple_texture_string_[4] = "boss_1_leg_2";
-		elemental_type_ = LIGHTNING;
-		health_ = 300 + PlayerBase::instance()->getPlayerLevel();
+		elemental_type_ = EARTH;
+		health_ = 100;
 		damage_ = 10;
 		attack_speed_ = 1;
 		walking_speed_ = 5;
@@ -34,7 +34,7 @@ public:
 		boss_name_ = "hi i am boss 1";
 		bossID_ = 0;
 		boss_state_ = IDLE;
-		armor_ = 0;
+		armor_ = 50;
 		third_attacks_ = 1;
 	}
 	void onDeath()

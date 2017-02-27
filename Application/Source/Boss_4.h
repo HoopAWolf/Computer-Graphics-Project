@@ -19,8 +19,8 @@ public:
 		multiple_texture_string_[2] = "boss_4_arm_2";
 		multiple_texture_string_[3] = "boss_4_leg_1";
 		multiple_texture_string_[4] = "boss_4_leg_2";
-		elemental_type_ = ELEMENTAL_TYPE(rand() % 5);
-		health_ = 200;
+		elemental_type_ = LIGHTNING;
+		health_ = 100;
 		damage_ = 10;
 		attack_speed_ = 1;
 		walking_speed_ = 5;
@@ -34,7 +34,7 @@ public:
 		boss_name_ = "Flash";
 		bossID_ = 3;
 		boss_state_ = IDLE;
-		armor_ = 0;
+		armor_ = 30;
 	}
 
 	void onDeath(){}
