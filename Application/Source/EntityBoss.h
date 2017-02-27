@@ -34,11 +34,14 @@ protected:
 		SKILL_3
 	};
 
+
 	string boss_name_;
 	unsigned bossID_;
 	BOSS_STATE boss_state_;
 	ATTACK_STATE boss_attack_state_;
 	unsigned armor_;
+	bool is_invisible_;
+
 
 	int count = 0;
 
@@ -137,6 +140,11 @@ public:
 	virtual float getspin()
 	{
 		return spin;
+	}
+
+	virtual bool isInvisible()
+	{
+		return is_invisible_;
 	}
 
 };

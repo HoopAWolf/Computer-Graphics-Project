@@ -9,31 +9,10 @@ void Boss_1::updateAI(float timer, unsigned dimensionID, float dt)
 	switch (boss_state_)
 	{
 	case IDLE:
-		if (rotaterightLeg > 0)
-		{
-			rotaterightLeg--;
-		}
-		if (rotaterightLeg < 0)
-		{
-			rotaterightLeg++;
-		}
-		if (rotateleftLeg > 0)
-		{
-			rotateleftLeg--;
-		}
-		if (rotateleftLeg < 0)
-		{
-			rotateleftLeg++;
-		}
-
-		if (rotateleftArmX <= 0)
-		{
-			rotateleftArmX++;
-		}
 
 		newTarget = Vector3(Camera::position.x, position_.y, Camera::position.z);
 
-		if ((newTarget - position_).Length() < 50)
+		if ((newTarget - position_).Length() < 100)
 		{
 			boss_state_ = TARGET_PLAYER;
 			timer_ = timer;
@@ -106,7 +85,7 @@ void Boss_1::updateAI(float timer, unsigned dimensionID, float dt)
 
 		rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
 
-		if ((newTarget - position_).Length() >= 100)
+		if ((newTarget - position_).Length() >= 500)
 		{
 			boss_state_ = IDLE;
 			timer_ = timer;
@@ -214,7 +193,7 @@ void Boss_1::updateAI(float timer, unsigned dimensionID, float dt)
 			{
 				//forward_ = (newTarget - position_).Normalized();
 
-				if (PlayerBase::instance()->getBoundingBox().isAABBInsideAABB(getBoundingBox().increaseBoundry(Vector3(2, 2, 2), Vector3(2, 2, 2))))
+				if (PlayerBase::instance()->getBoundingBox().isAABBInsideAABB(getBoundingBox().increaseBoundry(Vector3(4, 4, 4), Vector3(4, 4, 4))))
 				{
 					PlayerBase::instance()->playerAttacked(damage_);
 				}

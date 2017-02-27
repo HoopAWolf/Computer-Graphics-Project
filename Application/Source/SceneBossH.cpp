@@ -12,7 +12,7 @@
 
 #include <iostream>
 
-#define DIMENSIONID 4
+#define DIMENSIONID 3
 
 SceneBossH::SceneBossH()
 {

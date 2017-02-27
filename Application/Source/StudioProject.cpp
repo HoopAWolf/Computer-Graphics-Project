@@ -14,7 +14,6 @@
 
 #define DIMENSIONID 1
 
-float timer = 0.0f;
 DataBase *DataBase::s_instance = nullptr;
 MapBase *MapBase::s_instance = nullptr;
 RenderingBase *RenderingBase::s_instance = nullptr;
@@ -253,6 +252,9 @@ void StudioProject::Init()
 
 	meshList[GEO_SHOP] = MeshBuilder::GenerateOBJ("", "OBJ//shop.obj");
 	meshList[GEO_SHOP]->textureID = LoadTGA("Image//shopui.tga");
+
+	meshList[GEO_AIM] = MeshBuilder::GenerateOBJ("", "OBJ//Crosshair.obj");
+	meshList[GEO_AIM]->textureID = LoadTGA("Image//Crosshair.tga");
 
 	//------------------------------------------------------------------------------------------
 	//NPC for this scene only
@@ -1021,47 +1023,6 @@ void StudioProject::Render()
 	RenderMesh(meshList[GEO_LIGHTBALL], false);
 	modelStack.PopMatrix();
 	//===================================================================================================
-	//--------------------------------------------------DROPS--------------------------------------------------
-	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(0, DIMENSIONID); i++)
-	{
-		Color tempColor;
-		modelStack.PushMatrix();
-		modelStack.Translate(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().x,
-			DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().y,
-			DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().z);
-
-		AABB playerItemDetectionRange;
-		playerItemDetectionRange.setBoundry(Vector3(-12, -3, -12), Vector3(12, 3, 12));
-
-		modelStack.Rotate(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
-		RenderMesh(RenderingBase::instance()->getItemMesh(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getItemDrop()), true);
-
-		if (DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getBoundingBox().isAABBInsideAABB(playerItemDetectionRange.getBoundryAtCoord(camera.position)))
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				modelStack.PushMatrix();
-				modelStack.Translate(0, 4 - j, 0);
-
-				if (camera.getRotationY() != 0)
-					modelStack.Rotate((camera.getRotationY() + 750) - DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
-
-				if (j != 0)
-				{
-					modelStack.Scale(.25, .25, .25);
-					tempColor = Color(1, 1, 1);
-				}
-				else
-				{
-					modelStack.Scale(.4, .4, .4);
-					tempColor = DataBase::instance()->getRarityColor(DataBase::instance()->getItem(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getItemDrop())->getRarity());
-				}
-				RenderText(meshList[GEO_TEXT], DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getDropInfo(j), tempColor);
-				modelStack.PopMatrix();
-			}
-		}
-		modelStack.PopMatrix();
-	}
 
 	//--------------------------------------------------ENVIRONMENT--------------------------------------------------
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(1, DIMENSIONID); i++)
@@ -1128,46 +1089,49 @@ void StudioProject::Render()
 	//--------------------------------------------------BOSS--------------------------------------------------
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(3, DIMENSIONID); i++)
 	{
-		modelStack.PushMatrix();
-		modelStack.Translate(DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().x,
-			DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().y + 2,
-			DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().z);
+		if (!((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->isInvisible())
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().x,
+				DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().y + ((((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID() == 3) ? 0 : 2),
+				DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().z);
 
-		modelStack.Rotate(DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
+			modelStack.Rotate(DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
 
-		modelStack.PushMatrix();
-		modelStack.Translate(.1, 5, 0);
-		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
-		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotaterightArmZ(), 0, 0, 1);
-		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotaterightArmY(), 0, 1, 0);
-		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotaterightArmX(), 1, 0, 0);
-		RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 1), true);
-		modelStack.PopMatrix();
+			modelStack.PushMatrix();
+			modelStack.Translate(.1, 5, 0);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotaterightArmZ(), 0, 0, 1);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotaterightArmY(), 0, 1, 0);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotaterightArmX(), 1, 0, 0);
+			RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 1), true);
+			modelStack.PopMatrix();
 
-		modelStack.PushMatrix();
-		modelStack.Translate(.1, 5, 0);
-		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
-		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftArmZ(), 0, 0, 1);
-		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftArmY(), 0, 1, 0);
-		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftArmX(), 1, 0, 0);
-		RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 2), true);
-		modelStack.PopMatrix();
+			modelStack.PushMatrix();
+			modelStack.Translate(.1, 5, 0);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftArmZ(), 0, 0, 1);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftArmY(), 0, 1, 0);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftArmX(), 1, 0, 0);
+			RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 2), true);
+			modelStack.PopMatrix();
 
-		modelStack.PushMatrix();
-		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
-		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotaterightLeg(), 1, 0, 0);
-		RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 3), true);
-		modelStack.PopMatrix();
+			modelStack.PushMatrix();
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotaterightLeg(), 1, 0, 0);
+			RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 3), true);
+			modelStack.PopMatrix();
 
-		modelStack.PushMatrix();
-		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
-		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftLeg(), 1, 0, 0);
-		RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 4), true);
-		modelStack.PopMatrix();
-		
-		modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
-		RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 0), true);
-		modelStack.PopMatrix();
+			modelStack.PushMatrix();
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftLeg(), 1, 0, 0);
+			RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 4), true);
+			modelStack.PopMatrix();
+
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
+			RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 0), true);
+			modelStack.PopMatrix();
+		}
 	}
 
 	//--------------------------------------------------PROJECTILE--------------------------------------------------
@@ -1191,6 +1155,48 @@ void StudioProject::Render()
 			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().z);
 		modelStack.Rotate(DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
 		RenderMesh(RenderingBase::instance()->getNPCMesh((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getNPCID()), false);
+		modelStack.PopMatrix();
+	}
+
+	//--------------------------------------------------DROPS--------------------------------------------------
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(0, DIMENSIONID); i++)
+	{
+		Color tempColor;
+		modelStack.PushMatrix();
+		modelStack.Translate(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().x,
+			DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().y,
+			DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().z);
+
+		AABB playerItemDetectionRange;
+		playerItemDetectionRange.setBoundry(Vector3(-12, -3, -12), Vector3(12, 3, 12));
+
+		modelStack.Rotate(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
+		RenderMesh(RenderingBase::instance()->getItemMesh(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getItemDrop()), true);
+
+		if (DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getBoundingBox().isAABBInsideAABB(playerItemDetectionRange.getBoundryAtCoord(camera.position)))
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				modelStack.PushMatrix();
+				modelStack.Translate(0, 4 - j, 0);
+
+				if (camera.getRotationY() != 0)
+					modelStack.Rotate((camera.getRotationY() + 750) - DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
+
+				if (j != 0)
+				{
+					modelStack.Scale(.25, .25, .25);
+					tempColor = Color(1, 1, 1);
+				}
+				else
+				{
+					modelStack.Scale(.4, .4, .4);
+					tempColor = DataBase::instance()->getRarityColor(DataBase::instance()->getItem(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getItemDrop())->getRarity());
+				}
+				RenderText(meshList[GEO_TEXT], DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getDropInfo(j), tempColor);
+				modelStack.PopMatrix();
+			}
+		}
 		modelStack.PopMatrix();
 	}
 
@@ -1343,6 +1349,11 @@ void StudioProject::Render()
 	{
 		RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx / 10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy) / 10, 15, 15, 90);
 	}
+
+
+	//----------------------------------------------------AIM--------------------------------------------------------------
+
+	RenderMeshOnScreen(meshList[GEO_AIM], 40, 27.5, 3, 3, 90);
 
 }
 

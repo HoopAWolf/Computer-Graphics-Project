@@ -47,6 +47,7 @@ class StudioProject : public Scene
 		GEO_SHOP,
 		GEO_MOUSE,
 		GEO_INVENTORY,
+		GEO_AIM,
 
 		NUM_GEOMETRY,
 	};
@@ -97,6 +98,7 @@ class StudioProject : public Scene
 		U_TOTAL,
 	};
 
+	float timer = 0.0f;
 	MS modelStack, viewStack, projectionStack;
 public:
 	StudioProject();

@@ -15,9 +15,6 @@
 #include <iostream>
 
 
-
-
-
 exitmenu::exitmenu()
 {
 }
