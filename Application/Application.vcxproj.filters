@@ -290,10 +290,10 @@
 
     <ClCompile Include="Source\EnvironmentWall.cpp">
       <Filter>Source Files\Environment</Filter>
-
+ </ClCompile>
+ 
     <ClCompile Include="Source\EntitySpawner.cpp">
       <Filter>Source Files\Entities</Filter>
-
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
