@@ -110,9 +110,9 @@ void Application::Run()
 	SceneManager::getSceneManger()->addScene(scene);
 	scene = new StudioProject();
 	SceneManager::getSceneManger()->addScene(scene);
-	/*scene = new SceneBossL();
+	scene = new SceneBossL();
 	SceneManager::getSceneManger()->addScene(scene);
-	scene = new SceneBossM();
+	/*scene = new SceneBossM();
 	SceneManager::getSceneManger()->addScene(scene);
 	scene = new SceneBossH();
 	SceneManager::getSceneManger()->addScene(scene);

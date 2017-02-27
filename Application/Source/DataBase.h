@@ -53,6 +53,7 @@
 #include "EnvironmentMinigunStan.cpp"
 #include "EnvironmentTowerSpwanner.cpp"
 #include "EnvironmentTowerStructure.cpp"
+#include "EnvironmentWall.cpp"
 
 #include "Boss_1.cpp"
 #include "Boss_2.cpp"

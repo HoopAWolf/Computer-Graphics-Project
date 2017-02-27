@@ -215,6 +215,12 @@ void DataBase::registerEnvironments()
 	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentTowerStructure(); //Register Environment Obj
 	delete temp_obj;
 
+	//20
+	temp_obj = new EnvironmentWall();
+	environment_data_base[temp_obj->getEnvironmentID()] = new EnvironmentWall(); //Register Environment Obj
+	delete temp_obj;
+
+
 
 }
 
