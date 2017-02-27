@@ -287,6 +287,9 @@
     <ClCompile Include="Source\ShopBase.cpp">
       <Filter>Source Files\DataBase</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EnvironmentWall.cpp">
+      <Filter>Source Files\Environment</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h">

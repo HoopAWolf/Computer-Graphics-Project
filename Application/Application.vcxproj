@@ -116,6 +116,7 @@
     <ClCompile Include="Source\EnvironmentThreeQuarterSetStatue.cpp" />
     <ClCompile Include="Source\EnvironmentTowerSpwanner.cpp" />
     <ClCompile Include="Source\EnvironmentTowerStructure.cpp" />
+    <ClCompile Include="Source\EnvironmentWall.cpp" />
     <ClCompile Include="Source\EnvironmentWeaponMerchant.cpp" />
     <ClCompile Include="Source\exitmenu.cpp" />
     <ClCompile Include="Source\EntityDrop.cpp" />
