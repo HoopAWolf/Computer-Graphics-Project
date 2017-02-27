@@ -433,7 +433,7 @@ void StudioProject::Update(double dt)
 		if (Application::IsKeyPressed(VK_ESCAPE)&&!pause)
 		{
 			currscene = SceneManager::getSceneManger()->getCurrentScene();
-			SceneManager::getSceneManger()->setNextScene(6);
+			SceneManager::getSceneManger()->setNextScene(4);
 			pause = true;
 		}
 		else
@@ -449,14 +449,7 @@ void StudioProject::Update(double dt)
 		{
 			SceneManager::getSceneManger()->setNextScene(3);
 		}
-		if (Application::IsKeyPressed(VK_F3))
-		{
-			SceneManager::getSceneManger()->setNextScene(4);
-		}
-		if (Application::IsKeyPressed(VK_F4))
-		{
-			SceneManager::getSceneManger()->setNextScene(5);
-		}
+		
 	//light_controls---------------------------------------------------------------
 	//if (Application::IsKeyPressed('I'))
 	//{
@@ -940,6 +933,11 @@ void StudioProject::Update(double dt)
 			itemhover = 5;
 		}
 	}
+	if ((PlayerBase::instance()->getPlayerHealth()) <= 0)
+	{
+		PlayerBase::instance()->deaded();
+		SceneManager::getSceneManger()->setNextScene(5);
+	}
 }
 
 void StudioProject::Render()
@@ -1237,8 +1235,8 @@ void StudioProject::Render()
 		20, 90);
 
 
-	RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getPlayerLevel()), Color(1, 1, 0), 2.5, 20, 4);
-	RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getPlayerHealth()), Color(1, 1, 0), 2, 20, 2);
+	RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getPlayerLevel()), Color(1, 1, 0), 2, 21.5, 1.85);
+	RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getPlayerHealth()), Color(1, 1, 0), 1.8, 23.2, 3.6);
 		
 	modelStack.PopMatrix();
 

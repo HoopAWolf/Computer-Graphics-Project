@@ -13,6 +13,7 @@
 #include "SceneBossR.h"
 #include "exitmenu.h"
 #include "Mainmenu.h"
+#include "dead.h"
 
 GLFWwindow* Application::m_window = nullptr;
 SceneManager* SceneManager::s_instance = nullptr;
@@ -119,6 +120,8 @@ void Application::Run()
 	scene = new SceneBossR();
 	SceneManager::getSceneManger()->addScene(scene);*/
 	scene = new exitmenu();
+	SceneManager::getSceneManger()->addScene(scene);
+	scene = new dead();
 	SceneManager::getSceneManger()->addScene(scene);
 	
 

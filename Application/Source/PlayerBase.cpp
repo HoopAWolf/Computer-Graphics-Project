@@ -335,6 +335,12 @@ bool PlayerBase::isPlayerDead()
 	return false;
 }
 
+void PlayerBase::deaded()
+{
+	player_health_ = 100;
+	experience_ = 0;
+}
+
 void PlayerBase::healPlayer(unsigned ammount)
 {
 	if (getPlayerHealth() > 0)

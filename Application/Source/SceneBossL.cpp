@@ -282,7 +282,7 @@ void SceneBossL::Update(double dt)
 	if (Application::IsKeyPressed(VK_ESCAPE) && !pause)
 	{
 		currscene = SceneManager::getSceneManger()->getCurrentScene();
-		SceneManager::getSceneManger()->setNextScene(6);
+		SceneManager::getSceneManger()->setNextScene(4);
 		pause = true;
 	}
 	else
@@ -298,12 +298,9 @@ void SceneBossL::Update(double dt)
 	{
 		SceneManager::getSceneManger()->setNextScene(3);
 	}
-	if (Application::IsKeyPressed(VK_F3))
+	if ((PlayerBase::instance()->getPlayerHealth()) <= 0)
 	{
-		SceneManager::getSceneManger()->setNextScene(4);
-	}
-	if (Application::IsKeyPressed(VK_F4))
-	{
+		PlayerBase::instance()->deaded();
 		SceneManager::getSceneManger()->setNextScene(5);
 	}
 }
