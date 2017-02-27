@@ -39,6 +39,16 @@ class SceneBossL : public Scene
 		GEO_FRONT,
 		GEO_BACK,
 		GEO_TEXT,
+
+		GEO_HUD,
+		GEO_HEALTH,
+		GEO_EXP,
+		GEO_ATTRIBUTES,
+		GEO_SHOP,
+		GEO_MOUSE,
+		GEO_INVENTORY,
+		GEO_AIM,
+
 		NUM_GEOMETRY,
 	};
 	enum UNIFORM_TYPE
@@ -87,6 +97,7 @@ class SceneBossL : public Scene
 		U_TOTAL,
 	};
 
+	float timer = 0.0f;
 	MS modelStack, viewStack, projectionStack;
 public:
 	SceneBossL();
@@ -97,7 +108,32 @@ public:
 	virtual void Render();
 	virtual void Exit();
 	int currscene;
+	float rotateleftLeg = 0.0f;
+	float rotaterightLeg = 0.0f;
+	float rotateleftArm = 0.0f;
+
+	bool rightlegForward = true;
+	bool rightlegBackward = false;
+	bool leftlegForward = false;
+	bool leftlegBackward = true;
+	bool walking = false;
+	bool attacking = false;
 	bool pause = false;
+
+	bool attrib = false;
+	bool inattrib = false;
+	bool mouse = false;
+
+	bool s = false;
+	bool inv = false;
+	bool ininv = false;
+	bool i = false;
+	bool f = false;
+	bool shop = false;
+	int itemOne = 27;
+	int itemTwo = 27;
+	bool inshop = false;
+	int itemhover = 0;
 private:
 
 	unsigned m_vertexArrayID;
@@ -114,7 +150,7 @@ private:
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void RenderUI(Mesh* mesh, Color color, float size, float x, float y, bool enableLight);
-
+	void RenderMeshOnScreen(Mesh* mesh, float x, float y, int sizex, int sizey, int rotate);
 	void RenderSkybox();
 
 	char mapArray[2000][2000];

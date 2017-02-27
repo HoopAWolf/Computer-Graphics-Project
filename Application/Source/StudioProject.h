@@ -98,6 +98,7 @@ class StudioProject : public Scene
 		U_TOTAL,
 	};
 
+	float timer = 0.0f;
 	MS modelStack, viewStack, projectionStack;
 public:
 	StudioProject();
