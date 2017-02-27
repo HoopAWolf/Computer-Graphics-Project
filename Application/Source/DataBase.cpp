@@ -243,6 +243,10 @@ void DataBase::registerEntityMinion()
 	temp_obj = new RangedMinion_2(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
 	minion_data_base[(dynamic_cast<EntityMinion*>(temp_obj))->getMinionID()] = new RangedMinion_2(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
 	delete temp_obj;
+
+	temp_obj = new EntitySpawner(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	minion_data_base[(dynamic_cast<EntityMinion*>(temp_obj))->getMinionID()] = new EntitySpawner(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
 }
 
 void DataBase::registerEntityNPC()

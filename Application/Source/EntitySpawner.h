@@ -22,7 +22,7 @@ public:
 		drop_ID_ = 0;
 		timer_ = 0;
 		minion_name_ = "spawner";
-		minionID_ = 5;
+		minionID_ = 4;
 
 	}
 	void onDeath(){}

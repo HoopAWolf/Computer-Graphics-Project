@@ -64,6 +64,7 @@
 #include "MeleeMinion_2.cpp"
 #include "RangedMinion_1.h"
 #include "RangedMinion_2.h"
+#include "EntitySpawner.h"
 
 #include "NPCGirlWithBoobs.cpp"
 #include "NPCBoy.cpp"
