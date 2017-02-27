@@ -12,7 +12,7 @@ void Boss_1::updateAI(float timer, unsigned dimensionID, float dt)
 
 		newTarget = Vector3(Camera::position.x, position_.y, Camera::position.z);
 
-		if ((newTarget - position_).Length() < 50)
+		if ((newTarget - position_).Length() < 100)
 		{
 			boss_state_ = TARGET_PLAYER;
 			timer_ = timer;
@@ -85,7 +85,7 @@ void Boss_1::updateAI(float timer, unsigned dimensionID, float dt)
 
 		rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
 
-		if ((newTarget - position_).Length() >= 100)
+		if ((newTarget - position_).Length() >= 500)
 		{
 			boss_state_ = IDLE;
 			timer_ = timer;
