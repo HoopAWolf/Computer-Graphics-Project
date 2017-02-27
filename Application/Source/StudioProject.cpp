@@ -118,11 +118,8 @@ void StudioProject::Init()
 	DataBase::instance()->setEntity(true, false, false, 1, new Boss_3(Vector3(10 + 10 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(true, false, false, 1, new Boss_4(Vector3(10 + 15 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 
-	DataBase::instance()->setEntity(false, true, false, 1, new MeleeMinion_1(Vector3(10 + 0 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, true, false, 1, new MeleeMinion_2(Vector3(10 + 5 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, true, false, 1, new RangedMinion_1(Vector3(10 + 10 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, true, false, 1, new RangedMinion_2(Vector3(10 + 15 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-
+	DataBase::instance()->setEntity(false, true, false, 1, new EntitySpawner(Vector3(10 + 0 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCGirlwithBoobs(Vector3(10 + 0 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCBoy(Vector3(10 + 5 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCScientist(Vector3(1 + 10 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
