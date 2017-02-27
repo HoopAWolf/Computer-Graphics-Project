@@ -1090,24 +1090,40 @@ void StudioProject::Render()
 		modelStack.Rotate(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
 
 		modelStack.PushMatrix();
-		modelStack.Translate(.1, 1.9, 0);
-		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 1), true);
+		if (RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 1) !=
+			RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0))
+		{
+			modelStack.Translate(.1, 1.9, 0);
+			RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 1), true);
+		}
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
-		modelStack.Translate(-.1, 1.9, 0);
-		modelStack.Rotate(-(dynamic_cast<EntityMinion*>((DataBase::instance()->getEntityMinion(DIMENSIONID, i))))->getMinionrotateArm(), 1, 0, 0);
-		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 2), true);
+		if (RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 1) !=
+			RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0))
+		{
+			modelStack.Translate(-.1, 1.9, 0);
+			modelStack.Rotate(-(dynamic_cast<EntityMinion*>((DataBase::instance()->getEntityMinion(DIMENSIONID, i))))->getMinionrotateArm(), 1, 0, 0);
+			RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 2), true);
+		}
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
-		modelStack.Rotate(-(dynamic_cast<EntityMinion*>((DataBase::instance()->getEntityMinion(DIMENSIONID, i))))->getMinionrotateleftLeg(), 1, 0, 0);
-		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 3), true);
+		if (RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 1) !=
+			RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0))
+		{
+			modelStack.Rotate(-(dynamic_cast<EntityMinion*>((DataBase::instance()->getEntityMinion(DIMENSIONID, i))))->getMinionrotateleftLeg(), 1, 0, 0);
+			RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 3), true);
+		}
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
-		modelStack.Rotate((dynamic_cast<EntityMinion*>((DataBase::instance()->getEntityMinion(DIMENSIONID, i))))->getMinionrotaterightLeg(), 1, 0, 0);
-		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 4), true);
+		if (RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 1) !=
+			RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0))
+		{
+			modelStack.Rotate((dynamic_cast<EntityMinion*>((DataBase::instance()->getEntityMinion(DIMENSIONID, i))))->getMinionrotaterightLeg(), 1, 0, 0);
+			RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 4), true);
+		}
 		modelStack.PopMatrix();
 
 		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0), true);

@@ -11,10 +11,14 @@ class EntitySpawner : public EntityMinion
 public:
 	EntitySpawner(Vector3 position, Vector3 up, Vector3 forward, Vector3 right, Vector3 target)
 	{
-		texture_string_ = "spawner";
+		multiple_texture_string_[0] = "spawner";
+		multiple_texture_string_[0] = "spawner";
+		multiple_texture_string_[0] = "spawner";
+		multiple_texture_string_[0] = "spawner";
+		multiple_texture_string_[0] = "spawner";
 
 		elemental_type_ = NONE;
-		health_ = 1 + PlayerBase::instance()->getPlayerLevel();
+		health_ = 1;
 		damage_ = 10;
 		attack_speed_ = 1;
 		position_ = position;
