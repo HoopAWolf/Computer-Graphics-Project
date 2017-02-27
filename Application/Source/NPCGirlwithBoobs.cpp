@@ -71,8 +71,13 @@ public:
 			if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
 				((int)(position_.x + (forward_.x * 5 * dt))),
 				position_.z) != '#')
+
 			{
+				
+				
 				position_.x = position_.x + (forward_.x * 5 * dt);
+
+
 			}
 
 			if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
@@ -95,6 +100,9 @@ public:
 			}
 
 			break;
+
+
+
 		case INTERACTION:
 			newTarget = Camera::position;
 			rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
@@ -103,12 +111,15 @@ public:
 				NPC_state_ = IDLE;
 			}
 			break;
+
+
+
 		}
 	}
 
 	string getInteractionString()
 	{
-		return "IM A BOY, IM A BOI";
+		return "IM A GIRL, IM A GRILL";
 	}
 	void setPosition(Vector3 position)
 	{

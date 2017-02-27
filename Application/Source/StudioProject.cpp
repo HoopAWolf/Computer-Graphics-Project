@@ -14,7 +14,6 @@
 
 #define DIMENSIONID 1
 
-float timer = 0.0f;
 DataBase *DataBase::s_instance = nullptr;
 MapBase *MapBase::s_instance = nullptr;
 RenderingBase *RenderingBase::s_instance = nullptr;

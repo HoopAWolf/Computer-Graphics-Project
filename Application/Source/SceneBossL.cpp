@@ -14,7 +14,6 @@
 
 #define DIMENSIONID 2
 
-
 SceneBossL::SceneBossL()
 {
 }
@@ -292,19 +291,464 @@ void SceneBossL::Update(double dt)
 
 	if (Application::IsKeyPressed(VK_F1))
 	{
-		SceneManager::getSceneManger()->setNextScene(2);
+		SceneManager::getSceneManger()->setNextScene(0);
 	}
 	if (Application::IsKeyPressed(VK_F2))
 	{
-		SceneManager::getSceneManger()->setNextScene(3);
+		SceneManager::getSceneManger()->setNextScene(1);
 	}
 	if (Application::IsKeyPressed(VK_F3))
 	{
-		SceneManager::getSceneManger()->setNextScene(4);
+		SceneManager::getSceneManger()->setNextScene(2);
 	}
-	if (Application::IsKeyPressed(VK_F4))
+	if (timer == 0.0f)
 	{
-		SceneManager::getSceneManger()->setNextScene(5);
+		timer = Application::elapsed_timer_;
+	}
+
+	if (Application::elapsed_timer_ > timer + .2 && PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->IDLE)
+	{
+		if (Application::IsKeyPressed(VK_RBUTTON))
+		{
+			for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(5, DIMENSIONID); i++)
+			{
+				if (DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getBoundingBox().increaseBoundry(Vector3(10, 10, 10), Vector3(10, 10, 10)).isPointInsideAABB(Camera::position, Camera::view))
+				{
+					dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->setState(2);
+				}
+			}
+		}
+
+		if (Application::IsKeyPressed('Q'))
+		{
+			PlayerBase::instance()->moveCurrItem(false);
+			timer = Application::elapsed_timer_;
+		}
+		else if (Application::IsKeyPressed('E'))
+		{
+			PlayerBase::instance()->moveCurrItem(true);
+			timer = Application::elapsed_timer_;
+		}
+
+		if (Application::IsKeyPressed(VK_LEFT))
+		{
+			PlayerBase::instance()->moveCurrSkill(false);
+			timer = Application::elapsed_timer_;
+		}
+		else if (Application::IsKeyPressed(VK_RIGHT))
+		{
+			PlayerBase::instance()->moveCurrSkill(true);
+			timer = Application::elapsed_timer_;
+		}
+
+		if (Application::IsKeyPressed(VK_SPACE))
+		{
+			PlayerBase::instance()->useSkills(Application::elapsed_timer_);
+			timer = Application::elapsed_timer_;
+		}
+
+		if (Application::IsKeyPressed('K') && !attrib)
+		{
+			attrib = true;
+			inattrib = true;
+			timer = Application::elapsed_timer_;
+			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IN_UI);
+		}
+
+		if (Application::IsKeyPressed('I') && !inv)
+		{
+			inv = true;
+			ininv = true;
+			timer = Application::elapsed_timer_;
+			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IN_UI);
+
+		}
+
+		if (Application::IsKeyPressed('L') && !shop)
+		{
+			shop = true;
+			inshop = true;
+			timer = Application::elapsed_timer_;
+			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IN_UI);
+			std::cout << std::to_string(PlayerBase::instance()->getPlayerState()) << std::endl;
+		}
+	}
+
+	else if (Application::elapsed_timer_ > timer + .2 && PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->IN_UI)
+	{
+		if (Application::IsKeyPressed('K') && attrib)
+		{
+			attrib = false;
+			inattrib = false;
+			timer = Application::elapsed_timer_;
+			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
+		}
+
+		if (Application::IsKeyPressed('I') && inv)
+		{
+			inv = false;
+			ininv = false;
+			timer = Application::elapsed_timer_;
+			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
+		}
+
+		if (Application::IsKeyPressed('L') && shop)
+		{
+			shop = false;
+			inshop = false;
+			timer = Application::elapsed_timer_;
+			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
+		}
+
+		if (Application::IsKeyPressed(VK_LBUTTON) && !s && attrib)
+		{
+
+			if (PlayerBase::instance()->getAttributePoint() != 0)
+			{
+				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>138 && SceneManager::getSceneManger()->cy < 190)
+				{
+					PlayerBase::instance()->increaseSkillPoint(0);
+				}
+				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>232 && SceneManager::getSceneManger()->cy < 285)
+				{
+					PlayerBase::instance()->increaseSkillPoint(1);
+				}
+				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>363 && SceneManager::getSceneManger()->cy < 416)
+				{
+					PlayerBase::instance()->increaseSkillPoint(2);
+				}
+				if (SceneManager::getSceneManger()->cx > 481 && SceneManager::getSceneManger()->cx < 538 && SceneManager::getSceneManger()->cy>458 && SceneManager::getSceneManger()->cy < 511)
+				{
+					PlayerBase::instance()->increaseSkillPoint(3);
+				}
+			}
+			s = true;
+			timer = Application::elapsed_timer_;
+
+		}
+		else
+		{
+			s = false;
+		}
+
+		if (Application::IsKeyPressed(VK_LBUTTON) && !i && inv)
+		{
+			if (itemOne == 27)
+			{
+				//set itemOne to slot
+				//col1 row1
+				if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>179 && SceneManager::getSceneManger()->cy < 251)
+				{
+
+					itemOne = 0;
+				}
+				//col1 row2
+				else if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>256 && SceneManager::getSceneManger()->cy < 329)
+				{
+
+					itemOne = 1;
+				}
+				//col1 row3
+				else if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>334 && SceneManager::getSceneManger()->cy < 406)
+				{
+
+					itemOne = 2;
+				}
+				//col1 row4
+				else if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>411 && SceneManager::getSceneManger()->cy < 481)
+				{
+
+					itemOne = 3;
+				}
+
+
+				//col2 row1
+				else if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>179 && SceneManager::getSceneManger()->cy < 251)
+				{
+					itemOne = 4;
+				}
+				//col2 row2
+				else if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>256 && SceneManager::getSceneManger()->cy < 329)
+				{
+					itemOne = 5;
+				}
+				//col2 row3
+				else if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>334 && SceneManager::getSceneManger()->cy < 406)
+				{
+					itemOne = 6;
+				}
+				//col2 row4
+				else if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>411 && SceneManager::getSceneManger()->cy < 481)
+				{
+					itemOne = 7;
+				}
+
+
+				//col3 row1
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>179 && SceneManager::getSceneManger()->cy < 251)
+				{
+					itemOne = 8;
+				}
+				//col3 row2
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>256 && SceneManager::getSceneManger()->cy < 329)
+				{
+					itemOne = 9;
+				}
+				//col3 row3
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>334 && SceneManager::getSceneManger()->cy < 406)
+				{
+					itemOne = 10;
+				}
+				//col3 row4
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>411 && SceneManager::getSceneManger()->cy < 481)
+				{
+					itemOne = 11;
+				}
+
+
+				//col4 row1
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>179 && SceneManager::getSceneManger()->cy < 251)
+				{
+					itemOne = 12;
+				}
+				//col4 row2
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>256 && SceneManager::getSceneManger()->cy < 329)
+				{
+					itemOne = 13;
+				}
+				//col4 row3
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>334 && SceneManager::getSceneManger()->cy < 406)
+				{
+					itemOne = 14;
+				}
+				//col4 row4
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>411 && SceneManager::getSceneManger()->cy <481)
+				{
+					itemOne = 15;
+				}
+
+
+				//col5 row1
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>179 && SceneManager::getSceneManger()->cy < 251)
+				{
+					itemOne = 16;
+				}
+				//col5 row2
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>256 && SceneManager::getSceneManger()->cy < 329)
+				{
+					itemOne = 17;
+				}
+				//col5 row3
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>334 && SceneManager::getSceneManger()->cy < 406)
+				{
+					itemOne = 18;
+				}
+				//col5 row4
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>411 && SceneManager::getSceneManger()->cy < 481)
+				{
+					itemOne = 19;
+				}
+			}
+
+
+			else if (itemOne != 27 && itemTwo == 27)
+			{
+				//same for itemTwo
+				//col1 row1
+				if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>179 && SceneManager::getSceneManger()->cy < 251)
+				{
+					itemTwo = 0;
+				}
+				//col1 row2
+				else if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>256 && SceneManager::getSceneManger()->cy < 329)
+				{
+					itemTwo = 1;
+				}
+				//col1 row3
+				else if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>334 && SceneManager::getSceneManger()->cy < 406)
+				{
+					itemTwo = 2;
+				}
+				//col1 row4
+				else if (SceneManager::getSceneManger()->cx > 206 && SceneManager::getSceneManger()->cx < 285 && SceneManager::getSceneManger()->cy>411 && SceneManager::getSceneManger()->cy < 481)
+				{
+					itemTwo = 3;
+				}
+
+
+				//col2 row1
+				else if (SceneManager::getSceneManger()->cx > 289 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>179 && SceneManager::getSceneManger()->cy < 251)
+				{
+					itemTwo = 4;
+				}
+				//col2 row2
+				else if (SceneManager::getSceneManger()->cx > 329 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>256 && SceneManager::getSceneManger()->cy < 329)
+				{
+					itemTwo = 5;
+				}
+				//col2 row3
+				else if (SceneManager::getSceneManger()->cx > 329 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>334 && SceneManager::getSceneManger()->cy < 406)
+				{
+					itemTwo = 6;
+				}
+				//col2 row4
+				else if (SceneManager::getSceneManger()->cx > 329 && SceneManager::getSceneManger()->cx < 364 && SceneManager::getSceneManger()->cy>411 && SceneManager::getSceneManger()->cy < 481)
+				{
+					itemTwo = 7;
+				}
+
+
+				//col3 row1
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>179 && SceneManager::getSceneManger()->cy < 251)
+				{
+					itemTwo = 8;
+				}
+				//col3 row2
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>256 && SceneManager::getSceneManger()->cy < 329)
+				{
+					itemTwo = 9;
+				}
+				//col3 row3
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>334 && SceneManager::getSceneManger()->cy < 406)
+				{
+					itemTwo = 10;
+				}
+				//col3 row4
+				else if (SceneManager::getSceneManger()->cx > 366 && SceneManager::getSceneManger()->cx < 443 && SceneManager::getSceneManger()->cy>411 && SceneManager::getSceneManger()->cy < 481)
+				{
+					itemTwo = 11;
+				}
+
+
+				//col4 row1
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>179 && SceneManager::getSceneManger()->cy < 251)
+				{
+					itemTwo = 12;
+				}
+				//col4 row2
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>256 && SceneManager::getSceneManger()->cy < 329)
+				{
+					itemTwo = 13;
+				}
+				//col4 row3
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>334 && SceneManager::getSceneManger()->cy < 406)
+				{
+					itemTwo = 14;
+				}
+				//col4 row4
+				else if (SceneManager::getSceneManger()->cx > 445 && SceneManager::getSceneManger()->cx < 522 && SceneManager::getSceneManger()->cy>411 && SceneManager::getSceneManger()->cy < 481)
+				{
+					itemTwo = 15;
+				}
+
+
+				//col5 row1
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>179 && SceneManager::getSceneManger()->cy < 251)
+				{
+					itemTwo = 16;
+				}
+				//col5 row2
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>256 && SceneManager::getSceneManger()->cy < 329)
+				{
+					itemTwo = 17;
+				}
+				//col5 row3
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>334 && SceneManager::getSceneManger()->cy < 406)
+				{
+					itemTwo = 18;
+				}
+				//col5 row4
+				else if (SceneManager::getSceneManger()->cx > 524 && SceneManager::getSceneManger()->cx < 599 && SceneManager::getSceneManger()->cy>411 && SceneManager::getSceneManger()->cy < 481)
+				{
+					itemTwo = 19;
+				}
+			}
+			i = true;
+			timer = Application::elapsed_timer_;
+		}
+		else
+		{
+			i = false;
+		}
+		if (itemOne != 27 && itemTwo != 27)
+		{
+			PlayerBase::instance()->swapItemInInventory(itemOne, itemTwo);
+			itemOne = itemTwo = 27;
+		}
+
+		if (Application::IsKeyPressed(VK_LBUTTON) && !s && shop)
+		{
+			if (SceneManager::getSceneManger()->cx > 694 && SceneManager::getSceneManger()->cx < 738)
+			{
+				if (SceneManager::getSceneManger()->cy > 141 && SceneManager::getSceneManger()->cy < 172)
+				{
+					ShopBase::instance()->buyItem(0);
+				}
+				else if (SceneManager::getSceneManger()->cy > 204 && SceneManager::getSceneManger()->cy < 234)
+				{
+					ShopBase::instance()->buyItem(1);
+				}
+				else if (SceneManager::getSceneManger()->cy > 267 && SceneManager::getSceneManger()->cy < 298)
+				{
+					ShopBase::instance()->buyItem(2);
+				}
+				else if (SceneManager::getSceneManger()->cy > 331 && SceneManager::getSceneManger()->cy < 361)
+				{
+					ShopBase::instance()->buyItem(3);
+				}
+				else if (SceneManager::getSceneManger()->cy > 396 && SceneManager::getSceneManger()->cy < 427)
+				{
+					ShopBase::instance()->buyItem(4);
+				}
+				else if (SceneManager::getSceneManger()->cy > 458 && SceneManager::getSceneManger()->cy < 489)
+				{
+					ShopBase::instance()->buyItem(5);
+				}
+			}
+			s = true;
+			timer = Application::elapsed_timer_;
+		}
+		else
+		{
+			s = false;
+		}
+	}
+
+	if (Application::IsKeyPressed(VK_LSHIFT))
+	{
+		PlayerBase::instance()->setPlayerState(PlayerBase::instance()->SPRINTING);
+	}
+	else if (PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->SPRINTING)
+	{
+		PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
+	}
+
+	if (SceneManager::getSceneManger()->cx > 447 && SceneManager::getSceneManger()->cx < 738)
+	{
+		if (SceneManager::getSceneManger()->cy > 141 && SceneManager::getSceneManger()->cy < 172)
+		{
+			itemhover = 0;
+		}
+		else if (SceneManager::getSceneManger()->cy > 204 && SceneManager::getSceneManger()->cy < 234)
+		{
+			itemhover = 1;
+		}
+		else if (SceneManager::getSceneManger()->cy > 267 && SceneManager::getSceneManger()->cy < 298)
+		{
+			itemhover = 2;
+		}
+		else if (SceneManager::getSceneManger()->cy > 331 && SceneManager::getSceneManger()->cy < 361)
+		{
+			itemhover = 3;
+		}
+		else if (SceneManager::getSceneManger()->cy > 396 && SceneManager::getSceneManger()->cy < 427)
+		{
+			itemhover = 4;
+		}
+		else if (SceneManager::getSceneManger()->cy > 458 && SceneManager::getSceneManger()->cy < 489)
+		{
+			itemhover = 5;
+		}
 	}
 }
 
@@ -390,11 +834,365 @@ void SceneBossL::Render()
 	RenderMesh(meshList[GEO_LIGHTBALL], false);
 	modelStack.PopMatrix();
 	//===================================================================================================
+	//--------------------------------------------------DROPS--------------------------------------------------
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(0, DIMENSIONID); i++)
+	{
+		Color tempColor;
+		modelStack.PushMatrix();
+		modelStack.Translate(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().x,
+			DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().y,
+			DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getPosition().z);
+
+		AABB playerItemDetectionRange;
+		playerItemDetectionRange.setBoundry(Vector3(-12, -3, -12), Vector3(12, 3, 12));
+
+		modelStack.Rotate(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
+		RenderMesh(RenderingBase::instance()->getItemMesh(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getItemDrop()), true);
+
+		if (DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getBoundingBox().isAABBInsideAABB(playerItemDetectionRange.getBoundryAtCoord(camera.position)))
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				modelStack.PushMatrix();
+				modelStack.Translate(0, 4 - j, 0);
+
+				if (camera.getRotationY() != 0)
+					modelStack.Rotate((camera.getRotationY() + 750) - DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
+
+				if (j != 0)
+				{
+					modelStack.Scale(.25, .25, .25);
+					tempColor = Color(1, 1, 1);
+				}
+				else
+				{
+					modelStack.Scale(.4, .4, .4);
+					tempColor = DataBase::instance()->getRarityColor(DataBase::instance()->getItem(DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getItemDrop())->getRarity());
+				}
+				RenderText(meshList[GEO_TEXT], DataBase::instance()->getEntityDrop(DIMENSIONID, i)->getDropInfo(j), tempColor);
+				modelStack.PopMatrix();
+			}
+		}
+		modelStack.PopMatrix();
+	}
+
+	//--------------------------------------------------ENVIRONMENT--------------------------------------------------
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(1, DIMENSIONID); i++)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().x,
+			DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().y,
+			DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().z);
+
+		RenderMesh(RenderingBase::instance()->getEnviornmentMesh(DataBase::instance()->getEnvironment(DIMENSIONID, i)->getEnvironmentID()), true);
+		modelStack.PopMatrix();
+	}
+
+	//--------------------------------------------------MINION--------------------------------------------------
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(2, DIMENSIONID); i++)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().x,
+			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().y,
+			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().z);
+		modelStack.Rotate(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
+
+		modelStack.PushMatrix();
+		if (RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 1) !=
+			RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0))
+		{
+			modelStack.Translate(.1, 1.9, 0);
+			RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 1), true);
+		}
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		if (RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 1) !=
+			RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0))
+		{
+			modelStack.Translate(-.1, 1.9, 0);
+			modelStack.Rotate(-(dynamic_cast<EntityMinion*>((DataBase::instance()->getEntityMinion(DIMENSIONID, i))))->getMinionrotateArm(), 1, 0, 0);
+			RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 2), true);
+		}
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		if (RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 1) !=
+			RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0))
+		{
+			modelStack.Rotate(-(dynamic_cast<EntityMinion*>((DataBase::instance()->getEntityMinion(DIMENSIONID, i))))->getMinionrotateleftLeg(), 1, 0, 0);
+			RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 3), true);
+		}
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		if (RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 1) !=
+			RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0))
+		{
+			modelStack.Rotate((dynamic_cast<EntityMinion*>((DataBase::instance()->getEntityMinion(DIMENSIONID, i))))->getMinionrotaterightLeg(), 1, 0, 0);
+			RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 4), true);
+		}
+		modelStack.PopMatrix();
+
+		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0), true);
+		modelStack.PopMatrix();
+	}
+
+	//--------------------------------------------------BOSS--------------------------------------------------
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(3, DIMENSIONID); i++)
+	{
+		if (!((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->isInvisible())
+		{
+			modelStack.PushMatrix();
+			modelStack.Translate(DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().x,
+				DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().y + ((((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID() == 3) ? 0 : 2),
+				DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().z);
+
+			modelStack.Rotate(DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
+
+			modelStack.PushMatrix();
+			modelStack.Translate(.1, 5, 0);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotaterightArmZ(), 0, 0, 1);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotaterightArmY(), 0, 1, 0);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotaterightArmX(), 1, 0, 0);
+			RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 1), true);
+			modelStack.PopMatrix();
+
+			modelStack.PushMatrix();
+			modelStack.Translate(.1, 5, 0);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftArmZ(), 0, 0, 1);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftArmY(), 0, 1, 0);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftArmX(), 1, 0, 0);
+			RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 2), true);
+			modelStack.PopMatrix();
+
+			modelStack.PushMatrix();
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotaterightLeg(), 1, 0, 0);
+			RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 3), true);
+			modelStack.PopMatrix();
+
+			modelStack.PushMatrix();
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getrotateleftLeg(), 1, 0, 0);
+			RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 4), true);
+			modelStack.PopMatrix();
+
+			modelStack.Rotate(((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getspin(), 0, 1, 0);
+			RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 0), true);
+			modelStack.PopMatrix();
+		}
+	}
+
+	//--------------------------------------------------PROJECTILE--------------------------------------------------
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(4, DIMENSIONID); i++)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->getPosition().x,
+			DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->getPosition().y,
+			DataBase::instance()->getEntityProjectile(DIMENSIONID, i)->getPosition().z);
+		modelStack.Rotate(Application::elapsed_timer_ * 50, 1, 1, 1);
+		RenderMesh(RenderingBase::instance()->getProjectileMesh((dynamic_cast<EntityProjectile*>(DataBase::instance()->getEntityProjectile(DIMENSIONID, i)))->getProjectileID()), false);
+		modelStack.PopMatrix();
+	}
+
+	//--------------------------------------------------NPC--------------------------------------------------
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(5, DIMENSIONID); i++)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().x,
+			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().y,
+			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().z);
+		modelStack.Rotate(DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
+		RenderMesh(RenderingBase::instance()->getNPCMesh((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getNPCID()), false);
+		modelStack.PopMatrix();
+	}
+
+	//--------------------------------------------------HELD ITEMS--------------------------------------------------
+	if (PlayerBase::instance()->getCurrentHeldItem() != nullptr)
+	{
+		modelStack.PushMatrix();
+		modelStack.Translate(camera.target.x, camera.position.y - 1, camera.target.z);
+		modelStack.Rotate(camera.getRotationY() - 155, 0, 1, 0);
+		modelStack.Rotate(-camera.getRotationZ(), 1, 0, 0);
+		modelStack.Scale(.5, .5, .5);
+
+		modelStack.PushMatrix();
+		modelStack.Rotate(PlayerBase::instance()->getRotationX(), 1, 0, 0);
+		RenderMesh(RenderingBase::instance()->getItemMesh(PlayerBase::instance()->getCurrentHeldItem()->getItemID()), true);
+		modelStack.PopMatrix();
+
+		modelStack.PopMatrix();
+	}
+
+	//--------------------------------------------------FPS--------------------------------------------------
+	RenderTextOnScreen(meshList[GEO_TEXT], "FPS: " + std::to_string(SceneManager::getSceneManger()->frameRate), Color(0, 1, 0), 1.8, 1, 32);
+
+	//--------------------------------------------------MAIN INVENTORY(4 SLOTS)--------------------------------------------------
+	for (int i = 0; i < 4; i++)
+	{
+		if (PlayerBase::instance()->getItemFromInventory(i) != nullptr)
+			RenderTextOnScreen(meshList[GEO_TEXT],
+			((PlayerBase::instance()->getCurrentItemSlot() == i) ? "> " : "") + PlayerBase::instance()->getItemFromInventory(i)->getItemName(),
+			DataBase::instance()->getRarityColor(PlayerBase::instance()->getItemFromInventory(i)->getRarity()), 1.8, 1, 5 - i);
+		else
+			RenderTextOnScreen(meshList[GEO_TEXT], "-", Color(1, 1, 1), 1.8, 1, 5 - i);
+	}
+
+	//--------------------------------------------------HEALTH & LEVEL--------------------------------------------------
+	modelStack.PushMatrix();
+	string healthBar = "";
+	RenderMeshOnScreen(meshList[GEO_HUD], 35, 8, 20, 20, 90);
+
+	RenderMeshOnScreen(meshList[GEO_HEALTH], 34.71, 8, ((float)((float)PlayerBase::instance()->getPlayerHealth() / 100.) * 20.), 20, 90);
+	RenderMeshOnScreen(meshList[GEO_EXP], 34.71, 8, ((float)((float)PlayerBase::instance()->getPlayerExperience() / (float)PlayerBase::instance()->getPlayerLevelCap()) * 20.),
+		20, 90);
+
+
+	RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getPlayerLevel()), Color(1, 1, 0), 2.5, 20, 4);
+	RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getPlayerHealth()), Color(1, 1, 0), 2, 20, 2);
+
+	modelStack.PopMatrix();
+
+	//--------------------------------------------------SPEECH--------------------------------------------------
+	modelStack.PushMatrix();
+	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(5, DIMENSIONID); i++)
+	{
+		if ((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->isInteracting())
+		{
+			RenderTextOnScreen(meshList[GEO_TEXT], (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getInteractionString(),
+				Color(1, 1, 0), 1.8, 20, 10);
+		}
+	}
+	modelStack.PopMatrix();
+
+	//--------------------------------------------------POSITION--------------------------------------------------
+	RenderTextOnScreen(meshList[GEO_TEXT], "X:  " + std::to_string((int)camera.position.x), Color(1, 0, 0), 1.8, 1, 30);
+	RenderTextOnScreen(meshList[GEO_TEXT], "Y:  " + std::to_string((int)camera.position.y), Color(0, 1, 0), 1.8, 1, 28);
+	RenderTextOnScreen(meshList[GEO_TEXT], "Z:  " + std::to_string((int)camera.position.z), Color(0, 0, 1), 1.8, 1, 26);
+
+	//--------------------------------------------------SKILLS--------------------------------------------------
+	RenderTextOnScreen(meshList[GEO_TEXT], "Skill Active ", Color(0, 1, 1), 1.8, 32, 32);
+
+	if (PlayerBase::instance()->getCurrentSkillPoint(PlayerBase::instance()->getCurrentEquippedSkill()) > 0
+		&& PlayerBase::instance()->getCurrentSkillCoolDown(PlayerBase::instance()->getCurrentEquippedSkill()) <= 0)
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT], "SPACE : " + PlayerBase::instance()->getSkillName(PlayerBase::instance()->getCurrentEquippedSkill()), Color(0, 1, 0), 1.8, 28, 31);
+	}
+	else
+	{
+		RenderTextOnScreen(meshList[GEO_TEXT], "SPACE : " + PlayerBase::instance()->getSkillName(PlayerBase::instance()->getCurrentEquippedSkill()), Color(.4, .4, .4), 1.8, 28, 31);
+	}
+
+	//-----------------------------------------------------ATTRIBUTE-----------------------------------------------------
+
+	if (attrib)
+	{
+		RenderMeshOnScreen(meshList[GEO_ATTRIBUTES], 40, 27.5, 40, 40, 90);
+
+		RenderTextOnScreen(meshList[GEO_TEXT], "Attribute Points: " + std::to_string(PlayerBase::instance()->getAttributePoint()), Color(1, 1, 1), 1.8, 15, 27);
+		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(0)), Color(1, 1, 1), 1.8, 24, 24.4);
+		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(1)), Color(1, 1, 1), 1.8, 24, 19.1);
+		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(2)), Color(1, 1, 1), 1.8, 24, 12);
+		RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getCurrentSkillPoint(3)), Color(1, 1, 1), 1.8, 24, 6.7);
+	}
+
+	//-----------------------------------------------------SHOP-----------------------------------------------------
+	if (shop)
+	{
+		Color tempColor;
+		string priceTag;
+		RenderMeshOnScreen(meshList[GEO_SHOP], 40, 27.5, 40, 40, 90);
+
+		RenderTextOnScreen(meshList[GEO_TEXT], "Currency: " + std::to_string(PlayerBase::instance()->getPlayerCurrency()), Color(1, .5, 0), 1.8, 26, 5);
+
+		for (int i = 0; i < ShopBase::instance()->getShopItemSize(); i++)
+		{
+			if (ShopBase::instance()->getItemInShop(i) != nullptr)
+			{
+				tempColor = DataBase::instance()->getRarityColor(DataBase::instance()->getItem(ShopBase::instance()->getItemInShop(i)->getItemID())->getRarity());
+				RenderTextOnScreen(meshList[GEO_TEXT], ShopBase::instance()->getItemInShop(i)->getItemName(), tempColor, 1.8, 27, 24.6 - (3.565 * i));
+				priceTag = "[" + std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(i))->getPriceOfWeapon()) + "]";
+				RenderTextOnScreen(meshList[GEO_TEXT], priceTag, Color(1, .5, 0), 1.8, 40 - priceTag.size(), 24.6 - (3.565 * i));
+			}
+		}
+
+		if (ShopBase::instance()->getItemInShop(itemhover) != nullptr)
+		{
+			RenderMeshOnScreen(RenderingBase::instance()->getItemMesh(ShopBase::instance()->getItemInShop(itemhover)->getItemID()),
+				28, 33, 3, 3, 217);
+
+			tempColor = DataBase::instance()->getRarityColor(DataBase::instance()->getItem(ShopBase::instance()->getItemInShop(itemhover)->getItemID())->getRarity());
+			RenderTextOnScreen(meshList[GEO_TEXT], ShopBase::instance()->getItemInShop(itemhover)->getItemName(), tempColor, 1.8, 8, 23.5);
+
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(itemhover))->getWeaponDamage()), Color(1, 1, 1), 1.8, 13, 9.8);
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(itemhover))->getWeaponDurability()), Color(1, 1, 1), 1.8, 13, 8.2);
+			RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(dynamic_cast<ItemWeapon*>(ShopBase::instance()->getItemInShop(itemhover))->getWeaponAttackSpeed()), Color(1, 1, 1), 1.8, 13, 6.5);
+		}
+	}
+
+	//-----------------------------------------------------INVENTORY-----------------------------------------------------
+	if (inv)
+	{
+		RenderMeshOnScreen(meshList[GEO_INVENTORY], 40, 27.5, 40, 40, 90);
+
+		int item = 0;
+		for (int i = 0; i < 5; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				if (PlayerBase::instance()->getItemFromInventory(item) != nullptr)
+				{
+					RenderMeshOnScreen(RenderingBase::instance()->getItemMesh(PlayerBase::instance()->getItemFromInventory(item)->getItemID()),
+						27 + (i * 8), 40 - (j * 8), 1, 1,
+						217);
+				}
+
+				item++;
+			}
+		}
+	}
+	//-----------------------------------------------------MOUSE-----------------------------------------------------
+	if (mouse)
+	{
+		RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx / 10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy) / 10, 15, 15, 90);
+	}
+
+
+	//----------------------------------------------------AIM--------------------------------------------------------------
+
+	RenderMeshOnScreen(meshList[GEO_AIM], 40, 27.5, 3, 3, 90);
+
+
 
 
 
 }
 
+void SceneBossL::RenderMeshOnScreen(Mesh* mesh, float x, float y, int sizex, int sizey, int rotate)
+{
+	glDisable(GL_DEPTH_TEST);
+	Mtx44 ortho;
+	ortho.SetToOrtho(0, 80, 0, 60, -10, 10); //size of screen UI
+	projectionStack.PushMatrix();
+	projectionStack.LoadMatrix(ortho);
+	viewStack.PushMatrix();
+	viewStack.LoadIdentity(); //No need camera for ortho mode
+	modelStack.PushMatrix();
+	modelStack.LoadIdentity();
+	modelStack.Translate(x, y, 0);
+	modelStack.Rotate(rotate, 0, 0, 1);
+	modelStack.Rotate(rotate, 1, 0, 0);
+	modelStack.Rotate(rotate, 0, -1, 0);
+	modelStack.Scale(sizex, sizey, sizey);
+	RenderMesh(mesh, false); //UI should not have light
+	projectionStack.PopMatrix();
+	viewStack.PopMatrix();
+	modelStack.PopMatrix();
+	glEnable(GL_DEPTH_TEST);
+}
 
 void SceneBossL::RenderMesh(Mesh *mesh, bool enableLight)
 {
