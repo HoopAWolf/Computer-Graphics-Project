@@ -236,7 +236,12 @@ void Boss_4::updateAI(float timer, unsigned dimensionID, float dt)
 		break;
 
 	case SKILL_1:
-		setPosition(Vector3(Camera::position.x + (-Camera::view.x + 5), 0, Camera::position.z + (-Camera::view.z + 5)));
+		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
+			((int)(Camera::position.x + (-Camera::view.x + 5))),
+			((int)Camera::position.z + (-Camera::view.z + 5))) != '#')
+		{
+			setPosition(Vector3(Camera::position.x + (-Camera::view.x + 5), 0, Camera::position.z + (-Camera::view.z + 5)));
+		}
 		boss_attack_state_ = PASSIVE;
 		break;
 
@@ -263,9 +268,10 @@ void Boss_4::updateAI(float timer, unsigned dimensionID, float dt)
 				}
 			}
 
-			if (timer > attack_speed_timer_ + .5)
+			if (timer > attack_speed_timer_ + .2)
 			{
 				forward_ = (newTarget - position_).Normalized();
+				forward_.y -= .3;
 				EntityFireBall* bullet = new EntityFireBall(position_, forward_, damage_, timer, false);
 				DataBase::instance()->setEntity(dimensionID, bullet);
 				attack_speed_timer_ = timer;
