@@ -13,6 +13,7 @@ protected:
 	{
 	 WALKING,
 	 IDLE,
+	 INTERACTION
 
 	};
 
@@ -41,6 +42,27 @@ public:
 	{
 		return NPCID_;
 	}
+
+	virtual void setState(unsigned state)
+	{
+		switch (state)
+		{
+		case 0:
+			NPC_state_ = WALKING;
+			break;
+		case 1:
+			NPC_state_ = IDLE;
+		case 2:
+			NPC_state_ = INTERACTION;
+		}
+	}
+
+	virtual bool isInteracting()
+	{
+		return (NPC_state_ == INTERACTION);
+	}
+
+	virtual string getInteractionString() = 0;
 
 };
 

@@ -170,6 +170,7 @@
   <ItemGroup>
     <ClInclude Include="Source\AABB.h" />
     <ClInclude Include="Source\Application.h" />
+    <ClInclude Include="Source\Boss_1.h" />
     <ClInclude Include="Source\EntityBullet.h" />
     <ClInclude Include="Source\EntityChickenProjectile.h" />
     <ClInclude Include="Source\EntityFireBall.h" />

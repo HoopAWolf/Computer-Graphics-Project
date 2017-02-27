@@ -25,7 +25,7 @@ public:
 		right_ = right;
 		target_ = target;
 		drop_ID_ = 0;
-		boss_name_ = "hi i am boss 4";
+		boss_name_ = "Flash";
 		bossID_ = 3;
 		boss_state_ = IDLE;
 		armor_ = 0;
@@ -48,164 +48,164 @@ public:
 
 	void updateAI(float timer, unsigned dimensionID, float dt)
 	{
-		if (boss_state_ == WALKING)
-		{
-			walking = true;
-			if (rotateleftLeg < 20 && leftlegForward == true)
-			{
-				rotateleftLeg += (float)(80 * dt);
-			}
-			else
-			{
-				leftlegForward = false;
-				leftlegBackward = true;
-			}
-			if (rotateleftLeg > -20 && leftlegBackward == true)
-			{
-				rotateleftLeg -= (float)(80 * dt);
-			}
-			else
-			{
-				leftlegForward = true;
-				leftlegBackward = false;
-			}
-			if (rotaterightLeg < 20 && rightlegForward == true)
-			{
-				rotaterightLeg += (float)(80 * dt);
-			}
-			else
-			{
-				rightlegForward = false;
-				rightlegBackward = true;
-			}
-			if (rotaterightLeg > -20 && rightlegBackward == true)
-			{
-				rotaterightLeg -= (float)(80 * dt);
-			}
-			else
-			{
-				rightlegForward = true;
-				rightlegBackward = false;
-			}
-		}
-		else
-		{
-			walking = false;
-		}
+		//if (boss_state_ == WALKING)
+		//{
+		//	walking = true;
+		//	if (rotateleftLeg < 20 && leftlegForward == true)
+		//	{
+		//		rotateleftLeg += (float)(80 * dt);
+		//	}
+		//	else
+		//	{
+		//		leftlegForward = false;
+		//		leftlegBackward = true;
+		//	}
+		//	if (rotateleftLeg > -20 && leftlegBackward == true)
+		//	{
+		//		rotateleftLeg -= (float)(80 * dt);
+		//	}
+		//	else
+		//	{
+		//		leftlegForward = true;
+		//		leftlegBackward = false;
+		//	}
+		//	if (rotaterightLeg < 20 && rightlegForward == true)
+		//	{
+		//		rotaterightLeg += (float)(80 * dt);
+		//	}
+		//	else
+		//	{
+		//		rightlegForward = false;
+		//		rightlegBackward = true;
+		//	}
+		//	if (rotaterightLeg > -20 && rightlegBackward == true)
+		//	{
+		//		rotaterightLeg -= (float)(80 * dt);
+		//	}
+		//	else
+		//	{
+		//		rightlegForward = true;
+		//		rightlegBackward = false;
+		//	}
+		//}
+		//else
+		//{
+		//	walking = false;
+		//}
 
-		if (boss_state_ == BASIC_ATTACK)
-		{
-			attacking = true;
-		}
-		if (attacking == true)
-		{
-			rotateleftArmX += (float)(80 * dt);
-			if (rotateleftArmX <= -90)
-			{
-				limit = true;
-			}
-			if (rotateleftArmX >= 0)
-			{
-				limit = false;
-			}
-			if (limit == true)
-			{
-				dt = dt;
-			}
-			if (limit == false)
-			{
-				dt = -dt;
-			}
-		}
+		//if (boss_state_ == BASIC_ATTACK)
+		//{
+		//	attacking = true;
+		//}
+		//if (attacking == true)
+		//{
+		//	rotateleftArmX += (float)(80 * dt);
+		//	if (rotateleftArmX <= -90)
+		//	{
+		//		limit = true;
+		//	}
+		//	if (rotateleftArmX >= 0)
+		//	{
+		//		limit = false;
+		//	}
+		//	if (limit == true)
+		//	{
+		//		dt = dt;
+		//	}
+		//	if (limit == false)
+		//	{
+		//		dt = -dt;
+		//	}
+		//}
 
-		//=====================================================
+		////=====================================================
 
-		if (walking == false)
-		{
-			if (rotaterightLeg > 0)
-			{
-				rotaterightLeg--;
-			}
-			if (rotaterightLeg < 0)
-			{
-				rotaterightLeg++;
-			}
-			if (rotateleftLeg > 0)
-			{
-				rotateleftLeg--;
-			}
-			if (rotateleftLeg < 0)
-			{
-				rotateleftLeg++;
-			}
-		}
-		if (attacking == false)
-		{
-			if (rotateleftArmX < 0)
-			{
-				rotateleftArmX++;
-			}
-		}
-		//=================================================================================================
-		if (boss_state_ == SKILL_1)
-		{
-			rotateleftArmZ += (float)(80 * dt1);
-			rotaterightArmZ -= (float)(80 * dt1);
-			rotateleftArmX += (float)(160 * dt1);
-			spin += (float)(80 * dt2);
-			if (rotateleftArmZ >= 90)
-			{
-				limit1 = true;
-			}
-			if (limit1 == true)
-			{
-				dt1 = 0;
-				dt2 = 0.05;
-			}
-			if (spin >= 1800)
-			{
-				limit2 = true;
-			}
-			if (limit2 == true)
-			{
-				spin = 0;
-				dt1 = dt;
-				dt2 = 0;
-			}
-		}
-		//===========================================================================================
-		if (boss_state_ == SKILL_2)
-		{
-			rotateleftArmX += (float)(80 * dt);
-			rotaterightArmX += (float)(80 * dt);
-			if (rotateleftArmX <= -90)
-			{
-				limit = true;
-			}
-			if (rotateleftArmX >= 135)
-			{
-				limit = false;
-			}
-			if (limit3 == true)
-			{
-				dt = 0.3;
-			}
-			if (limit3 == false)
-			{
-				dt = -dt;
-			}
-		}
-		//============================================================================================
-		if (boss_state_ == SKILL_3)
-		{
-			//throw shuriken??
-		}
-		//=============================================================================================
-		if (boss_state_ == FINAL_ATTACK)
-		{
+		//if (walking == false)
+		//{
+		//	if (rotaterightLeg > 0)
+		//	{
+		//		rotaterightLeg--;
+		//	}
+		//	if (rotaterightLeg < 0)
+		//	{
+		//		rotaterightLeg++;
+		//	}
+		//	if (rotateleftLeg > 0)
+		//	{
+		//		rotateleftLeg--;
+		//	}
+		//	if (rotateleftLeg < 0)
+		//	{
+		//		rotateleftLeg++;
+		//	}
+		//}
+		//if (attacking == false)
+		//{
+		//	if (rotateleftArmX < 0)
+		//	{
+		//		rotateleftArmX++;
+		//	}
+		//}
+		////=================================================================================================
+		//if (boss_state_ == SKILL_1)
+		//{
+		//	rotateleftArmZ += (float)(80 * dt1);
+		//	rotaterightArmZ -= (float)(80 * dt1);
+		//	rotateleftArmX += (float)(160 * dt1);
+		//	spin += (float)(80 * dt2);
+		//	if (rotateleftArmZ >= 90)
+		//	{
+		//		limit1 = true;
+		//	}
+		//	if (limit1 == true)
+		//	{
+		//		dt1 = 0;
+		//		dt2 = 0.05;
+		//	}
+		//	if (spin >= 1800)
+		//	{
+		//		limit2 = true;
+		//	}
+		//	if (limit2 == true)
+		//	{
+		//		spin = 0;
+		//		dt1 = dt;
+		//		dt2 = 0;
+		//	}
+		//}
+		////===========================================================================================
+		//if (boss_state_ == SKILL_2)
+		//{
+		//	rotateleftArmX += (float)(80 * dt);
+		//	rotaterightArmX += (float)(80 * dt);
+		//	if (rotateleftArmX <= -90)
+		//	{
+		//		limit = true;
+		//	}
+		//	if (rotateleftArmX >= 135)
+		//	{
+		//		limit = false;
+		//	}
+		//	if (limit3 == true)
+		//	{
+		//		dt = 0.3;
+		//	}
+		//	if (limit3 == false)
+		//	{
+		//		dt = -dt;
+		//	}
+		//}
+		////============================================================================================
+		//if (boss_state_ == SKILL_3)
+		//{
+		//	//throw shuriken??
+		//}
+		////=============================================================================================
+		//if (boss_state_ == FINAL_ATTACK)
+		//{
 
-		}
-		//==================================================================================================
+		//}
+		////==================================================================================================
 	}
 
 	void setPosition(Vector3 position)

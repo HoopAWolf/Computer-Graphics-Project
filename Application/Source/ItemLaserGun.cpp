@@ -14,7 +14,7 @@ public:
 		texture_string_ = "laser_gun";
 		item_name_ = "Laser Gun";
 
-		recoil_ = .3;
+		recoil_ = .05;
 		weapon_type_ = RANGE_AUTO;
 		durability_ = 10;
 		damage_ = 5;
