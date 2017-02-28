@@ -398,9 +398,9 @@ void StudioProject::Update(double dt)
 				for (int j = -1; j <= 1; j++)
 				{
 					EntityDrop* drop = new EntityDrop(DataBase::instance()->getRandomItem(false, true)->getItemID(), 
-						Vector3(DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().x + k,
-						DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().y,
-						DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().z + j),
+						Vector3(DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().x + k * 3,
+						0,
+						DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().z + j * 3),
 						Application::elapsed_timer_);
 					DataBase::instance()->setEntity(DIMENSIONID, drop);
 				}
@@ -983,7 +983,11 @@ void StudioProject::Update(double dt)
 			}
 			i = true;
 			timer = Application::elapsed_timer_;
-			ShopBase::instance()->sellItem(sellPosition);
+			if (sellPosition != 27)
+			{
+				ShopBase::instance()->sellItem(sellPosition);
+				sellPosition = 27;
+			}
 		}
 		else
 		{
