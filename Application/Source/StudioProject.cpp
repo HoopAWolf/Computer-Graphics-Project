@@ -1508,9 +1508,8 @@ void StudioProject::Render()
 	//----------------------------------------------------AIM--------------------------------------------------------------
 
 	RenderMeshOnScreen(meshList[GEO_AIM], 40, 27.5, 3, 3, 90);
-<<<<<<< HEAD
-	RenderMeshOnScreen(meshList[GEO_BLOOD], 40, 30, 80,65, 90);
-=======
+
+	//RenderMeshOnScreen(meshList[GEO_BLOOD], 40, 30, 80,65, 90);
 
 
 	//IF DURATION FOR LIGHTNING SKILL IS MORE THAN 0
@@ -1520,7 +1519,7 @@ void StudioProject::Render()
 	//IF DURATION FOR ARMOR SKILL IS MORE THAN 0
 	//SHOW ARMNOR EFFECT
 
->>>>>>> 0bac4e8c6c678f5c06efb39e27ee3d6af0d7605a
+
 }
 
 
