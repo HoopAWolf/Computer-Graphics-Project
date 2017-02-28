@@ -113,8 +113,6 @@ void StudioProject::Init()
 	}
 
 	DataBase::instance()->setEntity(true, false, false, 1, new Boss_1(Vector3(10 + 0 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(true, false, false, 1, new Boss_2(Vector3(10 + 5 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(true, false, false, 1, new Boss_3(Vector3(10 + 10 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(true, false, false, 1, new Boss_4(Vector3(10 + 15 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 
 	DataBase::instance()->setEntity(false, true, false, 1, new EntitySpawner(Vector3(10 + 0 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
@@ -277,8 +275,8 @@ void StudioProject::Init()
 	//Just Kidding,you got pranked there aint no time for hard codings 
 	//-------------------------------------------------------------------------------------------
 	//light
-	light[0].type = Light::LIGHT_DIRECTIONAL;
-	light[0].LightPosition.Set(0, 1, 0);
+	light[0].type = Light::LIGHT_POINT;
+	light[0].LightPosition.Set(0, 1000, 0);
 	light[0].color.Set(1, 1, 1);
 	light[0].power = 1;
 	light[0].kC = 1.f;
@@ -304,7 +302,7 @@ void StudioProject::Init()
 	//=============================================================================
 	//light
 	light[1].type = Light::LIGHT_POINT;
-	light[1].LightPosition.Set(1000, 1000, 1000);
+	light[1].LightPosition.Set(0, 100, 0);
 	light[1].color.Set(1, 1, 1);
 	light[1].power = 1;
 	light[1].kC = 1.f;
@@ -1317,7 +1315,7 @@ void StudioProject::Render()
 			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().y,
 			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().z);
 		modelStack.Rotate(DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
-		RenderMesh(RenderingBase::instance()->getNPCMesh((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getNPCID()), false);
+		RenderMesh(RenderingBase::instance()->getNPCMesh((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getNPCID()), true);
 		modelStack.PopMatrix();
 	}
 

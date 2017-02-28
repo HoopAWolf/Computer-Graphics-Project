@@ -3,6 +3,7 @@
 
 void Boss_4::updateAI(float timer, unsigned dimensionID, float dt)
 {
+
 	switch (boss_state_)
 	{
 	case IDLE:
