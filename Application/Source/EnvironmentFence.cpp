@@ -7,14 +7,14 @@ public:
 	{
 		texture_string_ = "fence";
 		environmentID_ = 2;
-		environment_symbol_ = 'F';
+		environment_symbol_ = 'B';
 
 		boundry_[0][0] = '#';
 		boundry_[0][1] = '#';
 		boundry_[0][2] = '#';
 
 		boundry_[1][0] = '#';
-		boundry_[1][1] = 'F';
+		boundry_[1][1] = 'B';
 		boundry_[1][2] = '#';
 
 		boundry_[2][0] = '#';
