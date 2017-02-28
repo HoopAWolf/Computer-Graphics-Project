@@ -121,7 +121,7 @@ public:
 
 	string getInteractionString()
 	{
-		return "Do dogs have brains";
+		return "Do dogs have brains ?";
 	}
 	void setPosition(Vector3 position)
 	{

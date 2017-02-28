@@ -110,7 +110,7 @@ public:
 
 	string getInteractionString()
 	{
-		return "IM A BOY, IM A BOI";
+		return "Sup dug";
 	}
 
 	void setPosition(Vector3 position)
