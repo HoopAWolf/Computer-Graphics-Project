@@ -108,7 +108,7 @@ public:
 
 	string getInteractionString()
 	{
-		return "IM A BOY, IM A BOI";
+		return "Don't talk to me I am Depressed";
 	}
 	void setPosition(Vector3 position)
 	{

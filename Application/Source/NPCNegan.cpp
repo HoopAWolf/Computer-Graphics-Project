@@ -96,6 +96,10 @@ public:
 
 			break;
 
+
+		
+
+
 		case INTERACTION:
 			newTarget = Camera::position;
 			rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
@@ -109,9 +113,11 @@ public:
 
 	string getInteractionString()
 	{
-		return "IM A BOY, IM A BOI";
+		return "Hi I'm Negan, Give me half your shit";
 	}
 
+	
+	
 	void setPosition(Vector3 position)
 	{
 		position_ = position;

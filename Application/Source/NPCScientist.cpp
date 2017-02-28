@@ -86,6 +86,8 @@ public:
 				position_.z = position_.z + (forward_.z * 5 * dt);  //MOVING SPEED
 			}
 
+
+
 			rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
 
 			if ((newTarget - position_).Length() < 4)
@@ -112,7 +114,7 @@ public:
 
 	string getInteractionString()
 	{
-		return "Are you gallium yttrium ? because you'll be (Mg,Fe2+)2(Mg,Fe2+)5Si8O22(OH)2"; 
+		return "Are you gallium yttrium ?";
 	    
 	}
 
