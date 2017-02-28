@@ -12,7 +12,7 @@ void PlayerBase::startPlayer()
 	ammo_ = 300;
 	currency_ = 10;
 	attribute_points_ = 0;
-	resistance_ = 1;
+	armor_ = 100;
 	level_ = 1;
 	level_cap_ = 500;
 	experience_ = 0;
@@ -173,7 +173,7 @@ void PlayerBase::playerUpdate(float timer, float dt)
 				if (i == 2)
 					attack_speed_ = 0;
 				else if (i == 3)
-					resistance_ = 1;
+					armor_ = 0;
 			}
 		}
 	}
@@ -216,11 +216,6 @@ float PlayerBase::getPlayerAttackSpeed()
 unsigned PlayerBase::getPlayerMovingSpeed()
 {
 	return moving_speed_;
-}
-
-unsigned PlayerBase::getPlayerResistance()
-{
-	return resistance_;
 }
 
 unsigned PlayerBase::getAttributePoint()
@@ -288,7 +283,20 @@ void PlayerBase::decreaseCurrency(unsigned currency)
 
 void PlayerBase::playerAttacked(int damage)
 {
-	player_health_ -= (damage - ((resistance_ / 100) * 100));
+	int tempDamage = damage;
+	int tempArmor = armor_;
+	if (armor_ > 0)
+	{
+		armor_ -= damage;
+		if (armor_ < 0)
+			armor_ = 0;
+		tempDamage -= tempArmor;
+
+		if (tempDamage < 0)
+			tempDamage = 0;
+	}
+
+	player_health_ -= tempDamage;
 }
 
 AABB PlayerBase::getBoundingBox()
@@ -325,6 +333,11 @@ string PlayerBase::getSkillName(unsigned skillID)
 float PlayerBase::getRotationX()
 {
 	return rotationX;
+}
+
+int PlayerBase::getArmor()
+{
+	return armor_;
 }
 
 bool PlayerBase::isPlayerDead()
@@ -384,7 +397,7 @@ void PlayerBase::useSkills(float timer)
 		case 3:
 			if (skills_[current_skill_].y <= 0)
 			{
-				resistance_ = (resistance_ * 2);
+				armor_ = 100;
 				skills_[current_skill_].z = timer + (2 + skills_[current_skill_].x);
 			}
 

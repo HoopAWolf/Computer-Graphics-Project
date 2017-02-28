@@ -36,6 +36,7 @@ public:
 		boss_state_ = IDLE;
 		armor_ = 50;
 		third_attacks_ = 1;
+		is_invisible_ = false;
 	}
 	void onDeath()
 	{

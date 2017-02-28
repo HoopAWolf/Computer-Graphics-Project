@@ -129,6 +129,36 @@ void SceneBossL::Init()
 	meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_TOP]->textureID = LoadTGA("Image//fire-storm_up.tga");
 
+	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
+	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
+
+	meshList[GEO_HUD] = MeshBuilder::GenerateOBJ("hud", "OBJ//hud.obj");
+	meshList[GEO_HUD]->textureID = LoadTGA("Image//hud.tga");
+
+	meshList[GEO_HEALTH] = MeshBuilder::GenerateOBJ("health", "OBJ//health.obj");
+	meshList[GEO_HEALTH]->textureID = LoadTGA("Image//health.tga");
+
+	meshList[GEO_EXP] = MeshBuilder::GenerateOBJ("exp", "OBJ//exp.obj");
+	meshList[GEO_EXP]->textureID = LoadTGA("Image//exp.tga");
+
+	meshList[GEO_ATTRIBUTES] = MeshBuilder::GenerateOBJ("", "OBJ//attribute.obj");
+	meshList[GEO_ATTRIBUTES]->textureID = LoadTGA("Image//attribute.tga");
+
+	meshList[GEO_ARMOR] = MeshBuilder::GenerateOBJ("", "OBJ//armor.obj");
+	meshList[GEO_ARMOR]->textureID = LoadTGA("Image//armor.tga");
+
+	meshList[GEO_INVENTORY] = MeshBuilder::GenerateOBJ("", "OBJ//inventory.obj");
+	meshList[GEO_INVENTORY]->textureID = LoadTGA("Image//inventoryui.tga");
+
+	meshList[GEO_MOUSE] = MeshBuilder::GenerateOBJ("", "OBJ//play1.obj");
+	meshList[GEO_MOUSE]->textureID = LoadTGA("Image//gay_mouse.tga");
+
+	meshList[GEO_SHOP] = MeshBuilder::GenerateOBJ("", "OBJ//shop.obj");
+	meshList[GEO_SHOP]->textureID = LoadTGA("Image//shopui.tga");
+
+	meshList[GEO_AIM] = MeshBuilder::GenerateOBJ("", "OBJ//Crosshair.obj");
+	meshList[GEO_AIM]->textureID = LoadTGA("Image//Crosshair.tga");
+
 	//------------------------------------------------------------------------------------------
 	//light
 	light[0].type = Light::LIGHT_DIRECTIONAL;
@@ -1049,7 +1079,7 @@ void SceneBossL::Render()
 			RenderTextOnScreen(meshList[GEO_TEXT], "-", Color(1, 1, 1), 1.8, 1, 5 - i);
 	}
 
-	//--------------------------------------------------HEALTH & LEVEL--------------------------------------------------
+	//--------------------------------------------------HEALTH & LEVEL & ARMOR--------------------------------------------------
 	modelStack.PushMatrix();
 	string healthBar = "";
 	RenderMeshOnScreen(meshList[GEO_HUD], 35, 8, 20, 20, 90);
@@ -1057,7 +1087,7 @@ void SceneBossL::Render()
 	RenderMeshOnScreen(meshList[GEO_HEALTH], 34.71, 8, ((float)((float)PlayerBase::instance()->getPlayerHealth() / 100.) * 20.), 20, 90);
 	RenderMeshOnScreen(meshList[GEO_EXP], 34.71, 8, ((float)((float)PlayerBase::instance()->getPlayerExperience() / (float)PlayerBase::instance()->getPlayerLevelCap()) * 20.),
 		20, 90);
-
+	RenderMeshOnScreen(meshList[GEO_ARMOR], 34.71, 8, ((float)((float)PlayerBase::instance()->getArmor() / 100.) * 20.), 20, 90);
 
 	RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getPlayerLevel()), Color(1, 1, 0), 2.5, 20, 4);
 	RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getPlayerHealth()), Color(1, 1, 0), 2, 20, 2);
