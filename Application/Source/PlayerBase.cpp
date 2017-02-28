@@ -12,7 +12,7 @@ void PlayerBase::startPlayer()
 	ammo_ = 300;
 	currency_ = 10;
 	attribute_points_ = 0;
-	armor_ = 100;
+	armor_ = 0;
 	level_ = 1;
 	level_cap_ = 500;
 	experience_ = 0;
@@ -209,13 +209,13 @@ unsigned PlayerBase::getCurrentEquippedSkill()
 
 unsigned PlayerBase::getPlayerDamage()
 {
-	if (getCurrentHeldItem()->getItemID() <= DataBase::instance()->getItemStarting())
+	if (getCurrentHeldItem() != nullptr && getCurrentHeldItem()->getItemID() <= DataBase::instance()->getItemStarting())
 		return damage_ + ((ItemWeapon*)getCurrentHeldItem())->getWeaponDamage();
 	return damage_;
 }
 float PlayerBase::getPlayerAttackSpeed()
 {
-	if (getCurrentHeldItem()->getItemID() <= DataBase::instance()->getItemStarting())
+	if (getCurrentHeldItem() != nullptr && getCurrentHeldItem()->getItemID() <= DataBase::instance()->getItemStarting())
 		return attack_speed_ + (((ItemWeapon*)getCurrentHeldItem())->getWeaponAttackSpeed());
 	return attack_speed_;
 }

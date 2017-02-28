@@ -1516,7 +1516,7 @@ void StudioProject::Render()
 	{
 		RenderMeshOnScreen(meshList[GEO_ARMORSKEEL], 40, 30, 80, 65, 90);
 	}
-	if (PlayerBase::instance()->getPlayerAttackSpeed()>1)
+	if (PlayerBase::instance()->getCurrentSkillDamage(2) > 0)
 	{
 		RenderMeshOnScreen(meshList[GEO_LIGHTNING], 40, 30, 80, 65, 90);
 	}
