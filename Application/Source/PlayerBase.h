@@ -35,8 +35,8 @@ private:
 
 	unsigned damage_, moving_speed_,attribute_points_, dimension_ , 
 		level_, experience_, level_cap_;
-	bool isRecharging, hit;
-	float rechargingTimer, rotationX, health_regen_timer, attack_speed_;
+	bool isRecharging, hit, show_blood_;
+	float rechargingTimer, rotationX, health_regen_timer, attack_speed_, show_blood_timer_;
 	Vector3 size_;
 
 	vector<ItemBase *> inventory_data_;
@@ -78,7 +78,7 @@ public:
 	int getPlayerHealth();
 	unsigned getCurrentEquippedSkill();
 	float getRotationX();
-	void playerAttacked(int damage);
+	void playerAttacked(int damage, float timer);
 
 	PLAYER_STATE getPlayerState()
 	{
@@ -100,6 +100,7 @@ public:
 	void decreaseCurrency(unsigned currency);
 	void swapItemInInventory(int itemOne, int itemTwo);
 	void removeItemInInventory(unsigned position);
+	bool isShowBlood();
 
 	bool isInventoryFull();
 	void moveCurrItem(bool forward);

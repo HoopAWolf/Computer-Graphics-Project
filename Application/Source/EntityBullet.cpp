@@ -49,7 +49,7 @@ void EntityBullet::updateAI(float timer, unsigned dimensionID, float dt)
 	{
 		if (getBoundingBox().isAABBInsideAABB(PlayerBase::instance()->getBoundingBox()))
 		{
-			PlayerBase::instance()->playerAttacked(damage_);
+			PlayerBase::instance()->playerAttacked(damage_, timer);
 			health_ = 0;
 		}
 	}

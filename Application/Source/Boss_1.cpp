@@ -195,7 +195,7 @@ void Boss_1::updateAI(float timer, unsigned dimensionID, float dt)
 
 				if (PlayerBase::instance()->getBoundingBox().isAABBInsideAABB(getBoundingBox().increaseBoundry(Vector3(4, 4, 4), Vector3(4, 4, 4))))
 				{
-					PlayerBase::instance()->playerAttacked(damage_);
+					PlayerBase::instance()->playerAttacked(damage_, timer);
 				}
 				limit = true;
 			}
@@ -262,7 +262,7 @@ void Boss_1::updateAI(float timer, unsigned dimensionID, float dt)
 
 			if (PlayerBase::instance()->getBoundingBox().isAABBInsideAABB(getBoundingBox().increaseBoundry(Vector3(10, 10, 10), Vector3(10, 10, 10))))
 			{
-				PlayerBase::instance()->playerAttacked(damage_ * 2);
+				PlayerBase::instance()->playerAttacked(damage_ * 2, timer);
 			}
 			limit = true;
 		}
@@ -296,7 +296,7 @@ void Boss_1::updateAI(float timer, unsigned dimensionID, float dt)
 
 			if (PlayerBase::instance()->getBoundingBox().isAABBInsideAABB(getBoundingBox().increaseBoundry(Vector3(5, 5, 5) * third_attacks_, Vector3(5, 5, 5) * third_attacks_)))
 			{
-				PlayerBase::instance()->playerAttacked(damage_);
+				PlayerBase::instance()->playerAttacked(damage_, timer);
 				third_attacks_++;
 			}
 			limit = true;
