@@ -49,7 +49,7 @@ void StudioProject::Init()
 	//MapBase::instance()->generateMap(DIMENSIONID);  //RUN ONCE FOR EACH SCENE
 
 	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
-	MapBase::instance()->generateMap(DIMENSIONID, "Town.txt");  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->generateMap(DIMENSIONID, "maze.txt");  //RUN ONCE FOR EACH SCENE
 
 	RenderingBase::instance()->registerAllRenderingData();  //RUN ONCE
 
@@ -117,7 +117,9 @@ void StudioProject::Init()
 	DataBase::instance()->setEntity(true, false, false, 1, new Boss_3(Vector3(10 + 10 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(true, false, false, 1, new Boss_4(Vector3(10 + 15 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 
-	DataBase::instance()->setEntity(false, true, false, 1, new EntitySpawner(Vector3(10 + 0 * 20, 0, 20), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, false, 1, new EntitySpawner(Vector3(25, 0, 75), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, false, 1, new EntitySpawner(Vector3(10, 0, 75), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, false, 1, new EntitySpawner(Vector3(50, 0, 5), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCGirlwithBoobs(Vector3(10 + 0 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCBoy(Vector3(10 + 5 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
@@ -128,7 +130,7 @@ void StudioProject::Init()
 	DataBase::instance()->setEntity(false, false, true, 1, new NPCLady(Vector3(72 + 10 * 20, 0, 178), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 
 	//--------------------------------------------------------^REMOVE ONCE DONE^--------------------------------------------------------
-
+	
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
