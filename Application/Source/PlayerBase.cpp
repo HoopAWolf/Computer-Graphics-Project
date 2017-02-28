@@ -366,7 +366,6 @@ bool PlayerBase::isShowBlood()
 
 void PlayerBase::deaded()
 {
-	armor_ = 100;
 	player_health_ = 100;
 	experience_ = 0;
 }
