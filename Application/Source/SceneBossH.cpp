@@ -129,6 +129,36 @@ void SceneBossH::Init()
 	meshList[GEO_TOP] = MeshBuilder::GenerateQuad("top", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_TOP]->textureID = LoadTGA("Image//criminal-intentions_up.tga");
 
+	meshList[GEO_TEXT] = MeshBuilder::GenerateText("text", 16, 16);
+	meshList[GEO_TEXT]->textureID = LoadTGA("Image//calibri.tga");
+
+	meshList[GEO_HUD] = MeshBuilder::GenerateOBJ("hud", "OBJ//hud.obj");
+	meshList[GEO_HUD]->textureID = LoadTGA("Image//hud.tga");
+
+	meshList[GEO_HEALTH] = MeshBuilder::GenerateOBJ("health", "OBJ//health.obj");
+	meshList[GEO_HEALTH]->textureID = LoadTGA("Image//health.tga");
+
+	meshList[GEO_EXP] = MeshBuilder::GenerateOBJ("exp", "OBJ//exp.obj");
+	meshList[GEO_EXP]->textureID = LoadTGA("Image//exp.tga");
+
+	meshList[GEO_ATTRIBUTES] = MeshBuilder::GenerateOBJ("", "OBJ//attribute.obj");
+	meshList[GEO_ATTRIBUTES]->textureID = LoadTGA("Image//attribute.tga");
+
+	meshList[GEO_ARMOR] = MeshBuilder::GenerateOBJ("", "OBJ//armor.obj");
+	meshList[GEO_ARMOR]->textureID = LoadTGA("Image//armor.tga");
+
+	meshList[GEO_INVENTORY] = MeshBuilder::GenerateOBJ("", "OBJ//inventory.obj");
+	meshList[GEO_INVENTORY]->textureID = LoadTGA("Image//inventoryui.tga");
+
+	meshList[GEO_MOUSE] = MeshBuilder::GenerateOBJ("", "OBJ//play1.obj");
+	meshList[GEO_MOUSE]->textureID = LoadTGA("Image//gay_mouse.tga");
+
+	meshList[GEO_SHOP] = MeshBuilder::GenerateOBJ("", "OBJ//shop.obj");
+	meshList[GEO_SHOP]->textureID = LoadTGA("Image//shopui.tga");
+
+	meshList[GEO_AIM] = MeshBuilder::GenerateOBJ("", "OBJ//Crosshair.obj");
+	meshList[GEO_AIM]->textureID = LoadTGA("Image//Crosshair.tga");
+
 	//------------------------------------------------------------------------------------------
 	//light
 	light[0].type = Light::LIGHT_DIRECTIONAL;
@@ -391,6 +421,28 @@ void SceneBossH::Render()
 
 }
 
+void SceneBossH::RenderMeshOnScreen(Mesh* mesh, float x, float y, int sizex, int sizey, int rotate)
+{
+	glDisable(GL_DEPTH_TEST);
+	Mtx44 ortho;
+	ortho.SetToOrtho(0, 80, 0, 60, -10, 10); //size of screen UI
+	projectionStack.PushMatrix();
+	projectionStack.LoadMatrix(ortho);
+	viewStack.PushMatrix();
+	viewStack.LoadIdentity(); //No need camera for ortho mode
+	modelStack.PushMatrix();
+	modelStack.LoadIdentity();
+	modelStack.Translate(x, y, 0);
+	modelStack.Rotate(rotate, 0, 0, 1);
+	modelStack.Rotate(rotate, 1, 0, 0);
+	modelStack.Rotate(rotate, 0, -1, 0);
+	modelStack.Scale(sizex, sizey, sizey);
+	RenderMesh(mesh, false); //UI should not have light
+	projectionStack.PopMatrix();
+	viewStack.PopMatrix();
+	modelStack.PopMatrix();
+	glEnable(GL_DEPTH_TEST);
+}
 
 void SceneBossH::RenderMesh(Mesh *mesh, bool enableLight)
 {

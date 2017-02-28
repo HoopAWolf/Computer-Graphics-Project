@@ -35,6 +35,7 @@ public:
 		bossID_ = 3;
 		boss_state_ = IDLE;
 		armor_ = 30;
+		is_invisible_ = false;
 	}
 
 	void onDeath(){}

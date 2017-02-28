@@ -39,6 +39,17 @@ class SceneBossH : public Scene
 		GEO_FRONT,
 		GEO_BACK,
 		GEO_TEXT,
+
+		GEO_HUD,
+		GEO_HEALTH,
+		GEO_EXP,
+		GEO_ATTRIBUTES,
+		GEO_SHOP,
+		GEO_MOUSE,
+		GEO_INVENTORY,
+		GEO_AIM,
+		GEO_ARMOR,
+
 		NUM_GEOMETRY,
 	};
 	enum UNIFORM_TYPE
@@ -114,6 +125,8 @@ private:
 	void RenderText(Mesh* mesh, std::string text, Color color);
 	void RenderTextOnScreen(Mesh* mesh, std::string text, Color color, float size, float x, float y);
 	void RenderUI(Mesh* mesh, Color color, float size, float x, float y, bool enableLight);
+
+	void RenderMeshOnScreen(Mesh* mesh, float x, float y, int sizex, int sizey, int rotate);
 
 	void RenderSkybox();
 
