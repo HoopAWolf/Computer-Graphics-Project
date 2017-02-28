@@ -90,9 +90,14 @@ void RangedMinion_2::updateAI(float timer, unsigned dimensionID, float dt)
 			minion_state_ = IDLE;
 			timer_ = timer;
 		}
-		else if ((newTarget - position_).Length() <= 20)
+		else if ((newTarget - position_).Length() <= 20 && (newTarget - position_).Length() > 10)
 		{
 			minion_state_ = BASIC_ATTACK;
+			timer_ = timer;
+		}
+		else if ((newTarget - position_).Length() < 10)
+		{
+			minion_state_ = RETREAT;
 			timer_ = timer;
 		}
 		else if (timer > timer_ + 10)
@@ -173,6 +178,73 @@ void RangedMinion_2::updateAI(float timer, unsigned dimensionID, float dt)
 			timer_ = timer;
 		}
 
+		break;
+	case RETREAT:
+		if (minionrotateleftLeg < 20 && minionleftlegForward == true)
+		{
+			minionrotateleftLeg += (float)(80 * dt);
+		}
+		else
+		{
+			minionleftlegForward = false;
+			minionleftlegBackward = true;
+		}
+		if (minionrotateleftLeg > -20 && minionleftlegBackward == true)
+		{
+			minionrotateleftLeg -= (float)(80 * dt);
+		}
+		else
+		{
+			minionleftlegForward = true;
+			minionleftlegBackward = false;
+		}
+		if (minionrotaterightLeg < 20 && minionrightlegForward == true)
+		{
+			minionrotaterightLeg += (float)(80 * dt);
+		}
+		else
+		{
+			minionrightlegForward = false;
+			minionrightlegBackward = true;
+		}
+		if (minionrotaterightLeg > -20 && minionrightlegBackward == true)
+		{
+			minionrotaterightLeg -= (float)(80 * dt);
+		}
+		else
+		{
+			minionrightlegForward = true;
+			minionrightlegBackward = false;
+		}
+
+		newTarget = Vector3(position_.x + ((rand() % 100 < 50) ? Camera::view.x + 10 : Camera::view.x + -10), position_.y, position_.z + ((rand() % 100 < 50) ? Camera::view.z + 10 : Camera::view.z + -10));
+		forward_ = (newTarget - position_).Normalized();
+
+		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
+			((int)(position_.x + (forward_.x * 5 * dt))),
+			position_.z) != '#')
+		{
+			position_.x = position_.x + (forward_.x * 5 * dt);
+		}
+
+		if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
+			position_.x,
+			((int)(position_.z + (forward_.z * 5 * dt)))) != '#')
+		{
+			position_.z = position_.z + (forward_.z * 5 * dt);  //MOVING SPEED
+		}
+
+		rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
+
+		if (((Vector3(Camera::position.x, position_.y, Camera::position.z)) - position_).Length() > 10)
+		{
+			minion_state_ = TARGET_PLAYER;
+		}
+		else if (timer > timer_ + 10)
+		{
+			minion_state_ = TARGET_PLAYER;
+			timer_ = timer;
+		}
 		break;
 
 	case BASIC_ATTACK:
