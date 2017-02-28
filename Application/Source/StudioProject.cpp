@@ -235,6 +235,9 @@ void StudioProject::Init()
 	meshList[GEO_HUD] = MeshBuilder::GenerateOBJ("hud", "OBJ//hud.obj");
 	meshList[GEO_HUD]->textureID = LoadTGA("Image//hud.tga");
 
+	meshList[GEO_BOSSHUD] = MeshBuilder::GenerateOBJ("hud", "OBJ//hud.obj");
+	meshList[GEO_BOSSHUD]->textureID = LoadTGA("Image//bosshud.tga");
+
 	meshList[GEO_HEALTH] = MeshBuilder::GenerateOBJ("health", "OBJ//health.obj");
 	meshList[GEO_HEALTH]->textureID = LoadTGA("Image//health.tga");
 
@@ -250,7 +253,7 @@ void StudioProject::Init()
 	meshList[GEO_INVENTORY] = MeshBuilder::GenerateOBJ("", "OBJ//inventory.obj");
 	meshList[GEO_INVENTORY]->textureID = LoadTGA("Image//inventoryui.tga");
 
-	meshList[GEO_MOUSE] = MeshBuilder::GenerateOBJ("", "OBJ//play1.obj");
+	meshList[GEO_MOUSE] = MeshBuilder::GenerateOBJ("", "OBJ//mouse.obj");
 	meshList[GEO_MOUSE]->textureID = LoadTGA("Image//gay_mouse.tga");
 
 	meshList[GEO_SHOP] = MeshBuilder::GenerateOBJ("", "OBJ//shop.obj");
@@ -1289,7 +1292,7 @@ void StudioProject::Render()
 		}
 
 		modelStack.PushMatrix();
-		RenderMeshOnScreen(meshList[GEO_HUD], 35, 55, 20, 20, 90);
+		RenderMeshOnScreen(meshList[GEO_BOSSHUD], 33, 54.55, 16.95, 36.6, 90);
 		RenderMeshOnScreen(meshList[GEO_HEALTH], 34.71, 55, ((float)((float)DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getHealth() / 100.) * 20.), 20, 90);
 		modelStack.PopMatrix();
 	}
@@ -1505,10 +1508,11 @@ void StudioProject::Render()
 			}
 		}
 	}
+	RenderTextOnScreen(meshList[GEO_TEXT],"Ammo : "+std::to_string(PlayerBase::instance()->getPlayerAmmo()),Color(1,1,1),1.8,35,5);
 	//-----------------------------------------------------MOUSE-----------------------------------------------------
 	if (mouse)
 	{
-		RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx / 10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy) / 10, 15, 15, 90);
+		RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx / 10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy) / 10, 3, 3, 90);
 	}
 
 

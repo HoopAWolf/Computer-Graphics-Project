@@ -150,7 +150,7 @@ void SceneBossH::Init()
 	meshList[GEO_INVENTORY] = MeshBuilder::GenerateOBJ("", "OBJ//inventory.obj");
 	meshList[GEO_INVENTORY]->textureID = LoadTGA("Image//inventoryui.tga");
 
-	meshList[GEO_MOUSE] = MeshBuilder::GenerateOBJ("", "OBJ//play1.obj");
+	meshList[GEO_MOUSE] = MeshBuilder::GenerateOBJ("", "OBJ//mouse.obj");
 	meshList[GEO_MOUSE]->textureID = LoadTGA("Image//gay_mouse.tga");
 
 	meshList[GEO_SHOP] = MeshBuilder::GenerateOBJ("", "OBJ//shop.obj");
