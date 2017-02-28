@@ -113,8 +113,6 @@ void StudioProject::Init()
 	}
 
 	DataBase::instance()->setEntity(true, false, false, 1, new Boss_1(Vector3(10 + 0 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(true, false, false, 1, new Boss_2(Vector3(10 + 5 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(true, false, false, 1, new Boss_3(Vector3(10 + 10 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(true, false, false, 1, new Boss_4(Vector3(10 + 15 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 
 	DataBase::instance()->setEntity(false, true, false, 1, new EntitySpawner(Vector3(25, 0, 75), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
@@ -237,6 +235,9 @@ void StudioProject::Init()
 	meshList[GEO_HUD] = MeshBuilder::GenerateOBJ("hud", "OBJ//hud.obj");
 	meshList[GEO_HUD]->textureID = LoadTGA("Image//hud.tga");
 
+	meshList[GEO_BOSSHUD] = MeshBuilder::GenerateOBJ("hud", "OBJ//hud.obj");
+	meshList[GEO_BOSSHUD]->textureID = LoadTGA("Image//bosshud.tga");
+
 	meshList[GEO_HEALTH] = MeshBuilder::GenerateOBJ("health", "OBJ//health.obj");
 	meshList[GEO_HEALTH]->textureID = LoadTGA("Image//health.tga");
 
@@ -252,7 +253,7 @@ void StudioProject::Init()
 	meshList[GEO_INVENTORY] = MeshBuilder::GenerateOBJ("", "OBJ//inventory.obj");
 	meshList[GEO_INVENTORY]->textureID = LoadTGA("Image//inventoryui.tga");
 
-	meshList[GEO_MOUSE] = MeshBuilder::GenerateOBJ("", "OBJ//play1.obj");
+	meshList[GEO_MOUSE] = MeshBuilder::GenerateOBJ("", "OBJ//mouse.obj");
 	meshList[GEO_MOUSE]->textureID = LoadTGA("Image//gay_mouse.tga");
 
 	meshList[GEO_SHOP] = MeshBuilder::GenerateOBJ("", "OBJ//shop.obj");
@@ -276,8 +277,8 @@ void StudioProject::Init()
 	//Just Kidding,you got pranked there aint no time for hard codings 
 	//-------------------------------------------------------------------------------------------
 	//light
-	light[0].type = Light::LIGHT_DIRECTIONAL;
-	light[0].LightPosition.Set(0, 1, 0);
+	light[0].type = Light::LIGHT_POINT;
+	light[0].LightPosition.Set(0, 1000, 0);
 	light[0].color.Set(1, 1, 1);
 	light[0].power = 1;
 	light[0].kC = 1.f;
@@ -303,7 +304,7 @@ void StudioProject::Init()
 	//=============================================================================
 	//light
 	light[1].type = Light::LIGHT_POINT;
-	light[1].LightPosition.Set(1000, 1000, 1000);
+	light[1].LightPosition.Set(0, 100, 0);
 	light[1].color.Set(1, 1, 1);
 	light[1].power = 1;
 	light[1].kC = 1.f;
@@ -402,9 +403,9 @@ void StudioProject::Update(double dt)
 				for (int j = -1; j <= 1; j++)
 				{
 					EntityDrop* drop = new EntityDrop(DataBase::instance()->getRandomItem(false, true)->getItemID(), 
-						Vector3(DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().x + k,
-						DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().y,
-						DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().z + j),
+						Vector3(DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().x + k * 3,
+						0,
+						DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().z + j * 3),
 						Application::elapsed_timer_);
 					DataBase::instance()->setEntity(DIMENSIONID, drop);
 				}
@@ -987,7 +988,11 @@ void StudioProject::Update(double dt)
 			}
 			i = true;
 			timer = Application::elapsed_timer_;
-			ShopBase::instance()->sellItem(sellPosition);
+			if (sellPosition != 27)
+			{
+				ShopBase::instance()->sellItem(sellPosition);
+				sellPosition = 27;
+			}
 		}
 		else
 		{
@@ -1291,7 +1296,7 @@ void StudioProject::Render()
 		}
 
 		modelStack.PushMatrix();
-		RenderMeshOnScreen(meshList[GEO_HUD], 35, 55, 20, 20, 90);
+		RenderMeshOnScreen(meshList[GEO_BOSSHUD], 33, 54.55, 16.95, 36.6, 90);
 		RenderMeshOnScreen(meshList[GEO_HEALTH], 34.71, 55, ((float)((float)DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getHealth() / 100.) * 20.), 20, 90);
 		modelStack.PopMatrix();
 	}
@@ -1316,7 +1321,7 @@ void StudioProject::Render()
 			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().y,
 			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().z);
 		modelStack.Rotate(DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
-		RenderMesh(RenderingBase::instance()->getNPCMesh((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getNPCID()), false);
+		RenderMesh(RenderingBase::instance()->getNPCMesh((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getNPCID()), true);
 		modelStack.PopMatrix();
 	}
 
@@ -1507,10 +1512,11 @@ void StudioProject::Render()
 			}
 		}
 	}
+	RenderTextOnScreen(meshList[GEO_TEXT],"Ammo : "+std::to_string(PlayerBase::instance()->getPlayerAmmo()),Color(1,1,1),1.8,35,5);
 	//-----------------------------------------------------MOUSE-----------------------------------------------------
 	if (mouse)
 	{
-		RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx / 10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy) / 10, 15, 15, 90);
+		RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx / 10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy) / 10, 3, 3, 90);
 	}
 
 
