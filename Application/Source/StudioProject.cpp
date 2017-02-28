@@ -259,6 +259,15 @@ void StudioProject::Init()
 	meshList[GEO_AIM] = MeshBuilder::GenerateOBJ("", "OBJ//Crosshair.obj");
 	meshList[GEO_AIM]->textureID = LoadTGA("Image//Crosshair.tga");
 
+	meshList[GEO_BLOOD] = MeshBuilder::GenerateOBJ("", "OBJ//blood.obj");
+	meshList[GEO_BLOOD]->textureID = LoadTGA("Image//blood.tga");
+
+	meshList[GEO_ARMORSKEEL] = MeshBuilder::GenerateOBJ("", "OBJ//armorskill.obj");
+	meshList[GEO_ARMORSKEEL]->textureID = LoadTGA("Image//armorskill.tga");
+
+	meshList[GEO_LIGHTNING] = MeshBuilder::GenerateOBJ("", "OBJ//lightning.obj");
+	meshList[GEO_LIGHTNING]->textureID = LoadTGA("Image//lightning.tga");
+
 	//------------------------------------------------------------------------------------------
 	//NPC for this scene only
 	//Its gonna be funny seeing all of dem walk huehuehue
@@ -1504,8 +1513,30 @@ void StudioProject::Render()
 
 
 	//----------------------------------------------------AIM--------------------------------------------------------------
+	if (PlayerBase::instance()->getArmor() > 0)
+	{
+		RenderMeshOnScreen(meshList[GEO_ARMORSKEEL], 40, 30, 80, 65, 90);
+	}
+	if (PlayerBase::instance()->getPlayerAttackSpeed()>1)
+	{
+		RenderMeshOnScreen(meshList[GEO_LIGHTNING], 40, 30, 80, 65, 90);
+	}
+
+	if (PlayerBase::instance()->isShowBlood())
+		RenderMeshOnScreen(meshList[GEO_BLOOD], 40, 30, 80, 65, 90);
+
 
 	RenderMeshOnScreen(meshList[GEO_AIM], 40, 27.5, 3, 3, 90);
+
+
+
+	//IF DURATION FOR LIGHTNING SKILL IS MORE THAN 0
+	//SHOW LIGHTNING EFFECT
+	//IF PLAYERBASE:: SHOW BLOOD == TRUE
+	//SHOWBLOOD;
+	//IF DURATION FOR ARMOR SKILL IS MORE THAN 0
+	//SHOW ARMNOR EFFECT
+	
 
 }
 

@@ -48,7 +48,11 @@ class StudioProject : public Scene
 		GEO_MOUSE,
 		GEO_INVENTORY,
 		GEO_AIM,
+		GEO_BLOOD,
 		GEO_ARMOR,
+		GEO_ARMORSKEEL,
+		GEO_LIGHTNING,
+
 
 		NUM_GEOMETRY,
 	};

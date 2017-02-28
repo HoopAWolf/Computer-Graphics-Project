@@ -237,7 +237,7 @@ public:
 
 				if (PlayerBase::instance()->getBoundingBox().isPointInsideAABB(position_, forward_))
 				{
-					PlayerBase::instance()->playerAttacked(damage_);
+					PlayerBase::instance()->playerAttacked(damage_, timer);
 				}
 				Minionlimit = true;
 			}

@@ -193,7 +193,7 @@ void Boss_4::updateAI(float timer, unsigned dimensionID, float dt)
 
 				if (PlayerBase::instance()->getBoundingBox().isAABBInsideAABB(getBoundingBox().increaseBoundry(Vector3(4, 4, 4), Vector3(4, 4, 4))))
 				{
-					PlayerBase::instance()->playerAttacked(damage_);
+					PlayerBase::instance()->playerAttacked(damage_, timer);
 				}
 				limit = true;
 			}
