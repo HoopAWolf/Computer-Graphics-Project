@@ -157,6 +157,10 @@ void PlayerBase::playerUpdate(float timer, float dt)
 
 	//IF TIMER > SHOWBLOODTIMER + .2
 	//SHOWBLOOD = FALSE;
+	if (timer > show_blood_timer_+0.4)
+	{
+		show_blood_ = false;
+	}
 
 	//RESET COOLDOWN
 	for (int i = 0; i < skills_.size(); i++)
@@ -300,6 +304,8 @@ void PlayerBase::playerAttacked(int damage, float timer)
 	}
 
 	player_health_ -= tempDamage;
+	show_blood_ = true;
+	show_blood_timer_ = timer;
 	//SET SHOWBLOOD = TRUE
 	//SET SHOWBLODDTIMER = timer
 }
@@ -360,6 +366,7 @@ bool PlayerBase::isShowBlood()
 
 void PlayerBase::deaded()
 {
+	armor_ = 100;
 	player_health_ = 100;
 	experience_ = 0;
 }

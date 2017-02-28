@@ -50,6 +50,8 @@ class StudioProject : public Scene
 		GEO_AIM,
 		GEO_BLOOD,
 		GEO_ARMOR,
+		GEO_ARMORSKEEL,
+		GEO_LIGHTNING,
 
 
 		NUM_GEOMETRY,

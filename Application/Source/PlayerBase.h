@@ -101,6 +101,7 @@ public:
 	void swapItemInInventory(int itemOne, int itemTwo);
 	void removeItemInInventory(unsigned position);
 	bool isShowBlood();
+	
 
 	bool isInventoryFull();
 	void moveCurrItem(bool forward);
