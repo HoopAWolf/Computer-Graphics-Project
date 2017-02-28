@@ -49,6 +49,8 @@ class StudioProject : public Scene
 		GEO_INVENTORY,
 		GEO_AIM,
 		GEO_BLOOD,
+		GEO_ARMOR,
+
 
 		NUM_GEOMETRY,
 	};

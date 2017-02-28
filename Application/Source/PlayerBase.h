@@ -31,9 +31,9 @@ private:
 
 	PlayerBase(){};
 	static PlayerBase *s_instance;
-	int player_health_, current_held_item_, ammo_, currency_, current_skill_;
+	int player_health_, current_held_item_, ammo_, currency_, current_skill_, armor_;
 
-	unsigned damage_, moving_speed_,attribute_points_ , resistance_, dimension_ , 
+	unsigned damage_, moving_speed_,attribute_points_, dimension_ , 
 		level_, experience_, level_cap_;
 	bool isRecharging, hit;
 	float rechargingTimer, rotationX, health_regen_timer, attack_speed_;
@@ -65,6 +65,7 @@ public:
 	unsigned getPlayerMovingSpeed();
 	unsigned getPlayerResistance();
 	unsigned getAttributePoint();
+	int getArmor();
 	unsigned getDimension();
 	unsigned getPlayerLevel();
 	unsigned getPlayerExperience();

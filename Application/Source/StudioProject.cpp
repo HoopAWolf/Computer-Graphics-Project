@@ -244,6 +244,9 @@ void StudioProject::Init()
 	meshList[GEO_ATTRIBUTES] = MeshBuilder::GenerateOBJ("", "OBJ//attribute.obj");
 	meshList[GEO_ATTRIBUTES]->textureID = LoadTGA("Image//attribute.tga");
 
+	meshList[GEO_ARMOR] = MeshBuilder::GenerateOBJ("", "OBJ//armor.obj");
+	meshList[GEO_ARMOR]->textureID = LoadTGA("Image//armor.tga");
+
 	meshList[GEO_INVENTORY] = MeshBuilder::GenerateOBJ("", "OBJ//inventory.obj");
 	meshList[GEO_INVENTORY]->textureID = LoadTGA("Image//inventoryui.tga");
 
@@ -1179,14 +1182,6 @@ void StudioProject::Render()
 		RenderMesh(meshList[GEO_HEALTH], false);
 		modelStack.PopMatrix();*/
 
-		modelStack.PushMatrix();
-		modelStack.Translate(0, 4, 0);
-		if (camera.getRotationY() != 0)
-			modelStack.Rotate((camera.getRotationY() + 750), 0, 1, 0);
-
-		RenderText(meshList[GEO_TEXT], std::to_string(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getHealth()), Color(1, 0, 0));
-		modelStack.PopMatrix();
-
 		modelStack.Rotate(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
 
 		modelStack.PushMatrix();
@@ -1228,16 +1223,19 @@ void StudioProject::Render()
 
 		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0), true);
 		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		modelStack.Translate(0, 4, 0);
+		if (camera.getRotationY() != 0)
+			modelStack.Rotate((camera.getRotationY() + 750), 0, 1, 0);
+
+		RenderText(meshList[GEO_TEXT], std::to_string(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getHealth()), Color(1, 0, 0));
+		modelStack.PopMatrix();
 	}
 
 	//--------------------------------------------------BOSS--------------------------------------------------
 	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(3, DIMENSIONID); i++)
 	{
-
-		modelStack.PushMatrix();
-		RenderMeshOnScreen(meshList[GEO_HUD], 35, 40, 20, 20, 90);
-		RenderMeshOnScreen(meshList[GEO_HEALTH], 34.71, 40, ((float)((float)DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getHealth() / 100.) * 20.), 20, 90);
-		modelStack.PopMatrix();
 
 		if (!((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->isInvisible())
 		{
@@ -1283,6 +1281,11 @@ void StudioProject::Render()
 			RenderMesh(RenderingBase::instance()->getBossEntityMesh((dynamic_cast<EntityBoss*>(DataBase::instance()->getEntityBoss(DIMENSIONID, i)))->getBossID(), 0), true);
 			modelStack.PopMatrix();
 		}
+
+		modelStack.PushMatrix();
+		RenderMeshOnScreen(meshList[GEO_HUD], 35, 55, 20, 20, 90);
+		RenderMeshOnScreen(meshList[GEO_HEALTH], 34.71, 55, ((float)((float)DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getHealth() / 100.) * 20.), 20, 90);
+		modelStack.PopMatrix();
 	}
 
 	//--------------------------------------------------PROJECTILE--------------------------------------------------
@@ -1390,7 +1393,7 @@ void StudioProject::Render()
 	RenderMeshOnScreen(meshList[GEO_HEALTH], 34.71, 8, ((float)((float)PlayerBase::instance()->getPlayerHealth() / 100.) * 20.), 20, 90);
 	RenderMeshOnScreen(meshList[GEO_EXP], 34.71, 8, ((float)((float)PlayerBase::instance()->getPlayerExperience() / (float)PlayerBase::instance()->getPlayerLevelCap()) * 20.), 
 		20, 90);
-
+	RenderMeshOnScreen(meshList[GEO_ARMOR], 34.71, 8, ((float)((float)PlayerBase::instance()->getArmor() / 100.) * 20.), 20, 90);
 
 	RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getPlayerLevel()), Color(1, 1, 0), 2, 21.5, 1.85);
 	RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getPlayerHealth()), Color(1, 1, 0), 1.8, 23.2, 3.6);
@@ -1404,7 +1407,7 @@ void StudioProject::Render()
 		if ((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->isInteracting())
 		{
 			RenderTextOnScreen(meshList[GEO_TEXT], (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getInteractionString(), 
-				Color(1, 1, 0), 1.8, -5, 10);
+				Color(1, 1, 0), 1.8, 5, 10);
 		}
 	}
 	modelStack.PopMatrix();
@@ -1505,7 +1508,7 @@ void StudioProject::Render()
 	//----------------------------------------------------AIM--------------------------------------------------------------
 
 	RenderMeshOnScreen(meshList[GEO_AIM], 40, 27.5, 3, 3, 90);
-	RenderMeshOnScreen(meshList[GEO_BLOOD], 40, 30, 30, 25, 90);
+	RenderMeshOnScreen(meshList[GEO_BLOOD], 40, 30, 80,65, 90);
 }
 
 
