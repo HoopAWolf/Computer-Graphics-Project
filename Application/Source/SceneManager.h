@@ -25,6 +25,7 @@ private:
 
 public:
 
+	short dimension_been_;
 	unsigned frameRate = 0;
 	void addScene(Scene * scene);
 	void setNextScene(int sceneID);

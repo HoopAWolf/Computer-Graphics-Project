@@ -514,6 +514,14 @@ void StudioProject::Update(double dt)
 				{
 					dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->setState(2);
 				}
+
+				if (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->getNPCID() == 7)
+				{
+					if (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->isInteracting())
+					{
+
+					}
+				}
 			}
 		}
 
@@ -1170,7 +1178,7 @@ void StudioProject::Render()
 	{
 		modelStack.PushMatrix();
 		modelStack.Translate(DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().x,
-			DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().y,
+			DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().y - 1,
 			DataBase::instance()->getEnvironment(DIMENSIONID, i)->getPosition().z);
 
 		RenderMesh(RenderingBase::instance()->getEnviornmentMesh(DataBase::instance()->getEnvironment(DIMENSIONID, i)->getEnvironmentID()), true);
@@ -1510,7 +1518,7 @@ void StudioProject::Render()
 			}
 		}
 	}
-	RenderTextOnScreen(meshList[GEO_TEXT],"Ammo : "+std::to_string(PlayerBase::instance()->getPlayerAmmo()),Color(1,1,1),1.8,35,5);
+	RenderTextOnScreen(meshList[GEO_TEXT],"Ammo : "+std::to_string(PlayerBase::instance()->getPlayerAmmo()),Color(1,1,1),1.8,35,3);
 	//-----------------------------------------------------MOUSE-----------------------------------------------------
 	if (mouse)
 	{
