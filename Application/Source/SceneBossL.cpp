@@ -194,8 +194,20 @@ void SceneBossL::Update(double dt)
 
 	if (PlayerBase::instance()->getDimension() != DIMENSIONID)
 		PlayerBase::instance()->setPlayerDimension(DIMENSIONID);
-	camera.Update(dt);
+	SceneManager::getSceneManger()->getmycursor();
+
 	ShowCursor(false);
+
+	if (!inattrib && !ininv && !inshop)
+	{
+		camera.Update(dt);
+		mouse = false;
+	}
+
+	else if (attrib || shop || inv)
+	{
+		mouse = true;
+	}
 
 	SceneManager::getSceneManger()->frameRate = ((int)(1 / dt));
 

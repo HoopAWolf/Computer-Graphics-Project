@@ -256,6 +256,9 @@ void StudioProject::Init()
 	meshList[GEO_AIM] = MeshBuilder::GenerateOBJ("", "OBJ//Crosshair.obj");
 	meshList[GEO_AIM]->textureID = LoadTGA("Image//Crosshair.tga");
 
+	meshList[GEO_BLOOD] = MeshBuilder::GenerateOBJ("", "OBJ//blood.obj");
+	meshList[GEO_BLOOD]->textureID = LoadTGA("Image//blood.tga");
+
 	//------------------------------------------------------------------------------------------
 	//NPC for this scene only
 	//Its gonna be funny seeing all of dem walk huehuehue
@@ -1502,7 +1505,7 @@ void StudioProject::Render()
 	//----------------------------------------------------AIM--------------------------------------------------------------
 
 	RenderMeshOnScreen(meshList[GEO_AIM], 40, 27.5, 3, 3, 90);
-
+	RenderMeshOnScreen(meshList[GEO_BLOOD], 40, 30, 30, 25, 90);
 }
 
 

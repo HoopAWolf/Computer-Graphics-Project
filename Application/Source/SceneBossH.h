@@ -97,7 +97,33 @@ public:
 	virtual void Render();
 	virtual void Exit();
 	int currscene;
+	float rotateleftLeg = 0.0f;
+	float rotaterightLeg = 0.0f;
+	float rotateleftArm = 0.0f;
+
+	bool rightlegForward = true;
+	bool rightlegBackward = false;
+	bool leftlegForward = false;
+	bool leftlegBackward = true;
+	bool walking = false;
+	bool attacking = false;
 	bool pause = false;
+
+	bool attrib = false;
+	bool inattrib = false;
+	bool mouse = false;
+
+	bool s = false;
+	bool inv = false;
+	bool ininv = false;
+	bool i = false;
+	bool f = false;
+	bool shop = false;
+	int itemOne = 27;
+	int itemTwo = 27;
+	bool inshop = false;
+	int itemhover = 0;
+
 private:
 
 	unsigned m_vertexArrayID;
