@@ -155,6 +155,9 @@ void PlayerBase::playerUpdate(float timer, float dt)
 		}
 	}
 
+	//IF TIMER > SHOWBLOODTIMER + .2
+	//SHOWBLOOD = FALSE;
+
 	//RESET COOLDOWN
 	for (int i = 0; i < skills_.size(); i++)
 	{
@@ -281,7 +284,7 @@ void PlayerBase::decreaseCurrency(unsigned currency)
 		currency_ -= currency;
 }
 
-void PlayerBase::playerAttacked(int damage)
+void PlayerBase::playerAttacked(int damage, float timer)
 {
 	int tempDamage = damage;
 	int tempArmor = armor_;
@@ -297,6 +300,8 @@ void PlayerBase::playerAttacked(int damage)
 	}
 
 	player_health_ -= tempDamage;
+	//SET SHOWBLOOD = TRUE
+	//SET SHOWBLODDTIMER = timer
 }
 
 AABB PlayerBase::getBoundingBox()
@@ -322,7 +327,7 @@ string PlayerBase::getSkillName(unsigned skillID)
 	case 1:
 		return "Water Heal";
 	case 2:
-		return "Lightning Speed";
+		return "Lightning";
 	case 3:
 		return "Rock Hard";
 	default:
@@ -346,6 +351,11 @@ bool PlayerBase::isPlayerDead()
 		return true;
 
 	return false;
+}
+
+bool PlayerBase::isShowBlood()
+{
+	return show_blood_;
 }
 
 void PlayerBase::deaded()
