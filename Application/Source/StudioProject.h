@@ -41,6 +41,7 @@ class StudioProject : public Scene
 		GEO_TEXT,
 
 		GEO_HUD,
+		GEO_BOSSHUD,
 		GEO_HEALTH,
 		GEO_EXP,
 		GEO_ATTRIBUTES,
