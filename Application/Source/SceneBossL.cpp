@@ -1207,7 +1207,7 @@ void SceneBossL::Render()
 	//-----------------------------------------------------MOUSE-----------------------------------------------------
 	if (mouse)
 	{
-		RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx / 10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy) / 10, 1, 1, 90);
+		RenderMeshOnScreen(meshList[GEO_MOUSE], SceneManager::getSceneManger()->cx / 10, (-(SceneManager::getSceneManger()->cy) + SceneManager::getSceneManger()->wy) / 10, 3, 3, 90);
 	}
 
 
