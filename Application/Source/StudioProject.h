@@ -39,7 +39,7 @@ class StudioProject : public Scene
 		GEO_FRONT,
 		GEO_BACK,
 		GEO_TEXT,
-
+		GEO_CHAT,
 		GEO_HUD,
 		GEO_BOSSHUD,
 		GEO_HEALTH,
