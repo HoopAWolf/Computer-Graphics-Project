@@ -253,6 +253,9 @@ void StudioProject::Init()
 	meshList[GEO_LIGHTNING] = MeshBuilder::GenerateOBJ("", "OBJ//lightning.obj");
 	meshList[GEO_LIGHTNING]->textureID = LoadTGA("Image//lightning.tga");
 
+	meshList[GEO_CHAT] = MeshBuilder::GenerateOBJ("", "OBJ//chat.obj");
+	meshList[GEO_CHAT]->textureID = LoadTGA("Image//chat.tga");
+
 	//------------------------------------------------------------------------------------------
 	//NPC for this scene only
 	//Its gonna be funny seeing all of dem walk huehuehue
@@ -1472,6 +1475,7 @@ void StudioProject::Render()
 	{
 		if ((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->isInteracting())
 		{
+			RenderMeshOnScreen(meshList[GEO_CHAT], 37, 18, 40, 15, 90);
 			RenderTextOnScreen(meshList[GEO_TEXT], (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getInteractionString(), 
 				Color(1, 1, 0), 1.8, 5, 10);
 		}

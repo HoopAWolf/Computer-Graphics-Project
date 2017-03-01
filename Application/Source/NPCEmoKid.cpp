@@ -62,6 +62,9 @@ public:
 				timer_ = timer;
 			}
 
+
+			
+
 			break;
 
 		case WALKING:
@@ -73,31 +76,26 @@ public:
 				position_.z) != '#')
 			{
 				position_.x = position_.x + (forward_.x * 5 * dt);
-			}
+				position_.z = position_.z + (forward_.z * 5 * dt);//moving Speed and Direction of the NPC in the X and Z axis
+			}                                                     
 
-			if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
-				position_.x,
-				((int)(position_.z + (forward_.z * 5 * dt)))) != '#')
-			{
-				position_.z = position_.z + (forward_.z * 5 * dt);  //MOVING SPEED
-			}
-
-			rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
+			rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90; // Rotation of the NPC
 
 			if ((newTarget - position_).Length() < 4)
 			{
 				NPC_state_ = IDLE;
 			}
-			else if (timer > timer_ + 10)
-			{
-				NPC_state_ = IDLE;
-				timer_ = timer;
-			}
-
+		
 			break;
+
+
+
 		case INTERACTION:
+
 			newTarget = Camera::position;
+
 			rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
+
 			if (!(PlayerBase::instance()->getBoundingBox().isAABBInsideAABB(getBoundingBox().increaseBoundry(Vector3(10, 10, 10), Vector3(10, 10, 10)))))
 			{
 				NPC_state_ = IDLE;
@@ -110,6 +108,10 @@ public:
 	{
 		return "Don't talk to me I am Depressed";
 	}
+
+
+
+
 	void setPosition(Vector3 position)
 	{
 		position_ = position;

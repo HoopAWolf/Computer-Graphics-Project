@@ -89,7 +89,7 @@ public:
 
 			rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
 
-			if ((newTarget - position_).Length() < 4)
+			if ((newTarget - position_).Length() < 6)
 			{
 				NPC_state_ = IDLE;
 			}
@@ -108,6 +108,8 @@ public:
 			newTarget = Camera::position;
 
 			rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
+
+
 			if (!(PlayerBase::instance()->getBoundingBox().isAABBInsideAABB(getBoundingBox().increaseBoundry(Vector3(10, 10, 10), Vector3(10, 10, 10)))))
 			{
 				NPC_state_ = IDLE;

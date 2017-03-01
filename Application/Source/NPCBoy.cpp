@@ -83,7 +83,7 @@ public:
 				position_.z = position_.z + (forward_.z * 5 * dt);  //MOVING SPEED
 			}
 
-			rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
+			rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 50;
 
 			if ((newTarget - position_).Length() < 4)
 			{
