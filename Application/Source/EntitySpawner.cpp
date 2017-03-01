@@ -18,9 +18,9 @@ void EntitySpawner::updateAI(float timer, unsigned dimensionID, float dt)
 		{
 			if (rand() % 100 < 50)
 			{
-				if (dimensionID != 1)
+				if (dimensionID != 0)
 				{
-					if (dimensionID != 2)
+					if (dimensionID != 1)
 					{
 						minion = new RangedMinion_1(Vector3(position_.x + 3, 0, position_.z), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0));
 						DataBase::instance()->setEntity(false, true, false, dimensionID, minion);
@@ -33,7 +33,7 @@ void EntitySpawner::updateAI(float timer, unsigned dimensionID, float dt)
 				}
 				else
 				{
-					if (dimensionID != 2)
+					if (dimensionID != 1)
 					{
 						minion = new RangedMinion_1(position_, Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0));
 						DataBase::instance()->setEntity(false, true, false, dimensionID, minion);

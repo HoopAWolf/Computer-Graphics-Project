@@ -370,12 +370,6 @@
     <ClInclude Include="Source\SceneBossL.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SceneBossM.h">
-      <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SceneBossR.h">
-      <Filter>Header Files\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Mainmenu.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>

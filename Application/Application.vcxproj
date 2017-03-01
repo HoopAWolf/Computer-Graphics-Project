@@ -207,8 +207,6 @@
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneBossH.h" />
     <ClInclude Include="Source\SceneBossL.h" />
-    <ClInclude Include="Source\SceneBossM.h" />
-    <ClInclude Include="Source\SceneBossR.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\ShopBase.h" />

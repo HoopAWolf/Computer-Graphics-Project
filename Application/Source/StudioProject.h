@@ -105,6 +105,7 @@ class StudioProject : public Scene
 	};
 
 	float timer = 0.0f;
+	short beenTo = 0;
 	MS modelStack, viewStack, projectionStack;
 public:
 	StudioProject();

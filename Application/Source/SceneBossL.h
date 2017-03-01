@@ -41,6 +41,7 @@ class SceneBossL : public Scene
 		GEO_TEXT,
 
 		GEO_HUD,
+		GEO_BOSSHUD,
 		GEO_HEALTH,
 		GEO_EXP,
 		GEO_ATTRIBUTES,
@@ -48,7 +49,10 @@ class SceneBossL : public Scene
 		GEO_MOUSE,
 		GEO_INVENTORY,
 		GEO_AIM,
+		GEO_BLOOD,
 		GEO_ARMOR,
+		GEO_ARMORSKEEL,
+		GEO_LIGHTNING,
 
 		NUM_GEOMETRY,
 	};
@@ -99,6 +103,7 @@ class SceneBossL : public Scene
 	};
 
 	float timer = 0.0f;
+	bool spawn_boss_ = false;
 	MS modelStack, viewStack, projectionStack;
 public:
 	SceneBossL();
