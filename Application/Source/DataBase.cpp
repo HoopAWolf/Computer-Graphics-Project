@@ -281,6 +281,10 @@ void DataBase::registerEntityNPC()
 	npc_data_base[(dynamic_cast<EntityNPC*>(temp_obj))->getNPCID()] = new NPCLady(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
 	delete temp_obj;
 
+	temp_obj = new EntityPortal(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	npc_data_base[(dynamic_cast<EntityNPC*>(temp_obj))->getNPCID()] = new EntityPortal(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0));
+	delete temp_obj;
+
 }
 
 void DataBase::registerEntityBoss()

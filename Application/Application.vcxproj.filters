@@ -439,6 +439,9 @@
     <ClInclude Include="Source\dead.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\EntityPortal.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\..\Downloads\Practical2_files(1)\Practical2_files\Application\Shader\SimpleFragmentShader.fragmentshader">

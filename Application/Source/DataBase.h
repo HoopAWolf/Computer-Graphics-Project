@@ -73,6 +73,7 @@
 #include "NPCNegan.cpp"
 #include "NPCEmoKid.cpp"
 #include "NPCLady.cpp"
+#include "EntityPortal.h"
 
 
 

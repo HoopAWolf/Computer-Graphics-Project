@@ -180,6 +180,7 @@
     <ClInclude Include="Source\EntityChickenProjectile.h" />
     <ClInclude Include="Source\EntityFireBall.h" />
     <ClInclude Include="Source\EntityNPC.h" />
+    <ClInclude Include="Source\EntityPortal.h" />
     <ClInclude Include="Source\EntityProjectile.h" />
     <ClInclude Include="Source\EntitySpawner.h" />
     <ClInclude Include="Source\EnvironmentBase.h" />

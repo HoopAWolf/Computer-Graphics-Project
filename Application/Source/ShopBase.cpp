@@ -19,7 +19,7 @@ int ShopBase::getShopItemSize()
 
 void ShopBase::buyItem(int position)
 {
-	if (PlayerBase::instance()->getPlayerCurrency() >= (dynamic_cast<ItemWeapon*>(shop_items_[position])->getPriceOfWeapon()))
+	if (shop_items_[position] != nullptr && PlayerBase::instance()->getPlayerCurrency() >= (dynamic_cast<ItemWeapon*>(shop_items_[position])->getPriceOfWeapon()))
 	{
 		if (!PlayerBase::instance()->isInventoryFull())
 		{
