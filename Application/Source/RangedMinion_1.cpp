@@ -67,7 +67,13 @@ void RangedMinion_1::updateAI(float timer, unsigned dimensionID, float dt)
 		}
 
 		newTarget = Vector3(Camera::position.x, position_.y, Camera::position.z);
-		forward_ = (newTarget - position_).Normalized();
+		try{
+			forward_ = (newTarget - position_).Normalized();
+		}
+		catch (DivideByZero exp)
+		{
+			std::cout << "zero danger" << std::endl;
+		}
 
 		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
 			((int)(position_.x + (forward_.x * 10 * dt))),
@@ -146,7 +152,13 @@ void RangedMinion_1::updateAI(float timer, unsigned dimensionID, float dt)
 			minionrightlegBackward = false;
 		}
 
-		forward_ = (newTarget - position_).Normalized();
+		try{
+			forward_ = (newTarget - position_).Normalized();
+		}
+		catch (DivideByZero exp)
+		{
+			std::cout << "zero danger" << std::endl;
+		}
 
 		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
 			((int)(position_.x + (forward_.x * 5 * dt))),
@@ -218,20 +230,26 @@ void RangedMinion_1::updateAI(float timer, unsigned dimensionID, float dt)
 		}
 
 		newTarget = Vector3(position_.x + ((rand() % 100 < 50) ? Camera::view.x + 10 : Camera::view.x + -10), position_.y, position_.z + ((rand() % 100 < 50) ? Camera::view.z + 10 : Camera::view.z + -10));
-		forward_ = (newTarget - position_).Normalized();
+		try{
+			forward_ = (newTarget - position_).Normalized();
+		}
+		catch (DivideByZero exp)
+		{
+			std::cout << "zero danger" << std::endl;
+		}
 
 		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
-			((int)(position_.x + (forward_.x * 5 * dt))),
+			((int)(position_.x + (forward_.x * 10 * dt))),
 			position_.z) != '#')
 		{
-			position_.x = position_.x + (forward_.x * 5 * dt);
+			position_.x = position_.x + (forward_.x * 10 * dt);
 		}
 
 		if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
 			position_.x,
-			((int)(position_.z + (forward_.z * 5 * dt)))) != '#')
+			((int)(position_.z + (forward_.z * 10 * dt)))) != '#')
 		{
-			position_.z = position_.z + (forward_.z * 5 * dt);  //MOVING SPEED
+			position_.z = position_.z + (forward_.z * 10 * dt);  //MOVING SPEED
 		}
 
 		rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;

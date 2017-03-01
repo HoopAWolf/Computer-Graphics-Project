@@ -33,6 +33,8 @@ void Camera3::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
 	Vector3 right = view.Cross(up);
 	right.y = 0;
 	right.Normalize();
+	rotationZ = 0;
+	rotationY = 0;
 	this->up = defaultUp = right.Cross(view).Normalized();
 }
 

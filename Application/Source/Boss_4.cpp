@@ -65,7 +65,13 @@ void Boss_4::updateAI(float timer, unsigned dimensionID, float dt)
 		}
 
 		newTarget = Vector3(Camera::position.x, position_.y, Camera::position.z);
-		forward_ = (newTarget - position_).Normalized();
+		try{
+			forward_ = (newTarget - position_).Normalized();
+		}
+		catch (DivideByZero exp)
+		{
+			std::cout << "zero danger" << std::endl;
+		}
 
 		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
 			((int)(position_.x + (forward_.x * 20 * dt))),
@@ -140,7 +146,13 @@ void Boss_4::updateAI(float timer, unsigned dimensionID, float dt)
 		}
 
 
-		forward_ = (newTarget - position_).Normalized();
+		try{
+			forward_ = (newTarget - position_).Normalized();
+		}
+		catch (DivideByZero exp)
+		{
+			std::cout << "zero danger" << std::endl;
+		}
 
 		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
 			((int)(position_.x + (forward_.x * 10 * dt))),
@@ -271,7 +283,13 @@ void Boss_4::updateAI(float timer, unsigned dimensionID, float dt)
 
 			if (timer > attack_speed_timer_ + .2)
 			{
-				forward_ = (newTarget - position_).Normalized();
+				try{
+					forward_ = (newTarget - position_).Normalized();
+				}
+				catch (DivideByZero exp)
+				{
+					std::cout << "zero danger" << std::endl;
+				}
 				forward_.y -= .3;
 				EntityFireBall* bullet = new EntityFireBall(position_, forward_, damage_, timer, false);
 				DataBase::instance()->setEntity(dimensionID, bullet);

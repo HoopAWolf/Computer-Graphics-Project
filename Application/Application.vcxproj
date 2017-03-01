@@ -87,8 +87,6 @@
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
     <ClCompile Include="Source\Boss_1.cpp" />
-    <ClCompile Include="Source\Boss_2.cpp" />
-    <ClCompile Include="Source\Boss_3.cpp" />
     <ClCompile Include="Source\Boss_4.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\Camera2.cpp" />
@@ -162,8 +160,6 @@
     <ClCompile Include="Source\RenderingBase.cpp" />
     <ClCompile Include="Source\SceneBossH.cpp" />
     <ClCompile Include="Source\SceneBossL.cpp" />
-    <ClCompile Include="Source\SceneBossM.cpp" />
-    <ClCompile Include="Source\SceneBossR.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\shader.cpp" />
     <ClCompile Include="Source\ShopBase.cpp" />
@@ -211,8 +207,6 @@
     <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\SceneBossH.h" />
     <ClInclude Include="Source\SceneBossL.h" />
-    <ClInclude Include="Source\SceneBossM.h" />
-    <ClInclude Include="Source\SceneBossR.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\shader.hpp" />
     <ClInclude Include="Source\ShopBase.h" />

@@ -21,7 +21,7 @@ public:
 		attack_speed_ = 1;
 		walking_speed_ = 5;
 		position_ = position;
-		size_ = Vector3(2, 4, 2);
+		size_ = Vector3(3, 1, 3);
 		up_ = up;
 		forward_ = forward;
 		right_ = right;
@@ -51,6 +51,14 @@ public:
 	void updateAI(float timer, unsigned dimensionID, float dt)
 	{
 		tempDT = dt;
+		position_.x = Camera::position.x;
+		position_.z = Camera::position.z;
+
+		if (position_.y != 0)
+		{
+			position_.y -= 5 * dt;
+		}
+
 		switch (NPC_state_)
 		{
 		case IDLE:
@@ -58,8 +66,9 @@ public:
 			break;
 
 		case INTERACTION:
-			if (!(PlayerBase::instance()->getBoundingBox().isAABBInsideAABB(getBoundingBox().increaseBoundry(Vector3(10, 10, 10), Vector3(10, 10, 10)))))
+			if (PlayerBase::instance()->getBoundingBox().isAABBInsideAABB(getBoundingBox().increaseBoundry(Vector3(10, 2, 10), Vector3(10, 2, 10))))
 			{
+				health_ = 0;
 				NPC_state_ = IDLE;
 			}
 			break;

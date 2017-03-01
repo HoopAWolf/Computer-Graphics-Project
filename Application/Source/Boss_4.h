@@ -32,7 +32,7 @@ public:
 		target_ = target;
 		drop_ID_ = 0;
 		boss_name_ = "Flash";
-		bossID_ = 3;
+		bossID_ = 1;
 		boss_state_ = IDLE;
 		armor_ = 30;
 		is_invisible_ = false;

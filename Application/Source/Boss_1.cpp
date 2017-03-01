@@ -67,7 +67,13 @@ void Boss_1::updateAI(float timer, unsigned dimensionID, float dt)
 		}
 
 		newTarget = Vector3(Camera::position.x, position_.y, Camera::position.z);
-		forward_ = (newTarget - position_).Normalized();
+		try{
+			forward_ = (newTarget - position_).Normalized();
+		}
+		catch (DivideByZero exp)
+		{
+			std::cout << "zero danger" << std::endl;
+		}
 
 		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
 			((int)(position_.x + (forward_.x * 10 * dt))),
@@ -141,7 +147,13 @@ void Boss_1::updateAI(float timer, unsigned dimensionID, float dt)
 			rightlegBackward = false;
 		}
 
-		forward_ = (newTarget - position_).Normalized();
+		try{
+			forward_ = (newTarget - position_).Normalized();
+		}
+		catch (DivideByZero exp)
+		{
+			std::cout << "zero danger" << std::endl;
+		}
 
 		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
 			((int)(position_.x + (forward_.x * 5 * dt))),
@@ -242,7 +254,7 @@ void Boss_1::updateAI(float timer, unsigned dimensionID, float dt)
 		{
 			if (rand() % 100 < 50)
 			{
-				minion = new RangedMinion_1(position_, Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0));
+				minion = new MeleeMinion_2(position_, Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0));
 				DataBase::instance()->setEntity(false, true, false, dimensionID, minion);
 			}
 			else

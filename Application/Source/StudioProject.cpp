@@ -12,7 +12,7 @@
 
 #include <iostream>
 
-#define DIMENSIONID 1
+#define DIMENSIONID 0
 
 DataBase *DataBase::s_instance = nullptr;
 MapBase *MapBase::s_instance = nullptr;
@@ -49,7 +49,7 @@ void StudioProject::Init()
 	//MapBase::instance()->generateMap(DIMENSIONID);  //RUN ONCE FOR EACH SCENE
 
 	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
-	MapBase::instance()->generateMap(DIMENSIONID, "maze.txt");  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->generateMap(DIMENSIONID, "town.txt");  //RUN ONCE FOR EACH SCENE
 
 	RenderingBase::instance()->registerAllRenderingData();  //RUN ONCE
 
@@ -101,33 +101,15 @@ void StudioProject::Init()
 		RenderingBase::instance()->getNPCMesh(i)->textureID = LoadTGA(tempString.c_str());
 	}
 
-	//-------------------------------------------------------TESTING PURPOSES-----------------------------------------------------------
-	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(0); i++)
-	{
-		DataBase::instance()->setEntity(1, new EntityDrop(i, Vector3(1 + i * 20, 0, 50), Application::elapsed_timer_));
-	}
+	//SPAWNING OF ENTITIES
+	DataBase::instance()->setEntity(false, false, true, DIMENSIONID, new NPCGirlwithBoobs(Vector3(10 + 0 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, DIMENSIONID, new NPCBoy(Vector3(10 + 5 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, DIMENSIONID, new NPCScientist(Vector3(1 + 10 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, DIMENSIONID, new NPCElephant(Vector3(10 + 15 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, DIMENSIONID, new NPCNegan(Vector3(52 + 20 * 10, 0, 141), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, DIMENSIONID, new NPCEmoKid(Vector3(1 + (10 * 20), 0, 118), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, false, true, DIMENSIONID, new NPCLady(Vector3(72 + 10 * 20, 0, 178), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 
-	for (int i = 0; i < DataBase::instance()->sizeOfDataBase(0); i++)
-	{
-		DataBase::instance()->setEntity(1, new EntityDrop(i, Vector3(1 + i * 20, 0, 80), Application::elapsed_timer_));
-	}
-
-	DataBase::instance()->setEntity(true, false, false, 1, new Boss_1(Vector3(10 + 0 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(true, false, false, 1, new Boss_4(Vector3(10 + 15 * 20, 0, 10), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-
-	DataBase::instance()->setEntity(false, true, false, 1, new EntitySpawner(Vector3(25, 0, 75), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, true, false, 1, new EntitySpawner(Vector3(10, 0, 75), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, true, false, 1, new EntitySpawner(Vector3(50, 0, 5), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	
-	DataBase::instance()->setEntity(false, false, true, 1, new NPCGirlwithBoobs(Vector3(10 + 0 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new NPCBoy(Vector3(10 + 5 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new NPCScientist(Vector3(1 + 10 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new NPCElephant(Vector3(10 + 15 * 20, 0, 40), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new NPCNegan(Vector3(52 + 20 * 10, 0, 141), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new NPCEmoKid(Vector3(1 + (10 * 20), 0, 118), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, false, true, 1, new NPCLady(Vector3(72 + 10 * 20, 0, 178), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-
-	//--------------------------------------------------------^REMOVE ONCE DONE^--------------------------------------------------------
 	
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
@@ -430,6 +412,53 @@ void StudioProject::Update(double dt)
 		DataBase::instance()->getEntityNPC(DIMENSIONID, i)->updateAI(Application::elapsed_timer_, DIMENSIONID, dt);
 		if (DataBase::instance()->getEntityNPC(DIMENSIONID, i)->isEntityDead())
 		{
+			if (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->getNPCState() == 1 && dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->getNPCID() == 7)
+			{
+				if (rand() % 100 < 50)
+				{
+					if (beenTo == 0)
+					{
+						SceneManager::getSceneManger()->setNextScene(2);
+						camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
+						beenTo = 1;
+					}
+					else
+					{
+						if (beenTo == 1)
+						{
+							SceneManager::getSceneManger()->setNextScene(3);
+							camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
+						}
+						else
+						{
+							SceneManager::getSceneManger()->setNextScene(2);
+							camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
+						}
+					}
+				}
+				else
+				{
+					if (beenTo == 0)
+					{
+						SceneManager::getSceneManger()->setNextScene(3);
+						camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
+						beenTo = 2;
+					}
+					else
+					{
+						if (beenTo == 2)
+						{
+							SceneManager::getSceneManger()->setNextScene(2);
+							camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
+						}
+						else
+						{
+							SceneManager::getSceneManger()->setNextScene(3);
+							camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
+						}
+					}
+				}
+			}
 			DataBase::instance()->destroyEntityNPC(DIMENSIONID, i);
 			--i;
 		}
@@ -517,11 +546,28 @@ void StudioProject::Update(double dt)
 					dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->setState(2);
 				}
 
-				if (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->getNPCID() == 7)
+				if (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->getNPCID() == 2)
 				{
 					if (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->isInteracting())
 					{
+						EntityNPC* npcTemp = new EntityPortal(Vector3(Camera::position.x, Camera::position.y + 20, Camera::position.z), Vector3(0, 1, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0), Camera::position);
+						npcTemp->setState(2);
+						DataBase::instance()->setEntity(false, false, true, DIMENSIONID, npcTemp);
+						PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
+					}
+				}
 
+				else if (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->getNPCID() == 4)
+				{
+					if (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->isInteracting())
+					{
+						if (!shop)
+						{
+							shop = true;
+							inshop = true;
+							timer = Application::elapsed_timer_;
+							PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IN_UI);
+						}
 					}
 				}
 			}
@@ -571,15 +617,6 @@ void StudioProject::Update(double dt)
 			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IN_UI);
 
 		}
-		
-		if (Application::IsKeyPressed('L') && !shop)
-		{
-			shop = true;
-			inshop = true;
-			timer = Application::elapsed_timer_;
-			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IN_UI);
-			std::cout << std::to_string(PlayerBase::instance()->getPlayerState()) << std::endl;
-		}
 	}
 
 	else if (Application::elapsed_timer_ > timer + .2 && PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->IN_UI)
@@ -606,6 +643,7 @@ void StudioProject::Update(double dt)
 			inshop = false;
 			timer = Application::elapsed_timer_;
 			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
+			dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, 4))->setState(1);
 		}
 
 		if (Application::IsKeyPressed(VK_LBUTTON) && !s && attrib)
@@ -1192,7 +1230,7 @@ void StudioProject::Render()
 	{
 		modelStack.PushMatrix();
 		modelStack.Translate(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().x,
-			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().y,
+			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().y - 1,
 			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().z);
 
 		/*modelStack.PushMatrix();
@@ -1326,7 +1364,7 @@ void StudioProject::Render()
 	{
 		modelStack.PushMatrix();
 		modelStack.Translate(DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().x,
-			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().y,
+			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().y - 1,
 			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().z);
 		modelStack.Rotate(DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
 		RenderMesh(RenderingBase::instance()->getNPCMesh((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getNPCID()), true);
@@ -1543,15 +1581,6 @@ void StudioProject::Render()
 
 
 	RenderMeshOnScreen(meshList[GEO_AIM], 40, 27.5, 3, 3, 90);
-
-
-
-	//IF DURATION FOR LIGHTNING SKILL IS MORE THAN 0
-	//SHOW LIGHTNING EFFECT
-	//IF PLAYERBASE:: SHOW BLOOD == TRUE
-	//SHOWBLOOD;
-	//IF DURATION FOR ARMOR SKILL IS MORE THAN 0
-	//SHOW ARMNOR EFFECT
 	
 
 }
