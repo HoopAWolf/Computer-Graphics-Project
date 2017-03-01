@@ -25,7 +25,7 @@ public:
 		attack_speed_ = 1;
 		walking_speed_ = 5;
 		position_ = position;
-		size_ = Vector3(2, 4, 2);
+		size_ = Vector3(2, 5, 2);
 		up_ = up;
 		forward_ = forward;
 		right_ = right;
@@ -38,7 +38,11 @@ public:
 		is_invisible_ = false;
 	}
 
-	void onDeath(){}
+	void onDeath()
+	{
+		PlayerBase::instance()->increaseCurrency(300);
+		PlayerBase::instance()->increaseExperience(500);
+	}
 
 	bool isEntityDead()
 	{

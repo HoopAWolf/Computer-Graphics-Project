@@ -270,6 +270,7 @@ void dead::Update(double dt)
 		if (SceneManager::getSceneManger()->cx > 250 && SceneManager::getSceneManger()->cx < 553 && SceneManager::getSceneManger()->cy>260 && SceneManager::getSceneManger()->cy < 392)
 		{
 			SceneManager::getSceneManger()->setNextScene(1);
+			camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
 		}
 		t = true;
 	}

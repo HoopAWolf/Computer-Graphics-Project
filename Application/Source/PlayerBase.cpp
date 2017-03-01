@@ -37,6 +37,7 @@ void PlayerBase::startPlayer()
 	}
 
 	addIntoPlayerInventory(5);
+	addIntoPlayerInventory(15);
 }
 
 void PlayerBase::playerUpdate(float timer, float dt)

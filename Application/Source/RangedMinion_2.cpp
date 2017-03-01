@@ -101,7 +101,7 @@ void RangedMinion_2::updateAI(float timer, unsigned dimensionID, float dt)
 			minion_state_ = BASIC_ATTACK;
 			timer_ = timer;
 		}
-		else if ((newTarget - position_).Length() < 10)
+		else if ((newTarget - position_).Length() < 7)
 		{
 			minion_state_ = RETREAT;
 			timer_ = timer;

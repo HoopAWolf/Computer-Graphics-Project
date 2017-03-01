@@ -24,8 +24,12 @@ SceneBossH::~SceneBossH()
 
 void SceneBossH::Init()
 {
-	//MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
-	//MapBase::instance()->generateMap(DIMENSIONID, "tower_def.txt");  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->generateMap(DIMENSIONID, "tower_def.txt");  //RUN ONCE FOR EACH SCENE
+
+	DataBase::instance()->setEntity(false, true, false, DIMENSIONID, new EntitySpawner(Vector3(82, 35, 107), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, false, DIMENSIONID, new EntitySpawner(Vector3(73, 35, 227), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, false, DIMENSIONID, new EntitySpawner(Vector3(114, 35, 314), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
@@ -1168,15 +1172,15 @@ void SceneBossH::Render()
 		}
 		modelStack.PopMatrix();
 
-		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0), true);
-		modelStack.PopMatrix();
-
 		modelStack.PushMatrix();
 		modelStack.Translate(0, 4, 0);
 		if (camera.getRotationY() != 0)
 			modelStack.Rotate((camera.getRotationY() + 750), 0, 1, 0);
 
 		RenderText(meshList[GEO_TEXT], std::to_string(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getHealth()), Color(1, 0, 0));
+		modelStack.PopMatrix();
+
+		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0), true);
 		modelStack.PopMatrix();
 	}
 

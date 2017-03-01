@@ -25,7 +25,7 @@ public:
 		attack_speed_ = 1;
 		walking_speed_ = 5;
 		position_ = position;
-		size_ = Vector3(2, 4, 2);
+		size_ = Vector3(2, 5, 2);
 		up_ = up;
 		forward_ = forward;
 		right_ = right;
@@ -40,8 +40,8 @@ public:
 	}
 	void onDeath()
 	{
-		PlayerBase::instance()->increaseCurrency(1000);
-		PlayerBase::instance()->increaseExperience(4000);
+		PlayerBase::instance()->increaseCurrency(250);
+		PlayerBase::instance()->increaseExperience(400);
 	}
 
 	bool isEntityDead()

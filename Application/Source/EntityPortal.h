@@ -77,7 +77,7 @@ public:
 
 	string getInteractionString()
 	{
-		return "TELEPORTING";
+		return "";
 	}
 
 	void setPosition(Vector3 position)

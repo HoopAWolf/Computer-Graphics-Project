@@ -22,7 +22,7 @@ public:
 		damage_ = 10;
 		attack_speed_ = 1;
 		position_ = position;
-		size_ = Vector3(2, 4, 2);
+		size_ = Vector3(7, 4, 7);
 		drop_ID_ = 0;
 		timer_ = 0;
 		minion_name_ = "spawner";

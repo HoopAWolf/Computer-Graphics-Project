@@ -316,6 +316,7 @@ void StudioProject::Init()
 	projectionStack.LoadMatrix(projection);
 }
 
+bool stopTeleporting = false;
 void StudioProject::Update(double dt)
 {
 	if (PlayerBase::instance()->getDimension() != DIMENSIONID)
@@ -414,25 +415,27 @@ void StudioProject::Update(double dt)
 		{
 			if (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->getNPCState() == 1 && dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->getNPCID() == 7)
 			{
-				if (rand() % 100 < 50)
+				if (rand() % 100 < 30)
 				{
 					if (beenTo == 0)
 					{
-						SceneManager::getSceneManger()->setNextScene(2);
+						SceneManager::getSceneManger()->setNextScene(3);
 						camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
-						beenTo = 1;
+						beenTo = 3;
 					}
 					else
 					{
-						if (beenTo == 1)
-						{
-							SceneManager::getSceneManger()->setNextScene(3);
-							camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
-						}
-						else
+						if (beenTo == 3)
 						{
 							SceneManager::getSceneManger()->setNextScene(2);
 							camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
+							beenTo = 2;
+						}
+						else
+						{
+							SceneManager::getSceneManger()->setNextScene(3);
+							camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
+							beenTo = 3;
 						}
 					}
 				}
@@ -440,7 +443,7 @@ void StudioProject::Update(double dt)
 				{
 					if (beenTo == 0)
 					{
-						SceneManager::getSceneManger()->setNextScene(3);
+						SceneManager::getSceneManger()->setNextScene(2);
 						camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
 						beenTo = 2;
 					}
@@ -448,17 +451,20 @@ void StudioProject::Update(double dt)
 					{
 						if (beenTo == 2)
 						{
-							SceneManager::getSceneManger()->setNextScene(2);
+							SceneManager::getSceneManger()->setNextScene(3);
 							camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
+							beenTo = 3;
 						}
 						else
 						{
-							SceneManager::getSceneManger()->setNextScene(3);
+							SceneManager::getSceneManger()->setNextScene(2);
 							camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
+							beenTo = 2;
 						}
 					}
 				}
 			}
+			stopTeleporting = false;
 			DataBase::instance()->destroyEntityNPC(DIMENSIONID, i);
 			--i;
 		}
@@ -546,14 +552,15 @@ void StudioProject::Update(double dt)
 					dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->setState(2);
 				}
 
-				if (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->getNPCID() == 2)
+				if (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->getNPCID() == 2 && !stopTeleporting)
 				{
 					if (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->isInteracting())
 					{
 						EntityNPC* npcTemp = new EntityPortal(Vector3(Camera::position.x, Camera::position.y + 20, Camera::position.z), Vector3(0, 1, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0), Camera::position);
 						npcTemp->setState(2);
 						DataBase::instance()->setEntity(false, false, true, DIMENSIONID, npcTemp);
-						PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
+						dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->setState(1);
+						stopTeleporting = true;
 					}
 				}
 
@@ -1280,15 +1287,15 @@ void StudioProject::Render()
 		}
 		modelStack.PopMatrix();
 
-		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0), true);
-		modelStack.PopMatrix();
-
 		modelStack.PushMatrix();
 		modelStack.Translate(0, 4, 0);
 		if (camera.getRotationY() != 0)
 			modelStack.Rotate((camera.getRotationY() + 750), 0, 1, 0);
 
 		RenderText(meshList[GEO_TEXT], std::to_string(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getHealth()), Color(1, 0, 0));
+		modelStack.PopMatrix();
+
+		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0), true);
 		modelStack.PopMatrix();
 	}
 

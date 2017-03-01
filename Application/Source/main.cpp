@@ -1,10 +1,10 @@
 #include "Application.h"
 #include "DetectMemoryLeak.h"
 
-struct AtExit
-{
-	~AtExit() { _CrtDumpMemoryLeaks(); }
-} doAtExit;
+//struct AtExit
+//{
+//	~AtExit() { _CrtDumpMemoryLeaks(); }
+//} doAtExit;
 
 int main( void )
 {

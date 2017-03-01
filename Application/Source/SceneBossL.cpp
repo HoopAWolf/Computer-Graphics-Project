@@ -231,9 +231,14 @@ void SceneBossL::Init()
 	projection.SetToPerspective(45.f, 4.f / 3.f, 0.1f, 5000.f);
 	projectionStack.LoadMatrix(projection);
 
-	DataBase::instance()->setEntity(false, true, false, DIMENSIONID, new EntitySpawner(Vector3(15, 0, 72), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
-	DataBase::instance()->setEntity(false, true, false, DIMENSIONID, new EntitySpawner(Vector3(14, 0, 74), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, false, DIMENSIONID, new EntitySpawner(Vector3(10, 0, 4), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, false, DIMENSIONID, new EntitySpawner(Vector3(65, 0, 94), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, true, false, DIMENSIONID, new EntitySpawner(Vector3(14, 0, 32), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+
+	DataBase::instance()->setEntity(false, true, false, DIMENSIONID, new MeleeMinion_1(Vector3(10, 0, 4), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, false, DIMENSIONID, new MeleeMinion_2(Vector3(65, 0, 94), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, false, DIMENSIONID, new MeleeMinion_1(Vector3(14, 0, 32), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+
 }
 
 
@@ -1121,7 +1126,7 @@ void SceneBossL::Render()
 	{
 		modelStack.PushMatrix();
 		modelStack.Translate(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().x,
-			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().y - 3,
+			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().y,
 			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().z);
 
 		/*modelStack.PushMatrix();
@@ -1171,15 +1176,15 @@ void SceneBossL::Render()
 		}
 		modelStack.PopMatrix();
 
-		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0), true);
-		modelStack.PopMatrix();
-
 		modelStack.PushMatrix();
 		modelStack.Translate(0, 4, 0);
 		if (camera.getRotationY() != 0)
 			modelStack.Rotate((camera.getRotationY() + 750), 0, 1, 0);
 
 		RenderText(meshList[GEO_TEXT], std::to_string(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getHealth()), Color(1, 0, 0));
+		modelStack.PopMatrix();
+
+		RenderMesh(RenderingBase::instance()->getMinionEntityMesh((dynamic_cast<EntityMinion*>(DataBase::instance()->getEntityMinion(DIMENSIONID, i)))->getMinionID(), 0), true);
 		modelStack.PopMatrix();
 	}
 
@@ -1192,7 +1197,7 @@ void SceneBossL::Render()
 
 			modelStack.PushMatrix();
 			modelStack.Translate(DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().x,
-				DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().y + ((((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID() == 3) ? 0 : 2) - 3,
+				DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().y + ((((EntityBoss*)DataBase::instance()->getEntityBoss(DIMENSIONID, i))->getBossID() == 3) ? 0 : 2),
 				DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getPosition().z);
 
 			modelStack.Rotate(DataBase::instance()->getEntityBoss(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
