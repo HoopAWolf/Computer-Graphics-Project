@@ -385,10 +385,12 @@ void SceneBossL::Update(double dt)
 	if (Application::IsKeyPressed(VK_F1))
 	{
 		SceneManager::getSceneManger()->setNextScene(1);
+		camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
 	}
 	if (Application::IsKeyPressed(VK_F2))
 	{
 		SceneManager::getSceneManger()->setNextScene(3);
+		camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
 	}
 
 	if (Application::IsKeyPressed('G'))
