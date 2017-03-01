@@ -49,7 +49,7 @@ void StudioProject::Init()
 	//MapBase::instance()->generateMap(DIMENSIONID);  //RUN ONCE FOR EACH SCENE
 
 	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
-	MapBase::instance()->generateMap(DIMENSIONID, "maze.txt");  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->generateMap(DIMENSIONID, "town.txt");  //RUN ONCE FOR EACH SCENE
 
 	RenderingBase::instance()->registerAllRenderingData();  //RUN ONCE
 
