@@ -49,7 +49,7 @@ void StudioProject::Init()
 	//MapBase::instance()->generateMap(DIMENSIONID);  //RUN ONCE FOR EACH SCENE
 
 	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
-	MapBase::instance()->generateMap(DIMENSIONID, "maze.txt");  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->generateMap(DIMENSIONID, "town.txt");  //RUN ONCE FOR EACH SCENE
 
 	RenderingBase::instance()->registerAllRenderingData();  //RUN ONCE
 
@@ -524,6 +524,20 @@ void StudioProject::Update(double dt)
 
 					}
 				}
+
+				else if (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->getNPCID() == 4)
+				{
+					if (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i))->isInteracting())
+					{
+						if (!shop)
+						{
+							shop = true;
+							inshop = true;
+							timer = Application::elapsed_timer_;
+							PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IN_UI);
+						}
+					}
+				}
 			}
 		}
 
@@ -571,15 +585,6 @@ void StudioProject::Update(double dt)
 			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IN_UI);
 
 		}
-		
-		if (Application::IsKeyPressed('L') && !shop)
-		{
-			shop = true;
-			inshop = true;
-			timer = Application::elapsed_timer_;
-			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IN_UI);
-			std::cout << std::to_string(PlayerBase::instance()->getPlayerState()) << std::endl;
-		}
 	}
 
 	else if (Application::elapsed_timer_ > timer + .2 && PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->IN_UI)
@@ -606,6 +611,7 @@ void StudioProject::Update(double dt)
 			inshop = false;
 			timer = Application::elapsed_timer_;
 			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
+			dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, 4))->setState(1);
 		}
 
 		if (Application::IsKeyPressed(VK_LBUTTON) && !s && attrib)

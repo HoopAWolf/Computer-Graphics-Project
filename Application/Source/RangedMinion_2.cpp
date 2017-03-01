@@ -221,17 +221,17 @@ void RangedMinion_2::updateAI(float timer, unsigned dimensionID, float dt)
 		forward_ = (newTarget - position_).Normalized();
 
 		if (MapBase::instance()->checkingMapDataByCoord(dimensionID,
-			((int)(position_.x + (forward_.x * 5 * dt))),
+			((int)(position_.x + (forward_.x * 10 * dt))),
 			position_.z) != '#')
 		{
-			position_.x = position_.x + (forward_.x * 5 * dt);
+			position_.x = position_.x + (forward_.x * 10 * dt);
 		}
 
 		if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
 			position_.x,
-			((int)(position_.z + (forward_.z * 5 * dt)))) != '#')
+			((int)(position_.z + (forward_.z * 10 * dt)))) != '#')
 		{
-			position_.z = position_.z + (forward_.z * 5 * dt);  //MOVING SPEED
+			position_.z = position_.z + (forward_.z * 10 * dt);  //MOVING SPEED
 		}
 
 		rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
