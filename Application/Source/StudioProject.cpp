@@ -594,6 +594,15 @@ void StudioProject::Update(double dt)
 			timer = Application::elapsed_timer_;
 		}
 
+		if (Application::IsKeyPressed('G'))
+		{
+			PlayerBase::instance()->addIntoPlayerInventory(15);
+			PlayerBase::instance()->increaseCurrency(10000);
+			PlayerBase::instance()->increaseExperience(5000);
+
+			timer = Application::elapsed_timer_;
+		}
+
 		if (Application::IsKeyPressed(VK_LEFT))
 		{
 			PlayerBase::instance()->moveCurrSkill(false);

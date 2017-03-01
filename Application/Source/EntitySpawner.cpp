@@ -44,14 +44,14 @@ void EntitySpawner::updateAI(float timer, unsigned dimensionID, float dt)
 				if (rand() % 100 < 50)
 				{
 
-					minion = new MeleeMinion_2(Vector3(position_.x + 9, 0, position_.z + 9), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0));
+					minion = new MeleeMinion_2(Vector3(position_.x + 12, 0, position_.z + 12), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0));
 					DataBase::instance()->setEntity(false, true, false, dimensionID, minion);
 
 				}
 				else
 				{
 
-					minion = new RangedMinion_1(Vector3(position_.x - 9, 0, position_.z), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0));
+					minion = new RangedMinion_1(Vector3(position_.x - 12, 0, position_.z - 12), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0));
 					DataBase::instance()->setEntity(false, true, false, dimensionID, minion);
 
 				}

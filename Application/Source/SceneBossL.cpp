@@ -384,13 +384,21 @@ void SceneBossL::Update(double dt)
 
 	if (Application::IsKeyPressed(VK_F1))
 	{
-		SceneManager::getSceneManger()->setNextScene(2);
+		SceneManager::getSceneManger()->setNextScene(1);
 	}
 	if (Application::IsKeyPressed(VK_F2))
 	{
 		SceneManager::getSceneManger()->setNextScene(3);
 	}
 
+	if (Application::IsKeyPressed('G'))
+	{
+		PlayerBase::instance()->addIntoPlayerInventory(15);
+		PlayerBase::instance()->increaseCurrency(10000);
+		PlayerBase::instance()->increaseExperience(5000);
+
+		timer = Application::elapsed_timer_;
+	}
 	//light_controls---------------------------------------------------------------
 	//if (Application::IsKeyPressed('I'))
 	//{

@@ -27,7 +27,7 @@ void SceneBossH::Init()
 	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
 	MapBase::instance()->generateMap(DIMENSIONID, "tower_def.txt");  //RUN ONCE FOR EACH SCENE
 
-	DataBase::instance()->setEntity(false, true, false, DIMENSIONID, new EntitySpawner(Vector3(82, 35, 107), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
+	DataBase::instance()->setEntity(false, true, false, DIMENSIONID, new EntitySpawner(Vector3(83, 35, 107), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, true, false, DIMENSIONID, new EntitySpawner(Vector3(73, 35, 227), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 	DataBase::instance()->setEntity(false, true, false, DIMENSIONID, new EntitySpawner(Vector3(114, 35, 314), Vector3(0, 1, 0), Vector3(1, 0, 0), Vector3(10, 0, 10).Cross(Vector3(0, 1, 0)), Vector3(1, 0, 0)));
 
@@ -380,13 +380,21 @@ void SceneBossH::Update(double dt)
 
 	if (Application::IsKeyPressed(VK_F1))
 	{
-		SceneManager::getSceneManger()->setNextScene(2);
+		SceneManager::getSceneManger()->setNextScene(1);
 	}
 	if (Application::IsKeyPressed(VK_F2))
 	{
-		SceneManager::getSceneManger()->setNextScene(3);
+		SceneManager::getSceneManger()->setNextScene(2);
 	}
 
+	if (Application::IsKeyPressed('G'))
+	{
+		PlayerBase::instance()->addIntoPlayerInventory(15);
+		PlayerBase::instance()->increaseCurrency(10000);
+		PlayerBase::instance()->increaseExperience(5000);
+
+		timer = Application::elapsed_timer_;
+	}
 	//light_controls---------------------------------------------------------------
 	//if (Application::IsKeyPressed('I'))
 	//{
