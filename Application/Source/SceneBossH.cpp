@@ -24,8 +24,8 @@ SceneBossH::~SceneBossH()
 
 void SceneBossH::Init()
 {
-	//MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
-	//MapBase::instance()->generateMap(DIMENSIONID, "tower_def.txt");  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->generateMap(DIMENSIONID, "tower_def.txt");  //RUN ONCE FOR EACH SCENE
 
 	// Set background color to dark blue
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);

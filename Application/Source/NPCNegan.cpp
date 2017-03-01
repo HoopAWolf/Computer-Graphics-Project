@@ -64,6 +64,11 @@ public:
 
 			break;
 
+
+
+
+
+
 		case WALKING:
 
 			forward_ = (newTarget - position_).Normalized();
@@ -72,27 +77,29 @@ public:
 				((int)(position_.x + (forward_.x * 5 * dt))),
 				position_.z) != '#')
 			{
-				position_.x = position_.x + (forward_.x * 5 * dt);
+				position_.x = position_.x + (forward_.x * 5 * dt); //moving Speed on the X axis
 			}
 
 			if (MapBase::instance()->checkingMapDataByCoord(PlayerBase::instance()->getDimension(),
 				position_.x,
 				((int)(position_.z + (forward_.z * 5 * dt)))) != '#')
 			{
-				position_.z = position_.z + (forward_.z * 5 * dt);  //MOVING SPEED
+				position_.z = position_.z + (forward_.z * 5 * dt);  //Moving Speed on the Y axis
 			}
 
-			rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
+
+			rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90; //Rotation of NPC 
+
 
 			if ((newTarget - position_).Length() < 4)
 			{
 				NPC_state_ = IDLE;
 			}
-			else if (timer > timer_ + 10)
+			/*else if (timer > timer_ + 10)
 			{
 				NPC_state_ = IDLE;
 				timer_ = timer;
-			}
+			}*/
 
 			break;
 
@@ -102,7 +109,8 @@ public:
 
 		case INTERACTION:
 			newTarget = Camera::position;
-			rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90;
+			rotation_Y_ = -Math::RadianToDegree(atan2((position_ - newTarget).z, (position_ - newTarget).x)) - 90; //Rotation of NPC
+
 			if (!(PlayerBase::instance()->getBoundingBox().isAABBInsideAABB(getBoundingBox().increaseBoundry(Vector3(10, 10, 10), Vector3(10, 10, 10)))))
 			{
 				NPC_state_ = IDLE;
