@@ -6,7 +6,7 @@ public:
 	EnvironmentTowerSpwanner()
 	{
 		texture_string_ = "tower_spwanner";
-		environmentID_ = 15;
+		environmentID_ = 18;
 		environment_symbol_ = 'J';
 
 		boundry_[0][0] = '#';

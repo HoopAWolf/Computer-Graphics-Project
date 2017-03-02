@@ -24,7 +24,7 @@ SceneBossL::~SceneBossL()
 
 void SceneBossL::Init()
 {
-	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
+	MapBase::instance()->setMapSize(DIMENSIONID, 550, 550);  //RUN ONCE FOR EACH SCENE
 	MapBase::instance()->generateMap(DIMENSIONID, "maze.txt");  //RUN ONCE FOR EACH SCENE
 
 	// Set background color to dark blue
@@ -384,13 +384,23 @@ void SceneBossL::Update(double dt)
 
 	if (Application::IsKeyPressed(VK_F1))
 	{
-		SceneManager::getSceneManger()->setNextScene(2);
+		SceneManager::getSceneManger()->setNextScene(1);
+		camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
 	}
 	if (Application::IsKeyPressed(VK_F2))
 	{
 		SceneManager::getSceneManger()->setNextScene(3);
+		camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
 	}
 
+	if (Application::IsKeyPressed('G'))
+	{
+		PlayerBase::instance()->addIntoPlayerInventory(15);
+		PlayerBase::instance()->increaseCurrency(10000);
+		PlayerBase::instance()->increaseExperience(5000);
+
+		timer = Application::elapsed_timer_;
+	}
 	//light_controls---------------------------------------------------------------
 	//if (Application::IsKeyPressed('I'))
 	//{
@@ -1093,8 +1103,6 @@ void SceneBossL::Render()
 		glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightPosition_cameraspace.x);
 	}
 
-	RenderMesh(meshList[GEO_AXES], false);
-
 	RenderSkybox();
 
 	//=================================================================================================
@@ -1126,7 +1134,7 @@ void SceneBossL::Render()
 	{
 		modelStack.PushMatrix();
 		modelStack.Translate(DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().x,
-			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().y,
+			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().y - 1,
 			DataBase::instance()->getEntityMinion(DIMENSIONID, i)->getPosition().z);
 
 		/*modelStack.PushMatrix();
@@ -1260,7 +1268,7 @@ void SceneBossL::Render()
 	{
 		modelStack.PushMatrix();
 		modelStack.Translate(DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().x,
-			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().y,
+			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().y - 1,
 			DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getPosition().z);
 		modelStack.Rotate(DataBase::instance()->getEntityNPC(DIMENSIONID, i)->getRotationY(), 0, 1, 0);
 		RenderMesh(RenderingBase::instance()->getNPCMesh((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getNPCID()), true);
@@ -1353,18 +1361,6 @@ void SceneBossL::Render()
 	RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getPlayerLevel()), Color(1, 1, 0), 2, 21.5, 1.85);
 	RenderTextOnScreen(meshList[GEO_TEXT], std::to_string(PlayerBase::instance()->getPlayerHealth()), Color(1, 1, 0), 1.8, 23.2, 3.6);
 
-	modelStack.PopMatrix();
-
-	//--------------------------------------------------SPEECH--------------------------------------------------
-	modelStack.PushMatrix();
-	for (int i = 0; i < DataBase::instance()->sizeOfDimensionObjBase(5, DIMENSIONID); i++)
-	{
-		if ((dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->isInteracting())
-		{
-			RenderTextOnScreen(meshList[GEO_TEXT], (dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, i)))->getInteractionString(),
-				Color(1, 1, 0), 1.8, 5, 10);
-		}
-	}
 	modelStack.PopMatrix();
 
 
