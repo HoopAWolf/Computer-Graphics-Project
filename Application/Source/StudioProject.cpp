@@ -45,7 +45,10 @@ void StudioProject::Init()
 	srand(time(nullptr));
 	ShopBase::instance()->startShop();  //RUN ONCE
 
-	MapBase::instance()->setMapSize(DIMENSIONID, 550, 550);  //RUN ONCE FOR EACH SCENE
+	//MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
+	//MapBase::instance()->generateMap(DIMENSIONID);  //RUN ONCE FOR EACH SCENE
+
+	MapBase::instance()->setMapSize(DIMENSIONID, 500, 500);  //RUN ONCE FOR EACH SCENE
 	MapBase::instance()->generateMap(DIMENSIONID, "town.txt");  //RUN ONCE FOR EACH SCENE
 
 	RenderingBase::instance()->registerAllRenderingData();  //RUN ONCE
@@ -497,12 +500,10 @@ void StudioProject::Update(double dt)
 		if (Application::IsKeyPressed(VK_F1))
 		{
 			SceneManager::getSceneManger()->setNextScene(2);
-			camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
 		}
 		if (Application::IsKeyPressed(VK_F2))
 		{
 			SceneManager::getSceneManger()->setNextScene(3);
-			camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
 		}
 		
 	//light_controls---------------------------------------------------------------
@@ -591,15 +592,6 @@ void StudioProject::Update(double dt)
 		else if (Application::IsKeyPressed('E'))
 		{
 			PlayerBase::instance()->moveCurrItem(true);
-			timer = Application::elapsed_timer_;
-		}
-
-		if (Application::IsKeyPressed('G'))
-		{
-			PlayerBase::instance()->addIntoPlayerInventory(15);
-			PlayerBase::instance()->increaseCurrency(10000);
-			PlayerBase::instance()->increaseExperience(5000);
-
 			timer = Application::elapsed_timer_;
 		}
 
@@ -1231,6 +1223,8 @@ void StudioProject::Render()
 		Position lightPosition_cameraspace = viewStack.Top() * light[0].LightPosition;
 		glUniform3fv(m_parameters[U_LIGHT0_POSITION], 1, &lightPosition_cameraspace.x);
 	}
+
+	RenderMesh(meshList[GEO_AXES], false);
 
 	RenderSkybox();
 
@@ -1923,5 +1917,4 @@ void StudioProject::Exit()
 {
 	glDeleteVertexArrays(1, &m_vertexArrayID);
 	glDeleteProgram(m_programID);
-
 }

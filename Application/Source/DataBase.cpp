@@ -8,7 +8,12 @@ void DataBase::playSoundFromStringSG(string sound_name)
 
 void DataBase::playSoundFromStringBG(string sound_name)
 {
-	sfx_base_->play2D(("Audio/" + sound_name + ".mp3").c_str(), GL_FALSE);
+	sfx_base_->play2D(("Audio/" + sound_name + ".mp3").c_str(), GL_TRUE);
+}
+
+void DataBase::stopAllSound()
+{
+	sfx_base_->stopAllSounds();
 }
 
 void DataBase::registerItems()

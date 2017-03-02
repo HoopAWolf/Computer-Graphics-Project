@@ -278,6 +278,9 @@ void RangedMinion_2::updateAI(float timer, unsigned dimensionID, float dt)
 			EntityFireBall* bullet = new EntityFireBall(position_, forward_, damage_, timer, false);
 			DataBase::instance()->setEntity(dimensionID, bullet);
 			Minionlimit = true;
+
+
+
 		}
 		else if (rotateminionArm <= 0 && !Minionlimit)
 		{

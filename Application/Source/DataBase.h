@@ -11,7 +11,7 @@
 //Weapons 
 #include "ItemBattleAxe.cpp"
 #include "ItemGreatSword.cpp"
-#include "ItemChickenGun.cpp"
+#include "ItemChickenGun.h"
 #include "ItemDagger.cpp"
 #include "ItemGiggsGun.cpp"
 #include "ItemHammer.cpp"
@@ -214,6 +214,7 @@ public:
 
 	void playSoundFromStringSG(string sound_name);
 	void playSoundFromStringBG(string sound_name);
+	void stopAllSound();
 	void registerItems();  //REGISTER ALL ITEMS ONLY ONCE
 	void registerEnvironments();  //REGISTER ALL ENVIRONMENT ONLY ONCE
 	void registerEntityMinion();  //REGISTER ALL MINIONS ONLY ONCE

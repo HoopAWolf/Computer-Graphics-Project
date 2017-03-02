@@ -26,10 +26,14 @@ void SceneManager::quitAllScene()
 
 void SceneManager::setNextScene(int sceneID)
 {
+	DataBase::instance()->stopAllSound();
 	if (sceneID >= SceneDataBase.size())
+	{
 		currSceneID = SceneDataBase.size() - 1;
-
+	}
 	currSceneID = sceneID;
+
+	DataBase::instance()->playSoundFromStringBG(((currSceneID == 1) ? "What_is_love" : "Giggs_Gun"));
 }
 int SceneManager::getCurrentScene()
 {
