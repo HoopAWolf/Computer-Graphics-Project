@@ -61,10 +61,6 @@ public:
 				newTarget = Vector3(position_.x + ((rand() % 100 < 50) ? 10 : -10), position_.y, position_.z + ((rand() % 100 < 50) ? 10 : -10));
 				timer_ = timer;
 			}
-
-
-			
-
 			break;
 
 		case WALKING:
@@ -87,9 +83,6 @@ public:
 			}
 		
 			break;
-
-
-
 		case INTERACTION:
 
 			newTarget = Camera::position;
@@ -103,15 +96,10 @@ public:
 			break;
 		}
 	}
-
 	string getInteractionString()
 	{
 		return "Don't talk to me I am Depressed";
 	}
-
-
-
-
 	void setPosition(Vector3 position)
 	{
 		position_ = position;

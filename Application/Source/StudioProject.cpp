@@ -190,7 +190,8 @@ void StudioProject::Init()
 	meshList[GEO_LIGHTBALL] = MeshBuilder::GenerateSphere("lightball", Color(1, 1, 1), 24, 13, 1);
 
 	//..........................................................................................
-
+	meshList[GEO_TUT] = MeshBuilder::GenerateOBJ("", "OBJ//tutorial_.obj");
+	meshList[GEO_TUT]->textureID = LoadTGA("Image//TUT.tga");
 
 	meshList[GEO_FRONT] = MeshBuilder::GenerateQuad("front", Color(1, 1, 1), 1.f, 1.f);
 	meshList[GEO_FRONT]->textureID = LoadTGA("Image//deception_pass_ft.tga");
@@ -329,7 +330,7 @@ void StudioProject::Update(double dt)
 
 	ShowCursor(false);
 
-	if (!inattrib && !ininv && !inshop)
+	if (!inattrib && !ininv && !inshop&&!tut)
 	{
 			camera.Update(dt);
 			mouse = false;
@@ -518,8 +519,8 @@ void StudioProject::Update(double dt)
 		light[1].LightPosition.x -= (float)(LSPEED * dt);
 	if (Application::IsKeyPressed('L'))
 		light[1].LightPosition.x += (float)(LSPEED * dt);
-	if (Application::IsKeyPressed('O'))
-		light[1].LightPosition.y -= (float)(LSPEED * dt);
+	//if (Application::IsKeyPressed('O'))
+	//	light[1].LightPosition.y -= (float)(LSPEED * dt);
 	if (Application::IsKeyPressed('P'))
 		light[1].LightPosition.y += (float)(LSPEED * dt);
 
@@ -627,6 +628,13 @@ void StudioProject::Update(double dt)
 			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IN_UI);
 
 		}
+		if (Application::IsKeyPressed('O') && !tut)
+		{
+			tut = true;
+			timer = Application::elapsed_timer_;
+			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IN_UI);
+		}
+		
 	}
 
 	else if (Application::elapsed_timer_ > timer + .2 && PlayerBase::instance()->getPlayerState() == PlayerBase::instance()->IN_UI)
@@ -654,6 +662,12 @@ void StudioProject::Update(double dt)
 			timer = Application::elapsed_timer_;
 			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
 			dynamic_cast<EntityNPC*>(DataBase::instance()->getEntityNPC(DIMENSIONID, 4))->setState(1);
+		}
+	    if (Application::IsKeyPressed('O') && tut)
+		{
+			tut = false;
+			timer = Application::elapsed_timer_;
+			PlayerBase::instance()->setPlayerState(PlayerBase::instance()->IDLE);
 		}
 
 		if (Application::IsKeyPressed(VK_LBUTTON) && !s && attrib)
@@ -1096,6 +1110,7 @@ void StudioProject::Update(double dt)
 		{
 			s = false;
 		}
+		
 	}
 
 	if (Application::IsKeyPressed(VK_LSHIFT))
@@ -1139,6 +1154,8 @@ void StudioProject::Update(double dt)
 		PlayerBase::instance()->deaded();
 		SceneManager::getSceneManger()->setNextScene(5);
 	}
+
+
 }
 
 void StudioProject::Render()
@@ -1592,6 +1609,15 @@ void StudioProject::Render()
 
 
 	RenderMeshOnScreen(meshList[GEO_AIM], 40, 27.5, 3, 3, 90);
+
+
+
+	if (tut){
+		RenderMeshOnScreen(meshList[GEO_TUT], 40, 27.5, 50, 50, 90);
+	}
+
+
+	
 	
 
 }
@@ -1891,4 +1917,5 @@ void StudioProject::Exit()
 {
 	glDeleteVertexArrays(1, &m_vertexArrayID);
 	glDeleteProgram(m_programID);
+
 }

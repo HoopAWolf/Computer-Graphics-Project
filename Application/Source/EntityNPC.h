@@ -54,6 +54,7 @@ public:
 			NPC_state_ = IDLE;
 		case 2:
 			NPC_state_ = INTERACTION;
+
 		}
 	}
 

@@ -18,7 +18,7 @@ public:
 		recoil_ = .05;
 		weapon_type_ = RANGE_AUTO;
 		durability_ = 280;
-		damage_ = 300;
+		damage_ = 380;
 		attack_speed_ = 4;
 		timer_ = 0;
 		bulletcount_ = 30;

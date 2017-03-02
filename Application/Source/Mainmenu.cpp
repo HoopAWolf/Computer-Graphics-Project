@@ -138,9 +138,12 @@ void Mainmenu::Init()
 	meshList[GEO_QUIT2]->textureID = LoadTGA("Image//quit2.tga");
 	meshList[GEO_TITLE] = MeshBuilder::GenerateOBJ("", "OBJ//title.obj");
 	meshList[GEO_TITLE]->textureID = LoadTGA("Image//title.tga");
-
 	meshList[GEO_MOUSE] = MeshBuilder::GenerateOBJ("", "OBJ//mouse.obj");
 	meshList[GEO_MOUSE]->textureID = LoadTGA("Image//gay_mouse.tga");
+
+
+
+
 	//------------------------------------------------------------------------------------------
 	//light
 	light[0].type = Light::LIGHT_DIRECTIONAL;

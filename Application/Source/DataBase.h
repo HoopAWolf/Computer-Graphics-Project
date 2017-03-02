@@ -80,6 +80,10 @@
 #include <string>
 #include <time.h>
 
+#include "irrKlang.h"
+using namespace irrklang;
+#pragma comment (lib,"irrKlang.lib")
+
 using std::vector;
 using std::string;
 using std::map;
@@ -182,6 +186,7 @@ private:
 		}
 	}
 
+	ISoundEngine* sfx_base_ = createIrrKlangDevice();
 	unsigned item_starting_ = 0;  //STORES THE ITEM STARTING POSITION FOR THE ITEM DATA BASE
 	map<unsigned, ItemBase *> item_base_;  //STORES ALL THE ITEMS INTO THE DATABASE
 	map<unsigned, EnvironmentBase *> environment_data_base;  //STORES ALL ENVIRONMENT DATA
@@ -207,6 +212,7 @@ public:
 		return s_instance;  //RETURNS THE INSTANCE IF THERE IS ONE AVAILABLE
 	}
 
+	void playSoundFromString(string sound_name);
 	void registerItems();  //REGISTER ALL ITEMS ONLY ONCE
 	void registerEnvironments();  //REGISTER ALL ENVIRONMENT ONLY ONCE
 	void registerEntityMinion();  //REGISTER ALL MINIONS ONLY ONCE

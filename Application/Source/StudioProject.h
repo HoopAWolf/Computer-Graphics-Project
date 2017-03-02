@@ -30,7 +30,7 @@ class StudioProject : public Scene
 		GEO_SPHERE,
 		GEO_LIGHTBALL,
 		GEO_CYLINDER,
-
+		GEO_TUT,
 		//skybox
 		GEO_LEFT,
 		GEO_RIGHT,
@@ -143,7 +143,8 @@ public:
 	int itemTwo = 27;
 	bool inshop = false;
 	int itemhover = 0;
-
+	bool tut = false;
+	bool Appear;
 
 	
 
