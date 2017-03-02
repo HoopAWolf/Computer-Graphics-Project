@@ -212,7 +212,8 @@ public:
 		return s_instance;  //RETURNS THE INSTANCE IF THERE IS ONE AVAILABLE
 	}
 
-	void playSoundFromString(string sound_name);
+	void playSoundFromStringSG(string sound_name);
+	void playSoundFromStringBG(string sound_name);
 	void registerItems();  //REGISTER ALL ITEMS ONLY ONCE
 	void registerEnvironments();  //REGISTER ALL ENVIRONMENT ONLY ONCE
 	void registerEntityMinion();  //REGISTER ALL MINIONS ONLY ONCE

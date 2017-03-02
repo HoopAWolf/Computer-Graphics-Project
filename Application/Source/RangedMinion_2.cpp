@@ -275,7 +275,6 @@ void RangedMinion_2::updateAI(float timer, unsigned dimensionID, float dt)
 			{
 				std::cout << "zero danger" << std::endl;
 			}
-			DataBase::instance()->playSoundFromString("Giggs_Gun");
 			EntityFireBall* bullet = new EntityFireBall(position_, forward_, damage_, timer, false);
 			DataBase::instance()->setEntity(dimensionID, bullet);
 			Minionlimit = true;

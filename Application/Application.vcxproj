@@ -212,6 +212,7 @@
     <ClInclude Include="Source\ik_vec3d.h" />
     <ClInclude Include="Source\irrKlang.h" />
     <ClInclude Include="Source\ItemBase.h" />
+    <ClInclude Include="Source\ItemChickenGun.h" />
     <ClInclude Include="Source\ItemWeapon.h" />
     <ClInclude Include="Source\Light.h" />
     <ClInclude Include="Source\LoadOBJ.h" />

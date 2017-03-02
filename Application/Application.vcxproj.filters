@@ -490,6 +490,9 @@
     <ClInclude Include="Source\irrKlang.h">
       <Filter>Header Files\Sound</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ItemChickenGun.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\..\Downloads\Practical2_files(1)\Practical2_files\Application\Shader\SimpleFragmentShader.fragmentshader">
