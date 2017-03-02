@@ -6,7 +6,7 @@ public:
 	EnvironmentTowerStructure()
 	{
 		texture_string_ = "tower_structure";
-		environmentID_ = 15;
+		environmentID_ = 19;
 		environment_symbol_ = 'X';
 
 		boundry_[0][0] = '#';

@@ -6,7 +6,7 @@ public:
 	EnvironmentWall()
 	{
 		texture_string_ = "wall";
-		environmentID_ = 0;
+		environmentID_ = 20;
 		environment_symbol_ = 'F';
 
 		boundry_[0][0] = '#';

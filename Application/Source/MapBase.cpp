@@ -482,11 +482,11 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 					here:
 						for (int a = 0; a < 40; a++)
 						{
-							if (x + minPosX > -1 && x + 5 < getMapData(dimensionID).size_.x)
+							if (x + minPosX > -1 && x + 40 < getMapData(dimensionID).size_.x)
 							{
 								for (int b = 0; b < 40; b++)
 								{
-									if (z + minPosZ > -1 && z + 5 < getMapData(dimensionID).size_.z)
+									if (z + minPosZ > -1 && z + 40 < getMapData(dimensionID).size_.z)
 									{
 										if (checkingMapDataByCoord(dimensionID, (x + minPosX) + a, (z + minPosZ) + b) != currChar)
 										{

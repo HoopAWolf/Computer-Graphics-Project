@@ -66,7 +66,7 @@ public:
 			break;
 
 		case INTERACTION:
-			if (PlayerBase::instance()->getBoundingBox().isAABBInsideAABB(getBoundingBox().increaseBoundry(Vector3(10, 2, 10), Vector3(10, 2, 10))))
+			if (position_.y < Camera::position.y)
 			{
 				health_ = 0;
 				NPC_state_ = IDLE;
