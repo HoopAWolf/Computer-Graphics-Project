@@ -113,6 +113,7 @@ void PlayerBase::playerUpdate(float timer, float dt)
 						here:
 
 							hit = true;
+							DataBase::instance()->playSoundFromStringSG("melee");
 						}
 
 						rotationX -= getPlayerAttackSpeed();

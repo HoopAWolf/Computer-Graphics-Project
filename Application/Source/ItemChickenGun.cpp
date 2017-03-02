@@ -7,7 +7,7 @@ EntityProjectile* ItemChickenGun::onItemAttackProjectile(float timer, float dt)
 	{
 		EntityChickenProjectile* chicken = new EntityChickenProjectile(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer, true);
 		timer_ = timer;
-		DataBase::instance()->playSoundFromStringSG("Giggs_Gun");
+		DataBase::instance()->playSoundFromStringSG("chicken_gun");
 		return chicken;
 	}
 

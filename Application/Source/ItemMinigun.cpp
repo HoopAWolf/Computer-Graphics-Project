@@ -1,45 +1,15 @@
-#ifndef ITEM_MINIGUN
-#define ITEM_MINIGUN
+#include "ItemMinigun.h"
+#include "DataBase.h"
 
-#include "ItemWeapon.h"
-
-class ItemMinigun : public ItemWeapon
+EntityProjectile* ItemMinigun::onItemAttackProjectile(float timer, float dt)
 {
-	float timer_;
-
-public:
-	ItemMinigun()
+	if (timer > timer_ + ((attack_speed_ / 100.) * 100))
 	{
-		itemID_ = 15;
-		texture_string_ = "mini_gun";
-		item_name_ = "Minigun";
-
-		recoil_ = .05;
-		weapon_type_ = RANGE_AUTO;
-		durability_ = 250;
-		damage_ = 10;
-		attack_speed_ = .01;
-		timer_ = 0;
-		bulletcount_ = 1;
-
-		rarity_ = LEGENDARY;
-		price_ = 1670;
+		EntityBullet* bullet = new EntityBullet(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer, true);
+		timer_ = timer;
+		DataBase::instance()->playSoundFromStringSG("m4a4");
+		return bullet;
 	}
 
-	void onItemUse(float timer, float dt){}
-
-	//------------------USES------------------
-	 EntityProjectile* onItemAttackProjectile(float timer, float dt)
-	{
-		if (timer > timer_ + ((attack_speed_ / 100.) * 100))
-		{
-			EntityBullet* bullet = new EntityBullet(Vector3(Camera::position.x, Camera::position.y, Camera::position.z), (Camera::target - Camera::position).Normalized(), damage_, timer, true);
-			timer_ = timer;
-			return bullet;
-		}
-		
-		return nullptr;
-	}
-};
-
-#endif
+	return nullptr;
+}

@@ -277,6 +277,7 @@ void RangedMinion_2::updateAI(float timer, unsigned dimensionID, float dt)
 			}
 			EntityFireBall* bullet = new EntityFireBall(position_, forward_, damage_, timer, false);
 			DataBase::instance()->setEntity(dimensionID, bullet);
+			DataBase::instance()->playSoundFromStringSG("laser_gun");
 			Minionlimit = true;
 
 

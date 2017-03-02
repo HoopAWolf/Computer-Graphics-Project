@@ -32,8 +32,6 @@ void SceneManager::setNextScene(int sceneID)
 		currSceneID = SceneDataBase.size() - 1;
 	}
 	currSceneID = sceneID;
-
-	DataBase::instance()->playSoundFromStringBG(((currSceneID == 1) ? "What_is_love" : "Giggs_Gun"));
 }
 int SceneManager::getCurrentScene()
 {

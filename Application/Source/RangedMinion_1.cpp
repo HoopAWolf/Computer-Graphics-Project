@@ -269,7 +269,7 @@ void RangedMinion_1::updateAI(float timer, unsigned dimensionID, float dt)
 		if (rotateminionArm >= 90 && !Minionlimit)
 		{
 			forward_ = (newTarget - position_).Normalized();
-			DataBase::instance()->playSoundFromStringSG("Giggs_Gun");
+			DataBase::instance()->playSoundFromStringSG("laser_gun");
 			EntityFireBall* bullet = new EntityFireBall(position_, forward_, damage_, timer, false);
 			DataBase::instance()->setEntity(dimensionID, bullet);
 			Minionlimit = true;

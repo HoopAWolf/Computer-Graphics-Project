@@ -26,6 +26,7 @@ void ShopBase::buyItem(int position)
 			PlayerBase::instance()->decreaseCurrency((dynamic_cast<ItemWeapon*>(shop_items_[position])->getPriceOfWeapon()));
 			PlayerBase::instance()->addIntoPlayerInventory(shop_items_[position]->getItemID());
 			shop_items_[position] = nullptr;
+			DataBase::instance()->playSoundFromStringSG("buy");
 		}
 	}
 }
@@ -36,5 +37,6 @@ void ShopBase::sellItem(int position)
 	{
 		PlayerBase::instance()->increaseCurrency((dynamic_cast<ItemWeapon*>(PlayerBase::instance()->getItemFromInventory(position))->getPriceOfWeapon()));
 		PlayerBase::instance()->removeItemInInventory(position);
+		DataBase::instance()->playSoundFromStringSG("buy");
 	}
 }

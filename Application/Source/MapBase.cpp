@@ -531,7 +531,8 @@ void MapBase::generateMap(unsigned dimensionID, const std::string fileName)
 
 void MapBase::setMapDataByCoord(unsigned dimensionID, char data, unsigned coordX, unsigned coordZ)
 {
-	*(*(getMapData(dimensionID).mapArray_ + coordX) + coordZ) = data;
+	if (coordX >= 0 && coordX < getMapData(dimensionID).size_.x && coordZ >= 0 && coordZ < getMapData(dimensionID).size_.z)
+		*(*(getMapData(dimensionID).mapArray_ + coordX) + coordZ) = data;
 }
 
 ArrayData MapBase::getMapData(unsigned dimensionID)

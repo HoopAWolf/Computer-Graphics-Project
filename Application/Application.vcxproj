@@ -213,6 +213,10 @@
     <ClInclude Include="Source\irrKlang.h" />
     <ClInclude Include="Source\ItemBase.h" />
     <ClInclude Include="Source\ItemChickenGun.h" />
+    <ClInclude Include="Source\ItemGiggsGun.h" />
+    <ClInclude Include="Source\ItemLaserGun.h" />
+    <ClInclude Include="Source\ItemM4A4.h" />
+    <ClInclude Include="Source\ItemMinigun.h" />
     <ClInclude Include="Source\ItemWeapon.h" />
     <ClInclude Include="Source\Light.h" />
     <ClInclude Include="Source\LoadOBJ.h" />

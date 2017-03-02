@@ -500,10 +500,12 @@ void StudioProject::Update(double dt)
 		if (Application::IsKeyPressed(VK_F1))
 		{
 			SceneManager::getSceneManger()->setNextScene(2);
+			camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
 		}
 		if (Application::IsKeyPressed(VK_F2))
 		{
 			SceneManager::getSceneManger()->setNextScene(3);
+			camera.Init(Vector3(3, 2, 2), Vector3(2, 2, 0), Vector3(0, 1, 0));
 		}
 		
 	//light_controls---------------------------------------------------------------
@@ -592,6 +594,15 @@ void StudioProject::Update(double dt)
 		else if (Application::IsKeyPressed('E'))
 		{
 			PlayerBase::instance()->moveCurrItem(true);
+			timer = Application::elapsed_timer_;
+		}
+
+		if (Application::IsKeyPressed('G'))
+		{
+			PlayerBase::instance()->addIntoPlayerInventory(15);
+			PlayerBase::instance()->increaseCurrency(10000);
+			PlayerBase::instance()->increaseExperience(5000);
+
 			timer = Application::elapsed_timer_;
 		}
 
